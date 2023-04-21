@@ -5,7 +5,7 @@ import { ShaderPass } from 'three/examples/jsm/postprocessing/ShaderPass.js'
 import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
 import { GlitchPass } from 'three/addons/postprocessing/GlitchPass.js';
 import { RGBShiftShader } from 'three/examples/jsm/shaders/RGBShiftShader.js'
-import {TintShader} from "./Shaders.js";
+import {TintShader} from "./Shaders/PostProcessingShaders.js";
 import {DotScreenPass} from "three/addons/postprocessing/DotScreenPass.js";
 import {GammaCorrectionShader} from "three/addons/shaders/GammaCorrectionShader.js";
 import {SMAAPass} from "three/addons/postprocessing/SMAAPass.js";
