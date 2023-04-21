@@ -8,7 +8,9 @@ export default class Monitoring
     {
         this.experience = new Experience()
         this.debug = this.experience.debug
-        this.instance = new Stats()
+        this.statsFps = new Stats()
+        this.statsMs = new Stats()
+        this.statsMb = new Stats()
 
         this.setInstance()
     }
@@ -16,8 +18,32 @@ export default class Monitoring
     setInstance()
     {
         if (this.debug.active) {
-            this.instance.showPanel(0)
-            document.body.appendChild(this.instance.dom)
+            this.statsFps.showPanel(0)
+            document.body.appendChild(this.statsFps.dom)
+
+            this.statsMs.showPanel(1)
+            document.body.appendChild(this.statsMs.dom)
+            this.statsMs.domElement.style.cssText = 'position:absolute;top:0px;left:80px;';
+
+
+            this.statsMb.showPanel(2)
+            document.body.appendChild(this.statsMb.dom)
+            this.statsMb.domElement.style.cssText = 'position:absolute;top:0px;left:160px;';
+        }
+    }
+
+    beginMonitoring() {
+        if (this.debug.active) {
+            this.statsFps.begin()
+            this.statsMs.begin()
+            this.statsMb.begin()
+        }
+    }
+    endMonitoring() {
+        if (this.debug.active) {
+            this.statsFps.end()
+            this.statsMs.end()
+            this.statsMb.end()
         }
     }
 }
