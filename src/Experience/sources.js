@@ -23,6 +23,11 @@ export default [
         path: 'textures/dirt/normal.jpg'
     },
     {
+        name: 'interfaceNormalMap',
+        type: 'texture',
+        path: 'textures/interfaceNormalMap.png'
+    },
+    {
         name: 'foxModel',
         type: 'gltfModel',
         path: 'models/Fox/glTF/Fox.gltf'
