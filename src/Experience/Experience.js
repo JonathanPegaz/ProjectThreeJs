@@ -10,6 +10,7 @@ import Resources from './Utils/Resources.js'
 import PostProcessing from './PostProcessing.js'
 
 import sources from './sources.js'
+import Monitoring from "./Utils/Monitoring.js";
 
 let instance = null
 
@@ -32,6 +33,7 @@ export default class Experience
 
         // Setup
         this.debug = new Debug()
+        this.monitoring = new Monitoring()
         this.sizes = new Sizes()
         this.time = new Time()
         this.scene = new THREE.Scene()
@@ -63,10 +65,13 @@ export default class Experience
 
     update()
     {
+        this.monitoring.beginMonitoring()
+
         this.camera.update()
         this.world.update()
         this.renderer.update()
         this.postProcessing.update()
+        this.monitoring.endMonitoring()
     }
 
     destroy()
