@@ -31,5 +31,10 @@ export default [
         name: 'foxModel',
         type: 'gltfModel',
         path: 'models/Fox/glTF/Fox.gltf'
+    },
+    {
+        name: 'snowFlake',
+        type: 'texture',
+        path: 'textures/snowflake.png'
     }
 ]

@@ -3,6 +3,7 @@ import Environment from './Environment.js'
 import Floor from './Floor.js'
 import Fox from './Fox.js'
 import HTMLPoints from "../HTMLInterface/HTMLPoints.js";
+import BasicCharacterController from "./Player/CharacterController.js";
 
 export default class World
 {
@@ -17,7 +18,8 @@ export default class World
         {
             // Setup
             this.floor = new Floor()
-            this.fox = new Fox()
+            //this.fox = new Fox()
+            this.player = new BasicCharacterController()
             this.environment = new Environment()
             this.htmlPoint = new HTMLPoints()
         })
@@ -27,6 +29,9 @@ export default class World
     {
         if(this.fox)
             this.fox.update()
+
+        if(this.player)
+            this.player.update()
 
         if (this.htmlPoint)
             this.htmlPoint.update()
