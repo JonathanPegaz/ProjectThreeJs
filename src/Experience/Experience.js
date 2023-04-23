@@ -67,7 +67,6 @@ export default class Experience
     {
         this.monitoring.beginMonitoring()
 
-        this.camera.update()
         this.world.update()
         this.renderer.update()
         this.postProcessing.update()
