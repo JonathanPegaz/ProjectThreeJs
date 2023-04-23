@@ -2,6 +2,7 @@ import Experience from '../Experience.js'
 import Environment from './Environment.js'
 import Floor from './Floor.js'
 import Fox from './Fox.js'
+import HTMLPoints from "../HTMLInterface/HTMLPoints.js";
 
 export default class World
 {
@@ -18,6 +19,7 @@ export default class World
             this.floor = new Floor()
             this.fox = new Fox()
             this.environment = new Environment()
+            this.htmlPoint = new HTMLPoints()
         })
     }
 
@@ -25,5 +27,8 @@ export default class World
     {
         if(this.fox)
             this.fox.update()
+
+        if (this.htmlPoint)
+            this.htmlPoint.update()
     }
 }
