@@ -5,7 +5,7 @@ import { ShaderPass } from 'three/examples/jsm/postprocessing/ShaderPass.js'
 import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
 import { GlitchPass } from 'three/addons/postprocessing/GlitchPass.js';
 import { RGBShiftShader } from 'three/examples/jsm/shaders/RGBShiftShader.js'
-import {TintShader} from "./Shaders/PostProcessingShaders.js";
+import {DisplacementShader, TintShader} from "./Shaders/PostProcessingShaders.js";
 import {DotScreenPass} from "three/addons/postprocessing/DotScreenPass.js";
 import {GammaCorrectionShader} from "three/addons/shaders/GammaCorrectionShader.js";
 import {SMAAPass} from "three/addons/postprocessing/SMAAPass.js";
@@ -21,6 +21,7 @@ export default class PostProcessing
         this.camera = this.experience.camera
         this.sizes = this.experience.sizes
         this.debug = this.experience.debug
+        this.resources = this.experience.resources
 
         // Debug
         if(this.debug.active)
@@ -29,7 +30,14 @@ export default class PostProcessing
         }
 
         this.setInstance()
-        this.setupEffect()
+
+        this.resources.on('ready', () => {
+            // Wait a little
+            window.setTimeout(() =>
+            {
+                this.setupEffect()
+            }, 1000)
+        })
     }
 
     setInstance()
@@ -94,6 +102,13 @@ export default class PostProcessing
         tintPass.enabled = false
         this.instance.addPass(tintPass)
 
+        // displacements pass
+        const displacementPass = new ShaderPass(DisplacementShader)
+        displacementPass.material.uniforms.uTime.value = 0
+        displacementPass.material.uniforms.uNormalMap.value = this.resources.items.interfaceNormalMap
+        displacementPass.enabled = false
+        this.instance.addPass(displacementPass)
+
         // Debug
         if(this.debug.active)
         {
@@ -131,6 +146,10 @@ export default class PostProcessing
             this.debugFolderTint.add(tintPass.material.uniforms.uTint.value, 'y').min(- 1).max(1).step(0.001).name('green')
             this.debugFolderTint.add(tintPass.material.uniforms.uTint.value, 'z').min(- 1).max(1).step(0.001).name('blue')
 
+            // Displacement Debug
+            this.debugFolderDisplacement = this.debugFolder.addFolder('Displacement')
+            this.debugFolderDisplacement.add(displacementPass, 'enabled').name('enabled')
+            this.debugFolderDisplacement.add(displacementPass.material.uniforms.uTime, 'value').min(0).max(1).step(0.001).name('time')
 
         }
 
