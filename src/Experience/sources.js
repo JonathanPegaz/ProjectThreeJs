@@ -36,5 +36,10 @@ export default [
         name: 'snowFlake',
         type: 'texture',
         path: 'textures/snowflake.png'
+    },
+    {
+        name: 'bush',
+        type: 'gltfModel',
+        path: 'models/buisson.glb'
     }
 ]
