@@ -26,5 +26,10 @@ export default [
         name: 'foxModel',
         type: 'gltfModel',
         path: 'models/Fox/glTF/Fox.gltf'
+    },
+    {
+        name: 'undergroundSfModel',
+        type: 'gltfModel',
+        path: 'models/Buildings/UndergroundSF/glTF/UndergroundSF.gltf'
     }
 ]
