@@ -4,6 +4,7 @@ import EventEmitter from './EventEmitter.js'
 import { gsap } from 'gsap'
 import {overlayMaterial} from "../Shaders/OverlayShaders.js";
 import Experience from "../Experience.js";
+import { DRACOLoader } from "three/addons/loaders/DRACOLoader.js";
 
 export default class Resources extends EventEmitter
 {
@@ -57,7 +58,10 @@ export default class Resources extends EventEmitter
         )
 
         this.loaders = {}
+        this.loaders.dracoLoader = new DRACOLoader()
+        this.loaders.dracoLoader.setDecoderPath('/draco/')
         this.loaders.gltfLoader = new GLTFLoader(loadingManager)
+        this.loaders.gltfLoader.setDRACOLoader(this.loaders.dracoLoader)
         this.loaders.textureLoader = new THREE.TextureLoader()
         this.loaders.cubeTextureLoader = new THREE.CubeTextureLoader()
     }

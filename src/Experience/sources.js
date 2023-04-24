@@ -23,6 +23,11 @@ export default [
         path: 'textures/dirt/normal.jpg'
     },
     {
+        name: 'interfaceNormalMap',
+        type: 'texture',
+        path: 'textures/interfaceNormalMap.png'
+    },
+    {
         name: 'foxModel',
         type: 'gltfModel',
         path: 'models/Fox/glTF/Fox.gltf'
@@ -31,5 +36,15 @@ export default [
         name: 'undergroundSfModel',
         type: 'gltfModel',
         path: 'models/Buildings/UndergroundSF/glTF/UndergroundSF.gltf'
+    },
+    {
+        name: 'snowFlake',
+        type: 'texture',
+        path: 'textures/snowflake.png'
+    },
+    {
+        name: 'bush',
+        type: 'gltfModel',
+        path: 'models/buisson.glb'
     }
 ]
