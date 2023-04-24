@@ -67,7 +67,6 @@ export default class Experience
     {
         this.monitoring.beginMonitoring()
 
-        this.camera.update()
         this.world.update()
         this.renderer.update()
         this.postProcessing.update()
@@ -101,7 +100,7 @@ export default class Experience
             }
         })
 
-        this.camera.controls.dispose()
+        // this.camera.controls.dispose()
         this.renderer.instance.dispose()
 
         if(this.debug.active)

@@ -88,12 +88,24 @@ export default class BasicCharacterController {
         this.decceleration = new THREE.Vector3(-0.0005, -0.0001, -5.0);
         this.acceleration = new THREE.Vector3(1, 0.25, 50.0);
         this.velocity = new THREE.Vector3(0, 0, 0);
+        this.position = new THREE.Vector3(0, 0, 0);
 
         this.input = new BasicCharacterControllerInput();
         this.stateMachine = new CharacterFSM(
             new BasicCharacterControllerProxy(this.animations));
 
         this.stateMachine.SetState('idle');
+    }
+
+    get Position() {
+        return this.position;
+    }
+
+    get Rotation() {
+        if(!this.model) {
+            return new THREE.Quaternion();
+        }
+        return this.model.quaternion;
     }
 
     update() {
@@ -162,7 +174,7 @@ export default class BasicCharacterController {
         controlObject.position.add(forward);
         controlObject.position.add(sideways);
 
-        oldPosition.copy(controlObject.position);
+        this.position.copy(controlObject.position);
 
         if (this.mixer) {
             this.mixer.update(timeInSeconds);

@@ -4,6 +4,8 @@ import Floor from './Floor.js'
 import Fox from './Fox.js'
 import HTMLPoints from "../HTMLInterface/HTMLPoints.js";
 import BasicCharacterController from "./Player/CharacterController.js";
+import ThirdPersonCamera from "./Player/ThirdPersonCamera.js";
+import Bush from "./Bush.js";
 
 export default class World
 {
@@ -18,8 +20,9 @@ export default class World
         {
             // Setup
             this.floor = new Floor()
-            //this.fox = new Fox()
+            this.bush = new Bush()
             this.player = new BasicCharacterController()
+            this.thirdPersonCamera = new ThirdPersonCamera(this.player)
             this.environment = new Environment()
             this.htmlPoint = new HTMLPoints()
         })
@@ -27,11 +30,11 @@ export default class World
 
     update()
     {
-        if(this.fox)
-            this.fox.update()
-
         if(this.player)
             this.player.update()
+
+        if(this.thirdPersonCamera)
+            this.thirdPersonCamera.update()
 
         if (this.htmlPoint)
             this.htmlPoint.update()
