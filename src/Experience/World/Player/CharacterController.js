@@ -37,6 +37,7 @@ export default class BasicCharacterController {
         this.camera = this.experience.camera
         this.time = this.experience.time
         this.resources = this.experience.resources
+        this.debug = this.experience.debug
 
         this.resource = this.resources.items.foxModel
 
@@ -179,6 +180,48 @@ export default class BasicCharacterController {
         if (this.mixer) {
             this.mixer.update(timeInSeconds);
         }
+
+        this.detectCollision()
+    }
+
+    detectCollision() {
+        const direction = new THREE.Vector3();
+        const raycaster = new THREE.Raycaster(this.model.position, direction)
+        const intersects = raycaster.intersectObjects(this.experience.scene.children)[0]
+
+        console.log(intersects)
+
+        // if (intersects.length > 0)
+        //     let firstIntersection = intersects[0].point;
+
+        if (!this.debug.active) return
+
+        this.model.getWorldDirection(direction)
+        direction.normalize()
+        const distance = 3 // in meters
+        const targetPosition = new THREE.Vector3().copy(this.model.position).add(direction.multiplyScalar(distance))
+
+        const positions = new Float32Array([
+            this.model.position.x, this.model.position.y+1, this.model.position.z,
+            targetPosition.x, targetPosition.y+1, targetPosition.z,
+        ])
+
+        const geometry = new THREE.BufferGeometry()
+        geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3))
+
+        const material = new THREE.LineBasicMaterial({
+            color: 0xff0000, // white color
+            linewidth: 10, // line width in pixels
+        })
+
+        const line = new THREE.Line(geometry, material)
+        this.scene.add(line)
+
+        // Remove the line after 2 seconds
+        setTimeout(() => {
+            this.scene.remove(line)
+        }, 500)
+
     }
 }
 

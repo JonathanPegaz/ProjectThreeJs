@@ -1,5 +1,6 @@
 import * as THREE from 'three'
 import Experience from '../../Experience.js'
+import SphereCollider from "../../Utils/Colliders/SphereCollider.js";
 
 export default class InfoBeacon {
 
@@ -21,11 +22,10 @@ export default class InfoBeacon {
     const cube = new THREE.Mesh( geometry, material );
     cube.position.set(0, 1, 5)
 
-    this.hitbox = new THREE.Mesh(new THREE.SphereGeometry(2, 32, 32), new THREE.MeshBasicMaterial({ color: 0xff0000, opacity: 0.5, transparent: true }));
-    this.hitbox.position.copy(cube.position);
+    this.collider =  new SphereCollider(cube, 2)
 
     this.scene.add(cube);
-    this.scene.add(this.hitbox);
+    this.scene.add(this.collider.hitbox);
   }
 
   update()
