@@ -5,6 +5,7 @@ import Fox from './Fox.js'
 import HTMLPoints from "../HTMLInterface/HTMLPoints.js";
 import BasicCharacterController from "./Player/CharacterController.js";
 import ThirdPersonCamera from "./Player/ThirdPersonCamera.js";
+import Map from "./Map.js";
 import Bush from "./Bush.js";
 import InfoBeacon from "./InteractableObject/InfoBeacon.js";
 import UndergroundSF from "./Buildings/UndergroundSF.js";
@@ -24,9 +25,10 @@ export default class World
         {
             // Setup
             //this.floor = new Floor()
-            // this.bush = new Bush()
-            // this.infoBeacon = new InfoBeacon()
-            // this.undergroundSF = new UndergroundSF()
+            //this.bush = new Bush()
+            //this.infoBeacon = new InfoBeacon()
+            //this.undergroundSF = new UndergroundSF()
+            this.map = new Map()
             this.player = new BasicCharacterController()
             //this.testMap = new TestMap()
             this.mapv1 = new Mapv1()

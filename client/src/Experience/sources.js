@@ -66,5 +66,10 @@ export default [
         name: 'mapv1',
         type: 'gltfModel',
         path: 'models/Map/mapv1.glb'
+    },
+    {
+        name: 'heightmap',
+        type: 'texture',
+        path: 'textures/heightmap.png'
     }
 ]
