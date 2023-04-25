@@ -3,13 +3,29 @@ import Experience from '../Experience.js'
 
 export default class Bush
 {
-    constructor() {
+    constructor(count) {
         this.experience = new Experience()
         this.scene = this.experience.scene
         this.resources = this.experience.resources
 
         this.resource = this.resources.items.bush2
         this.setModel()
+    }
+
+    setInstance()
+    {
+        this.geometry = new THREE.BufferGeometry()
+        this.positions = new Float32Array(this.count * 3);
+        this.geometry.setAttribute('position', new THREE.BufferAttribute(this.positions, 3));
+
+        // Precompute the values of Math.cos(angle) and Math.sin(angle) for each angle in a lookup table
+        this.cosTable = [];
+        this.sinTable = [];
+        for (let i = 0; i < 1000; i++) {
+            const angle = Math.random() * Math.PI * 2;
+            this.cosTable.push(Math.cos(angle));
+            this.sinTable.push(Math.sin(angle));
+        }
     }
 
     setModel() {
