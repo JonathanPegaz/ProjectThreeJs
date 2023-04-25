@@ -6,6 +6,8 @@ import HTMLPoints from "../HTMLInterface/HTMLPoints.js";
 import BasicCharacterController from "./Player/CharacterController.js";
 import ThirdPersonCamera from "./Player/ThirdPersonCamera.js";
 import Bush from "./Bush.js";
+import InfoBeacon from "./InteractableObject/InfoBeacon.js";
+import UndergroundSF from "./Buildings/UndergroundSF.js";
 
 export default class World
 {
@@ -19,8 +21,10 @@ export default class World
         this.resources.on('ready', () =>
         {
             // Setup
-            this.floor = new Floor()
+            //this.floor = new Floor()
             this.bush = new Bush()
+            this.infoBeacon = new InfoBeacon()
+            this.undergroundSF = new UndergroundSF()
             this.player = new BasicCharacterController()
             this.thirdPersonCamera = new ThirdPersonCamera(this.player)
             this.environment = new Environment()

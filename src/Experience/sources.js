@@ -33,6 +33,11 @@ export default [
         path: 'models/Fox/glTF/Fox.gltf'
     },
     {
+        name: 'undergroundSfModel',
+        type: 'gltfModel',
+        path: 'models/Buildings/UndergroundSF/glTF/UndergroundSF.gltf'
+    },
+    {
         name: 'snowFlake',
         type: 'texture',
         path: 'textures/snowflake.png'
