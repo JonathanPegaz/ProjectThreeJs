@@ -1,3 +1,4 @@
+import * as THREE from 'three'
 import Experience from '../Experience.js'
 import Environment from './Environment.js'
 import Floor from './Floor.js'
@@ -8,6 +9,7 @@ import ThirdPersonCamera from "./Player/ThirdPersonCamera.js";
 import Bush from "./Bush.js";
 import InfoBeacon from "./InteractableObject/InfoBeacon.js";
 import UndergroundSF from "./Buildings/UndergroundSF.js";
+import { oceanMaterial } from '../Shaders/WaterShader.js';
 
 export default class World
 {
@@ -24,6 +26,12 @@ export default class World
             //this.floor = new Floor()
             this.infoBeacon = new InfoBeacon()
             this.undergroundSF = new UndergroundSF()
+            // Définition du matériau pour un objet
+            const geometry = new THREE.BoxGeometry();
+            const material = oceanMaterial;
+            const cube = new THREE.Mesh(geometry, material);
+            cube.position.y = 2
+            this.scene.add(cube)
             //this.floor = new Floor()
             this.bush = new Bush(1000)
             this.player = new BasicCharacterController()
