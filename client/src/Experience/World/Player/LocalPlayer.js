@@ -30,11 +30,23 @@ export default class LocalPlayer extends Player {
         })
 
         this.socket.on('remoteData', (data) => {
-
+            this.remoteData = data
         })
 
         this.socket.on('deletePlayer', (data) => {
-
+            const players = this.remotePlayers.filter((player) => {
+                if(player.id == data.id) {
+                    return player
+                }
+            })
+            if (players.length>0) {
+                let index = this.remotePlayers.indexOf(players[0])
+                if (index!==1) {
+                    const player = this.initialisingPlayers[index]
+                    player.deleted = true
+                    this.initialisingPlayers.splice(index, 1)
+                }
+            }
         })
         this.initSocket()
     }

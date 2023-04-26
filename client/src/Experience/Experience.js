@@ -31,6 +31,12 @@ export default class Experience
         // Options
         this.canvas = _canvas
 
+        // Network
+        this.remotePlayers = [];
+		this.remoteColliders = [];
+		this.initialisingPlayers = [];
+		this.remoteData = [];
+
         // Setup
         this.debug = new Debug()
         this.monitoring = new Monitoring()
