@@ -46,5 +46,10 @@ export default [
         name: 'bush',
         type: 'gltfModel',
         path: 'models/buisson.glb'
+    },
+    {
+        name: 'water',
+        type: 'texture',
+        path: 'textures/water.png'
     }
 ]
