@@ -70,6 +70,6 @@ export default [
     {
         name: 'heightmap',
         type: 'texture',
-        path: 'textures/heightmap.png'
-    }
+        path: 'textures/mapv1heightmap.png'
+    },
 ]

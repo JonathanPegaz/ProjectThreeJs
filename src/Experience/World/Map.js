@@ -16,7 +16,7 @@ export default class Map
   }
 
   create() {
-    const groundGeometry = new THREE.PlaneGeometry(100, 100, 200, 200)
+    const groundGeometry = new THREE.PlaneGeometry(1000, 1000, 200, 200)
     this.texture.wrapS = this.texture.wrapT = THREE.RepeatWrapping
     this.texture.repeat.set(1, 1)
 
