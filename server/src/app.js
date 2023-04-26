@@ -16,6 +16,7 @@ io.sockets.on('connection', function(socket){
 	socket.emit('setId', { id:socket.id });
 	
     socket.on('disconnect', function(){
+		console.log(`${socket.id} disconnected`);
 		socket.broadcast.emit('deletePlayer', { id: socket.id });
     });	
 	
@@ -53,9 +54,9 @@ http.listen(2002, function(){
 setInterval(function(){
 	const nsp = io.of('/');
     let pack = [];
-	
-    for(let id in io.sockets.sockets){
-        const socket = nsp.connected[id];
+
+	io.sockets.sockets.forEach((socket) =>{
+		//const socket = nsp.connected[socketio.id]
 		//Only push sockets that have been initialised
 		if (socket.userData.model!==undefined){
 			pack.push({
@@ -68,8 +69,8 @@ setInterval(function(){
 				heading: socket.userData.heading,
 				pb: socket.userData.pb,
 				action: socket.userData.action
-			});    
+			});
 		}
-    }
+	})
 	if (pack.length>0) io.emit('remoteData', pack);
-}, 40);
+}, 4000);

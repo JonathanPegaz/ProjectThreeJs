@@ -2,7 +2,10 @@ import * as THREE from 'three'
 import Experience from "../../Experience.js";
 
 export default class Player {
-    constructor() {
+    constructor(local, options = {}) {
+        this.local = local
+        this.options = options
+
         this.experience = new Experience()
         this.scene = this.experience.scene
         this.time = this.experience.time
@@ -14,14 +17,28 @@ export default class Player {
         this.remotePlayers = this.experience.remotePlayers
         this.initialisingPlayers = this.experience.initialisingPlayers
 
+        this.player = this
+
+        this.player.object = new THREE.Object3D()
+        this.player.object.position.set(0, 0, 0)
+        this.player.object.rotation.set(0, 0, 0)
+        
+        if (!this.local){
+            this.local = false;
+			this.id = this.options.id;
+			//this.model = this.options.model;
+			this.colour = this.options.colour;
+
+            this.player.object.userData.id = this.id
+            this.player.object.userData.remotePlayer = true
+            const players = this.initialisingPlayers.splice(this.initialisingPlayers.indexOf(this), 1);
+            this.remotePlayers.push(players[0])
+        }
+
         this.setModel()
         this.setAnimation()
 
-        this.player = this
-
-        this.object = new THREE.Object3D()
-        this.object.position.set(0, 0, 0)
-        this.object.rotation.set(0, 0, 0)
+        
     }
 
     setModel()
@@ -36,8 +53,9 @@ export default class Player {
             }
         })
 
-        //this.object.add(this.model)
-        this.scene.add(this.model)
+        this.player.object.add(this.model)
+
+        if (this.player.deleted===undefined) this.scene.add(this.player.object);
     }
 
     setAnimation()
@@ -61,6 +79,9 @@ export default class Player {
             clip: this.resource.animations[2],
             action: this.mixer.clipAction(this.resource.animations[2])
         }
+        if (!this.local){
+            this.player.action = 'idle'
+        }
     }
 
     update()
@@ -74,8 +95,13 @@ export default class Player {
             for (let data of this.remoteData) {
                 if (data.id != this.id) continue
                 // Found the player
-                //this.
+                this.object.position.set( data.x, data.y, data.z )
+                const euler = new THREE.Euler(data.pb, data.heading, data.pb)
+                this.object.quaternion.setFromEuler( euler )
+                this.action = data.action
+                found = true;
             }
+            if (!found) this.game.removePlayer(this);
         }
     }
 

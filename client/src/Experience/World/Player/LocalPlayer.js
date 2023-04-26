@@ -31,11 +31,13 @@ export default class LocalPlayer extends Player {
 
         this.socket.on('remoteData', (data) => {
             this.remoteData = data
+            console.log(this.remoteData)
         })
 
         this.socket.on('deletePlayer', (data) => {
             const players = this.remotePlayers.filter((player) => {
-                if(player.id == data.id) {
+                console.log('deletePlayer', player)
+                if(player && player.id == data.id) {
                     return player
                 }
             })
@@ -53,8 +55,8 @@ export default class LocalPlayer extends Player {
 
     initSocket() {
         this.socket.emit('init', {
-            model:this.model,
-            colour: this.colour,
+            model:"foxModel",
+            //colour: this.colour,
             x: this.controller.position.x,
             y: this.controller.position.y,
             z: this.controller.position.z,
@@ -76,6 +78,62 @@ export default class LocalPlayer extends Player {
         }
     }
 
+    updateRemotePlayers(){
+		if (this.remoteData===undefined || this.remoteData.length == 0 || this.player===undefined || this.player.id===undefined) return;
+
+		const game = this.experience.world;
+		//Get all remotePlayers from remoteData array
+		const remotePlayers = [];
+		const remoteColliders = [];
+		
+		this.remoteData.forEach((data) => {
+			if (game.player.id != data.id){
+				//Is this player being initialised?
+				let iplayer;
+				this.initialisingPlayers.forEach((player) => {
+					if (player.id == data.id) iplayer = player;
+				});
+				//If not being initialised check the remotePlayers array
+				if (iplayer===undefined){
+					let rplayer;
+					this.remotePlayers.forEach((player) => {
+						if (player && player.id == data.id) rplayer = player;
+					});
+					if (rplayer===undefined){
+						//Initialise player
+						this.initialisingPlayers.push( new Player( false, data ));
+					}else{
+						//Player exists
+						remotePlayers.push(rplayer);
+						remoteColliders.push(rplayer.collider);
+					}
+				}
+			}
+		});
+
+		this.scene.children.forEach((object) =>{
+			if (object.userData.remotePlayer && this.getRemotePlayerById(object.userData.id)==undefined){
+				this.scene.remove(object);
+			}	
+		});
+		
+		this.remotePlayers = remotePlayers
+		this.remoteColliders = remoteColliders
+		this.remotePlayers.forEach((player) => { player.update() })
+	}
+
+    getRemotePlayerById(id){
+		if (this.remotePlayers===undefined || this.remotePlayers.length==0) return;
+		
+		const players = this.remotePlayers.filter((player) =>{
+			if (player && player.id == id) return true;
+		});	
+		
+		if (players.length==0) return;
+		
+		return players[0];
+	}
+
     update() {
         this.controller.update()
         this.updateSocket()
@@ -83,5 +141,7 @@ export default class LocalPlayer extends Player {
 
         if(this.thirdPersonCamera)
             this.thirdPersonCamera.update()
+
+        this.updateRemotePlayers()
     }
 }

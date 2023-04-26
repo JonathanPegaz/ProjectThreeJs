@@ -100,7 +100,7 @@ export default class World
             this.bush = new Bush()
             this.infoBeacon = new InfoBeacon()
             this.undergroundSF = new UndergroundSF()
-            this.player = new LocalPlayer()
+            this.player = new LocalPlayer(true)
             this.environment = new Environment()
             this.htmlPoint = new HTMLPoints()
         })
