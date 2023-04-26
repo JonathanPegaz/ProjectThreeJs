@@ -56,5 +56,15 @@ export default [
         name: 'bush2',
         type: 'gltfModel',
         path: 'models/buisson2.glb'
+    },
+    {
+        name: 'testmap',
+        type: 'gltfModel',
+        path: 'models/Map/maquette.glb'
+    },
+    {
+        name: 'mapv1',
+        type: 'gltfModel',
+        path: 'models/Map/mapv1.glb'
     }
 ]

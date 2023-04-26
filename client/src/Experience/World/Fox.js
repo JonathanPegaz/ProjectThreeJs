@@ -27,7 +27,7 @@ export default class Fox
     setModel()
     {
         this.model = this.resource.scene
-        this.model.scale.set(0.02, 0.02, 0.02)
+        this.model.scale.set(0.001, 0.001, 0.001)
         this.scene.add(this.model)
 
         this.model.traverse((child) =>
