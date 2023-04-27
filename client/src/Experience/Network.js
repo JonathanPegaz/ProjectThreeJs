@@ -7,6 +7,7 @@ export default class Network {
     constructor() {
         this.experience = new Experience()
         this.localPlayer = this.experience.localPlayer
+        this.scene = this.experience.scene
 
         // Network
         this.remotePlayers = [];
@@ -27,25 +28,29 @@ export default class Network {
 
         this.socket.on('remoteData', (data) => {
             this.remoteData = data
-            console.log(this.remoteData)
         })
 
-        // this.socket.on('deletePlayer', (data) => {
-        //     const players = this.remotePlayers.filter((player) => {
-        //         console.log('deletePlayer', player)
-        //         if(player && player.id == data.id) {
-        //             return player
-        //         }
-        //     })
-        //     if (players.length>0) {
-        //         let index = this.remotePlayers.indexOf(players[0])
-        //         if (index!==1) {
-        //             const player = this.initialisingPlayers[index]
-        //             player.deleted = true
-        //             this.initialisingPlayers.splice(index, 1)
-        //         }
-        //     }
-        // })
+        this.socket.on('deletePlayer', (data) => {
+            const players = this.remotePlayers.filter((player) =>{
+				if (player.id == data.id){
+					return player;
+				}
+			});
+			if (players.length>0){
+				let index = this.remotePlayers.indexOf(players[0]);
+				if (index!=-1){
+					this.remotePlayers.splice( index, 1 );
+					this.scene.remove(players[0].object);
+				}else{
+					index = this.initialisingPlayers.indexOf(data.id);
+					if (index!=-1){
+						const player = this.initialisingPlayers[index];
+						player.deleted = true;
+						this.initialisingPlayers.splice(index, 1);
+					}
+				}
+			}
+        })
     }
 
     initSocket() {
@@ -68,7 +73,7 @@ export default class Network {
                 z: this.localPlayer.controller.position.z,
                 h: this.localPlayer.controller.Rotation.y,
                 pb: this.localPlayer.controller.Rotation.x,
-                action: this.localPlayer.controller.stateMachine._currentState.name
+                action: this.localPlayer.controller.stateMachine._currentState.Name
             })
         }
     }
@@ -107,64 +112,26 @@ export default class Network {
             }
         })
 
+        this.scene.children.forEach((object) =>{
+             if (object.remotePlayer && this.getRemotePlayerById(object.id)==undefined){
+                 this.scene.remove(object);
+             }
+         });
+
         this.remotePlayers = tempRemotePlayers;
         this.remotePlayers.forEach((player) => {
             player.update();
         })
     }
 
-    // updateRemotePlayers(){
-    //     if (this.remoteData===undefined || this.remoteData.length == 0 || this.local===undefined || this.player.id===undefined) return;
-    //
-    //     const game = this.experience.world;
-    //     //Get all remotePlayers from remoteData array
-    //     const remotePlayers = [];
-    //     const remoteColliders = [];
-    //
-    //     this.remoteData.forEach((data) => {
-    //         if (game.player.id != data.id){
-    //             //Is this player being initialised?
-    //             let iplayer;
-    //             this.initialisingPlayers.forEach((player) => {
-    //                 if (player.id == data.id) iplayer = player;
-    //             });
-    //             //If not being initialised check the remotePlayers array
-    //             if (iplayer===undefined){
-    //                 let rplayer;
-    //                 this.remotePlayers.forEach((player) => {
-    //                     if (player && player.id == data.id) rplayer = player;
-    //                 });
-    //                 if (rplayer===undefined){
-    //                     //Initialise player
-    //                     this.initialisingPlayers.push( new RemotePlayer( false, data ));
-    //                 }else{
-    //                     //RemotePlayer exists
-    //                     remotePlayers.push(rplayer);
-    //                     remoteColliders.push(rplayer.collider);
-    //                 }
-    //             }
-    //         }
-    //     });
-    //
-    //     this.scene.children.forEach((object) =>{
-    //         if (object.userData.remotePlayer && this.getRemotePlayerById(object.userData.id)==undefined){
-    //             this.scene.remove(object);
-    //         }
-    //     });
-    //
-    //     this.remotePlayers = remotePlayers
-    //     this.remoteColliders = remoteColliders
-    //     this.remotePlayers.forEach((player) => { player.update() })
-    // }
-
     getRemotePlayerById(id){
         if (this.remotePlayers===undefined || this.remotePlayers.length==0) return;
 
         const players = this.remotePlayers.filter((player) =>{
-            if (player && player.id == id) return true;
+            if (player && player.id === id) return true;
         });
 
-        if (players.length==0) return;
+        if (players.length===0) return;
 
         return players[0];
     }
