@@ -29,7 +29,7 @@ io.sockets.on('connection', function(socket){
 		socket.userData.z = data.z;
 		socket.userData.heading = data.h;
 		socket.userData.pb = data.pb,
-		socket.userData.action = "Idle";
+		socket.userData.action = "idle";
 	});
 	
 	socket.on('update', function(data){
@@ -73,4 +73,4 @@ setInterval(function(){
 		}
 	})
 	if (pack.length>0) io.emit('remoteData', pack);
-}, 4000);
+}, 40);
