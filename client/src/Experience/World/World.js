@@ -19,28 +19,19 @@ export default class World
         this.resources = this.experience.resources
         this.time = this.experience.time
 
-        // Wait for resources
-        this.resources.on('ready', () =>
-        {
-            this.bush = new Bush()
-            this.ocean = new Ocean()
-            this.infoBeacon = new InfoBeacon()
-            this.undergroundSF = new UndergroundSF()
-            this.player = new LocalPlayer(true)
-            this.environment = new Environment()
-            this.htmlPoint = new HTMLPoints()
-        })
+        
+        this.bush = new Bush()
+        this.ocean = new Ocean()
+        this.infoBeacon = new InfoBeacon()
+        this.undergroundSF = new UndergroundSF()
+        this.environment = new Environment()
+        this.htmlPoint = new HTMLPoints()
+        
     }
 
     update()
     {
-        if(this.player)
-            this.player.update()
-
-        if (this.htmlPoint)
-            this.htmlPoint.update()
-
-        if (this.ocean)
-            this.ocean.update()
+        this.htmlPoint.update()
+        this.ocean.update()
     }
 }

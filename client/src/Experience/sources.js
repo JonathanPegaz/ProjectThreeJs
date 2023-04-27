@@ -51,5 +51,10 @@ export default [
         name: 'water',
         type: 'texture',
         path: 'textures/water.png'
+    },
+    {
+        name: 'bush2',
+        type: 'gltfModel',
+        path: 'models/buisson2.glb'
     }
 ]

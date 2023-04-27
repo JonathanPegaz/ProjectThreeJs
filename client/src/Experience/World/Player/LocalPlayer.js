@@ -1,11 +1,11 @@
 import * as THREE from 'three'
-import Player from "./Player.js";
 import BasicCharacterController from "./CharacterController.js";
 import ThirdPersonCamera from "./ThirdPersonCamera.js";
 import Experience from "../../Experience.js";
 
 export default class LocalPlayer {
     constructor() {
+        this.id = null
         this.experience = new Experience()
         this.scene = this.experience.scene
         this.time = this.experience.time
@@ -13,9 +13,7 @@ export default class LocalPlayer {
         this.resources = this.experience.resources
         this.resource = this.resources.items.foxModel
 
-        this.player = this
-
-        this.player.object = new THREE.Object3D()
+        this.object = new THREE.Object3D()
 
         this.setModel()
         this.setAnimation()
@@ -35,8 +33,8 @@ export default class LocalPlayer {
             }
         })
 
-        this.player.object.add(this.model)
-        this.scene.add(this.player.object);
+        this.object.add(this.model)
+        this.scene.add(this.object);
     }
 
     setAnimation()

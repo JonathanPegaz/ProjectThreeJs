@@ -1,44 +1,34 @@
 import * as THREE from 'three'
 import Experience from "../../Experience.js";
 
-export default class Player {
-    constructor(local, options = {}) {
-        this.local = local
-        this.options = options
-
+export default class RemotePlayer {
+    constructor(data) {
         this.experience = new Experience()
         this.scene = this.experience.scene
         this.time = this.experience.time
+        this.network = this.experience.network
 
         this.resources = this.experience.resources
         this.resource = this.resources.items.foxModel
 
-        this.remoteData = this.experience.remoteData
-        this.remotePlayers = this.experience.remotePlayers
-        this.initialisingPlayers = this.experience.initialisingPlayers
+        this.object = new THREE.Object3D()
+        this.object.position.set(0, 0, 0)
+        this.object.rotation.set(0, 0, 0)
 
-        this.player = this
+        this.id = data.id;
+        this.model = data.model;
+        this.colour = data.colour;
 
-        this.player.object = new THREE.Object3D()
-        this.player.object.position.set(0, 0, 0)
-        this.player.object.rotation.set(0, 0, 0)
-        
-        if (!this.local){
-            this.local = false;
-			this.id = this.options.id;
-			//this.model = this.options.model;
-			this.colour = this.options.colour;
 
-            this.player.object.userData.id = this.id
-            this.player.object.userData.remotePlayer = true
-            const players = this.initialisingPlayers.splice(this.initialisingPlayers.indexOf(this), 1);
-            this.remotePlayers.push(players[0])
-        }
+        // this.player.object.userData.id = this.id
+        // this.player.object.userData.remotePlayer = true
+        // console.log('initial', this.network.initialisingPlayers)
+        // const players = this.network.initialisingPlayers.splice(this.network.initialisingPlayers.indexOf(this), 1);
+        // console.log('players', players)
+        // this.network.remotePlayers.push(players[0])
 
         this.setModel()
         this.setAnimation()
-
-        
     }
 
     setModel()
@@ -53,9 +43,9 @@ export default class Player {
             }
         })
 
-        this.player.object.add(this.model)
-
-        if (this.player.deleted===undefined) this.scene.add(this.player.object);
+        this.object.add(this.model)
+        this.scene.add(this.object)
+        //if (this.player.deleted===undefined) this.scene.add(this.object);
     }
 
     setAnimation()
@@ -79,9 +69,9 @@ export default class Player {
             clip: this.resource.animations[2],
             action: this.mixer.clipAction(this.resource.animations[2])
         }
-        if (!this.local){
-            this.player.action = 'idle'
-        }
+
+        this.mixer.clipAction(this.animations.idle.clip).play()
+        //this.player.action = 'idle'
     }
 
     update()
@@ -90,9 +80,9 @@ export default class Player {
             this.mixer.update(this.time.delta / 1000)
         }
 
-        if (this.remoteData.length > 0) {
+        if (this.network.remoteData.length > 0) {
             let found = false
-            for (let data of this.remoteData) {
+            for (let data of this.network.remoteData) {
                 if (data.id != this.id) continue
                 // Found the player
                 this.object.position.set( data.x, data.y, data.z )
@@ -101,7 +91,7 @@ export default class Player {
                 this.action = data.action
                 found = true;
             }
-            if (!found) this.game.removePlayer(this);
+            //if (!found) this.game.removePlayer(this);
         }
     }
 

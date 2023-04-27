@@ -11,6 +11,8 @@ import PostProcessing from './PostProcessing.js'
 
 import sources from './sources.js'
 import Monitoring from "./Utils/Monitoring.js";
+import LocalPlayer from "./World/Player/LocalPlayer.js";
+import Network from "./Network.js";
 
 let instance = null
 
@@ -40,7 +42,7 @@ export default class Experience
         this.resources = new Resources(sources)
         this.camera = new Camera()
         this.renderer = new Renderer()
-        this.world = new World()
+        
         this.postProcessing = new PostProcessing()
 
         // Resize event
@@ -53,6 +55,13 @@ export default class Experience
         this.time.on('tick', () =>
         {
             this.update()
+        })
+        // Wait for resources
+        this.resources.on('ready', () =>
+        {
+            this.world = new World()
+            this.localPlayer = new LocalPlayer()
+            this.network = new Network()
         })
     }
 
@@ -67,7 +76,13 @@ export default class Experience
     {
         this.monitoring.beginMonitoring()
 
-        this.world.update()
+        if(this.world)
+            this.world.update()
+        if(this.network)
+            this.network.update()
+        if(this.localPlayer)
+            this.localPlayer.update()
+
         this.renderer.update()
         this.postProcessing.update()
         this.monitoring.endMonitoring()
