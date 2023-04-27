@@ -2,16 +2,64 @@ import * as THREE from 'three'
 import Player from "./Player.js";
 import BasicCharacterController from "./CharacterController.js";
 import ThirdPersonCamera from "./ThirdPersonCamera.js";
-import io from 'socket.io-client';
+import Experience from "../../Experience.js";
 
-export default class LocalPlayer extends Player {
+export default class LocalPlayer {
     constructor() {
-        super()
+        this.experience = new Experience()
+        this.scene = this.experience.scene
+        this.time = this.experience.time
 
+        this.resources = this.experience.resources
+        this.resource = this.resources.items.foxModel
+
+        this.player = this
+
+        this.player.object = new THREE.Object3D()
+
+        this.setModel()
+        this.setAnimation()
         this.setController()
         this.setThirdPersonCamera()
-        this.setSocket()
+    }
 
+    setModel()
+    {
+        this.model = this.resource.scene
+        this.model.scale.set(0.02, 0.02, 0.02)
+        this.model.traverse((child) =>
+        {
+            if(child instanceof THREE.Mesh)
+            {
+                child.castShadow = true
+            }
+        })
+
+        this.player.object.add(this.model)
+        this.scene.add(this.player.object);
+    }
+
+    setAnimation()
+    {
+        this.animations = {}
+
+        this.mixer = new THREE.AnimationMixer(this.model)
+
+        // action
+        this.animations.idle = {
+            clip: this.resource.animations[0],
+            action: this.mixer.clipAction(this.resource.animations[0])
+        }
+
+        this.animations.walk = {
+            clip: this.resource.animations[1],
+            action: this.mixer.clipAction(this.resource.animations[1])
+        }
+
+        this.animations.run = {
+            clip: this.resource.animations[2],
+            action: this.mixer.clipAction(this.resource.animations[2])
+        }
     }
 
     setController() {
@@ -22,126 +70,14 @@ export default class LocalPlayer extends Player {
         this.thirdPersonCamera = new ThirdPersonCamera(this.controller)
     }
 
-    setSocket() {
-        this.socket = io();
-
-        this.socket.on('setId', (data) => {
-            this.player.id = data.id;
-        })
-
-        this.socket.on('remoteData', (data) => {
-            this.remoteData = data
-            console.log(this.remoteData)
-        })
-
-        this.socket.on('deletePlayer', (data) => {
-            const players = this.remotePlayers.filter((player) => {
-                console.log('deletePlayer', player)
-                if(player && player.id == data.id) {
-                    return player
-                }
-            })
-            if (players.length>0) {
-                let index = this.remotePlayers.indexOf(players[0])
-                if (index!==1) {
-                    const player = this.initialisingPlayers[index]
-                    player.deleted = true
-                    this.initialisingPlayers.splice(index, 1)
-                }
-            }
-        })
-        this.initSocket()
-    }
-
-    initSocket() {
-        this.socket.emit('init', {
-            model:"foxModel",
-            //colour: this.colour,
-            x: this.controller.position.x,
-            y: this.controller.position.y,
-            z: this.controller.position.z,
-            h: this.controller.Rotation.y,
-            pb: this.controller.Rotation.x
-        })
-    }
-
-    updateSocket() {
-        if (this.socket !== undefined){
-            this.socket.emit('update', {
-                x: this.controller.position.x,
-                y: this.controller.position.y,
-                z: this.controller.position.z,
-                h: this.controller.Rotation.y,
-                pb: this.controller.Rotation.x,
-                action: this.action
-            })
-        }
-    }
-
-    updateRemotePlayers(){
-		if (this.remoteData===undefined || this.remoteData.length == 0 || this.player===undefined || this.player.id===undefined) return;
-
-		const game = this.experience.world;
-		//Get all remotePlayers from remoteData array
-		const remotePlayers = [];
-		const remoteColliders = [];
-		
-		this.remoteData.forEach((data) => {
-			if (game.player.id != data.id){
-				//Is this player being initialised?
-				let iplayer;
-				this.initialisingPlayers.forEach((player) => {
-					if (player.id == data.id) iplayer = player;
-				});
-				//If not being initialised check the remotePlayers array
-				if (iplayer===undefined){
-					let rplayer;
-					this.remotePlayers.forEach((player) => {
-						if (player && player.id == data.id) rplayer = player;
-					});
-					if (rplayer===undefined){
-						//Initialise player
-						this.initialisingPlayers.push( new Player( false, data ));
-					}else{
-						//Player exists
-						remotePlayers.push(rplayer);
-						remoteColliders.push(rplayer.collider);
-					}
-				}
-			}
-		});
-
-		this.scene.children.forEach((object) =>{
-			if (object.userData.remotePlayer && this.getRemotePlayerById(object.userData.id)==undefined){
-				this.scene.remove(object);
-			}	
-		});
-		
-		this.remotePlayers = remotePlayers
-		this.remoteColliders = remoteColliders
-		this.remotePlayers.forEach((player) => { player.update() })
-	}
-
-    getRemotePlayerById(id){
-		if (this.remotePlayers===undefined || this.remotePlayers.length==0) return;
-		
-		const players = this.remotePlayers.filter((player) =>{
-			if (player && player.id == id) return true;
-		});	
-		
-		if (players.length==0) return;
-		
-		return players[0];
-	}
-
     update() {
         this.controller.update()
-        this.updateSocket()
-        super.update()
+
+        if (this.mixer) {
+            this.mixer.update(this.time.delta / 1000)
+        }
 
         if(this.thirdPersonCamera)
             this.thirdPersonCamera.update()
-
-        this.updateRemotePlayers()
     }
 }
