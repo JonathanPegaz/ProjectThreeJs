@@ -7,6 +7,7 @@ export const oceanMaterial = new THREE.ShaderMaterial({
             uMap: {type: 't', value: null},
             uTime: {type: 'f', value: 0},
             uColor: {type: 'f', value: new THREE.Color('#0051da')},
+            uSize: {type: 'f', value: 1.0}
         },
     vertexShader: `
         #define SCALE 10.0
@@ -39,6 +40,7 @@ export const oceanMaterial = new THREE.ShaderMaterial({
         uniform sampler2D uMap;
         uniform float uTime;
         uniform vec3 uColor;
+        uniform float uSize;
         
         void main() {
             vec2 uv = vUv * 10.0 + vec2(uTime * -0.05);
@@ -47,8 +49,8 @@ export const oceanMaterial = new THREE.ShaderMaterial({
             uv.x += 0.12 * (sin(uv.y * 4.0 + uTime * 0.5) + sin(uv.y * 6.8 + uTime * 0.75) + sin(uv.y * 11.3 + uTime * 0.2)) / 3.0;
             uv.y += 0.12 * (sin(uv.x * 4.2 + uTime * 0.64) + sin(uv.x * 6.3 + uTime * 1.65) + sin(uv.x * 8.2 + uTime * 0.45)) / 3.0;
         
-            vec4 tex1 = texture2D(uMap, uv * 1.0);
-            vec4 tex2 = texture2D(uMap, uv * 1.0 + vec2(0.2));
+            vec4 tex1 = texture2D(uMap, uv * uSize);
+            vec4 tex2 = texture2D(uMap, uv * uSize + vec2(0.2));
         
             vec3 blue = uColor;
         

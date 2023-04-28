@@ -16,7 +16,7 @@ export default class Ocean {
     }
 
     setGeometry() {
-        this.geometry = new THREE.PlaneBufferGeometry(50, 50, 20, 20)
+        this.geometry = new THREE.PlaneBufferGeometry(500, 500, 20, 20)
         this.geometry.rotateX(-Math.PI / 2)
     }
 
@@ -30,6 +30,7 @@ export default class Ocean {
     setMaterial() {
         this.oceanMaterial = oceanMaterial
         this.oceanMaterial.uniforms.uMap.value = this.waterTexture
+        this.oceanMaterial.uniforms.uSize.value = 2
     }
 
     setMesh() {
