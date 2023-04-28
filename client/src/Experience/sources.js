@@ -68,8 +68,18 @@ export default [
         path: 'models/Map/mapv1.glb'
     },
     {
-        name: 'heightmap',
+        name: 'mapisland',
+        type: 'gltfModel',
+        path: 'models/Map/island.glb'
+    },
+    {
+        name: 'heightmap2',
         type: 'texture',
         path: 'textures/mapv1heightmap.png'
     },
+    {
+        name: 'heightmap1',
+        type: 'texture',
+        path: 'textures/heightmap.png'
+    }
 ]

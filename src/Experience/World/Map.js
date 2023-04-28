@@ -1,5 +1,6 @@
 import * as THREE from 'three'
 import Experience from '../Experience.js'
+import * as CANNON from "cannon-es";
 
 export default class Map
 {
@@ -9,27 +10,30 @@ export default class Map
     this.resources = this.experience.resources
     this.time = this.experience.time
     this.debug = this.experience.debug
+    this.mapBody = null;
+    this.mapMesh = null;
 
-    this.texture = this.resources.items.heightmap
+    this.texture = this.resources.items.heightmap1
 
-    this.create()
+
+    this.init()
   }
 
-  create() {
-    const groundGeometry = new THREE.PlaneGeometry(1000, 1000, 200, 200)
+  init() {
+    const geometry = new THREE.PlaneGeometry(1000, 1000, 200, 200)
     this.texture.wrapS = this.texture.wrapT = THREE.RepeatWrapping
     this.texture.repeat.set(1, 1)
 
-    const groundMaterial = new THREE.MeshStandardMaterial({
+    const material = new THREE.MeshStandardMaterial({
       color: 0x00ff00,
       wireframe: true,
       displacementMap: this.texture,
       displacementScale: 20,
     })
 
-    const groundMesh = new THREE.Mesh(groundGeometry, groundMaterial)
-    this.scene.add(groundMesh)
-    groundMesh.rotation.x = -Math.PI / 2
-    groundMesh.position.y = -0.5
+    this.mapMesh = new THREE.Mesh(geometry, material)
+    this.scene.add(this.mapMesh)
+    this.mapMesh.rotation.x = -Math.PI / 2
+    this.mapMesh.position.y = 0
   }
 }

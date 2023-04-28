@@ -5,6 +5,7 @@ import Experience from "../../Experience.js";
 import IdleState from "./State/IdleState.js";
 import RunState from "./State/RunState.js";
 import WalkState from "./State/WalkState.js";
+import * as CANNON from "cannon-es";
 
 class BasicCharacterControllerProxy {
     constructor(animations) {
@@ -38,6 +39,8 @@ export default class BasicCharacterController {
         this.time = this.experience.time
         this.model = model
         this.animations = animations
+        this.resources = this.experience.resources
+        this.sphereBody = null;
 
         this.setParams()
     }

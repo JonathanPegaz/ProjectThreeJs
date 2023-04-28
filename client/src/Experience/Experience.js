@@ -82,7 +82,7 @@ export default class Experience
             this.network.update()
         if(this.localPlayer)
             this.localPlayer.update()
-
+        this.camera.update()
         this.renderer.update()
         this.postProcessing.update()
         this.monitoring.endMonitoring()

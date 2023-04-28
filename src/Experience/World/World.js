@@ -11,12 +11,16 @@ import InfoBeacon from "./InteractableObject/InfoBeacon.js";
 import UndergroundSF from "./Buildings/UndergroundSF.js";
 import TestMap from "./Map/TestMap.js";
 import Mapv1 from "./Map/mapv1.js";
+import Physics from "../Physics.js";
+import PhysicPlane from "./Map/PhysicPlane.js";
+import Sphere from "./Sphere.js";
 
 export default class World
 {
     constructor()
     {
         this.experience = new Experience()
+        this.physics = new Physics()
         this.scene = this.experience.scene
         this.resources = this.experience.resources
 
@@ -28,8 +32,7 @@ export default class World
             //this.bush = new Bush()
             //this.infoBeacon = new InfoBeacon()
             //this.undergroundSF = new UndergroundSF()
-            this.map = new Map()
-            this.player = new BasicCharacterController()
+            //this.map = new Map()
             //this.testMap = new TestMap()
             this.mapv1 = new Mapv1()
             this.thirdPersonCamera = new ThirdPersonCamera(this.player)
@@ -48,5 +51,11 @@ export default class World
 
         if (this.htmlPoint)
             this.htmlPoint.update()
+
+        if(this.physics)
+            this.physics.update()
+
+        // if(this.sphere)
+        //     this.sphere.update()
     }
 }
