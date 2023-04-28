@@ -47,10 +47,7 @@ export default class Bush
             this.gradientMap.magFilter = THREE.NearestFilter
             this.model.traverse((child) => {
                 if (child instanceof THREE.Mesh) {
-                    
-                    console.log(this.gradientMap)
                     child.material = new THREE.MeshToonMaterial({...child.material, type: 'MeshToonMaterial', gradientMap: this.gradientMap})
-                    console.log(child.material)
                     //child.material.side = THREE.DoubleSide
                     //child.castShadow = true
                 }
