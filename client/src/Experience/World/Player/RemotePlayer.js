@@ -72,7 +72,6 @@ export default class RemotePlayer {
     set action(name){
 		//Make a copy of the clip if this is a remote player
 		if (this.actionName == name) return;
-        console.log(name)
 		const action = this.animations[name].action;
         action.time = 0;
 		this.mixer.stopAllAction();
