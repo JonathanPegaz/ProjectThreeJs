@@ -3,12 +3,12 @@ import Experience from '../Experience.js'
 
 export default class Bush
 {
-    constructor(count) {
+    constructor() {
         this.experience = new Experience()
         this.scene = this.experience.scene
         this.resources = this.experience.resources
 
-        this.resource = this.resources.items.bush2
+        this.resource = this.resources.items.tree
         this.setModel()
     }
 
@@ -37,15 +37,22 @@ export default class Bush
             const z = Math.sin(angle) * radius        // Get the z position using sinus
 
             this.model = this.resource.scene.clone()
-            this.model.scale.set(0.012, 0.012, 0.012)
-            this.model.position.set(x, 0.2, z)
+            this.model.scale.set(2, 2, 2)
+            this.model.position.set(x, -2, z)
             // Rotation
             this.model.rotation.y = (Math.random() - 0.5) * 0.4
             this.scene.add(this.model)
+            this.gradientMap = this.resources.items.onetone
+            this.gradientMap.minFilter = THREE.NearestFilter
+            this.gradientMap.magFilter = THREE.NearestFilter
             this.model.traverse((child) => {
                 if (child instanceof THREE.Mesh) {
-                    child.material.side = THREE.DoubleSide
-                    child.castShadow = true
+                    
+                    console.log(this.gradientMap)
+                    child.material = new THREE.MeshToonMaterial({...child.material, type: 'MeshToonMaterial', gradientMap: this.gradientMap})
+                    console.log(child.material)
+                    //child.material.side = THREE.DoubleSide
+                    //child.castShadow = true
                 }
             })
         }

@@ -56,5 +56,30 @@ export default [
         name: 'bush2',
         type: 'gltfModel',
         path: 'models/buisson2.glb'
+    },
+    {
+        name: 'tree',
+        type: 'gltfModel',
+        path: 'models/tree_green.glb'
+    },
+    {
+        name: 'fivetone',
+        type: 'texture',
+        path: 'textures/gradientMaps/fiveTone.jpg'
+    },
+    {
+        name: 'fourtone',
+        type: 'texture',
+        path: 'textures/gradientMaps/fourTone.jpg'
+    },
+    {
+        name: 'threetone',
+        type: 'texture',
+        path: 'textures/gradientMaps/threeTone.jpg'
+    },
+    {
+        name: 'onetone',
+        type: 'texture',
+        path: 'textures/gradientMaps/oneTone.jpg'
     }
 ]
