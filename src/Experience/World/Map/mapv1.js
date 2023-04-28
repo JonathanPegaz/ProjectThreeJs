@@ -10,12 +10,13 @@ export default class Mapv1 {
     this.scene = this.experience.scene
     this.resources = this.experience.resources
     this.time = this.experience.time
-    //this.debug = this.experience.debug
+    this.debug = this.experience.debug
 
     this.world = this.experience.world.physics.world
     this.worldOctree = null
+    this.helperActive = false
 
-    this.resource = this.resources.items.mapisland
+    this.resource = this.resources.items.mapisland_lowpoly
     this.setModel()
   }
 
@@ -33,18 +34,18 @@ export default class Mapv1 {
 
       //TODO: Physics with octree
 
-      // if ( child.isMesh ) {
-      //
-      //   child.castShadow = true;
-      //   child.receiveShadow = true;
-      //
-      //   if ( child.material.map ) {
-      //
-      //     child.material.map.anisotropy = 4;
-      //
-      //   }
-      //
-      // }
+      if ( child.isMesh ) {
+
+        child.castShadow = true;
+        child.receiveShadow = true;
+
+        if ( child.material.map ) {
+
+          child.material.map.anisotropy = 4;
+
+        }
+
+      }
 
       //TODO: Physics with octree
       if (child instanceof THREE.Mesh) {
@@ -57,50 +58,50 @@ export default class Mapv1 {
 
     //TODO: Physics with octree
 
-    // const helper = new OctreeHelper( this.worldOctree );
-    // helper.visible = false;
-    // this.scene.add( helper );
-    //
-    // const gui = new GUI( { width: 200 } );
-    // gui.add( { debug: false }, 'debug' )
-    //   .onChange( function ( value ) {
-    //
-    //     helper.visible = value;
-    //
-    //   } );
+    const helper = new OctreeHelper( this.worldOctree );
+    helper.visible = this.helperActive;
+    this.scene.add( helper );
+
+    if (this.debug.active)
+    {
+      this.debugFolder = this.debug.ui.addFolder('Physics')
+      this.debugFolder.add(this, 'helperActive').onChange(() => {
+        helper.visible = this.helperActive
+      })
+    }
 
     //TODO: Physics with octree
 
 
-    const positionAttribute = bufferGeometry.getAttribute('position')
-    const sizeX = 64/* number of rows in the matrix */
-    const sizeZ = 64/* number of columns in the matrix */
-    const matrix = []
-
-    for (let i = 0; i < sizeX; i++) {
-      matrix.push([])
-      for (let j = 0; j < sizeZ; j++) {
-
-        const vertexIndex = (i * sizeZ) + j
-
-        const height = positionAttribute.getY(vertexIndex)
-        matrix[i].push(height)
-      }
-    }
-
-    const heightfieldShape = new CANNON.Heightfield(matrix, {
-      elementSize: 1,
-    })
-    const heightfieldBody = new CANNON.Body({ mass: 0 })
-    heightfieldBody.addShape(heightfieldShape)
-    heightfieldBody.position.set(
-      -(sizeX * heightfieldShape.elementSize) / 2,
-      -1,
-      (sizeZ * heightfieldShape.elementSize) / 2
-    )
-    heightfieldBody.quaternion.copy(this.model.quaternion)
-    heightfieldBody.quaternion.setFromAxisAngle(new CANNON.Vec3(1, 0, 0), -Math.PI / 2)
-    heightfieldBody.position.copy(this.model.position)
-    this.world.addBody(heightfieldBody)
+    // const positionAttribute = bufferGeometry.getAttribute('position')
+    // const sizeX = 64/* number of rows in the matrix */
+    // const sizeZ = 64/* number of columns in the matrix */
+    // const matrix = []
+    //
+    // for (let i = 0; i < sizeX; i++) {
+    //   matrix.push([])
+    //   for (let j = 0; j < sizeZ; j++) {
+    //
+    //     const vertexIndex = (i * sizeZ) + j
+    //
+    //     const height = positionAttribute.getY(vertexIndex)
+    //     matrix[i].push(height)
+    //   }
+    // }
+    //
+    // const heightfieldShape = new CANNON.Heightfield(matrix, {
+    //   elementSize: 1,
+    // })
+    // const heightfieldBody = new CANNON.Body({ mass: 0 })
+    // heightfieldBody.addShape(heightfieldShape)
+    // heightfieldBody.position.set(
+    //   -(sizeX * heightfieldShape.elementSize) / 2,
+    //   -1,
+    //   (sizeZ * heightfieldShape.elementSize) / 2
+    // )
+    // heightfieldBody.quaternion.copy(this.model.quaternion)
+    // heightfieldBody.quaternion.setFromAxisAngle(new CANNON.Vec3(1, 0, 0), -Math.PI / 2)
+    // heightfieldBody.position.copy(this.model.position)
+    // this.world.addBody(heightfieldBody)
   }
 }

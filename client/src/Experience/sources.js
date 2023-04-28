@@ -73,6 +73,11 @@ export default [
         path: 'models/Map/island.glb'
     },
     {
+        name: 'mapisland_lowpoly',
+        type: 'gltfModel',
+        path: 'models/Map/island_lowpoly.glb'
+    },
+    {
         name: 'heightmap2',
         type: 'texture',
         path: 'textures/mapv1heightmap.png'
