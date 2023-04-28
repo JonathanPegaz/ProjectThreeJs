@@ -31,56 +31,15 @@ class CharacterFSM extends FiniteStateMachine {
 }
 
 export default class BasicCharacterController {
-    constructor() {
+    constructor(model, animations) {
         this.experience = new Experience()
-        this.scene = this.experience.scene
+
         this.camera = this.experience.camera
         this.time = this.experience.time
-        this.resources = this.experience.resources
+        this.model = model
+        this.animations = animations
 
-        this.resource = this.resources.items.foxModel
-
-        this.setModel()
-        this.setAnimation()
         this.setParams()
-
-    }
-
-    setModel()
-    {
-        this.model = this.resource.scene
-        this.model.scale.set(0.02, 0.02, 0.02)
-        this.scene.add(this.model)
-        this.model.traverse((child) =>
-        {
-            if(child instanceof THREE.Mesh)
-            {
-                child.castShadow = true
-            }
-        })
-    }
-
-    setAnimation()
-    {
-        this.animations = {}
-
-        this.mixer = new THREE.AnimationMixer(this.model)
-
-        // action
-        this.animations.idle = {
-            clip: this.resource.animations[0],
-            action: this.mixer.clipAction(this.resource.animations[0])
-        }
-
-        this.animations.walk = {
-            clip: this.resource.animations[1],
-            action: this.mixer.clipAction(this.resource.animations[1])
-        }
-
-        this.animations.run = {
-            clip: this.resource.animations[2],
-            action: this.mixer.clipAction(this.resource.animations[2])
-        }
     }
 
     setParams()
@@ -175,10 +134,6 @@ export default class BasicCharacterController {
         controlObject.position.add(sideways);
 
         this.position.copy(controlObject.position);
-
-        if (this.mixer) {
-            this.mixer.update(timeInSeconds);
-        }
     }
 }
 

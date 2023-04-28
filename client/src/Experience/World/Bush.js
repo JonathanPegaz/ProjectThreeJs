@@ -8,12 +8,12 @@ export default class Bush
         this.scene = this.experience.scene
         this.resources = this.experience.resources
 
-        this.resource = this.resources.items.bush
+        this.resource = this.resources.items.bush2
         this.setModel()
     }
 
     setModel() {
-        for (let i = 0; i < 1000; i++) {
+        for (let i = 0; i < 100; i++) {
             const angle = Math.random() * Math.PI * 2 // Random angle
             const radius = Math.random() * 1000     // Random radius
 
@@ -21,13 +21,14 @@ export default class Bush
             const z = Math.sin(angle) * radius        // Get the z position using sinus
 
             this.model = this.resource.scene.clone()
-            this.model.scale.set(0.2, 0.2, 0.2)
+            this.model.scale.set(0.012, 0.012, 0.012)
             this.model.position.set(x, 0.2, z)
             // Rotation
             this.model.rotation.y = (Math.random() - 0.5) * 0.4
             this.scene.add(this.model)
             this.model.traverse((child) => {
                 if (child instanceof THREE.Mesh) {
+                    child.material.side = THREE.DoubleSide
                     child.castShadow = true
                 }
             })
