@@ -5,6 +5,7 @@ import Experience from "../../Experience.js";
 import IdleState from "./State/IdleState.js";
 import RunState from "./State/RunState.js";
 import WalkState from "./State/WalkState.js";
+import JoyStick from "../../Utils/JoyStick.js";
 
 class BasicCharacterControllerProxy {
     constructor(animations) {
@@ -38,6 +39,7 @@ export default class BasicCharacterController {
         this.time = this.experience.time
         this.model = model
         this.animations = animations
+        this.position = model.position
 
         this.setParams()
     }
@@ -47,11 +49,16 @@ export default class BasicCharacterController {
         this.decceleration = new THREE.Vector3(-0.0005, -0.0001, -5.0);
         this.acceleration = new THREE.Vector3(1, 0.25, 50.0);
         this.velocity = new THREE.Vector3(0, 0, 0);
-        this.position = new THREE.Vector3(0, 0, 0);
 
         this.input = new BasicCharacterControllerInput();
         this.stateMachine = new CharacterFSM(
             new BasicCharacterControllerProxy(this.animations));
+
+        this.joystick = new JoyStick({
+            onMove: (forward, turn) => {
+                console.log(forward, turn)
+            }
+        })
 
         this.stateMachine.SetState('idle');
     }

@@ -13,6 +13,7 @@ import sources from './sources.js'
 import Monitoring from "./Utils/Monitoring.js";
 import LocalPlayer from "./World/Player/LocalPlayer.js";
 import Network from "./Network.js";
+import Physics from "./Physics.js";
 
 let instance = null
 
@@ -42,7 +43,7 @@ export default class Experience
         this.resources = new Resources(sources)
         this.camera = new Camera()
         this.renderer = new Renderer()
-        
+        this.physics = new Physics()
         this.postProcessing = new PostProcessing()
 
         // Resize event
@@ -75,6 +76,8 @@ export default class Experience
     update()
     {
         this.monitoring.beginMonitoring()
+
+        this.physics.update()
 
         if(this.world)
             this.world.update()
