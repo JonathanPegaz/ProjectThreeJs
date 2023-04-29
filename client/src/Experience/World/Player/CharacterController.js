@@ -32,14 +32,12 @@ class CharacterFSM extends FiniteStateMachine {
 }
 
 export default class BasicCharacterController {
-    constructor(model, animations) {
+    constructor(localPlayer) {
         this.experience = new Experience()
-
+        this.localPlayer = localPlayer
         this.camera = this.experience.camera
         this.time = this.experience.time
-        this.model = model
-        this.animations = animations
-        this.position = model.position
+        this.position = localPlayer.object.position
 
         this.setParams()
     }
@@ -52,11 +50,13 @@ export default class BasicCharacterController {
 
         this.input = new BasicCharacterControllerInput();
         this.stateMachine = new CharacterFSM(
-            new BasicCharacterControllerProxy(this.animations));
+            new BasicCharacterControllerProxy(this.localPlayer.animations));
 
+        this.joystickSetup =  {forward: 0, turn: 0 }
         this.joystick = new JoyStick({
             onMove: (forward, turn) => {
-                console.log(forward, turn)
+                this.joystickSetup.forward = forward
+                this.joystickSetup.turn = -turn
             }
         })
 
@@ -68,20 +68,45 @@ export default class BasicCharacterController {
     }
 
     get Rotation() {
-        if(!this.model) {
+        if(!this.localPlayer.object) {
             return new THREE.Quaternion();
         }
-        return this.model.quaternion;
+        return this.localPlayer.object.quaternion;
     }
 
     update() {
-        if (!this.model) {
+        if (!this.localPlayer.model) {
             return;
         }
         const timeInSeconds = this.time.delta / 1000;
 
-        this.stateMachine.Update(timeInSeconds, this.input);
+        this.handleJoystick(timeInSeconds)
+        this.handleKeyboard(timeInSeconds)
 
+        this.stateMachine.Update(timeInSeconds, this.input);
+    }
+
+    handleJoystick(timeInSeconds) {
+        let maxSteerVal = 0.03
+        let maxForce = .10
+        let force = maxForce * this.joystickSetup.forward
+        let steer = maxSteerVal * this.joystickSetup.turn
+        if (this.joystickSetup.forward !== 0) {
+            this.localPlayer.object.translateZ(force)
+            if(this.joystickSetup.forward > 0) {
+                this.input._keys.forward = true
+            } else {
+                this.input._keys.backward = true
+            }
+        } else {
+            this.input._keys.forward = false
+            this.input._keys.backward = false
+        }
+        this.position.copy(this.localPlayer.object.position)
+        this.localPlayer.object.rotateY(steer)
+
+    }
+    handleKeyboard(timeInSeconds) {
         const velocity = this.velocity;
         const frameDecceleration = new THREE.Vector3(
             velocity.x * this.decceleration.x,
@@ -94,7 +119,7 @@ export default class BasicCharacterController {
 
         velocity.add(frameDecceleration);
 
-        const controlObject = this.model;
+        const controlObject = this.localPlayer.object;
         const _Q = new THREE.Quaternion();
         const _A = new THREE.Vector3();
         const _R = controlObject.quaternion.clone();

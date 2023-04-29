@@ -11,6 +11,17 @@ export default class Camera
         this.scene = this.experience.scene
         this.canvas = this.experience.canvas
 
+        this.debug = this.experience.debug
+        this.control = null
+
+        this.isOrbitControlActive = true
+
+        if (this.debug.active)
+        {
+            this.debugFolder = this.debug.ui.addFolder('Camera')
+            this.debugFolder.add(this, 'isOrbitControlActive')
+        }
+
         this.setInstance()
     }
 
@@ -19,11 +30,22 @@ export default class Camera
         this.instance = new THREE.PerspectiveCamera(60, this.sizes.width / this.sizes.height, 1, 5000)
         this.instance.position.set(-5, 6, -10)
         this.scene.add(this.instance)
+
+        this.control = new OrbitControls(this.instance, this.canvas)
+        this.control.enableDamping = true
     }
 
     resize()
     {
         this.instance.aspect = this.sizes.width / this.sizes.height
         this.instance.updateProjectionMatrix()
+    }
+
+    update()
+    {
+        if (this.isOrbitControlActive)
+        {
+            this.control.update()
+        }
     }
 }

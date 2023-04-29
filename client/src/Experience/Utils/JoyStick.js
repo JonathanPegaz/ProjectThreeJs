@@ -12,7 +12,8 @@ export default class JoyStick {
       transform: translateX(-50%);
       box-sizing: border-box;
       filter: drop-shadow(0px 1px 1px rgba(0, 0, 0, .25));
-      z-index: 11
+      z-index: 11;
+      user-select: none;
     `;
         const thumb = document.createElement('div');
         thumb.style.cssText = `
@@ -24,6 +25,7 @@ export default class JoyStick {
       border-radius: 50%;
       background: rgba(255, 255, 255, .6);
       box-shadow: 0px 1px 2px rgba(200, 200, 200, .25);
+      user-select: none:
     `;
         circle.appendChild(thumb);
         document.getElementById('webgl').appendChild(circle);
