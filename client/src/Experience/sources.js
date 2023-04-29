@@ -38,6 +38,11 @@ export default [
         path: 'models/Buildings/UndergroundSF/glTF/UndergroundSF.gltf'
     },
     {
+        name: 'island_lowpoly',
+        type: 'gltfModel',
+        path: 'models/island_lowpoly.glb'
+    },
+    {
         name: 'snowFlake',
         type: 'texture',
         path: 'textures/snowflake.png'
