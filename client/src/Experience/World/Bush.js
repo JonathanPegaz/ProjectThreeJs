@@ -8,50 +8,49 @@ export default class Bush
         this.scene = this.experience.scene
         this.resources = this.experience.resources
 
-        this.resource = this.resources.items.tree
-        this.setModel()
-    }
+        this.resource = this.resources.items.bush
+        this.geometry = this.resource.scene.children[0].geometry // On récupère la géométrie du buisson
 
-    setInstance()
-    {
-        this.geometry = new THREE.BufferGeometry()
-        this.positions = new Float32Array(this.count * 3);
-        this.geometry.setAttribute('position', new THREE.BufferAttribute(this.positions, 3));
-
-        // Precompute the values of Math.cos(angle) and Math.sin(angle) for each angle in a lookup table
-        this.cosTable = [];
-        this.sinTable = [];
-        for (let i = 0; i < 1000; i++) {
-            const angle = Math.random() * Math.PI * 2;
-            this.cosTable.push(Math.cos(angle));
-            this.sinTable.push(Math.sin(angle));
-        }
+        this.material = new THREE.MeshLambertMaterial({ // On crée le matériau du buisson
+            ...this.resource.scene.children[0].material,
+            type: 'MeshLambertMaterial',
+         })
+         this.instancedMesh = null // On initialise l'InstancedMesh
+         this.setModel()
     }
 
     setModel() {
-        for (let i = 0; i < 100; i++) {
+        const count = 1000 // Nombre d'instances à créer
+        const dummy = new THREE.Object3D() // Un objet temporaire pour stocker les transformations
+        const positions = [] // Tableaux pour stocker les positions, rotations et échelles
+        const rotations = []
+        const scales = []
+
+        for (let i = 0; i < count; i++) {
             const angle = Math.random() * Math.PI * 2 // Random angle
-            const radius = Math.random() * 1000     // Random radius
+            const radius = Math.random() * 100 // Random radius
 
-            const x = Math.cos(angle) * radius        // Get the x position using cosinus
-            const z = Math.sin(angle) * radius        // Get the z position using sinus
+            const x = Math.cos(angle) * radius // Get the x position using cosinus
+            const z = Math.sin(angle) * radius // Get the z position using sinus
 
-            this.model = this.resource.scene.clone()
-            this.model.scale.set(2, 2, 2)
-            this.model.position.set(x, -2, z)
-            // Rotation
-            this.model.rotation.y = (Math.random() - 0.5) * 0.4
-            this.scene.add(this.model)
-            this.gradientMap = this.resources.items.onetone
-            this.gradientMap.minFilter = THREE.NearestFilter
-            this.gradientMap.magFilter = THREE.NearestFilter
-            this.model.traverse((child) => {
-                if (child instanceof THREE.Mesh) {
-                    child.material = new THREE.MeshToonMaterial({...child.material, type: 'MeshToonMaterial', gradientMap: this.gradientMap})
-                    //child.material.side = THREE.DoubleSide
-                    //child.castShadow = true
-                }
-            })
+            positions.push(x, 0.2, z) // On ajoute la position, la rotation et l'échelle à leurs tableaux respectifs
+            rotations.push(0, Math.random() * Math.PI * 2, 0)
+            scales.push(0.12, 0.12, 0.12)
         }
+
+        // On crée l'InstancedMesh
+        this.instancedMesh = new THREE.InstancedMesh(this.geometry, this.material, count)
+        this.instancedMesh.instanceMatrix.setUsage(THREE.DynamicDrawUsage) // On définit l'usage à DynamicDrawUsage
+
+        for (let i = 0; i < count; i++) {
+            dummy.position.set(positions[i * 3], positions[i * 3 + 1], positions[i * 3 + 2]) // On applique les transformations sur l'objet temporaire
+            dummy.rotation.set(rotations[i * 3], rotations[i * 3 + 1], rotations[i * 3 + 2])
+            dummy.scale.set(scales[i * 3], scales[i * 3 + 1], scales[i * 3 + 2])
+            dummy.updateMatrix() // On met à jour la matrice de transformation de l'objet temporaire
+            this.instancedMesh.setMatrixAt(i, dummy.matrix) // On définit la matrice d'instance avec la matrice de transformation de l'objet temporaire
+        }
+
+        this.scene.add(this.instancedMesh)
+        this.instancedMesh.castShadow = true // On active les ombres pour l'InstancedMesh
     }
 }
