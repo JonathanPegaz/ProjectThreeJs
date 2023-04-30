@@ -35,10 +35,12 @@ export default class ThirdPersonCamera {
         // const t = 4.0 * timeElapsed;
         const t = 1.0 - Math.pow(0.001, timeElapsed);
 
-        this._currentPosition.lerp(idealOffset, t);
-        this._currentLookat.lerp(idealLookat, t);
+        if (!this.camera.isOrbitControlActive) {
+            this._currentPosition.lerp(idealOffset, t);
+            this._currentLookat.lerp(idealLookat, t);
 
-        this.camera.instance.position.copy(this._currentPosition);
-        this.camera.instance.lookAt(this._currentLookat);
+            this.camera.instance.position.copy(this._currentPosition);
+            this.camera.instance.lookAt(this._currentLookat);
+        }
     }
 }

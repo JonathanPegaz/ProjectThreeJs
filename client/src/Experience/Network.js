@@ -57,9 +57,9 @@ export default class Network {
         this.socket.emit('init', {
             model:"foxModel",
             //colour: this.colour,
-            x: this.localPlayer.controller.position.x,
-            y: this.localPlayer.controller.position.y,
-            z: this.localPlayer.controller.position.z,
+            x: this.localPlayer.controller.Position.x,
+            y: this.localPlayer.controller.Position.y,
+            z: this.localPlayer.controller.Position.z,
             h: this.localPlayer.controller.Rotation.y,
             pb: this.localPlayer.controller.Rotation.x
         })
@@ -68,9 +68,9 @@ export default class Network {
     updateSocket() {
         if (this.socket !== undefined){
             this.socket.emit('update', {
-                x: this.localPlayer.controller.position.x,
-                y: this.localPlayer.controller.position.y,
-                z: this.localPlayer.controller.position.z,
+                x: this.localPlayer.controller.Position.x,
+                y: this.localPlayer.controller.Position.y,
+                z: this.localPlayer.controller.Position.z,
                 h: this.localPlayer.controller.Rotation.y,
                 pb: this.localPlayer.controller.Rotation.x,
                 action: this.localPlayer.controller.stateMachine._currentState.Name
