@@ -14,7 +14,7 @@ export default class Camera
         this.debug = this.experience.debug
         this.control = null
 
-        this.isOrbitControlActive = true
+        this.isOrbitControlActive = false
 
         if (this.debug.active)
         {
