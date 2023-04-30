@@ -26,8 +26,8 @@ export default class World
         //this.ocean = new Ocean()
         //this.infoBeacon = new InfoBeacon()
         //this.undergroundSF = new UndergroundSF()
-        //this.terrain = new Terrain()
-        this.heightfieldTerrain = new HeightfieldTerrain()
+        this.terrain = new Terrain()
+        //this.heightfieldTerrain = new HeightfieldTerrain()
         this.environment = new Environment()
         this.htmlPoint = new HTMLPoints()
         
