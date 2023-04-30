@@ -56,5 +56,15 @@ export default [
         name: 'bush2',
         type: 'gltfModel',
         path: 'models/buisson2.glb'
+    },
+    {
+        name: 'landscape',
+        type: 'gltfModel',
+        path: 'models/landscape.glb'
+    },
+    {
+        name: 'island',
+        type: 'gltfModel',
+        path: 'models/island_lowpoly.glb'
     }
 ]

@@ -13,6 +13,7 @@ import sources from './sources.js'
 import Monitoring from "./Utils/Monitoring.js";
 import LocalPlayer from "./World/Player/LocalPlayer.js";
 import Network from "./Network.js";
+import Physics from "./Physics.js";
 
 let instance = null
 
@@ -59,6 +60,7 @@ export default class Experience
         // Wait for resources
         this.resources.on('ready', () =>
         {
+            this.physics = new Physics()
             this.world = new World()
             this.localPlayer = new LocalPlayer()
             this.network = new Network()
@@ -76,12 +78,15 @@ export default class Experience
     {
         this.monitoring.beginMonitoring()
 
+        if(this.physics)
+            this.physics.update()
         if(this.world)
             this.world.update()
         if(this.network)
             this.network.update()
         if(this.localPlayer)
             this.localPlayer.update()
+
 
         this.renderer.update()
         this.postProcessing.update()

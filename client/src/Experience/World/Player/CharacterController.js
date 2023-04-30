@@ -97,7 +97,7 @@ export default class BasicCharacterController {
             if (this.input._keys.shift) {
                 force = force * 1.5;
             }
-            this.localPlayer.object.translateZ(force)
+            this.localPlayer.body.translateZ(force)
             if(this.joystickSetup.forward > 0) {
                 this.input._keys.forward = true
             } else {

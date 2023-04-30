@@ -9,6 +9,7 @@ import InfoBeacon from "./InteractableObject/InfoBeacon.js";
 import UndergroundSF from "./Buildings/UndergroundSF.js";
 import LocalPlayer from "./Player/LocalPlayer.js";
 import Ocean from "./Ocean.js";
+import Landscape from "./Landscape.js";
 
 export default class World
 {
@@ -20,10 +21,12 @@ export default class World
         this.time = this.experience.time
 
         
-        this.bush = new Bush()
-        this.ocean = new Ocean()
-        this.infoBeacon = new InfoBeacon()
-        this.undergroundSF = new UndergroundSF()
+        //this.bush = new Bush()
+        //this.floor = new Floor()
+        //this.ocean = new Ocean()
+        //this.infoBeacon = new InfoBeacon()
+        //this.undergroundSF = new UndergroundSF()
+        this.landscape = new Landscape()
         this.environment = new Environment()
         this.htmlPoint = new HTMLPoints()
         
@@ -32,6 +35,6 @@ export default class World
     update()
     {
         this.htmlPoint.update()
-        this.ocean.update()
+        //this.ocean.update()
     }
 }
