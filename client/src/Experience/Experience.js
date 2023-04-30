@@ -14,6 +14,7 @@ import Monitoring from "./Utils/Monitoring.js";
 import LocalPlayer from "./World/Player/LocalPlayer.js";
 import Network from "./Network.js";
 import Physics from "./Physics.js";
+import OctreePhysics from "./OctreePhysics.js";
 
 let instance = null
 
@@ -63,6 +64,7 @@ export default class Experience
             this.world = new World()
             this.localPlayer = new LocalPlayer()
             this.network = new Network()
+            //this.octreephysics = new OctreePhysics()
         })
     }
 
@@ -78,6 +80,7 @@ export default class Experience
         this.monitoring.beginMonitoring()
 
         this.physics.update()
+        //this.octreephysics.update()
 
         if(this.world)
             this.world.update()

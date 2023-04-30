@@ -3,6 +3,7 @@ import Experience from '../Experience.js'
 import * as CANNON from 'cannon-es'
 import {ConvexGeometry} from "three/addons/geometries/ConvexGeometry.js";
 import CannonUtils from "../Utils/CannonUtils.js";
+import {bodyToMesh} from "../Utils/Utils.js";
 
 export default class Terrain {
     constructor() {
@@ -33,6 +34,7 @@ export default class Terrain {
         })
         this.model.children[0].position.set(0, 0, 0)
         this.model.children[0].geometry.center()
+        console.log(this.model.children[0])
 
         this.object.add(this.model)
         this.scene.add(this.object)
@@ -41,7 +43,7 @@ export default class Terrain {
     setPhysics1() {
         // try physics with trimesh & convex polyhedron
 
-       /* const shape = CannonUtils.createConvexPolyhedron(this.model.children[0].geometry)
+        const shape = CannonUtils.createCannonConvex(this.model.children[0].geometry)
 
         const geometry = new THREE.BufferGeometry()
         const points = []
@@ -73,14 +75,81 @@ export default class Terrain {
         //const shape = CannonUtils.createTrimesh(convexHull.geometry)
         const body = new CANNON.Body({mass: 0})
         body.addShape(shape)
-        this.physics.world.addBody(body)*/
+        this.physics.world.addBody(body)
     }
 
     setPhysics2() {
-        // create Oriented Bounding Box
-        console.log(this.model.children[0].geometry)
+       /* // Récupérez le mesh correspondant au terrain
+        const mesh = this.model.children[0]
+
+        // Obtenez la matrice de modèle du terrain pour la transformation des coordonnées en y
+        const matrix = mesh.matrix;
+
+        // Récupérez les coordonnées en y de votre terrain
+        const heights = mesh.geometry.attributes.position.array.filter((_, i) => i % 3 === 1);
+
+        // Appliquez la matrice de modèle aux coordonnées en y pour les transformer en coordonnées du monde de Three.js
+        const position = new THREE.Vector3();
+        for (let i = 0; i < heights.length; i++) {
+            position.set(0, heights[i], 0);
+            position.applyMatrix4(matrix);
+            heights[i] = position.y;
+        }
+        console.log(heights)
+
+        const data = []
+        for (let i = 0; i < 1000; i++) {
+            const y = 0.5 * Math.cos(0.2 * i)
+            data.push(y)
+        }*/
+
+        const terrain = this.model.children[0]
+
+        /*// Create a matrix of height values
+        const matrix = []
+        const sizeX = 15
+        const sizeZ = 15
+        for (let i = 0; i < sizeX; i++) {
+            matrix.push([])
+            for (let j = 0; j < sizeZ; j++) {
+                if (i === 0 || i === sizeX - 1 || j === 0 || j === sizeZ - 1) {
+                    const height = 3
+                    matrix[i].push(height)
+                    continue
+                }
+
+                const height = Math.cos((i / sizeX) * Math.PI * 2) * Math.cos((j / sizeZ) * Math.PI * 2) + 2
+                matrix[i].push(height)
+            }
+        }*/
+
+       /* console.log(matrix)
+
+        // Create the heightfield
+        const heightfieldShape = new CANNON.Heightfield(matrix, {
+            elementSize: 1,
+        })
 
 
+        // Créez un corps physique pour le terrain et ajoutez le `Heightfield`
+        const terrainBody = new CANNON.Body({
+            mass: 0, // Le terrain est statique, donc sa masse est de 0
+            shape: heightfieldShape,
+        });
+
+        // Ajoutez le corps physique du terrain à votre monde Cannon.js
+        this.physics.world.addBody(terrainBody)
+
+        const mesh = bodyToMesh(terrainBody, new THREE.MeshLambertMaterial({
+            color: 0xdddddd
+        }))
+        mesh.rotation.x = -Math.PI / 2
+        console.log(mesh)
+        // enable shadows on every object
+        mesh.traverse((child) => {
+        })
+
+        this.scene.add(mesh)*/
     }
 
 }

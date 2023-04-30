@@ -5,6 +5,7 @@ import Experience from "../../Experience.js";
 import * as CANNON from 'cannon-es'
 import {ConvexGeometry} from "three/addons/geometries/ConvexGeometry.js";
 import CannonUtils from "../../Utils/CannonUtils.js";
+import {Capsule} from "three/addons/math/Capsule.js";
 
 export default class LocalPlayer {
     constructor() {
@@ -26,6 +27,7 @@ export default class LocalPlayer {
         this.setController()
         this.setThirdPersonCamera()
         this.setPhysics()
+        this.setOctreePhysics()
     }
 
     setModel()
@@ -85,7 +87,6 @@ export default class LocalPlayer {
                 new THREE.Vector3(position[i], position[i + 1], position[i + 2])
             )
         }
-        console.log(points)
         const convexGeometry = new ConvexGeometry(points)
         const convexHull = new THREE.Mesh(
             convexGeometry,
@@ -95,7 +96,6 @@ export default class LocalPlayer {
             })
         )
         convexHull.scale.set(0.02, 0.02, 0.02)
-        console.log('fox', convexGeometry)
         this.object.add(convexHull)
 
         const shape = CannonUtils.createTrimesh(convexHull.geometry)
@@ -109,7 +109,13 @@ export default class LocalPlayer {
         })*/
     }
 
+    setOctreePhysics() {
+        this.playerCollider = new Capsule( new THREE.Vector3( 0, 0.35, 0 ), new THREE.Vector3( 0, 1, 0 ), 0.35 );
+        this.playerOnFloor = false;
+    }
+
     update() {
+
         this.controller.update()
 
         if (this.mixer) {

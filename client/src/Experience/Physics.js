@@ -1,6 +1,8 @@
 import * as THREE from 'three'
 import * as CANNON from 'cannon-es'
 import Experience from "./Experience.js";
+import CannonUtils from "./Utils/CannonUtils.js";
+import {Octree} from 'three/addons/math/Octree.js';
 
 export default class Physics
 {
@@ -10,7 +12,18 @@ export default class Physics
         this.debug = this.experience.debug
         this.scene = this.experience.scene
         this.time = this.experience.time
+        this.utils = new CannonUtils()
 
+        if(this.debug.active) {
+            this.debugFolder = this.debug.ui.addFolder('Physics')
+            this.setupDebug()
+        }
+
+        this.setCannonPhysics()
+        this.setInstance()
+    }
+
+    setCannonPhysics() {
         this.world = new CANNON.World()
         this.world.gravity.set(0, -9.82, 0)
         this.world.broadphase = new CANNON.SAPBroadphase(this.world)
@@ -18,15 +31,6 @@ export default class Physics
 
         this.objectsToUpdate = []
 
-        this.setInstance()
-        if(this.debug.active) {
-            this.debugFolder = this.debug.ui.addFolder('Physics')
-            this.setupDebug()
-        }
-    }
-
-    setInstance()
-    {
         // Default material
         this.defaultMaterial = new CANNON.Material('default')
         const defaultContactMaterial = new CANNON.ContactMaterial(
@@ -38,6 +42,11 @@ export default class Physics
             }
         )
         this.world.defaultContactMaterial = defaultContactMaterial
+    }
+
+    setInstance()
+    {
+
     }
 
     setupDebug() {

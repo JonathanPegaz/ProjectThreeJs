@@ -10,6 +10,7 @@ import UndergroundSF from "./Buildings/UndergroundSF.js";
 import LocalPlayer from "./Player/LocalPlayer.js";
 import Ocean from "./Ocean.js";
 import Terrain from "./Terrain.js";
+import HeightfieldTerrain from "./HeightfieldTerrain.js";
 
 export default class World
 {
@@ -21,11 +22,12 @@ export default class World
         this.time = this.experience.time
 
         
-        this.bush = new Bush()
-        this.ocean = new Ocean()
-        this.infoBeacon = new InfoBeacon()
+        //this.bush = new Bush()
+        //this.ocean = new Ocean()
+        //this.infoBeacon = new InfoBeacon()
         //this.undergroundSF = new UndergroundSF()
-        this.terrain = new Terrain()
+        //this.terrain = new Terrain()
+        this.heightfieldTerrain = new HeightfieldTerrain()
         this.environment = new Environment()
         this.htmlPoint = new HTMLPoints()
         
@@ -34,6 +36,6 @@ export default class World
     update()
     {
         this.htmlPoint.update()
-        this.ocean.update()
+        //this.ocean.update()
     }
 }

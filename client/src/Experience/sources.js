@@ -61,5 +61,10 @@ export default [
         name: 'bush2',
         type: 'gltfModel',
         path: 'models/buisson2.glb'
+    },
+    {
+        name: 'heightMap',
+        type: 'image',
+        path: 'textures/mapv1heightmap.png'
     }
 ]
