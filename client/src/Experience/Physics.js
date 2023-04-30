@@ -12,9 +12,7 @@ export default class Physics
         this.time = this.experience.time
         this.debug = this.experience.debug
 
-
         this.world = new CANNON.World()
-        this.debugger = new CannonDebugger(this.scene, this.world)
         this.world.gravity.set(0, -9.82, 0)
         this.world.broadphase = new CANNON.SAPBroadphase(this.world)
 
@@ -24,6 +22,18 @@ export default class Physics
 
         if(this.debug.active) {
             this.debugFolder = this.debug.ui.addFolder('Physics')
+
+            this.debugObject = {}
+            this.debugObject.debugger = true
+
+            this.debugFolder.add(this.debugObject, 'debugger')
+
+            this.debugger = new CannonDebugger(this.scene, this.world, {
+                onUpdate: (body, mesh) => {
+                    mesh.visible = this.debugObject.debugger
+                }
+            })
+
             this.setupDebug()
         }
     }
@@ -45,9 +55,7 @@ export default class Physics
 
     setupDebug() {
 
-
-        const debugObject = {}
-        debugObject.createSphere = () =>
+        this.debugObject.createSphere = () =>
         {
             createSphere(
                 Math.random() * 0.5,
@@ -59,7 +67,7 @@ export default class Physics
             )
         }
 
-        this.debugFolder.add(debugObject, 'createSphere')
+        this.debugFolder.add(this.debugObject, 'createSphere')
 
         const sphereGeometry = new THREE.SphereGeometry(1, 20, 20)
         const sphereMaterial = new THREE.MeshStandardMaterial({
@@ -96,7 +104,9 @@ export default class Physics
 
     update()
     {
-        this.debugger.update()
+        if (this.debug.active)
+            this.debugger.update()
+
         this.world.step(1 / 60, this.time.delta * 0.001, 3)
         for(const object of this.objectsToUpdate)
         {
