@@ -5,6 +5,7 @@ import Experience from "../../Experience.js";
 import IdleState from "./State/IdleState.js";
 import RunState from "./State/RunState.js";
 import WalkState from "./State/WalkState.js";
+import JoyStick from "../../Utils/JoyStick.js";
 
 class BasicCharacterControllerProxy {
     constructor(animations) {
@@ -31,13 +32,12 @@ class CharacterFSM extends FiniteStateMachine {
 }
 
 export default class BasicCharacterController {
-    constructor(model, animations) {
+    constructor(localPlayer) {
         this.experience = new Experience()
+        this.localPlayer = localPlayer
 
         this.camera = this.experience.camera
         this.time = this.experience.time
-        this.model = model
-        this.animations = animations
 
         this.setParams()
     }
@@ -47,34 +47,73 @@ export default class BasicCharacterController {
         this.decceleration = new THREE.Vector3(-0.0005, -0.0001, -5.0);
         this.acceleration = new THREE.Vector3(1, 0.25, 50.0);
         this.velocity = new THREE.Vector3(0, 0, 0);
-        this.position = new THREE.Vector3(0, 0, 0);
 
         this.input = new BasicCharacterControllerInput();
         this.stateMachine = new CharacterFSM(
-            new BasicCharacterControllerProxy(this.animations));
+            new BasicCharacterControllerProxy(this.localPlayer.animations));
+
+        this.isJoyStickTouch = false
+        this.joystickSetup =  {forward: 0, turn: 0 }
+        this.joystick = new JoyStick({
+            onMove: (forward, turn) => {
+                this.isJoyStickTouch = true
+                this.joystickSetup.forward = forward
+                this.joystickSetup.turn = -turn
+            }
+        })
 
         this.stateMachine.SetState('idle');
     }
 
     get Position() {
-        return this.position;
+        return this.localPlayer.object.position;
     }
 
     get Rotation() {
-        if(!this.model) {
+        if(!this.localPlayer.object) {
             return new THREE.Quaternion();
         }
-        return this.model.quaternion;
+        return this.localPlayer.object.quaternion;
     }
 
     update() {
-        if (!this.model) {
+        if (!this.localPlayer.object) {
             return;
         }
         const timeInSeconds = this.time.delta / 1000;
-
+        if (this.isJoyStickTouch) {
+            this.handleJoystick(timeInSeconds)
+        }
+        this.handleKeyboard(timeInSeconds)
         this.stateMachine.Update(timeInSeconds, this.input);
+    }
 
+    handleJoystick(timeInSeconds) {
+        let maxSteerVal = 0.03
+        let maxForce = .10
+        let force = maxForce * this.joystickSetup.forward
+        let steer = maxSteerVal * this.joystickSetup.turn
+        if (this.joystickSetup.forward !== 0) {
+            if (this.input._keys.shift) {
+                force = force * 1.5;
+            }
+            this.localPlayer.object.translateZ(force)
+            if(this.joystickSetup.forward > 0) {
+                this.input._keys.forward = true
+            } else {
+                this.input._keys.backward = true
+            }
+        } else {
+            if (this.isJoyStickTouch) {
+                this.input._keys.forward = false
+                this.input._keys.backward = false
+                this.isJoyStickTouch = false
+            }
+        }
+        this.localPlayer.object.rotateY(steer)
+    }
+
+    handleKeyboard(timeInSeconds) {
         const velocity = this.velocity;
         const frameDecceleration = new THREE.Vector3(
             velocity.x * this.decceleration.x,
@@ -87,7 +126,7 @@ export default class BasicCharacterController {
 
         velocity.add(frameDecceleration);
 
-        const controlObject = this.model;
+        const controlObject = this.localPlayer.object;
         const _Q = new THREE.Quaternion();
         const _A = new THREE.Vector3();
         const _R = controlObject.quaternion.clone();
@@ -133,7 +172,7 @@ export default class BasicCharacterController {
         controlObject.position.add(forward);
         controlObject.position.add(sideways);
 
-        this.position.copy(controlObject.position);
+        this.localPlayer.object.position.copy(controlObject.position);
     }
 }
 

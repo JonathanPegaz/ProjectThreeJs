@@ -14,6 +14,8 @@ export default class LocalPlayer {
         this.resource = this.resources.items.foxModel
 
         this.object = new THREE.Object3D()
+        this.object.add(new THREE.AxesHelper(5))
+        this.object.position.set(0, 0, 0)
 
         this.setModel()
         this.setAnimation()
@@ -61,7 +63,7 @@ export default class LocalPlayer {
     }
 
     setController() {
-        this.controller = new BasicCharacterController(this.model, this.animations)
+        this.controller = new BasicCharacterController(this)
     }
 
     setThirdPersonCamera() {
