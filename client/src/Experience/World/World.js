@@ -37,4 +37,11 @@ export default class World
         this.htmlPoint.update()
         this.ocean.update()
     }
+
+    destroy() {
+        this.htmlPoint.destroy()
+        this.ocean.destroy()
+        this.landscape.destroy()
+        this.environment.destroy()
+    }
 }

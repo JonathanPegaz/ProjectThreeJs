@@ -1,4 +1,4 @@
-import * as THREE from 'three';
+import { Object3D, Mesh} from 'three';
 import Experience from '../Experience.js';
 import * as CANNON from "cannon-es";
 
@@ -12,7 +12,7 @@ export default class Landscape {
 
         this.resource = this.resources.items.island
 
-        this.object = new THREE.Object3D()
+        this.object = new Object3D()
 
         this.setModel()
         this.setPhysics()
@@ -24,7 +24,7 @@ export default class Landscape {
         this.model.children[0].position.set(0, 0, 0)
         this.model.children[0].geometry.center()
         this.model.traverse((child) => {
-            if(child instanceof THREE.Mesh) {
+            if(child instanceof Mesh) {
                 //child.material.wireframe = true
                 child.receiveShadow = true
             }
@@ -35,7 +35,7 @@ export default class Landscape {
 
     setPhysics() {
         this.model.traverse((child) => {
-            if(child instanceof THREE.Mesh) {
+            if(child instanceof Mesh) {
                 const shape = this.createShape(child.geometry)
                 const body = this.createBody(shape)
             }
@@ -66,5 +66,7 @@ export default class Landscape {
         return body
     }
 
-
+    destroy() {
+        this.scene.remove(this.object)
+    }
 }

@@ -1,6 +1,6 @@
-import * as THREE from 'three'
+import { ShaderMaterial } from 'three'
 
-export const overlayMaterial = new THREE.ShaderMaterial({
+export const overlayMaterial = new ShaderMaterial({
     // wireframe: true,
     transparent: true,
     uniforms:

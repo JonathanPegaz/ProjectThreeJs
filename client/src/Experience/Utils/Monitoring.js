@@ -1,4 +1,3 @@
-import * as THREE from 'three'
 import Experience from '../Experience.js'
 import Stats from 'three/examples/jsm/libs/stats.module'
 
@@ -44,6 +43,14 @@ export default class Monitoring
             this.statsFps.end()
             this.statsMs.end()
             this.statsMb.end()
+        }
+    }
+
+    destroy() {
+        if (this.debug.active) {
+            document.body.removeChild(this.statsFps.dom)
+            document.body.removeChild(this.statsMs.dom)
+            document.body.removeChild(this.statsMb.dom)
         }
     }
 }

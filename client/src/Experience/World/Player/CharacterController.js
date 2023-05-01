@@ -174,6 +174,29 @@ export default class BasicCharacterController {
 
         this.localPlayer.object.position.copy(controlObject.position);
     }
+
+    destroy() {
+        this.input.destroy()
+        this.joystick.destroy()
+
+        this.input = null
+        this.stateMachine = null
+        this.joystick = null
+
+        this.localPlayer = null
+        this.camera = null
+        this.time = null
+
+        this.decceleration = null
+        this.acceleration = null
+        this.velocity = null
+
+        this.isJoyStickTouch = null
+        this.joystickSetup = null
+
+        this.Position = null
+        this.Rotation = null
+    }
 }
 
 

@@ -1,4 +1,4 @@
-import * as THREE from 'three'
+import { PlaneGeometry, Mesh, LoadingManager, TextureLoader, CubeTextureLoader } from 'three'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
 import EventEmitter from './EventEmitter.js'
 import { gsap } from 'gsap'
@@ -27,12 +27,12 @@ export default class Resources extends EventEmitter
     setLoaders()
     {
         // Overlay
-        const overlayGeometry = new THREE.PlaneGeometry(2, 2, 1, 1)
-        const overlay = new THREE.Mesh(overlayGeometry, overlayMaterial)
+        const overlayGeometry = new PlaneGeometry(2, 2, 1, 1)
+        const overlay = new Mesh(overlayGeometry, overlayMaterial)
         this.scene.add(overlay)
 
         const loadingBarElement = document.querySelector('.loading-bar')
-        const loadingManager = new THREE.LoadingManager(
+        const loadingManager = new LoadingManager(
             // Loaded
             () =>
             {
@@ -62,8 +62,8 @@ export default class Resources extends EventEmitter
         this.loaders.dracoLoader.setDecoderPath('/draco/')
         this.loaders.gltfLoader = new GLTFLoader(loadingManager)
         this.loaders.gltfLoader.setDRACOLoader(this.loaders.dracoLoader)
-        this.loaders.textureLoader = new THREE.TextureLoader()
-        this.loaders.cubeTextureLoader = new THREE.CubeTextureLoader()
+        this.loaders.textureLoader = new TextureLoader()
+        this.loaders.cubeTextureLoader = new CubeTextureLoader()
     }
 
     startLoading()
@@ -114,5 +114,22 @@ export default class Resources extends EventEmitter
         {
             this.trigger('ready')
         }
+    }
+
+    destroy() {
+        this.sources = null
+        this.items = null
+        this.experience = null
+        this.scene = null
+        this.toLoad = null
+        this.loaded = null
+        this.setLoaders = null
+        this.startLoading = null
+
+        this.loaders.dracoLoader = null
+        this.loaders.gltfLoader = null
+        this.loaders.textureLoader = null
+        this.loaders.cubeTextureLoader = null
+        this.loaders = null
     }
 }
