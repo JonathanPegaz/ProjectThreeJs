@@ -10,18 +10,16 @@ import UndergroundSF from "./Buildings/UndergroundSF.js";
 import LocalPlayer from "./Player/LocalPlayer.js";
 import Ocean from "./Ocean.js";
 import Landscape from "./Landscape.js";
+import CustomFog from "./CustomFog.js";
 
 export default class World
 {
     constructor()
     {
         this.experience = new Experience()
-        this.scene = this.experience.scene
-        this.resources = this.experience.resources
-        this.time = this.experience.time
 
-        
-        //this.bush = new Bush()
+        this.customFog = new CustomFog()
+        this.bush = new Bush()
         //this.floor = new Floor()
         this.ocean = new Ocean()
         //this.infoBeacon = new InfoBeacon()
@@ -36,6 +34,7 @@ export default class World
     {
         this.htmlPoint.update()
         this.ocean.update()
+        this.customFog.update()
     }
 
     destroy() {
