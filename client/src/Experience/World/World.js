@@ -23,7 +23,7 @@ export default class World
         
         //this.bush = new Bush()
         //this.floor = new Floor()
-        //this.ocean = new Ocean()
+        this.ocean = new Ocean()
         //this.infoBeacon = new InfoBeacon()
         //this.undergroundSF = new UndergroundSF()
         this.landscape = new Landscape()
@@ -35,6 +35,6 @@ export default class World
     update()
     {
         this.htmlPoint.update()
-        //this.ocean.update()
+        this.ocean.update()
     }
 }

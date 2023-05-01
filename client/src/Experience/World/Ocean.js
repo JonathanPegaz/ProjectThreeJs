@@ -16,13 +16,12 @@ export default class Ocean {
     }
 
     setGeometry() {
-        this.geometry = new THREE.PlaneBufferGeometry(50, 50, 20, 20)
+        this.geometry = new THREE.PlaneBufferGeometry(5000, 5000, 20, 20)
         this.geometry.rotateX(-Math.PI / 2)
     }
 
     setTextures() {
         this.waterTexture = this.resources.items.water
-        this.waterTexture.repeat.set(5, 5)
         this.waterTexture.wrapS = THREE.RepeatWrapping
         this.waterTexture.wrapT = THREE.RepeatWrapping
     }
@@ -30,10 +29,12 @@ export default class Ocean {
     setMaterial() {
         this.oceanMaterial = oceanMaterial
         this.oceanMaterial.uniforms.uMap.value = this.waterTexture
+        //this.oceanMaterial.uniforms.uSize.value = 50
     }
 
     setMesh() {
         this.mesh = new THREE.Mesh(this.geometry, this.oceanMaterial)
+        this.mesh.position.set(0, -15, 0)
         this.scene.add(this.mesh)
     }
 

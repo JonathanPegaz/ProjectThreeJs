@@ -1,5 +1,17 @@
 export default [
     {
+        name: 'skybox',
+        type: 'cubeTexture',
+        path: [
+            'textures/environmentMap/Skybox/FS017/FS017_Day_Cubemap_front.png',
+            'textures/environmentMap/Skybox/FS017/FS017_Day_Cubemap_back.png',
+            'textures/environmentMap/Skybox/FS017/FS017_Day_Cubemap_up.png',
+            'textures/environmentMap/Skybox/FS017/FS017_Day_Cubemap_down.png',
+            'textures/environmentMap/Skybox/FS017/FS017_Day_Cubemap_right.png',
+            'textures/environmentMap/Skybox/FS017/FS017_Day_Cubemap_left.png'
+        ]
+    },
+    {
         name: 'environmentMapTexture',
         type: 'cubeTexture',
         path:
