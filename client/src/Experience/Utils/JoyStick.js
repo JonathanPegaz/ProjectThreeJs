@@ -119,4 +119,8 @@ export default class JoyStick {
         this.domElement.style.left = `${this.origin.left}px`;
         this.onMove.call(this.game, 0, 0);
     }
+
+    destroy() {
+        this.domElement.parentNode.removeChild(this.domElement);
+    }
 }

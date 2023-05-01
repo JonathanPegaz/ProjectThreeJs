@@ -165,4 +165,8 @@ export default class PostProcessing
     {
         this.instance.render()
     }
+
+    destroy() {
+        this.instance.dispose()
+    }
 }

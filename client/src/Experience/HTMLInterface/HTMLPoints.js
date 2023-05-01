@@ -1,4 +1,4 @@
-import * as THREE from 'three';
+import { Raycaster, Vector3 } from 'three';
 import Experience from "../Experience.js";
 
 export default class HTMLPoints {
@@ -11,18 +11,18 @@ export default class HTMLPoints {
         this.camera = this.experience.camera
 
 
-        this.raycaster = new THREE.Raycaster()
+        this.raycaster = new Raycaster()
         this.points = [
             {
-                position: new THREE.Vector3(1.55, 0.3, - 0.6),
+                position: new Vector3(1.55, 0.3, - 0.6),
                 element: document.querySelector('.point-0')
             },
             {
-                position: new THREE.Vector3(0.5, 0.8, - 1.6),
+                position: new Vector3(0.5, 0.8, - 1.6),
                 element: document.querySelector('.point-1')
             },
             {
-                position: new THREE.Vector3(1.6, 1.3, - 0.7),
+                position: new Vector3(1.6, 1.3, - 0.7),
                 element: document.querySelector('.point-2')
             }
         ]
@@ -74,5 +74,8 @@ export default class HTMLPoints {
         }
     }
 
-
+    destroy() {
+        this.raycaster = null
+        this.points = null
+    }
 }

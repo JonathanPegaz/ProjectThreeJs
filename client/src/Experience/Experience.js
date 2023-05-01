@@ -30,6 +30,10 @@ export default class Experience
         
         // Global access
         window.experience = this
+        window.addEventListener('beforeunload', () =>
+        {
+            window.experience.destroy()
+        })
 
         // Options
         this.canvas = _canvas
@@ -95,9 +99,6 @@ export default class Experience
 
     destroy()
     {
-        this.sizes.off('resize')
-        this.time.off('tick')
-
         // Traverse the whole scene
         this.scene.traverse((child) =>
         {
@@ -120,10 +121,45 @@ export default class Experience
             }
         })
 
-        // this.camera.controls.dispose()
-        this.renderer.instance.dispose()
-
+        // Destroy everything
+        this.sizes.destroy()
+        this.sizes.off('resize')
+        this.time.destroy()
+        this.time.off('tick')
+        this.resources.destroy()
+        this.world.destroy()
+        this.localPlayer.destroy()
+        this.camera.destroy()
+        this.renderer.destroy()
+        this.postProcessing.destroy()
+        this.monitoring.destroy()
         if(this.debug.active)
-            this.debug.ui.destroy()
+            this.debug.destroy()
+
+
+
+        // Remove global access
+        window.experience = null
+
+        // Remove singleton
+        instance = null
+
+        // Remove canvas
+        this.canvas.remove()
+
+        // Remove all properties
+        for(const key in this)
+        {
+            delete this[key]
+        }
+
+        // Collect garbage
+        setTimeout(() =>
+        {
+            if(window.gc)
+            {
+                window.gc()
+            }
+        }, 1000)
     }
 }

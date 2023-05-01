@@ -43,4 +43,14 @@ export default class ThirdPersonCamera {
             this.camera.instance.lookAt(this._currentLookat);
         }
     }
+
+    destroy() {
+        this.camera = null;
+        this.time = null;
+        this.target = null;
+
+        this._currentPosition = null;
+        this._currentLookat = null;
+
+    }
 }

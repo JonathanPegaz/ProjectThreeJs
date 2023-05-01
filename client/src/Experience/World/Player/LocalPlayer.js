@@ -106,4 +106,36 @@ export default class LocalPlayer {
         if(this.thirdPersonCamera)
             this.thirdPersonCamera.update()
     }
+
+    destroy() {
+        this.scene.remove(this.object)
+        this.physics.world.removeBody(this.body)
+
+        this.controller.destroy()
+        this.thirdPersonCamera.destroy()
+
+        this.object.traverse((child) => {
+            if (child.isMesh) {
+                child.geometry.dispose()
+                child.material.dispose()
+            }
+        })
+
+        this.scene.remove(this.object)
+
+        this.object = null
+        this.model = null
+        this.mixer = null
+        this.animations = null
+        this.controller = null
+        this.thirdPersonCamera = null
+        this.body = null
+
+        this.experience = null
+        this.scene = null
+        this.time = null
+        this.physics = null
+        this.resources = null
+        this.resource = null
+    }
 }

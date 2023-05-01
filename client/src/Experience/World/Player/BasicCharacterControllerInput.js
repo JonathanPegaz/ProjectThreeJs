@@ -30,9 +30,9 @@ export default class BasicCharacterControllerInput {
             case 68: // d
                 this._keys.right = true;
                 break;
-            case 32: // SPACE
+            /*case 32: // SPACE
                 this._keys.space = true;
-                break;
+                break;*/
             case 16: // SHIFT
                 this._keys.shift = true;
                 break;
@@ -53,12 +53,19 @@ export default class BasicCharacterControllerInput {
             case 68: // d
                 this._keys.right = false;
                 break;
-            case 32: // SPACE
+            /*case 32: // SPACE
                 this._keys.space = false;
-                break;
+                break;*/
             case 16: // SHIFT
                 this._keys.shift = false;
                 break;
         }
+    }
+
+    destroy() {
+        document.removeEventListener('keydown', (e) => this._onKeyDown(e), false);
+        document.removeEventListener('keyup', (e) => this._onKeyUp(e), false);
+
+        this._keys = null;
     }
 }

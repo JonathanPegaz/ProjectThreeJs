@@ -1,4 +1,4 @@
-import * as THREE from 'three';
+import { PlaneBufferGeometry, RepeatWrapping, Mesh } from 'three';
 import Experience from '../Experience.js';
 import {oceanMaterial} from "../Shaders/OceanShader.js";
 
@@ -7,7 +7,6 @@ export default class Ocean {
         this.experience = new Experience();
         this.scene = this.experience.scene;
         this.resources = this.experience.resources;
-        this.time = this.experience.time;
 
         this.setGeometry();
         this.setTextures();
@@ -16,14 +15,14 @@ export default class Ocean {
     }
 
     setGeometry() {
-        this.geometry = new THREE.PlaneBufferGeometry(5000, 5000, 20, 20)
+        this.geometry = new PlaneBufferGeometry(5000, 5000, 20, 20)
         this.geometry.rotateX(-Math.PI / 2)
     }
 
     setTextures() {
         this.waterTexture = this.resources.items.water
-        this.waterTexture.wrapS = THREE.RepeatWrapping
-        this.waterTexture.wrapT = THREE.RepeatWrapping
+        this.waterTexture.wrapS = RepeatWrapping
+        this.waterTexture.wrapT = RepeatWrapping
     }
 
     setMaterial() {
@@ -33,7 +32,7 @@ export default class Ocean {
     }
 
     setMesh() {
-        this.mesh = new THREE.Mesh(this.geometry, this.oceanMaterial)
+        this.mesh = new Mesh(this.geometry, this.oceanMaterial)
         this.mesh.position.set(0, -15, 0)
         this.scene.add(this.mesh)
     }
@@ -41,6 +40,13 @@ export default class Ocean {
     update() {
         if (this.oceanMaterial)
             this.oceanMaterial.uniforms.uTime.value = this.experience.time.elapsed * 0.001
+    }
+
+    destroy() {
+        this.scene.remove(this.mesh)
+        this.geometry.dispose()
+        this.oceanMaterial.dispose()
+        this.waterTexture.dispose()
     }
 }
 

@@ -1,12 +1,12 @@
-import * as THREE from 'three'
+import {ShaderMaterial, Color, DoubleSide} from 'three'
 
-export const oceanMaterial = new THREE.ShaderMaterial({
-    side: THREE.DoubleSide,
+export const oceanMaterial = new ShaderMaterial({
+    side: DoubleSide,
     uniforms:
         {
             uMap: {type: 't', value: null},
             uTime: {type: 'f', value: 0},
-            uColor: {type: 'f', value: new THREE.Color('#0051da')},
+            uColor: {type: 'f', value: new Color('#0051da')},
         },
     vertexShader: `
         #define SCALE 10.0
@@ -56,13 +56,13 @@ export const oceanMaterial = new THREE.ShaderMaterial({
         }`
 })
 
-export const oceanMaterial2 = new THREE.ShaderMaterial({
-    side: THREE.DoubleSide,
+export const oceanMaterial2 = new ShaderMaterial({
+    side: DoubleSide,
     uniforms:
         {
             uMap: {type: 't', value: null},
             uTime: {type: 'f', value: 0},
-            uColor: {type: 'f', value: new THREE.Color('#0051da')},
+            uColor: {type: 'f', value: new Color('#0051da')},
         },
     vertexShader: `
         varying vec2 vUv;

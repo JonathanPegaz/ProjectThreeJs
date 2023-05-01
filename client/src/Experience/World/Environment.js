@@ -99,4 +99,19 @@ export default class Environment
                 .onChange(this.environmentMap.updateMaterials)
         }
     }
+
+    destroy() {
+        this.sunLight.dispose()
+        this.scene.remove(this.sunLight)
+        this.sunLight = null
+
+        this.environmentMap.texture.dispose()
+        this.scene.background = null
+        this.scene.environment = null
+        this.environmentMap = null
+
+        this.scene = null
+        this.resources = null
+        this.debug = null
+    }
 }

@@ -114,4 +114,8 @@ export default class Physics
             object.mesh.quaternion.copy(object.body.quaternion)
         }
     }
+
+    destroy() {
+
+    }
 }

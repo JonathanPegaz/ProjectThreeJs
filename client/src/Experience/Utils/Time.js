@@ -32,4 +32,11 @@ export default class Time extends EventEmitter
             this.tick()
         })
     }
+
+    destroy() {
+        this.start = null
+        this.current = null
+        this.elapsed = null
+        this.delta = null
+    }
 }
