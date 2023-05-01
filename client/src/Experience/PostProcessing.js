@@ -27,6 +27,7 @@ export default class PostProcessing
         if(this.debug.active)
         {
             this.debugFolder = this.debug.ui.addFolder('PostProcessing')
+            this.debugFolder.close()
         }
 
         this.setInstance()

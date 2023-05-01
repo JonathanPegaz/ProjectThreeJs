@@ -1,4 +1,4 @@
-import {WebGLRenderer, sRGBEncoding, CineonToneMapping, PCFSoftShadowMap} from 'three'
+import {WebGLRenderer, sRGBEncoding, CineonToneMapping, PCFSoftShadowMap, NoToneMapping, LinearToneMapping, ReinhardToneMapping, ACESFilmicToneMapping} from 'three'
 import Experience from './Experience.js'
 
 export default class Renderer
@@ -29,6 +29,19 @@ export default class Renderer
         this.instance.setClearColor('#211d20')
         this.instance.setSize(this.sizes.width, this.sizes.height)
         this.instance.setPixelRatio(Math.min(this.sizes.pixelRatio, 2))
+
+        if(this.experience.debug.active) {
+            this.debugFolder = this.experience.debug.ui.addFolder('renderer')
+            this.debugFolder.close()
+            this.debugFolder.add(this.instance, 'toneMapping', {
+                No: NoToneMapping,
+                Linear: LinearToneMapping,
+                Reinhard: ReinhardToneMapping,
+                Cineon: CineonToneMapping,
+                ACESFilmic: ACESFilmicToneMapping
+            })
+            this.debugFolder.add(this.instance, 'toneMappingExposure').min(0).max(10).step(0.001)
+        }
     }
 
     resize()

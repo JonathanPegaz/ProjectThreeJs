@@ -22,6 +22,7 @@ export default class Physics
 
         if(this.debug.active) {
             this.debugFolder = this.debug.ui.addFolder('Physics')
+            this.debugFolder.close()
 
             this.debugObject = {}
             this.debugObject.debugger = true
