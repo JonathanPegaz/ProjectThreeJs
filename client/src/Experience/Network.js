@@ -57,6 +57,7 @@ export default class Network {
         this.socket.emit('init', {
             model:"foxModel",
             //colour: this.colour,
+            pseudo: this.localPlayer.pseudo,
             x: this.localPlayer.controller.Position.x,
             y: this.localPlayer.controller.Position.y,
             z: this.localPlayer.controller.Position.z,
@@ -68,6 +69,7 @@ export default class Network {
     updateSocket() {
         if (this.socket !== undefined){
             this.socket.emit('update', {
+                pseudo: this.localPlayer.pseudo,
                 x: this.localPlayer.controller.Position.x,
                 y: this.localPlayer.controller.Position.y,
                 z: this.localPlayer.controller.Position.z,

@@ -22,6 +22,7 @@ io.sockets.on('connection', function(socket){
 	
 	socket.on('init', function(data){
 		console.log(`socket.init ${data.model}`);
+		socket.userData.pseudo = data.pseudo;
 		socket.userData.model = data.model;
 		socket.userData.colour = data.colour;
 		socket.userData.x = data.x;
@@ -33,6 +34,7 @@ io.sockets.on('connection', function(socket){
 	});
 	
 	socket.on('update', function(data){
+		socket.userData.pseudo = data.pseudo;
 		socket.userData.x = data.x;
 		socket.userData.y = data.y;
 		socket.userData.z = data.z;
@@ -61,6 +63,7 @@ setInterval(function(){
 		if (socket.userData.model!==undefined){
 			pack.push({
 				id: socket.id,
+				pseudo: socket.userData.pseudo,
 				model: socket.userData.model,
 				colour: socket.userData.colour,
 				x: socket.userData.x,

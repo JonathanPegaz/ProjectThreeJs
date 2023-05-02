@@ -4,6 +4,7 @@ import ThirdPersonCamera from "./ThirdPersonCamera.js";
 import Experience from "../../Experience.js";
 import * as CANNON from "cannon-es";
 import {ConvexGeometry} from "three/addons/geometries/ConvexGeometry.js";
+import {Vector3} from "three";
 
 export default class LocalPlayer {
     constructor() {
@@ -20,11 +21,14 @@ export default class LocalPlayer {
         this.object.add(new THREE.AxesHelper(5))
         this.object.position.set(-80, 20, 22)
 
+        this.pseudo = 'Xx__PussySlayer__xX'
+
         this.setModel()
         this.setAnimation()
         this.setController()
         this.setThirdPersonCamera()
         this.setPhysics()
+        this.setPseudo()
     }
 
     setModel()
@@ -93,6 +97,31 @@ export default class LocalPlayer {
         })
     }
 
+    setPseudo() {
+        this.followText = document.createElement('div');
+        this.followText.id = 'follow-text';
+        this.followText.style.cssText= `
+        position: absolute;
+        color: white;
+        background: #00000077;
+        line-height: 40px;
+        border: 1px solid #ffffff77;
+        z-index: 100;
+        font-family: Arial;
+        font-weight: bold;
+        font-size: 14px;
+        padding: 0 10px;`
+
+        document.body.appendChild(this.followText);
+
+        this.followText.innerHTML = this.pseudo;
+
+        this.boxPosition = new THREE.Vector3();
+        this.boxPositionOffset = new THREE.Vector3();
+        this.y_axis = new Vector3(0, 2, 0);
+
+    }
+
     update() {
         this.controller.update()
 
@@ -105,6 +134,26 @@ export default class LocalPlayer {
 
         if(this.thirdPersonCamera)
             this.thirdPersonCamera.update()
+
+        // update pseudo
+        this.boxPositionOffset.copy(this.object.position)
+        this.boxPositionOffset.sub(this.thirdPersonCamera._currentPosition)
+        this.boxPositionOffset.normalize();
+        this.boxPositionOffset.applyAxisAngle(this.y_axis, - Math.PI / 2)
+        this.boxPositionOffset.multiplyScalar(0.5)
+        this.boxPositionOffset.y = 3
+
+        this.boxPosition.setFromMatrixPosition( this.object.matrixWorld )
+        this.boxPosition.add(this.boxPositionOffset)
+        this.boxPosition.project(this.thirdPersonCamera.camera.instance)
+
+        const rect = this.experience.canvas.getBoundingClientRect()
+        const widthHalf = this.experience.sizes.width / 2, heightHalf = this.experience.sizes.height / 2
+        this.boxPosition.x = rect.left + widthHalf - ( this.boxPosition.x * widthHalf )
+        this.boxPosition.y = rect.top - ( this.boxPosition.y * heightHalf ) + heightHalf
+
+        this.followText.style.top = `${this.boxPosition.y}px`
+        this.followText.style.left = `${this.boxPosition.x}px`
     }
 
     destroy() {
