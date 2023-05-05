@@ -106,6 +106,7 @@ export default class LocalPlayer {
         background: #00000077;
         line-height: 40px;
         border: 1px solid #ffffff77;
+        transform: translate(-50%, -50%);
         z-index: 100;
         font-family: Arial;
         font-weight: bold;
@@ -149,7 +150,7 @@ export default class LocalPlayer {
 
         const rect = this.experience.canvas.getBoundingClientRect()
         const widthHalf = this.experience.sizes.width / 2, heightHalf = this.experience.sizes.height / 2
-        this.boxPosition.x = rect.left + widthHalf - ( this.boxPosition.x * widthHalf )
+        this.boxPosition.x = rect.left + widthHalf
         this.boxPosition.y = rect.top - ( this.boxPosition.y * heightHalf ) + heightHalf
 
         this.followText.style.top = `${this.boxPosition.y}px`

@@ -19,6 +19,7 @@ export default class Resources extends EventEmitter
         this.scene = this.experience.scene
         this.toLoad = this.sources.length
         this.loaded = 0
+        this.pseudo = null
 
         this.setLoaders()
         this.startLoading()
@@ -169,10 +170,9 @@ export default class Resources extends EventEmitter
         document.body.appendChild(form)
 
         form.addEventListener('submit', (event) => {
-            console.log('pseudo', inputElement.value)
             event.preventDefault();
-            const pseudo = inputElement.value;
-            this.trigger('pseudo-entered', pseudo);
+            this.pseudo = inputElement.value;
+            this.trigger('pseudo-entered')
             form.remove();
             // Animate overlay
             gsap.to(overlayMaterial.uniforms.uAlpha, { duration: 3, value: 0, delay: 1 })
