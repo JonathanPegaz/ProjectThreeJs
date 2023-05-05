@@ -1,4 +1,4 @@
-import { PerspectiveCamera } from 'three'
+import { PerspectiveCamera, Frustum, Matrix4 } from 'three'
 import Experience from './Experience.js'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 
@@ -23,6 +23,9 @@ export default class Camera
             this.debugFolder.close()
         }
 
+        this.frustum = new Frustum()
+        this.cameraViewProjectionMatrix = new Matrix4()
+
         this.setInstance()
     }
 
@@ -44,6 +47,20 @@ export default class Camera
 
     update()
     {
+        //this.frustum.setFromProjectionMatrix(this.cameraViewProjectionMatrix.multiplyMatrices(this.instance.projectionMatrix, this.instance.matrixWorldInverse))
+
+        // loop through all objects in the scene and check if they're visible
+       /* for (let i = 0; i < this.scene.children.length; i++)
+        {
+            const child = this.scene.children[i]
+            if (this.frustum.intersectsObject(child)) {
+                child.visible = true
+            }
+            else {
+                child.visible = false
+            }
+        }*/
+
         if (this.isOrbitControlActive)
         {
             this.control.update()

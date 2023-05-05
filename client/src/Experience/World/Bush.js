@@ -1,5 +1,6 @@
 import * as THREE from 'three'
 import Experience from '../Experience.js'
+import { gsap } from 'gsap'
 
 export default class Bush
 {
@@ -8,6 +9,8 @@ export default class Bush
         this.scene = this.experience.scene
         this.resources = this.experience.resources
 
+        this.debug = this.experience.debug
+
         this.resource = this.resources.items.bush
         this.geometry = this.resource.scene.children[0].geometry // On récupère la géométrie du buisson
 
@@ -15,8 +18,27 @@ export default class Bush
             ...this.resource.scene.children[0].material,
             type: 'MeshLambertMaterial',
          })
+
+        if (this.debug.active) {
+            this.debugFolder = this.debug.ui.addFolder('Bush')
+            this.debugObject = {}
+
+            this.debugObject.fadein = () => {
+                gsap.to(this.material, { duration: 2, opacity: 1 });
+                this.instancedMesh.visible = true
+            }
+            this.debugObject.fadeout = () => {
+                gsap.to(this.material, { duration: 2, opacity: 0 });
+                this.instancedMesh.visible = false
+            }
+
+            this.debugFolder.add(this.debugObject, 'fadein')
+            this.debugFolder.add(this.debugObject, 'fadeout')
+
+        }
+
          this.instancedMesh = null // On initialise l'InstancedMesh
-         this.setModel()
+         this.setModel2()
     }
 
     setModel() {
@@ -52,5 +74,18 @@ export default class Bush
 
         this.scene.add(this.instancedMesh)
         this.instancedMesh.castShadow = true // On active les ombres pour l'InstancedMesh
+    }
+
+    setModel2() {
+        // create 1000 bushes
+        const count = 10000
+        for (let i = 0; i < count; i++) {
+            const mesh = new THREE.Mesh(this.geometry, this.material)
+            mesh.position.x = (Math.random() - 0.5) * 100
+            mesh.position.z = (Math.random() - 0.5) * 100
+            mesh.rotation.y = Math.random() * Math.PI * 2
+            mesh.scale.set(0.12, 0.12, 0.12)
+            this.scene.add(mesh)
+        }
     }
 }

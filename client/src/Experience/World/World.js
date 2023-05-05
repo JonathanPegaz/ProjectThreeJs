@@ -21,7 +21,7 @@ export default class World
         this.time = this.experience.time
 
         
-        //this.bush = new Bush()
+        this.bush = new Bush()
         //this.floor = new Floor()
         this.ocean = new Ocean()
         //this.infoBeacon = new InfoBeacon()
