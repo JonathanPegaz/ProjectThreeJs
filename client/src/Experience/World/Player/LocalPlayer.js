@@ -7,7 +7,7 @@ import {ConvexGeometry} from "three/addons/geometries/ConvexGeometry.js";
 import {Vector3} from "three";
 
 export default class LocalPlayer {
-    constructor() {
+    constructor(pseudo) {
         this.id = null
         this.experience = new Experience()
         this.scene = this.experience.scene
@@ -21,7 +21,7 @@ export default class LocalPlayer {
         this.object.add(new THREE.AxesHelper(5))
         this.object.position.set(-80, 20, 22)
 
-        this.pseudo = 'Xx__PussySlayer__xX'
+        this.pseudo = pseudo
 
         this.setModel()
         this.setAnimation()

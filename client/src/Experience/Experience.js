@@ -75,7 +75,11 @@ export default class Experience
         {
             this.physics = new Physics()
             this.world = new World()
-            this.localPlayer = new LocalPlayer()
+        })
+
+        this.resources.on('pseudo-entered', (pseudo) => {
+            console.log("Pseudo entered: " + pseudo)
+            this.localPlayer = new LocalPlayer(pseudo)
             this.network = new Network()
         })
     }
