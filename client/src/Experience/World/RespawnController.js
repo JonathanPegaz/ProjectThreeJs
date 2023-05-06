@@ -21,7 +21,9 @@ export default class RespawnController {
       new SpawnPoint(new THREE.Vector3(-80, .5, 22), "stage2")
     ];
 
-    this.setGui()
+    if (this.debug.active) {
+      this.setGui()
+    }
   }
 
   setGui() {
