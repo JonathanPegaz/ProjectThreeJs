@@ -78,5 +78,10 @@ export default [
         name: 'island',
         type: 'gltfModel',
         path: 'models/island_lowpoly.glb'
+    },
+    {
+        name: 'noise',
+        type: 'texture',
+        path: 'textures/noise.png'
     }
 ]

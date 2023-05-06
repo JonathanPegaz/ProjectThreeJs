@@ -10,6 +10,7 @@ import UndergroundSF from "./Buildings/UndergroundSF.js";
 import LocalPlayer from "./Player/LocalPlayer.js";
 import Ocean from "./Ocean.js";
 import Landscape from "./Landscape.js";
+import Water from "./Water.js";
 
 export default class World
 {
@@ -24,6 +25,7 @@ export default class World
         //this.bush = new Bush()
         //this.floor = new Floor()
         this.ocean = new Ocean()
+        //this.water = new Water()
         //this.infoBeacon = new InfoBeacon()
         //this.undergroundSF = new UndergroundSF()
         this.landscape = new Landscape()
@@ -36,11 +38,11 @@ export default class World
     {
         this.htmlPoint.update()
         this.ocean.update()
+
     }
 
     destroy() {
         this.htmlPoint.destroy()
-        this.ocean.destroy()
         this.landscape.destroy()
         this.environment.destroy()
     }

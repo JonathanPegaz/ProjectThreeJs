@@ -15,7 +15,7 @@ export default class Ocean {
     }
 
     setGeometry() {
-        this.geometry = new PlaneBufferGeometry(5000, 5000, 20, 20)
+        this.geometry = new PlaneBufferGeometry(5000, 5000)
         this.geometry.rotateX(-Math.PI / 2)
     }
 
