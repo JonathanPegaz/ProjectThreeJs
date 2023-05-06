@@ -10,24 +10,31 @@ import UndergroundSF from "./Buildings/UndergroundSF.js";
 import LocalPlayer from "./Player/LocalPlayer.js";
 import Ocean from "./Ocean.js";
 import Landscape from "./Landscape.js";
+import RespawnController from "./RespawnController.js";
 
 export default class World
 {
     constructor()
     {
+        // Default
         this.experience = new Experience()
         this.scene = this.experience.scene
         this.resources = this.experience.resources
         this.time = this.experience.time
 
-        
+        //Environment
+        this.ocean = new Ocean()
+        this.environment = new Environment()
+        this.landscape = new Landscape()
+        this.respawn = new RespawnController()
+
+
+
+        //Assets
         //this.bush = new Bush()
         //this.floor = new Floor()
-        this.ocean = new Ocean()
         //this.infoBeacon = new InfoBeacon()
         //this.undergroundSF = new UndergroundSF()
-        this.landscape = new Landscape()
-        this.environment = new Environment()
         this.htmlPoint = new HTMLPoints()
         
     }
@@ -43,5 +50,6 @@ export default class World
         this.ocean.destroy()
         this.landscape.destroy()
         this.environment.destroy()
+        this.respawn.destroy()
     }
 }

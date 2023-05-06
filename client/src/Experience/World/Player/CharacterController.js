@@ -76,6 +76,10 @@ export default class BasicCharacterController {
         return this.localPlayer.object.quaternion;
     }
 
+    respawn() {
+        this.experience.world.respawn.execute(this.localPlayer)
+    }
+
     update() {
         if (!this.localPlayer.object) {
             return;
@@ -86,6 +90,9 @@ export default class BasicCharacterController {
         }
         this.handleKeyboard(timeInSeconds)
         this.stateMachine.Update(timeInSeconds, this.input);
+        if (this.Position.y < -15) {
+            this.respawn()
+        }
     }
 
     handleJoystick(timeInSeconds) {
