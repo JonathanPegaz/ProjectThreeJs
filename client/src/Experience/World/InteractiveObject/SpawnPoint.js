@@ -38,7 +38,18 @@ export default class SpawnPoint extends InteractiveObject {
   }
 
   interact() {
-    console.log("SpawnPoint interact")
+    if (!this.canInteract) {
+      return
+    }
+    this.canInteract = false
+
+    this.wait(() => this.experience.world.htmlAnnouncement).then(() => {
+      this.experience.world.htmlAnnouncement.addQueue(this.experience.world.htmlAnnouncement.type.AREA, this.name, 3000)
+    })
+
+    setTimeout(() => {
+      this.canInteract = true
+    }, 2000)
   }
 
   destroy() {

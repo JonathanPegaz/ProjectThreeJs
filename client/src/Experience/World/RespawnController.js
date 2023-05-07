@@ -17,8 +17,8 @@ export default class RespawnController {
 
   init() {
     this.repawnPoints = [
-      new SpawnPoint(new THREE.Vector3(0, 0, 0), "stage1"),
-      new SpawnPoint(new THREE.Vector3(-80, .5, 22), "stage2", 20)
+      new SpawnPoint(new THREE.Vector3(0, 0, 0), "Village", 20),
+      new SpawnPoint(new THREE.Vector3(-80, .5, 22), "Temple", 20)
     ];
 
     if (this.debug.active) {

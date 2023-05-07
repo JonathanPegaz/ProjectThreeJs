@@ -8,6 +8,7 @@ export default class InteractiveObject {
     this.resources = this.experience.resources
 
     this.id = null
+    this.canInteract = true
 
     this.add()
   }
@@ -22,8 +23,17 @@ export default class InteractiveObject {
     this.experience.world.interactiveObject.delete(this.id)
   }
   interact() { //TODO : must be override
+    if (!this.canInteract) {
+      return
+    }
+    this.canInteract = false
+
     console.log("Default interaction with", this.id)
     console.log(this)
+
+    setTimeout(() => {
+      this.canInteract = true
+    }, 1000)
   }
   update(uuid) {
     //TODO : update object inside the list if his source change
@@ -43,5 +53,6 @@ export default class InteractiveObject {
   }
   destroy() {
     this.id = null
+    this.canInteract = null
   }
 }

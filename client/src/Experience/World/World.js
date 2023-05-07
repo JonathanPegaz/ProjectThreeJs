@@ -11,6 +11,7 @@ import Ocean from "./Ocean.js";
 import Landscape from "./Landscape.js";
 import RespawnController from "./RespawnController.js";
 import InteractiveObjectController from "./InteractiveObject/InteractiveObjectController.js";
+import HTMLAnnouncement from "../HTMLInterface/HTMLAnnouncement.js";
 
 export default class World
 {
@@ -22,6 +23,7 @@ export default class World
         this.resources = this.experience.resources
         this.time = this.experience.time
         this.interactiveObject = new InteractiveObjectController()
+        this.htmlAnnouncement = new HTMLAnnouncement()
 
         //Environment
         this.ocean = new Ocean()
@@ -52,5 +54,6 @@ export default class World
         this.environment.destroy()
         this.respawn.destroy()
         this.interactiveObject.destroy()
+        this.htmlAnnouncement.destroy()
     }
 }
