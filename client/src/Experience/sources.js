@@ -77,6 +77,16 @@ export default [
     {
         name: 'island',
         type: 'gltfModel',
-        path: 'models/island_lowpoly.glb'
-    }
+        path: 'models/island_texture_lowpolyXXL.glb'
+    },
+    {
+        name: 'island_texture',
+        type: 'texture',
+        path: 'textures/maptexture.png'
+    },
+    {
+        name: 'tree',
+        type: 'gltfModel',
+        path: 'models/green_tree.glb'
+    },
 ]

@@ -36,6 +36,9 @@ export default class World
         //Assets
         //this.bush = new Bush()
         //this.floor = new Floor()
+        this.ocean = new Ocean()
+        this.fox = new Fox()
+        //this.infoBeacon = new InfoBeacon()
         //this.undergroundSF = new UndergroundSF()
         this.htmlPoint = new HTMLPoints()
         

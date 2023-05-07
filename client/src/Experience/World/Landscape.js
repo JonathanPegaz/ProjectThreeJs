@@ -1,4 +1,4 @@
-import { Object3D, Mesh} from 'three';
+import { Object3D, Mesh, DoubleSide} from 'three';
 import Experience from '../Experience.js';
 import * as CANNON from "cannon-es";
 
@@ -25,7 +25,8 @@ export default class Landscape {
         this.model.children[0].geometry.center()
         this.model.traverse((child) => {
             if(child instanceof Mesh) {
-                //child.material.wireframe = true
+
+                child.material.side = DoubleSide
                 child.receiveShadow = true
             }
         })

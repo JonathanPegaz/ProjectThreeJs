@@ -18,16 +18,17 @@ export default class Fox
         }
 
         // Resource
-        this.resource = this.resources.items.foxModel
+        this.resource = this.resources.items.tree
 
         this.setModel()
-        this.setAnimation()
+        //this.setAnimation()
     }
 
     setModel()
     {
         this.model = this.resource.scene
-        this.model.scale.set(0.02, 0.02, 0.02)
+        this.model.scale.set(1, 1, 1)
+        console.log(this.model)
         this.scene.add(this.model)
 
         this.model.traverse((child) =>
