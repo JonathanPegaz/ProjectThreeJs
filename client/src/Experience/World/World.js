@@ -5,12 +5,12 @@ import Floor from './Floor.js'
 import Fox from './Fox.js'
 import HTMLPoints from "../HTMLInterface/HTMLPoints.js";
 import Bush from "./Bush.js";
-import InfoBeacon from "./InteractableObject/InfoBeacon.js";
 import UndergroundSF from "./Buildings/UndergroundSF.js";
 import LocalPlayer from "./Player/LocalPlayer.js";
 import Ocean from "./Ocean.js";
 import Landscape from "./Landscape.js";
 import RespawnController from "./RespawnController.js";
+import InteractiveObjectController from "./InteractiveObject/InteractiveObjectController.js";
 
 export default class World
 {
@@ -21,6 +21,7 @@ export default class World
         this.scene = this.experience.scene
         this.resources = this.experience.resources
         this.time = this.experience.time
+        this.interactiveObject = new InteractiveObjectController()
 
         //Environment
         this.ocean = new Ocean()
@@ -33,7 +34,6 @@ export default class World
         //Assets
         //this.bush = new Bush()
         //this.floor = new Floor()
-        //this.infoBeacon = new InfoBeacon()
         //this.undergroundSF = new UndergroundSF()
         this.htmlPoint = new HTMLPoints()
         
@@ -51,5 +51,6 @@ export default class World
         this.landscape.destroy()
         this.environment.destroy()
         this.respawn.destroy()
+        this.interactiveObject.destroy()
     }
 }

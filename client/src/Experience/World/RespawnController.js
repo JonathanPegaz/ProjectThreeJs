@@ -1,6 +1,6 @@
 import * as THREE from 'three'
 import Experience from "../Experience.js";
-import SpawnPoint from "./InteractableObject/SpawnPoint.js";
+import SpawnPoint from "./InteractiveObject/SpawnPoint.js";
 
 export default class RespawnController {
 
@@ -18,10 +18,12 @@ export default class RespawnController {
   init() {
     this.repawnPoints = [
       new SpawnPoint(new THREE.Vector3(0, 0, 0), "stage1"),
-      new SpawnPoint(new THREE.Vector3(-80, .5, 22), "stage2")
+      new SpawnPoint(new THREE.Vector3(-80, .5, 22), "stage2", 20)
     ];
 
-    this.setGui()
+    if (this.debug.active) {
+      this.setGui()
+    }
   }
 
   setGui() {
@@ -29,8 +31,8 @@ export default class RespawnController {
     this.debugFolder.close()
 
     this.repawnPoints.forEach((element) => {
-      this.debugFolderTest = this.debugFolder.addFolder(element.name)
-      this.debugFolderTest
+      this.debugFolderSpawnPoint = this.debugFolder.addFolder(element.name)
+      this.debugFolderSpawnPoint
         .add(element.position, 'x')
         .name('Position x')
         .min(-100)
@@ -39,7 +41,7 @@ export default class RespawnController {
         .onChange(() => {
           element.updatePosition(element.position);
         })
-      this.debugFolderTest
+      this.debugFolderSpawnPoint
         .add(element.position, 'y')
         .name('Position y')
         .min(-10)
@@ -48,7 +50,7 @@ export default class RespawnController {
         .onChange(() => {
           element.updatePosition(element.position);
         })
-      this.debugFolderTest
+      this.debugFolderSpawnPoint
         .add(element.position, 'z')
         .name('Position z')
         .min(-100)
@@ -57,7 +59,7 @@ export default class RespawnController {
         .onChange(() => {
           element.updatePosition(element.position);
         })
-      this.debugFolderTest
+      this.debugFolderSpawnPoint
         .add(element, 'radius')
         .name('Hitbox radius')
         .min(0)
