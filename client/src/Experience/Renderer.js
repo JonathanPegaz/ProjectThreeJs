@@ -22,7 +22,7 @@ export default class Renderer
         })
         this.instance.physicallyCorrectLights = true
         this.instance.outputEncoding = sRGBEncoding
-        this.instance.toneMapping = CineonToneMapping
+        this.instance.toneMapping = NoToneMapping
         this.instance.toneMappingExposure = 1.75
         this.instance.shadowMap.enabled = true
         this.instance.shadowMap.type = PCFSoftShadowMap

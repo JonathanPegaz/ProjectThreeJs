@@ -4,6 +4,7 @@ import Environment from './Environment.js'
 import Floor from './Floor.js'
 import Fox from './Fox.js'
 import Tree from './Tree.js'
+import Flower from './Flower.js'
 import HTMLPoints from "../HTMLInterface/HTMLPoints.js";
 import Bush from "./Bush.js";
 import UndergroundSF from "./Buildings/UndergroundSF.js";
@@ -37,11 +38,15 @@ export default class World
         //Assets
         //this.bush = new Bush()
         //this.floor = new Floor()
-        this.ocean = new Ocean()
+        //this.ocean = new Ocean()
         //this.fox = new Fox()
+        this.landscape = new Landscape()
         this.tree = new Tree()
+        this.flower = new Flower()
         //this.infoBeacon = new InfoBeacon()
         //this.undergroundSF = new UndergroundSF()
+        this.landscape = new Landscape()
+        this.environment = new Environment()
         this.htmlPoint = new HTMLPoints()
         
     }
@@ -49,7 +54,7 @@ export default class World
     update()
     {
         this.htmlPoint.update()
-        this.ocean.update()
+        //this.ocean.update()
     }
 
     destroy() {

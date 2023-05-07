@@ -94,4 +94,9 @@ export default [
         type: 'gltfModel',
         path: 'models/Arbres.glb'
     },
+    {
+        name: 'flowers',
+        type: 'gltfModel',
+        path: 'models/fleurs.glb'
+    },
 ]

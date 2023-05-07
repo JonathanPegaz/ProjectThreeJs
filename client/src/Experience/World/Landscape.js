@@ -1,4 +1,4 @@
-import { Object3D, Mesh} from 'three';
+import { Object3D, Mesh, DoubleSide, MeshToonMaterial, MeshStandardMaterial, MeshPhongMaterial} from 'three';
 import Experience from '../Experience.js';
 import * as CANNON from "cannon-es";
 
@@ -24,12 +24,64 @@ export default class Landscape {
         this.model = this.resource.scene
         this.model.scale.set(1, 1, 1)
         this.model.traverse((child) => {
+            child.frustumCulled = false
             if(child instanceof Mesh) {
-                child.receiveShadow = true
+                child.material = new MeshToonMaterial({ // On crée le matériau du buisson
+                    ...child.material,
+                    depthWrite: true,
+                    type: 'MeshToonMaterial',
+                })
+
+                //child.receiveShadow = true
             }
         })
+
         this.object.add(this.model)
         this.scene.add(this.object)
+
+        if(this.experience.debug.active) {
+            this.debugFolder = this.experience.debug.ui.addFolder('landscape')
+
+            // add depth material
+            this.debugObject = {}
+            this.debugObject.depthTest = true
+            this.debugObject.depthWrite = true
+            this.debugObject.depthFunc = 2
+
+            this.debugFolder.add(this.debugObject, 'depthTest').onChange(() => {
+                this.model.traverse((child) => {
+                    if(child instanceof Mesh) {
+                        child.material.depthTest = this.debugObject.depthTest
+                    }
+                })
+            })
+
+            this.debugFolder.add(this.debugObject, 'depthWrite').onChange(() => {
+                this.model.traverse((child) => {
+                    if(child instanceof Mesh) {
+                        child.material.depthWrite = this.debugObject.depthWrite
+                    }
+                })
+            })
+            this.debugFolder.add(this.debugObject, 'depthFunc', {
+                Never: 0,
+                Less: 1,
+                Equal: 2,
+                LessEqual: 3,
+                Greater: 4,
+                NotEqual: 5,
+                GreaterEqual: 6,
+                Always: 7
+            }).onChange(() => {
+                this.model.traverse((child) => {
+                    if(child instanceof Mesh) {
+                        child.material.depthFunc = this.debugObject.depthFunc
+                    }
+                })
+            })
+
+            
+        }
     }
 
     setPhysics() {

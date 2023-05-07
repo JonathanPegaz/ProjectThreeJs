@@ -1,7 +1,7 @@
 import {ShaderMaterial, Color, DoubleSide} from 'three'
 
 export const oceanMaterial = new ShaderMaterial({
-    side: DoubleSide,
+    depthWrite: true,
     uniforms:
         {
             uMap: {type: 't', value: null},
