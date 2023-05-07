@@ -5,6 +5,8 @@ import { gsap } from 'gsap'
 import {overlayMaterial} from "../Shaders/OverlayShaders.js";
 import Experience from "../Experience.js";
 import { DRACOLoader } from "three/addons/loaders/DRACOLoader.js";
+import LocalPlayer from "../World/Player/LocalPlayer.js";
+import Network from "../Network.js";
 
 export default class Resources extends EventEmitter
 {
@@ -19,7 +21,6 @@ export default class Resources extends EventEmitter
         this.scene = this.experience.scene
         this.toLoad = this.sources.length
         this.loaded = 0
-        this.pseudo = null
 
         this.setLoaders()
         this.startLoading()
@@ -43,9 +44,6 @@ export default class Resources extends EventEmitter
                     // Update loadingBarElement
                     loadingBarElement.classList.add('ended')
                     loadingBarElement.style.transform = ''
-
-                    // Show input
-                    this.showInput()
                 }, 500)
             },
 
@@ -117,66 +115,9 @@ export default class Resources extends EventEmitter
         }
     }
 
-    showInput()
-    {
-        // Ajouter l'input pour rentrer le pseudo
-        const inputContainer = document.createElement('div')
-        inputContainer.style.position = 'absolute'
-        inputContainer.style.top = '50%'
-        inputContainer.style.left = '50%'
-        inputContainer.style.transform = 'translate(-50%, -50%)'
-        inputContainer.style.display = 'flex'
-        inputContainer.style.flexDirection = 'column'
-        inputContainer.style.alignItems = 'center'
-
-        const inputLabel = document.createElement('label')
-        inputLabel.innerText = 'Entrez votre pseudo :'
-        inputLabel.style.marginBottom = '10px'
-        inputLabel.style.fontFamily = 'Arial, sans-serif'
-        inputLabel.style.fontSize = '24px'
-        inputLabel.style.color = 'white'
-
-        const inputElement = document.createElement('input')
-        inputElement.type = 'text'
-        inputElement.style.width = '200px'
-        inputElement.style.padding = '10px'
-        inputElement.style.borderRadius = '5px'
-        inputElement.style.border = 'none'
-        inputElement.style.background = '#555555'
-        inputElement.style.color = 'white'
-        inputElement.style.fontFamily = 'Arial, sans-serif'
-        inputElement.style.fontSize = '18px'
-        inputElement.style.textAlign = 'center'
-
-        const submitButton = document.createElement('button')
-        submitButton.type = 'submit'
-        submitButton.innerText = 'Valider'
-        submitButton.style.padding = '10px'
-        submitButton.style.marginTop = '20px'
-        submitButton.style.borderRadius = '5px'
-        submitButton.style.border = 'none'
-        submitButton.style.background = '#555555'
-        submitButton.style.color = 'white'
-        submitButton.style.fontFamily = 'Arial, sans-serif'
-        submitButton.style.fontSize = '18px'
-        submitButton.style.cursor = 'pointer'
-
-        const form = document.createElement('form')
-
-        inputContainer.appendChild(inputLabel)
-        inputContainer.appendChild(inputElement)
-        inputContainer.appendChild(submitButton)
-        form.appendChild(inputContainer)
-        document.body.appendChild(form)
-
-        form.addEventListener('submit', (event) => {
-            event.preventDefault();
-            this.pseudo = inputElement.value;
-            this.trigger('pseudo-entered')
-            form.remove();
-            // Animate overlay
-            gsap.to(overlayMaterial.uniforms.uAlpha, { duration: 3, value: 0, delay: 1 })
-        });
+    removeOverlay() {
+        // Animate overlay
+        gsap.to(overlayMaterial.uniforms.uAlpha, { duration: 3, value: 0, delay: 1 })
     }
 
     destroy() {
