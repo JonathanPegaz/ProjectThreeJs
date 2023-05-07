@@ -3,6 +3,7 @@ import BasicCharacterController from "./CharacterController.js";
 import ThirdPersonCamera from "./ThirdPersonCamera.js";
 import Experience from "../../Experience.js";
 import * as CANNON from "cannon-es";
+import Pseudo from "./Hud/Pseudo.js";
 
 export default class LocalPlayer {
     constructor() {
@@ -18,6 +19,9 @@ export default class LocalPlayer {
         this.object = new THREE.Object3D()
         this.object.add(new THREE.AxesHelper(5))
         this.object.position.set(-80, 20, 22)
+
+        this.pseudo = new Pseudo(this, this.experience.mainscreen.pseudo)
+
 
         this.setModel()
         this.setAnimation()
@@ -97,6 +101,8 @@ export default class LocalPlayer {
 
         this.body.position.copy(this.object.position)
         this.body.quaternion.copy(this.object.quaternion)
+
+        this.pseudo.update()
 
         if (this.mixer) {
             this.mixer.update(this.time.delta / 1000)

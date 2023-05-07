@@ -2,6 +2,7 @@ import * as THREE from 'three'
 import Experience from "../../Experience.js";
 import { clone } from 'three/examples/jsm/utils/SkeletonUtils.js';
 import {Vector3} from "three";
+import Pseudo from "./Hud/Pseudo.js";
 
 export default class RemotePlayer {
     constructor(data) {
@@ -20,15 +21,15 @@ export default class RemotePlayer {
         this.id = data.id;
         this.model = data.model;
         this.colour = data.colour;
-        this.pseudo = data.pseudo;
         this.remotePlayer = true
+
+        this.pseudo = new Pseudo(this, data.pseudo)
 
         const players = this.network.initialisingPlayers.splice(this.network.initialisingPlayers.indexOf(this), 1);
         this.network.remotePlayers.push(players[0])
 
         this.setModel()
         this.setAnimation()
-        this.setPseudo()
     }
 
     setModel()
@@ -89,31 +90,6 @@ export default class RemotePlayer {
 		return this.actionName;
 	}
 
-    setPseudo() {
-        this.followText = document.createElement('div');
-        this.followText.id = 'follow-text';
-        this.followText.style.cssText= `
-        position: absolute;
-        color: white;
-        background: #00000077;
-        line-height: 40px;
-        border: 1px solid #ffffff77;
-        z-index: 100;
-        font-family: Arial;
-        font-weight: bold;
-        font-size: 14px;
-        margin: 0 10px;
-        padding: 0 10px;`
-
-        document.body.appendChild(this.followText);
-
-        this.followText.innerHTML = this.pseudo;
-
-        this.boxPosition = new THREE.Vector3();
-        this.boxPositionOffset = new THREE.Vector3();
-        this.y_axis = new Vector3(0, 2, 0);
-    }
-
     update()
     {
         if (this.mixer) {
@@ -131,36 +107,8 @@ export default class RemotePlayer {
                 }
             }
         }
-
-        // update pseudo
-        this.boxPositionOffset.copy(this.object.position)
-        this.boxPositionOffset.sub(this.experience.camera.instance.position)
-        this.boxPositionOffset.normalize();
-        this.boxPositionOffset.applyAxisAngle(this.y_axis, - Math.PI / 2)
-        this.boxPositionOffset.multiplyScalar(0.5)
-        this.boxPositionOffset.y = 3
-
-        this.boxPosition.setFromMatrixPosition( this.object.matrixWorld )
-        this.boxPosition.add(this.boxPositionOffset)
-        this.boxPosition.project(this.experience.camera.instance)
-
-        const rect = this.experience.canvas.getBoundingClientRect()
-        const widthHalf = this.experience.sizes.width / 2, heightHalf = this.experience.sizes.height / 2
-        this.boxPosition.x = rect.left + widthHalf + ( this.boxPosition.x * widthHalf )
-        this.boxPosition.y = rect.top - ( this.boxPosition.y * heightHalf ) + heightHalf
-
-        const distance = this.experience.camera.instance.position.distanceTo(this.object.position);
-        const maxDistance = 50; // the maximum distance at which the pseudo disappears completely
-
-        let scale = 1; // the scale of the pseudo
-        if (distance >= maxDistance) {
-            this.followText.style.opacity = `0`;
-        } else {
-            this.followText.style.opacity = `1`;
-        }
-
-        this.followText.style.top = `${this.boxPosition.y}px`
-        this.followText.style.left = `${this.boxPosition.x - this.followText.clientWidth + 10}px`
+        
+        this.pseudo.update()
     }
 
 }
