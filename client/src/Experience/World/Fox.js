@@ -28,7 +28,6 @@ export default class Fox
     {
         this.model = this.resource.scene
         this.model.scale.set(1, 1, 1)
-        console.log(this.model)
         this.scene.add(this.model)
 
         this.model.traverse((child) =>
