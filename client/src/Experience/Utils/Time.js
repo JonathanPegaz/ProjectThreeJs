@@ -34,6 +34,7 @@ export default class Time extends EventEmitter
     }
 
     destroy() {
+        window.cancelAnimationFrame(this.tick)
         this.start = null
         this.current = null
         this.elapsed = null

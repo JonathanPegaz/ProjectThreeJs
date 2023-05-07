@@ -1,8 +1,6 @@
 import { Object3D, Mesh} from 'three';
-import { VertexNormalsHelper } from 'three/addons/helpers/VertexNormalsHelper.js';
 import Experience from '../Experience.js';
 import * as CANNON from "cannon-es";
-import * as THREE from "three";
 
 
 export default class Landscape {
@@ -25,22 +23,13 @@ export default class Landscape {
     setModel() {
         this.model = this.resource.scene
         this.model.scale.set(1, 1, 1)
-        this.model.children[0].position.set(0, 0, 0)
-        this.model.children[0].geometry.center()
         this.model.traverse((child) => {
             if(child instanceof Mesh) {
-                child.material = new THREE.MeshNormalMaterial({ // On crée le matériau du buisson
-                    ...this.resource.scene.children[0].material,
-                    type: 'MeshNormalMaterial',
-                })
-                console.log(child.material)
                 child.receiveShadow = true
             }
         })
         this.object.add(this.model)
         this.scene.add(this.object)
-        const helper = new VertexNormalsHelper( this.model.children[0], 1, 0xff0000 );
-        this.scene.add( helper );
     }
 
     setPhysics() {
@@ -78,5 +67,12 @@ export default class Landscape {
 
     destroy() {
         this.scene.remove(this.object)
+
+        this.model.traverse((child) => {
+            if(child instanceof Mesh) {
+                child.material.dispose()
+                child.geometry.dispose()
+            }
+        })
     }
 }

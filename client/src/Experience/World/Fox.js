@@ -18,7 +18,7 @@ export default class Fox
         }
 
         // Resource
-        this.resource = this.resources.items.tree
+        this.resource = this.resources.items.fox
 
         this.setModel()
         //this.setAnimation()

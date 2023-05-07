@@ -226,9 +226,6 @@ export default class BasicCharacterController {
         this.isJoyStickTouch = null
         this.joystickSetup = null
 
-        this.Position = null
-        this.Rotation = null
-
         this.raycaster = null
         this.raycastDebug = null
     }

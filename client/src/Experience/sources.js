@@ -89,4 +89,9 @@ export default [
         type: 'gltfModel',
         path: 'models/green_tree.glb'
     },
+    {
+        name: 'Arbres',
+        type: 'gltfModel',
+        path: 'models/Arbres.glb'
+    },
 ]
