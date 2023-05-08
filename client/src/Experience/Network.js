@@ -32,7 +32,7 @@ export default class Network {
 
         this.socket.on('deletePlayer', (data) => {
             const players = this.remotePlayers.filter((player) =>{
-				if (player.id == data.id){
+				if (player && player.id == data.id){
 					return player;
 				}
 			});
