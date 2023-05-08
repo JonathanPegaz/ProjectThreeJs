@@ -17,8 +17,6 @@ export default class Network {
 
         this.setSocket()
         this.initSocket()
-
-
     }
 
     setSocket() {
@@ -52,6 +50,10 @@ export default class Network {
 					}
 				}
 			}
+        })
+
+        this.socket.on('chat message', (data) => {
+            this.experience.hud.chat.addMessage(data)
         })
     }
 

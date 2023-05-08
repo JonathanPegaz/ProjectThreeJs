@@ -107,7 +107,7 @@ export default class RemotePlayer {
                 }
             }
         }
-        
+
         this.pseudo.update()
     }
 

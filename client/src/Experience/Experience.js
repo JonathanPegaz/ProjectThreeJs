@@ -83,9 +83,10 @@ export default class Experience
 
         this.mainscreen.on('pseudo-entered', () => {
             this.resources.removeOverlay()
+            this.hud = new Hud()
             this.localPlayer = new LocalPlayer()
             this.network = new Network()
-            this.hud = new Hud()
+
         })
 
     }

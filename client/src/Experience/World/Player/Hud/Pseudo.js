@@ -63,13 +63,24 @@ export default class Pseudo {
 
         let scale = 1; // the scale of the pseudo
         if (distance >= maxDistance) {
-            this.followText.style.opacity = `0`;
+            this.fadeOut()
         } else {
-            this.followText.style.opacity = `1`;
+            this.fadeIn()
         }
 
         this.followText.style.top = `${this.boxPosition.y}px`
         this.followText.style.left = `${this.boxPosition.x}px`
 
+    }
+
+    fadeIn() {
+        // fade in the chat
+        this.followText.classList.add("fade-in");
+        this.followText.classList.remove("fade-out");
+    }
+
+    fadeOut() {
+        this.followText.classList.add("fade-out");
+        this.followText.classList.remove("fade-in");
     }
 }
