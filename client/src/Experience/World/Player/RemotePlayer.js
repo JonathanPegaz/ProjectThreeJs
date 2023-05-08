@@ -34,7 +34,7 @@ export default class RemotePlayer {
     setModel()
     {
         this.model = clone(this.resource.scene)
-        this.model.scale.set(0.02, 0.02, 0.02)
+        this.model.scale.set(0.006, 0.006, 0.006)
         this.model.traverse((child) =>
         {
             if(child instanceof THREE.Mesh)

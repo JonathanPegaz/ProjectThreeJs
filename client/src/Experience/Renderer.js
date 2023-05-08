@@ -1,5 +1,6 @@
 import {WebGLRenderer, sRGBEncoding, CineonToneMapping, PCFSoftShadowMap, NoToneMapping, LinearToneMapping, ReinhardToneMapping, ACESFilmicToneMapping} from 'three'
 import Experience from './Experience.js'
+import {CSS2DRenderer} from "three/addons/renderers/CSS2DRenderer.js";
 
 export default class Renderer
 {
@@ -12,6 +13,7 @@ export default class Renderer
         this.camera = this.experience.camera
 
         this.setInstance()
+        this.setLabelRenderer()
     }
 
     setInstance()
@@ -44,15 +46,27 @@ export default class Renderer
         }
     }
 
+    setLabelRenderer() {
+        this.labelRenderer = new CSS2DRenderer();
+        this.labelRenderer.setSize(this.sizes.width, this.sizes.height);
+        this.labelRenderer.domElement.style.position = 'absolute';
+        this.labelRenderer.domElement.style.top = '0px';
+
+        document.body.appendChild(this.labelRenderer.domElement);
+    }
+
     resize()
     {
         this.instance.setSize(this.sizes.width, this.sizes.height)
         this.instance.setPixelRatio(Math.min(this.sizes.pixelRatio, 2))
+
+        this.labelRenderer.setSize(this.sizes.width, this.sizes.height);
     }
 
     update()
     {
         this.instance.render(this.scene, this.camera.instance)
+        this.labelRenderer.render(this.scene, this.camera.instance);
     }
 
     destroy() {
