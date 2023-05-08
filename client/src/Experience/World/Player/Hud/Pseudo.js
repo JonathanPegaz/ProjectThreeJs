@@ -71,4 +71,21 @@ export default class Pseudo {
         this.pseudoLabel.element.classList.add("fade-out");
         this.pseudoLabel.element.classList.remove("fade-in");
     }
+
+    destroy() {
+
+        this.followText.remove()
+        this.label.visible = false
+        this.pseudoLabel.visible = false
+
+        this.experience = null
+        this.player = null
+        this.text = null
+        this.followText = null
+        this.label.geometry.dispose()
+        this.label.material.dispose()
+
+        this.label = null
+        this.pseudoLabel = null
+    }
 }

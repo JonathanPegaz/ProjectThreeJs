@@ -24,9 +24,6 @@ export default class RemotePlayer {
 
         this.pseudo = new Pseudo(this, data.pseudo)
 
-        const players = this.network.initialisingPlayers.splice(this.network.initialisingPlayers.indexOf(this), 1);
-        this.network.remotePlayers.push(players[0])
-
         this.setModel()
         this.setAnimation()
     }
@@ -44,7 +41,7 @@ export default class RemotePlayer {
         })
 
         this.object.add(this.model)
-        if (this.deleted===undefined) this.scene.add(this.object);
+        this.scene.add(this.object);
     }
 
     setAnimation()
@@ -95,19 +92,68 @@ export default class RemotePlayer {
             this.mixer.update(this.time.delta / 1000)
         }
 
-        if (this.network.remoteData.length > 0) {
-            for (let data of this.network.remoteData) {
-                if (data.id === this.id) {
-                    // Found the player
-                    this.object.position.set( data.x, data.y, data.z )
-                    const euler = new THREE.Euler(data.pb, data.heading, data.pb)
-                    this.object.quaternion.setFromEuler( euler )
-                    this.action = data.action
+        this.pseudo.update()
+    }
+
+    networkUpdate(data) {
+        // Update from network
+        this.object.position.set( data.x, data.y, data.z )
+        const euler = new THREE.Euler(data.pb, data.heading, data.pb)
+        this.object.quaternion.setFromEuler( euler )
+        this.action = data.action
+    }
+
+    destroy() {
+
+        //destroy mixer
+        this.mixer.stopAllAction()
+        this.mixer.uncacheRoot(this.model)
+        this.mixer = null
+
+        //destroy model
+        this.model.traverse((child) =>
+        {
+            // Loop through the material properties
+            for(const key in child)
+            {
+                const value = child[key]
+
+                // Test if there is a invisible property
+
+
+                // Test if there is a dispose function
+                if(value && typeof value.dispose === 'function')
+                {
+                    value.dispose()
+                }
+
+                // Test if there is a remove function
+                if(value && typeof value.remove === 'function')
+                {
+                    value.remove()
                 }
             }
-        }
+        })
 
-        this.pseudo.update()
+        //destroy pseudo
+        this.pseudo.destroy()
+
+        //destroy object
+        this.object.traverse((child) =>
+        {
+            if(child instanceof THREE.Mesh)
+            {
+                child.material.dispose()
+                child.geometry.dispose()
+            }
+        })
+
+
+        this.scene.remove(this.model);
+        this.scene.remove(this.object);
+
+        this.model = null
+        this.object = null
     }
 
 }

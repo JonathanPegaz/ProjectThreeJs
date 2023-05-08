@@ -14,6 +14,7 @@ import Landscape from "./Landscape.js";
 import RespawnController from "./RespawnController.js";
 import InteractiveObjectController from "./InteractiveObject/InteractiveObjectController.js";
 import HTMLAnnouncement from "../HTMLInterface/HTMLAnnouncement.js";
+import House from "./House.js";
 
 export default class World
 {
@@ -35,6 +36,7 @@ export default class World
         //this.fox = new Fox()
         this.tree = new Tree()
         this.flower = new Flower()
+        this.house = new House()
         //this.infoBeacon = new InfoBeacon()
         //this.undergroundSF = new UndergroundSF()
         //this.htmlPoint = new HTMLPoints()
@@ -56,6 +58,7 @@ export default class World
     destroy() {
         //this.htmlPoint.destroy()
         this.ocean.destroy()
+        this.house.destroy()
         this.tree.destroy()
         this.landscape.destroy()
         this.environment.destroy()

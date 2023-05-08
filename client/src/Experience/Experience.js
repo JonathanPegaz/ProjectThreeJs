@@ -84,9 +84,8 @@ export default class Experience
         this.mainscreen.on('pseudo-entered', () => {
             this.resources.removeOverlay()
             this.hud = new Hud()
-            this.localPlayer = new LocalPlayer()
             this.network = new Network()
-
+            this.localPlayer = new LocalPlayer()
         })
 
     }
@@ -106,8 +105,6 @@ export default class Experience
             this.physics.update()
         if(this.world)
             this.world.update()
-        if(this.network)
-            this.network.update()
         if(this.localPlayer)
             this.localPlayer.update()
         if(this.hud)

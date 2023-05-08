@@ -31,6 +31,8 @@ io.sockets.on('connection', function(socket){
 		socket.userData.heading = data.h;
 		socket.userData.pb = data.pb,
 		socket.userData.action = "idle";
+
+		socket.broadcast.emit('newPlayer', socket.userData);
 	});
 	
 	socket.on('update', function(data){

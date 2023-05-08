@@ -79,4 +79,9 @@ export default [
         type: 'gltfModel',
         path: 'models/fleurs.glb'
     },
+    {
+        name: 'house',
+        type: 'gltfModel',
+        path: 'models/house.glb'
+    }
 ]

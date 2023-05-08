@@ -12,12 +12,12 @@ export default class LocalPlayer {
         this.scene = this.experience.scene
         this.time = this.experience.time
         this.physics = this.experience.physics
+        this.network = this.experience.network
 
         this.resources = this.experience.resources
         this.resource = this.resources.items.foxModel
 
         this.object = new THREE.Object3D()
-        this.object.add(new THREE.AxesHelper(5))
         this.object.position.set(-80, 20, 22)
 
         this.pseudo = new Pseudo(this, this.experience.mainscreen.pseudo)
@@ -27,6 +27,7 @@ export default class LocalPlayer {
         this.setController()
         this.setThirdPersonCamera()
         this.setPhysics()
+        this.setNetwork()
     }
 
     setModel()
@@ -95,6 +96,21 @@ export default class LocalPlayer {
         })
     }
 
+    setNetwork() {
+        this.network.setSocket()
+
+        this.network.socket.emit('init', {
+            model:"foxModel",
+            //colour: this.colour,
+            pseudo: this.pseudo.text,
+            x: this.controller.Position.x,
+            y: this.controller.Position.y,
+            z: this.controller.Position.z,
+            h: this.controller.Rotation.y,
+            pb: this.controller.Rotation.x
+        })
+    }
+
     update() {
         this.controller.update()
 
@@ -109,6 +125,17 @@ export default class LocalPlayer {
 
         if(this.thirdPersonCamera)
             this.thirdPersonCamera.update()
+
+        if(this.network.socket)
+            this.network.socket.emit('update', {
+                pseudo: this.pseudo.text,
+                x: this.controller.Position.x,
+                y: this.controller.Position.y,
+                z: this.controller.Position.z,
+                h: this.controller.Rotation.y,
+                pb: this.controller.Rotation.x,
+                action: this.controller.stateMachine._currentState.Name
+            })
     }
 
     destroy() {
