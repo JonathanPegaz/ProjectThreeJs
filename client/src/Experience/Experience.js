@@ -47,8 +47,17 @@ export default class Experience
         this.resources = new Resources(sources)
         this.camera = new Camera()
         this.renderer = new Renderer()
-        
         this.postProcessing = new PostProcessing()
+
+        if (this.debug.active) {
+            this.debugFolder = this.debug.ui.addFolder('Experience')
+            this.debugObject = {}
+            this.debugObject.cleanMemory = () => {
+                this.destroy()
+                window.location.reload()
+            }
+            this.debugFolder.add(this.debugObject, 'cleanMemory').name('Clean memory')
+        }
 
         // Resize event
         this.sizes.on('resize', () =>
@@ -118,6 +127,8 @@ export default class Experience
                         value.dispose()
                     }
                 }
+
+                child.material.dispose()
             }
         })
 

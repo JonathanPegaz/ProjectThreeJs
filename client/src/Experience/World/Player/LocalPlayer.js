@@ -18,7 +18,7 @@ export default class LocalPlayer {
 
         this.object = new THREE.Object3D()
         this.object.add(new THREE.AxesHelper(5))
-        this.object.position.set(-80, 0, 22)
+        this.object.position.set(-80, 20, 22)
 
         this.setModel()
         this.setAnimation()
@@ -30,7 +30,7 @@ export default class LocalPlayer {
     setModel()
     {
         this.model = this.resource.scene
-        this.model.scale.set(0.02, 0.02, 0.02)
+        this.model.scale.set(0.006, 0.006, 0.006)
         this.model.traverse((child) =>
         {
             if(child instanceof THREE.Mesh)
@@ -81,7 +81,7 @@ export default class LocalPlayer {
             shape: shape,
             mass: 1,
             material: this.physics.defaultMaterial,
-            position: new CANNON.Vec3(-80, 0, 22),
+            position: new CANNON.Vec3(-80, 20, 22),
             fixedRotation: true,
         })
 
@@ -108,11 +108,11 @@ export default class LocalPlayer {
     }
 
     destroy() {
+        this.thirdPersonCamera.destroy()
+        this.controller.destroy()
+
         this.scene.remove(this.object)
         this.physics.world.removeBody(this.body)
-
-        this.controller.destroy()
-        this.thirdPersonCamera.destroy()
 
         this.object.traverse((child) => {
             if (child.isMesh) {

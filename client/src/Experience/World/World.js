@@ -3,6 +3,8 @@ import Experience from '../Experience.js'
 import Environment from './Environment.js'
 import Floor from './Floor.js'
 import Fox from './Fox.js'
+import Tree from './Tree.js'
+import Flower from './Flower.js'
 import HTMLPoints from "../HTMLInterface/HTMLPoints.js";
 import Bush from "./Bush.js";
 import UndergroundSF from "./Buildings/UndergroundSF.js";
@@ -25,31 +27,36 @@ export default class World
         this.interactiveObject = new InteractiveObjectController()
         this.htmlAnnouncement = new HTMLAnnouncement()
 
-        //Environment
-        this.ocean = new Ocean()
-        this.environment = new Environment()
-        this.landscape = new Landscape()
-        this.respawn = new RespawnController()
-
 
 
         //Assets
         //this.bush = new Bush()
         //this.floor = new Floor()
+        //this.fox = new Fox()
+        this.tree = new Tree()
+        this.flower = new Flower()
+        //this.infoBeacon = new InfoBeacon()
         //this.undergroundSF = new UndergroundSF()
-        this.htmlPoint = new HTMLPoints()
+        //this.htmlPoint = new HTMLPoints()
+
         
+        //Environment
+        this.ocean = new Ocean()
+        this.environment = new Environment()
+        this.landscape = new Landscape()
+        this.respawn = new RespawnController()
     }
 
     update()
     {
-        this.htmlPoint.update()
+        //this.htmlPoint.update()
         this.ocean.update()
     }
 
     destroy() {
         this.htmlPoint.destroy()
         this.ocean.destroy()
+        this.tree.destroy()
         this.landscape.destroy()
         this.environment.destroy()
         this.respawn.destroy()
