@@ -27,34 +27,30 @@ export default class World
         this.interactiveObject = new InteractiveObjectController()
         this.htmlAnnouncement = new HTMLAnnouncement()
 
-        //Environment
-        this.ocean = new Ocean()
-        this.environment = new Environment()
-        this.landscape = new Landscape()
-        this.respawn = new RespawnController()
-
 
 
         //Assets
         //this.bush = new Bush()
         //this.floor = new Floor()
-        //this.ocean = new Ocean()
         //this.fox = new Fox()
-        this.landscape = new Landscape()
         this.tree = new Tree()
         this.flower = new Flower()
         //this.infoBeacon = new InfoBeacon()
         //this.undergroundSF = new UndergroundSF()
-        this.landscape = new Landscape()
-        this.environment = new Environment()
-        this.htmlPoint = new HTMLPoints()
+        //this.htmlPoint = new HTMLPoints()
+
         
+        //Environment
+        this.ocean = new Ocean()
+        this.environment = new Environment()
+        this.landscape = new Landscape()
+        this.respawn = new RespawnController()
     }
 
     update()
     {
-        this.htmlPoint.update()
-        //this.ocean.update()
+        //this.htmlPoint.update()
+        this.ocean.update()
     }
 
     destroy() {

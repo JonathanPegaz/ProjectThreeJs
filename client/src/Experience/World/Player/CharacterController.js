@@ -96,7 +96,8 @@ export default class BasicCharacterController {
         this.raycaster.set(this.Position, this.Direction);
         this.raycaster.far = 5
 
-        this.experience.world.interactiveObject.catch(this.raycaster)
+        if(this.experience.world.interactiveObject)
+            this.experience.world.interactiveObject.catch(this.raycaster)
 
         if (this.debug.active && this.raycastDebug.isActive) {
             this.raycastDebug.execute(this.raycaster.ray.origin, this.raycaster.ray.direction, this.raycaster.far)
