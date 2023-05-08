@@ -21,7 +21,6 @@ export default class Flower
 
     setModel() {
         this.model = this.resource.scene
-        console.log(this.model)
         this.geometry = this.resource.scene.children[0].geometry
         this.material = new THREE.MeshLambertMaterial({ // On crée le matériau du buisson
             ...this.resource.scene.children[0].material,
