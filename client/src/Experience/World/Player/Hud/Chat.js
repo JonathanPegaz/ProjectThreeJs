@@ -111,6 +111,7 @@ export default class Chat {
             }
         })
 
+        // Enter
         document.addEventListener("keydown", (e) => {
             if (e.key === "Enter") {
                 if (this.chat.classList.contains("fade-in")) {
@@ -119,6 +120,17 @@ export default class Chat {
                     this.fadeIn();
                     // focus on the input
                     this.chatInput.focus();
+                }
+            }
+        })
+
+        // Escape
+        document.addEventListener("keydown", (e) => {
+            if (e.key === "Escape") {
+                if (this.chat.classList.contains("fade-in")) {
+                    // remove focus from the input
+                    this.chatInput.blur();
+                    this.fadeOut();
                 }
             }
         })
