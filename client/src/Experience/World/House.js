@@ -32,6 +32,7 @@ export default class House
                 child.material = new THREE.MeshToonMaterial({ // On crée le matériau du buisson
                     ...child.material,
                     type: 'MeshToonMaterial',
+                    transparent: false,
                 })
             }
         })

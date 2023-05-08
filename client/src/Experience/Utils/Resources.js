@@ -31,7 +31,18 @@ export default class Resources extends EventEmitter
         const overlay = new Mesh(overlayGeometry, overlayMaterial)
         this.scene.add(overlay)
 
-        const loadingBarElement = document.querySelector('.loading-bar')
+        const loadingBarElement = document.createElement('div')
+        loadingBarElement.style.cssText = `
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            height: 2px;
+            background: #ffffff;
+            transform: scaleX(0.3);
+            transform-origin: top left;
+            transition: transform 0.5s;
+        `
+        document.body.appendChild(loadingBarElement)
         const loadingManager = new LoadingManager(
             // Loaded
             () =>
@@ -39,6 +50,16 @@ export default class Resources extends EventEmitter
                 // Wait a little
                 window.setTimeout(() =>
                 {
+                    // create css class ended
+                    const style = document.createElement('style')
+                    style.type = 'text/css'
+                    style.innerHTML = '.ended { ' +
+                        '    transform: scaleX(0);\n' +
+                        '    transform-origin: 100% 0;\n' +
+                        '    transition: transform 1.5s ease-in-out;  ' +
+                        '}'
+                    document.getElementsByTagName('head')[0].appendChild(style)
+
                     // Update loadingBarElement
                     loadingBarElement.classList.add('ended')
                     loadingBarElement.style.transform = ''

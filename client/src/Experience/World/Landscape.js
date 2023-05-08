@@ -1,4 +1,4 @@
-import { Object3D, Mesh, DoubleSide, MeshToonMaterial, MeshStandardMaterial, MeshPhongMaterial} from 'three';
+import { Object3D, Mesh, DoubleSide, MeshToonMaterial} from 'three';
 import Experience from '../Experience.js';
 import * as CANNON from "cannon-es";
 
@@ -33,7 +33,7 @@ export default class Landscape {
                     transparent: false,
                 })
 
-                //child.receiveShadow = true
+                child.receiveShadow = true
             }
         })
 
