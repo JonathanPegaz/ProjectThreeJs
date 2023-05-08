@@ -30,6 +30,7 @@ export default class Landscape {
                     ...child.material,
                     depthWrite: true,
                     type: 'MeshToonMaterial',
+                    transparent: false,
                 })
 
                 //child.receiveShadow = true
