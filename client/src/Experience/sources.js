@@ -50,11 +50,6 @@ export default [
         path: 'models/Buildings/UndergroundSF/glTF/UndergroundSF.gltf'
     },
     {
-        name: 'snowFlake',
-        type: 'texture',
-        path: 'textures/snowflake.png'
-    },
-    {
         name: 'bush',
         type: 'gltfModel',
         path: 'models/buisson.glb'
@@ -70,24 +65,9 @@ export default [
         path: 'models/buisson2.glb'
     },
     {
-        name: 'landscape',
-        type: 'gltfModel',
-        path: 'models/landscape.glb'
-    },
-    {
         name: 'island',
         type: 'gltfModel',
         path: 'models/island_texture_lowpolyXXL.glb'
-    },
-    {
-        name: 'island_texture',
-        type: 'texture',
-        path: 'textures/maptexture.png'
-    },
-    {
-        name: 'tree',
-        type: 'gltfModel',
-        path: 'models/green_tree.glb'
     },
     {
         name: 'Arbres',
