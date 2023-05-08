@@ -6,6 +6,7 @@ import IdleState from "./State/IdleState.js";
 import RunState from "./State/RunState.js";
 import WalkState from "./State/WalkState.js";
 import JoyStick from "../../Utils/JoyStick.js";
+import RaycastDebug from "../../Utils/RaycastDebug.js";
 
 class BasicCharacterControllerProxy {
     constructor(animations) {
@@ -38,6 +39,11 @@ export default class BasicCharacterController {
 
         this.camera = this.experience.camera
         this.time = this.experience.time
+        this.scene = this.experience.scene
+        this.debug = this.experience.debug
+
+        this.raycaster = new THREE.Raycaster(undefined, undefined)
+        this.raycastDebug = null
 
         this.setParams()
     }
@@ -63,10 +69,16 @@ export default class BasicCharacterController {
         })
 
         this.stateMachine.SetState('idle');
+
+        this.raycastDebug = new RaycastDebug(50)
     }
 
     get Position() {
         return this.localPlayer.object.position;
+    }
+
+    get Direction() {
+        return this.localPlayer.model.getWorldDirection(new THREE.Vector3())
     }
 
     get Rotation() {
@@ -74,6 +86,21 @@ export default class BasicCharacterController {
             return new THREE.Quaternion();
         }
         return this.localPlayer.object.quaternion;
+    }
+
+    respawn() {
+        this.experience.world.respawn.execute(this.localPlayer)
+    }
+
+    detectCollision() {
+        this.raycaster.set(this.Position, this.Direction);
+        this.raycaster.far = 5
+
+        this.experience.world.interactiveObject.catch(this.raycaster)
+
+        if (this.debug.active && this.raycastDebug.isActive) {
+            this.raycastDebug.execute(this.raycaster.ray.origin, this.raycaster.ray.direction, this.raycaster.far)
+        }
     }
 
     update() {
@@ -86,6 +113,11 @@ export default class BasicCharacterController {
         }
         this.handleKeyboard(timeInSeconds)
         this.stateMachine.Update(timeInSeconds, this.input);
+        if (this.Position.y < -15) {
+            this.respawn()
+        }
+
+        this.detectCollision()
     }
 
     handleJoystick(timeInSeconds) {
@@ -196,6 +228,9 @@ export default class BasicCharacterController {
 
         this.Position = null
         this.Rotation = null
+
+        this.raycaster = null
+        this.raycastDebug = null
     }
 }
 

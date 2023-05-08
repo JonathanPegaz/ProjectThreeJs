@@ -5,29 +5,38 @@ import Floor from './Floor.js'
 import Fox from './Fox.js'
 import HTMLPoints from "../HTMLInterface/HTMLPoints.js";
 import Bush from "./Bush.js";
-import InfoBeacon from "./InteractableObject/InfoBeacon.js";
 import UndergroundSF from "./Buildings/UndergroundSF.js";
 import LocalPlayer from "./Player/LocalPlayer.js";
 import Ocean from "./Ocean.js";
 import Landscape from "./Landscape.js";
+import RespawnController from "./RespawnController.js";
+import InteractiveObjectController from "./InteractiveObject/InteractiveObjectController.js";
+import HTMLAnnouncement from "../HTMLInterface/HTMLAnnouncement.js";
 
 export default class World
 {
     constructor()
     {
+        // Default
         this.experience = new Experience()
         this.scene = this.experience.scene
         this.resources = this.experience.resources
         this.time = this.experience.time
+        this.interactiveObject = new InteractiveObjectController()
+        this.htmlAnnouncement = new HTMLAnnouncement()
 
-        
+        //Environment
+        this.ocean = new Ocean()
+        this.environment = new Environment()
+        this.landscape = new Landscape()
+        this.respawn = new RespawnController()
+
+
+
+        //Assets
         //this.bush = new Bush()
         //this.floor = new Floor()
-        this.ocean = new Ocean()
-        //this.infoBeacon = new InfoBeacon()
         //this.undergroundSF = new UndergroundSF()
-        this.landscape = new Landscape()
-        this.environment = new Environment()
         this.htmlPoint = new HTMLPoints()
         
     }
@@ -43,5 +52,8 @@ export default class World
         this.ocean.destroy()
         this.landscape.destroy()
         this.environment.destroy()
+        this.respawn.destroy()
+        this.interactiveObject.destroy()
+        this.htmlAnnouncement.destroy()
     }
 }
