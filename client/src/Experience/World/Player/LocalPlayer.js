@@ -22,7 +22,6 @@ export default class LocalPlayer {
 
         this.pseudo = new Pseudo(this, this.experience.mainscreen.pseudo)
 
-
         this.setModel()
         this.setAnimation()
         this.setController()

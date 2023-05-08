@@ -1,7 +1,6 @@
 import * as THREE from 'three'
 import Experience from "../../Experience.js";
 import { clone } from 'three/examples/jsm/utils/SkeletonUtils.js';
-import {Vector3} from "three";
 import Pseudo from "./Hud/Pseudo.js";
 
 export default class RemotePlayer {

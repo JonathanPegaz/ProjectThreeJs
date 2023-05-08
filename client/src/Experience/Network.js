@@ -107,7 +107,6 @@ export default class Network {
                     if (rplayer===undefined) {
                         // Initialise player
                         const newRemotePlayer = new RemotePlayer(data)
-                        console.log(data)
                         tempRemotePlayers.push(newRemotePlayer)
                     }
                     else {

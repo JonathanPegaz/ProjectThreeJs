@@ -5,8 +5,6 @@ import { gsap } from 'gsap'
 import {overlayMaterial} from "../Shaders/OverlayShaders.js";
 import Experience from "../Experience.js";
 import { DRACOLoader } from "three/addons/loaders/DRACOLoader.js";
-import LocalPlayer from "../World/Player/LocalPlayer.js";
-import Network from "../Network.js";
 
 export default class Resources extends EventEmitter
 {
