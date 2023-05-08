@@ -39,9 +39,6 @@ export default class Resources extends EventEmitter
                 // Wait a little
                 window.setTimeout(() =>
                 {
-                    // Animate overlay
-                    gsap.to(overlayMaterial.uniforms.uAlpha, { duration: 3, value: 0, delay: 1 })
-
                     // Update loadingBarElement
                     loadingBarElement.classList.add('ended')
                     loadingBarElement.style.transform = ''
@@ -114,6 +111,11 @@ export default class Resources extends EventEmitter
         {
             this.trigger('ready')
         }
+    }
+
+    removeOverlay() {
+        // Animate overlay
+        gsap.to(overlayMaterial.uniforms.uAlpha, { duration: 3, value: 0, delay: 1 })
     }
 
     destroy() {

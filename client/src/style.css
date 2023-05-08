@@ -2,6 +2,7 @@
 {
     margin: 0;
     padding: 0;
+    user-select: none;
 }
 
 html,
@@ -16,6 +17,36 @@ body
     top: 0;
     left: 0;
     outline: none;
+}
+
+.fade-in {
+    animation-name: fade-in;
+    animation-duration: 1s;
+    animation-fill-mode: both;
+}
+
+@keyframes fade-in {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.fade-out {
+    animation-name: fade-out;
+    animation-duration: 1s;
+    animation-fill-mode: both;
+}
+
+@keyframes fade-out {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
 }
 
 .loading-bar

@@ -14,6 +14,8 @@ import Monitoring from "./Utils/Monitoring.js";
 import LocalPlayer from "./World/Player/LocalPlayer.js";
 import Network from "./Network.js";
 import Physics from "./Physics.js";
+import Mainscreen from "./Mainscreen.js";
+import Hud from "./World/Player/Hud/Hud.js";
 
 let instance = null
 
@@ -45,6 +47,7 @@ export default class Experience
         this.time = new Time()
         this.scene = new Scene()
         this.resources = new Resources(sources)
+        this.mainscreen = new Mainscreen()
         this.camera = new Camera()
         this.renderer = new Renderer()
         this.postProcessing = new PostProcessing()
@@ -73,11 +76,19 @@ export default class Experience
         // Wait for resources
         this.resources.on('ready', () =>
         {
+            this.mainscreen.showInput()
             this.physics = new Physics()
             this.world = new World()
+        })
+
+        this.mainscreen.on('pseudo-entered', () => {
+            this.resources.removeOverlay()
+            this.hud = new Hud()
             this.localPlayer = new LocalPlayer()
             this.network = new Network()
+
         })
+
     }
 
     resize()
@@ -99,6 +110,8 @@ export default class Experience
             this.network.update()
         if(this.localPlayer)
             this.localPlayer.update()
+        if(this.hud)
+            this.hud.update()
 
 
         this.renderer.update()

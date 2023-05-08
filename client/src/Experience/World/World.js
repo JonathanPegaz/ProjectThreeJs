@@ -37,7 +37,7 @@ export default class World
         this.flower = new Flower()
         //this.infoBeacon = new InfoBeacon()
         //this.undergroundSF = new UndergroundSF()
-        //this.htmlPoint = new HTMLPoints()
+        this.htmlPoint = new HTMLPoints()
 
         
         //Environment
@@ -49,7 +49,7 @@ export default class World
 
     update()
     {
-        //this.htmlPoint.update()
+        this.htmlPoint.update()
         this.ocean.update()
     }
 

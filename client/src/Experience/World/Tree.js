@@ -36,7 +36,6 @@ export default class Tree
                     type: 'MeshToonMaterial',
                     side: THREE.DoubleSide,
                 })
-                console.log(child.material)
                 child.castShadow = true
             }
         })

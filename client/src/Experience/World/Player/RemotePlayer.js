@@ -1,6 +1,7 @@
 import * as THREE from 'three'
 import Experience from "../../Experience.js";
 import { clone } from 'three/examples/jsm/utils/SkeletonUtils.js';
+import Pseudo from "./Hud/Pseudo.js";
 
 export default class RemotePlayer {
     constructor(data) {
@@ -21,6 +22,8 @@ export default class RemotePlayer {
         this.colour = data.colour;
         this.remotePlayer = true
 
+        this.pseudo = new Pseudo(this, data.pseudo)
+
         const players = this.network.initialisingPlayers.splice(this.network.initialisingPlayers.indexOf(this), 1);
         this.network.remotePlayers.push(players[0])
 
@@ -31,7 +34,7 @@ export default class RemotePlayer {
     setModel()
     {
         this.model = clone(this.resource.scene)
-        this.model.scale.set(0.02, 0.02, 0.02)
+        this.model.scale.set(0.006, 0.006, 0.006)
         this.model.traverse((child) =>
         {
             if(child instanceof THREE.Mesh)
@@ -103,6 +106,8 @@ export default class RemotePlayer {
                 }
             }
         }
+
+        this.pseudo.update()
     }
 
 }
