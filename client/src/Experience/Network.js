@@ -94,14 +94,14 @@ export default class Network {
                 //Is this player being initialised?
                 let iplayer
                 this.initialisingPlayers.forEach((player) => {
-                    if (player.id === data.id) iplayer = player;
+                    if (player && player.id === data.id) iplayer = player;
                 })
 
                 //If not being initialised check the remotePlayers array
                 if (iplayer===undefined) {
                     let rplayer
                     this.remotePlayers.forEach((player) => {
-                        if (player.id === data.id) rplayer = player;
+                        if (player && player.id === data.id) rplayer = player;
                     })
 
                     if (rplayer===undefined) {
