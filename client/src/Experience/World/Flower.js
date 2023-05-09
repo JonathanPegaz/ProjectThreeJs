@@ -1,5 +1,6 @@
 import * as THREE from 'three'
 import Experience from '../Experience.js'
+import {MeshToonMaterial} from "three";
 
 export default class Flower
 {
@@ -22,10 +23,13 @@ export default class Flower
     setModel() {
         this.model = this.resource.scene
         this.geometry = this.resource.scene.children[0].geometry
-        this.material = new THREE.MeshLambertMaterial({ // On crée le matériau du buisson
+        this.material = new THREE.MeshToonMaterial({ // On crée le matériau du buisson
             ...this.resource.scene.children[0].material,
-            type: 'MeshLambertMaterial',
+            type: 'MeshToonMaterial',
+            depthWrite: true,
+            transparent: false,
         })
+        console.log(this.material)
 
         const count = this.model.children.length // Nombre d'enfants du modèle
         const dummy = new THREE.Object3D() // Un objet temporaire pour stocker les transformations

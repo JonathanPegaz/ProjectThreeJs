@@ -31,9 +31,11 @@ export default class Tree
             {
                 child.material = new THREE.MeshToonMaterial({ // On crée le matériau du buisson
                     ...child.material,
-                    //depthWrite: true,
                     type: 'MeshToonMaterial',
                     side: THREE.DoubleSide,
+                    alphaTest: 0.5,
+                    depthWrite: true,
+                    transparent: false,
                 })
                 child.castShadow = true
             }
