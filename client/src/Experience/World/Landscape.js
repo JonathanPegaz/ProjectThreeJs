@@ -10,7 +10,7 @@ export default class Landscape {
         this.resources = this.experience.resources
         this.physics = this.experience.physics
 
-        this.resource = this.resources.items.island
+        this.resource = this.resources.items.islandHigh
 
         this.object = new Object3D()
         this.object.position.set(0, 0, 0)

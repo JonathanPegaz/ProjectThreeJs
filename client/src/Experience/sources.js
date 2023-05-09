@@ -34,10 +34,15 @@ export default [
     {
         name: 'bush2',
         type: 'gltfModel',
-        path: 'models/buisson2.glb'
+        path: 'models/buisson.glb'
     },
     {
         name: 'island',
+        type: 'gltfModel',
+        path: 'models/island_texture_lowpoly.glb'
+    },
+    {
+        name: 'islandHigh',
         type: 'gltfModel',
         path: 'models/island_texture_lowpolyXXL.glb'
     },
@@ -54,6 +59,16 @@ export default [
     {
         name: 'house',
         type: 'gltfModel',
-        path: 'models/house.glb'
+        path: 'models/Maison.glb'
+    },
+    {
+        name: 'rock',
+        type: 'gltfModel',
+        path: 'models/Rochers.glb'
+    },
+    {
+        name: 'fence',
+        type: 'gltfModel',
+        path: 'models/Barrieres.glb'
     }
 ]
