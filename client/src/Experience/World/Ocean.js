@@ -6,7 +6,14 @@ export default class Ocean {
     constructor() {
         this.experience = new Experience();
         this.scene = this.experience.scene;
+        this.camera = this.experience.camera;
         this.resources = this.experience.resources;
+        this.debug = this.experience.debug
+
+        if (this.debug.active) {
+            this.debugFolder = this.debug.ui.addFolder('Ocean')
+
+        }
 
         this.setGeometry();
         this.setTextures();
@@ -29,6 +36,8 @@ export default class Ocean {
         this.oceanMaterial = oceanMaterial
         this.oceanMaterial.uniforms.uMap.value = this.waterTexture
         //this.oceanMaterial.uniforms.uSize.value = 50
+        this.oceanMaterial.uniforms.uCamNear.value = this.camera.instance.near
+        this.oceanMaterial.uniforms.uCamFar.value = 10
     }
 
     setMesh() {

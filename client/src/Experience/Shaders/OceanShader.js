@@ -7,27 +7,38 @@ export const oceanMaterial = new ShaderMaterial({
             uMap: {type: 't', value: null},
             uTime: {type: 'f', value: 0},
             uColor: {type: 'f', value: new Color('#0051da')},
+            uDarkColor: {type: 'f', value: new Color('#00008B')},
+            uCamNear: {type: 'f', value: 1},
+            uCamFar: {type: 'f', value: 100},
         },
     vertexShader: `
             
         varying vec2 vUv;
+
+        varying float distToCam;
         
         uniform float uTime;
         
         void main() {
             vUv = uv;
             vec3 pos = position;
-           
+
+            distToCam = pos.z * 1000.0;
         
             gl_Position = projectionMatrix * modelViewMatrix * vec4(pos, 1.0);
         }
     `,
     fragmentShader: `
         varying vec2 vUv;
+        varying float distToCam;
+
+        uniform float uCamNear;
+        uniform float uCamFar;
             
         uniform sampler2D uMap;
         uniform float uTime;
         uniform vec3 uColor;
+        uniform vec3 uDarkColor;
         
         void main() {
             vec2 uv = vUv * 400.0 + vec2(uTime * -0.05);
@@ -40,8 +51,11 @@ export const oceanMaterial = new ShaderMaterial({
             vec4 tex2 = texture2D(uMap, uv * 1.0 + vec2(0.2));
         
             vec3 blue = uColor;
+            vec3 darkblue = uDarkColor;
+
+            float distanceAmount = smoothstep(uCamNear, uCamFar, distToCam);
         
-            gl_FragColor = vec4(blue + vec3(tex1.a * 0.9 - tex2.a * 0.02), 1.0);
+            gl_FragColor = vec4(mix(blue + vec3(tex1.a * 0.9 - tex2.a * 0.02), darkblue + vec3(tex1.a * 0.9 - tex2.a * 0.02), distToCam), 1.0);
         }`
 })
 

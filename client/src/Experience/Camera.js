@@ -16,14 +16,17 @@ export default class Camera
 
         this.isOrbitControlActive = false
 
+        this.setInstance()
+
         if (this.debug.active)
         {
             this.debugFolder = this.debug.ui.addFolder('Camera')
             this.debugFolder.add(this, 'isOrbitControlActive')
+            this.debugFolder.add(this.instance, 'near').step(0.001).min(0.001).max(1000).name('near')
+            this.debugFolder.add(this.instance, 'far').step(0.001).min(0.001).max(1000).name('far')
+
             this.debugFolder.close()
         }
-
-        this.setInstance()
     }
 
     setInstance()
