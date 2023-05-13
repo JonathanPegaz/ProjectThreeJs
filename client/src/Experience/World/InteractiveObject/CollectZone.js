@@ -2,30 +2,22 @@ import * as THREE from 'three'
 import Experience from "../../Experience.js";
 import InteractiveObject from "./InteractiveObject.js";
 
-export default class SpawnPoint extends InteractiveObject {
-
+export default class CollectZone extends InteractiveObject {
   constructor(position, name, radius = 1) {
-    super()
-    this.experience = new Experience()
+    super();
 
     this.radius = null
-    //this.player = null
-
     this.init(position, name, radius)
   }
 
-  async init(position, name, radius) {
+  init(position, name, radius) {
     this.name = name
     this.radius = radius
-    this.position = position
     this.object = new THREE.Object3D()
-    this.object.position.set(this.position.x, this.position.y, this.position.z)
+    this.object.position.set(position.x, position.y, position.z)
     this.scene.add(this.object)
 
-    this.player = this.experience.localPlayer
-
     this.setHitbox()
-    this.add()
   }
 
   setHitbox() {
@@ -36,19 +28,20 @@ export default class SpawnPoint extends InteractiveObject {
     this.scene.add(this.hitbox)
   }
 
-  interact(origin) {
-    const test = super.interact(origin)
-    if (!test) {
-      return
-    }
-
-    this.wait(() => this.experience.world.htmlAnnouncement).then(() => {
-      this.experience.world.htmlAnnouncement.addQueue(this.experience.world.htmlAnnouncement.type.AREA, this.name, 3000)
-    })
+  interact() {
+    super.interact()
   }
 
+
+
+  leave() {
+    super.leave()
+  }
+
+
+
   destroy() {
-    super.destroy()
+    super.destroy();
     this.radius = null
   }
 }
