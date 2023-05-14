@@ -8,7 +8,7 @@ export default class Bush
         this.scene = this.experience.scene
         this.resources = this.experience.resources
 
-        this.resource = this.resources.items.bush
+        this.resource = this.resources.items.bush2
         this.geometry = this.resource.scene.children[0].geometry // On récupère la géométrie du buisson
 
         this.material = new THREE.MeshLambertMaterial({ // On crée le matériau du buisson

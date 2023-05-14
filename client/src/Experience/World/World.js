@@ -10,6 +10,9 @@ import RespawnController from "./RespawnController.js";
 import InteractiveObjectController from "./InteractiveObject/InteractiveObjectController.js";
 import HTMLAnnouncement from "../HTMLInterface/HTMLAnnouncement.js";
 import House from "./House.js";
+import Rock from "./Rock.js";
+import Barriere from "./Barriere.js";
+import Buisson from "./Buisson.js";
 
 export default class World
 {
@@ -29,6 +32,10 @@ export default class World
         this.tree = new Tree()
         this.flower = new Flower()
         this.house = new House()
+        //this.bush = new Bush()
+        this.buisson = new Buisson()
+        this.rock = new Rock()
+        this.barriere = new Barriere()
 
         //Environment
         this.ocean = new Ocean()
@@ -43,12 +50,20 @@ export default class World
     }
 
     destroy() {
-        this.ocean.destroy()
-        this.house.destroy()
+
         this.tree.destroy()
-        this.landscape.destroy()
+        this.flower.destroy()
+        this.house.destroy()
+
+        this.buisson.destroy()
+        this.rock.destroy()
+        this.barriere.destroy()
+
+        this.ocean.destroy()
         this.environment.destroy()
+        this.landscape.destroy()
         this.respawn.destroy()
+
         this.interactiveObject.destroy()
         this.htmlAnnouncement.destroy()
     }

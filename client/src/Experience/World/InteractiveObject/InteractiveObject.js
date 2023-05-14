@@ -28,9 +28,6 @@ export default class InteractiveObject {
     }
     this.canInteract = false
 
-    console.log("Default interaction with", this.id)
-    console.log(this)
-
     setTimeout(() => {
       this.canInteract = true
     }, 1000)

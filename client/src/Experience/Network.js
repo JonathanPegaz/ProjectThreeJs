@@ -82,4 +82,23 @@ export default class Network {
 
         return players[0];
     }
+
+    update() {
+        // update remote players
+        this.remotePlayers.forEach((remotePlayer) => {
+            remotePlayer.update()
+        })
+    }
+
+    destroy() {
+        this.socket.disconnect()
+
+        this.remotePlayers.forEach((remotePlayer) => {
+            remotePlayer.destroy()
+        })
+
+        this.remotePlayers = []
+        this.deletedPlayers = []
+        this.remoteData = []
+    }
 }

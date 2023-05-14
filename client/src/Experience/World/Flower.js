@@ -1,6 +1,5 @@
-import * as THREE from 'three'
 import Experience from '../Experience.js'
-import {MeshToonMaterial} from "three";
+import {DynamicDrawUsage, InstancedMesh, MeshToonMaterial, Object3D} from "three";
 
 export default class Flower
 {
@@ -23,16 +22,15 @@ export default class Flower
     setModel() {
         this.model = this.resource.scene
         this.geometry = this.resource.scene.children[0].geometry
-        this.material = new THREE.MeshToonMaterial({ // On crée le matériau du buisson
+        this.material = new MeshToonMaterial({ // On crée le matériau du buisson
             ...this.resource.scene.children[0].material,
             type: 'MeshToonMaterial',
             depthWrite: true,
             transparent: false,
         })
-        console.log(this.material)
 
         const count = this.model.children.length // Nombre d'enfants du modèle
-        const dummy = new THREE.Object3D() // Un objet temporaire pour stocker les transformations
+        const dummy = new Object3D() // Un objet temporaire pour stocker les transformations
         const positions = [] // Tableaux pour stocker les positions, rotations et échelles
         const rotations = []
         const scales = []
@@ -44,8 +42,8 @@ export default class Flower
         }
 
         // On crée l'InstancedMesh
-        this.instancedMesh = new THREE.InstancedMesh(this.geometry, this.material, count)
-        this.instancedMesh.instanceMatrix.setUsage(THREE.DynamicDrawUsage) // On définit l'usage à DynamicDrawUsage
+        this.instancedMesh = new InstancedMesh(this.geometry, this.material, count)
+        this.instancedMesh.instanceMatrix.setUsage(DynamicDrawUsage) // On définit l'usage à DynamicDrawUsage
 
         for (let i = 0; i < count; i++) {
             dummy.position.set(positions[i * 3], positions[i * 3 + 1], positions[i * 3 + 2]) // On applique les transformations sur l'objet temporaire
@@ -57,6 +55,19 @@ export default class Flower
 
         this.scene.add(this.instancedMesh) // On ajoute l'InstancedMesh à la scène
 
+    }
+
+    destroy() {
+        this.scene.remove(this.instancedMesh)
+
+        this.model.traverse((child) =>
+        {
+            if(child instanceof THREE.Mesh)
+            {
+                child.material.dispose()
+                child.geometry.dispose()
+            }
+        })
     }
 
 }

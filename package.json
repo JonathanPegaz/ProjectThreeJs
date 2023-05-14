@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "three-to-cannon": "^4.3.0"
+  }
+}

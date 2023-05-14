@@ -16,6 +16,7 @@ import Network from "./Network.js";
 import Physics from "./Physics.js";
 import Mainscreen from "./Mainscreen.js";
 import Hud from "./World/Player/Hud/Hud.js";
+import Controls from "./Utils/Controls.js";
 
 let instance = null
 
@@ -47,10 +48,11 @@ export default class Experience
         this.time = new Time()
         this.scene = new Scene()
         this.resources = new Resources(sources)
+        this.physics = new Physics()
         this.mainscreen = new Mainscreen()
         this.camera = new Camera()
         this.renderer = new Renderer()
-        this.postProcessing = new PostProcessing()
+        //this.postProcessing = new PostProcessing()
 
         if (this.debug.active) {
             this.debugFolder = this.debug.ui.addFolder('Experience')
@@ -77,13 +79,13 @@ export default class Experience
         this.resources.on('ready', () =>
         {
             this.mainscreen.showInput()
-            this.physics = new Physics()
             this.world = new World()
         })
 
         this.mainscreen.on('pseudo-entered', () => {
             this.resources.removeOverlay()
             this.hud = new Hud()
+            this.controls = new Controls()
             this.network = new Network()
             this.localPlayer = new LocalPlayer()
         })
@@ -94,33 +96,74 @@ export default class Experience
     {
         this.camera.resize()
         this.renderer.resize()
-        this.postProcessing.resize()
+        //this.postProcessing.resize()
     }
 
     update()
     {
         this.monitoring.beginMonitoring()
 
+        this.camera.update()
+
         if(this.physics)
             this.physics.update()
         if(this.world)
             this.world.update()
-        if(this.localPlayer)
-            this.localPlayer.update()
+        if(this.controls)
+            this.controls.update()
         if(this.hud)
             this.hud.update()
-
+        if(this.network)
+            this.network.update()
+        if(this.localPlayer)
+            this.localPlayer.update()
 
         this.renderer.update()
-        this.postProcessing.update()
+        //this.postProcessing.update()
         this.monitoring.endMonitoring()
     }
 
     destroy()
     {
+        // Destroy everything
+        this.sizes.destroy()
+        this.sizes.off('resize')
+        this.time.destroy()
+        this.time.off('tick')
+        this.controls.destroy()
+        this.resources.destroy()
+        this.world.destroy()
+        this.network.destroy()
+        this.physics.destroy()
+        this.mainscreen.destroy()
+        this.hud.destroy()
+        this.localPlayer.destroy()
+        this.camera.destroy()
+        this.renderer.destroy()
+        //this.postProcessing.destroy()
+        this.monitoring.destroy()
+        if(this.debug.active)
+            this.debug.destroy()
+
         // Traverse the whole scene
         this.scene.traverse((child) =>
         {
+            for(const key in child)
+            {
+                // Test if there is a dispose function
+                if(key && typeof key.dispose === 'function')
+                {
+                    key.dispose()
+                }
+
+                // Test if there is a remove function
+                if(key && typeof key.remove === 'function')
+                {
+                    key.remove()
+                }
+
+            }
+
             // Test if it's a mesh
             if(child instanceof Mesh)
             {
@@ -142,22 +185,26 @@ export default class Experience
             }
         })
 
-        // Destroy everything
-        this.sizes.destroy()
-        this.sizes.off('resize')
-        this.time.destroy()
-        this.time.off('tick')
-        this.resources.destroy()
-        this.world.destroy()
-        this.localPlayer.destroy()
-        this.camera.destroy()
-        this.renderer.destroy()
-        this.postProcessing.destroy()
-        this.monitoring.destroy()
-        if(this.debug.active)
-            this.debug.destroy()
+        this.scene.dispose()
 
-
+        // null
+        this.scene = null
+        this.camera = null
+        this.renderer = null
+        this.world = null
+        this.resources = null
+        this.physics = null
+        this.mainscreen = null
+        this.hud = null
+        this.localPlayer = null
+        this.network = null
+        this.controls = null
+        this.time = null
+        this.sizes = null
+        this.monitoring = null
+        this.debug = null
+        this.debugFolder = null
+        this.debugObject = null
 
         // Remove global access
         window.experience = null

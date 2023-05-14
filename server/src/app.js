@@ -28,8 +28,9 @@ io.sockets.on('connection', function(socket){
 		socket.userData.x = data.x;
 		socket.userData.y = data.y;
 		socket.userData.z = data.z;
-		socket.userData.heading = data.h;
-		socket.userData.pb = data.pb,
+		socket.userData.rx = data.rx;
+		socket.userData.ry = data.ry;
+		socket.userData.rz = data.rz;
 		socket.userData.action = "idle";
 
 		socket.broadcast.emit('newPlayer', socket.userData);
@@ -40,8 +41,9 @@ io.sockets.on('connection', function(socket){
 		socket.userData.x = data.x;
 		socket.userData.y = data.y;
 		socket.userData.z = data.z;
-		socket.userData.heading = data.h;
-		socket.userData.pb = data.pb,
+		socket.userData.rx = data.rx;
+		socket.userData.ry = data.ry;
+		socket.userData.rz = data.rz;
 		socket.userData.action = data.action;
 	});
 	
@@ -72,8 +74,9 @@ setInterval(function(){
 				x: socket.userData.x,
 				y: socket.userData.y,
 				z: socket.userData.z,
-				heading: socket.userData.heading,
-				pb: socket.userData.pb,
+				rx: socket.userData.rx,
+				ry: socket.userData.ry,
+				rz: socket.userData.rz,
 				action: socket.userData.action
 			});
 		}

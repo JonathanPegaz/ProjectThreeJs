@@ -36,8 +36,8 @@ export default class WalkState extends State {
     }
 
     Update(timeElapsed, input) {
-        if (input._keys.forward || input._keys.backward) {
-            if (input._keys.shift) {
+        if (input.keys.down.forward || input.keys.down.backward) {
+            if (input.keys.down.boost) {
                 this._parent.SetState('run');
             }
             return;
