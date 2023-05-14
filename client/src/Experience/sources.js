@@ -44,12 +44,12 @@ export default [
     {
         name: 'islandHigh',
         type: 'gltfModel',
-        path: 'models/island_texture_lowpolyXXL.glb'
+        path: 'models/island.glb'
     },
     {
         name: 'Arbres',
         type: 'gltfModel',
-        path: 'models/Arbres.glb'
+        path: 'models/arbresolo.glb'
     },
     {
         name: 'flowers',

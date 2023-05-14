@@ -50,12 +50,20 @@ export default class World
     }
 
     destroy() {
-        this.ocean.destroy()
-        this.house.destroy()
+
         this.tree.destroy()
-        this.landscape.destroy()
+        this.flower.destroy()
+        this.house.destroy()
+
+        this.buisson.destroy()
+        this.rock.destroy()
+        this.barriere.destroy()
+
+        this.ocean.destroy()
         this.environment.destroy()
+        this.landscape.destroy()
         this.respawn.destroy()
+
         this.interactiveObject.destroy()
         this.htmlAnnouncement.destroy()
     }

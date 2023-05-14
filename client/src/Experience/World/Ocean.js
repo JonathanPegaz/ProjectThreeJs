@@ -33,7 +33,7 @@ export default class Ocean {
 
     setMesh() {
         this.mesh = new Mesh(this.geometry, this.oceanMaterial)
-        this.mesh.position.set(0, -15, 0)
+        this.mesh.position.set(0, 3, 0)
         this.scene.add(this.mesh)
     }
 

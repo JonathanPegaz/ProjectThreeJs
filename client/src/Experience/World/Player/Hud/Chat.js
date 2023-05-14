@@ -166,4 +166,28 @@ export default class Chat {
     update() {
         this.chatMessages.scrollTop = this.chat.scrollHeight;
     }
+
+    destroy() {
+        this.chatContainer.remove();
+
+        this.toggleButton.remove();
+        this.chat.remove();
+        this.chatMessages.remove();
+        this.inputContainer.remove();
+        this.chatInput.remove();
+        this.chatButton.remove();
+
+        this.toggleButton = null;
+        this.chat = null;
+        this.chatMessages = null;
+        this.inputContainer = null;
+        this.chatInput = null;
+        this.chatButton = null;
+
+        this.experience = null;
+
+        this.fadeIn = null;
+        this.fadeOut = null;
+        this.sendMessage = null;
+    }
 }

@@ -29,6 +29,7 @@ export default class Rock
         {
             if(child instanceof THREE.Mesh)
             {
+                //this.experience.physics.setStaticPhysics(child, 'box')
                 child.material = new THREE.MeshToonMaterial({ // On crée le matériau du buisson
                     ...child.material,
                     type: 'MeshToonMaterial',

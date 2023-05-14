@@ -16,7 +16,6 @@ export default class Tree
         this.resource = this.resources.items.Arbres
 
         this.setModel()
-        //this.setAnimation()
     }
 
     setModel()
@@ -29,6 +28,9 @@ export default class Tree
         {
             if(child instanceof THREE.Mesh)
             {
+                if( child.name.endsWith('_1')) {
+                    this.experience.physics.createTrimeshShape(child)
+                }
                 child.material = new THREE.MeshToonMaterial({ // On crée le matériau du buisson
                     ...child.material,
                     type: 'MeshToonMaterial',

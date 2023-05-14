@@ -1,73 +1,22 @@
-import * as THREE from 'three'
 import BasicCharacterController from "./CharacterController.js";
 import ThirdPersonCamera from "./ThirdPersonCamera.js";
-import Experience from "../../Experience.js";
 import * as CANNON from "cannon-es";
 import Pseudo from "./Hud/Pseudo.js";
+import Player from "./Player.js";
 
-export default class LocalPlayer {
+export default class LocalPlayer extends Player {
     constructor() {
+        super()
         this.id = null
-        this.experience = new Experience()
-        this.scene = this.experience.scene
-        this.time = this.experience.time
-        this.physics = this.experience.physics
-        this.network = this.experience.network
-
-        this.resources = this.experience.resources
-        this.resource = this.resources.items.foxModel
-
-        this.object = new THREE.Object3D()
-        this.object.position.set(-80, 20, 22)
 
         this.pseudo = new Pseudo(this, this.experience.mainscreen.pseudo)
 
-        this.setModel()
-        this.setAnimation()
         this.setController()
         this.setThirdPersonCamera()
         this.setPhysics()
         this.setNetwork()
     }
 
-    setModel()
-    {
-        this.model = this.resource.scene
-        this.model.scale.set(0.006, 0.006, 0.006)
-        this.model.traverse((child) =>
-        {
-            if(child instanceof THREE.Mesh)
-            {
-                child.castShadow = true
-            }
-        })
-
-        this.object.add(this.model)
-        this.scene.add(this.object);
-    }
-
-    setAnimation()
-    {
-        this.animations = {}
-
-        this.mixer = new THREE.AnimationMixer(this.model)
-
-        // action
-        this.animations.idle = {
-            clip: this.resource.animations[0],
-            action: this.mixer.clipAction(this.resource.animations[0])
-        }
-
-        this.animations.walk = {
-            clip: this.resource.animations[1],
-            action: this.mixer.clipAction(this.resource.animations[1])
-        }
-
-        this.animations.run = {
-            clip: this.resource.animations[2],
-            action: this.mixer.clipAction(this.resource.animations[2])
-        }
-    }
 
     setController() {
         this.controller = new BasicCharacterController(this)
@@ -79,12 +28,12 @@ export default class LocalPlayer {
 
     setPhysics() {
 
-        const shape = new CANNON.Sphere(1); // dimensions de la boîte
+        const shape = new CANNON.Sphere(0.5); // dimensions de la boîte
         this.body = new CANNON.Body({
             shape: shape,
             mass: 1,
             material: this.physics.defaultMaterial,
-            position: new CANNON.Vec3(-80, 20, 22),
+            position: new CANNON.Vec3(-80, 22, 22),
             fixedRotation: true,
         })
 
@@ -106,8 +55,9 @@ export default class LocalPlayer {
             x: this.controller.Position.x,
             y: this.controller.Position.y,
             z: this.controller.Position.z,
-            h: this.controller.Rotation.y,
-            pb: this.controller.Rotation.x
+            rx: this.object.rotation.x,
+            ry: this.object.rotation.y,
+            rz: this.object.rotation.z,
         })
     }
 
@@ -132,8 +82,9 @@ export default class LocalPlayer {
                 x: this.controller.Position.x,
                 y: this.controller.Position.y,
                 z: this.controller.Position.z,
-                h: this.controller.Rotation.y,
-                pb: this.controller.Rotation.x,
+                rx: this.object.rotation.x,
+                ry: this.object.rotation.y,
+                rz: this.object.rotation.z,
                 action: this.controller.stateMachine._currentState.Name
             })
     }
@@ -142,31 +93,14 @@ export default class LocalPlayer {
         this.thirdPersonCamera.destroy()
         this.controller.destroy()
 
+        this.pseudo.destroy()
+
         this.scene.remove(this.object)
         this.physics.world.removeBody(this.body)
 
-        this.object.traverse((child) => {
-            if (child.isMesh) {
-                child.geometry.dispose()
-                child.material.dispose()
-            }
-        })
-
-        this.scene.remove(this.object)
-
-        this.object = null
-        this.model = null
-        this.mixer = null
-        this.animations = null
         this.controller = null
         this.thirdPersonCamera = null
-        this.body = null
 
-        this.experience = null
-        this.scene = null
-        this.time = null
-        this.physics = null
-        this.resources = null
-        this.resource = null
+        super.destroy()
     }
 }

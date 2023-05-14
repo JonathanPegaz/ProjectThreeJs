@@ -140,6 +140,14 @@ export default class Resources extends EventEmitter
     }
 
     destroy() {
+
+        // dispose of all the things
+        for (const item of Object.values(this.items)) {
+            if (item.dispose) {
+                item.dispose()
+            }
+        }
+
         this.sources = null
         this.items = null
         this.experience = null

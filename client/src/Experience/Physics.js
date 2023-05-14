@@ -2,6 +2,8 @@ import * as THREE from 'three'
 import * as CANNON from 'cannon-es'
 import Experience from "./Experience.js";
 import CannonDebugger from 'cannon-es-debugger'
+import {Mesh} from "three";
+import { threeToCannon, ShapeType } from 'three-to-cannon';
 
 export default class Physics
 {
@@ -25,7 +27,7 @@ export default class Physics
             this.debugFolder.close()
 
             this.debugObject = {}
-            this.debugObject.debugger = false
+            this.debugObject.debugger = true
 
             this.debugFolder.add(this.debugObject, 'debugger')
 
@@ -103,6 +105,38 @@ export default class Physics
         }
     }
 
+    createBoxShape(mesh) {
+        const result = threeToCannon(mesh, {type: ShapeType.BOX});
+        const body = new CANNON.Body({mass: 0, material: this.defaultMaterial})
+        body.addShape(result.shape, result.offset, result.orientation)
+        this.world.addBody(body)
+    }
+    createTrimeshShape(mesh) {
+        const geometry = mesh.geometry
+        const vertices = []
+        geometry.attributes.position.array.forEach((vertex, index) => {
+            if (index % 3 === 0) {
+                vertices.push(vertex, geometry.attributes.position.array[index + 1], geometry.attributes.position.array[index + 2])
+            }
+        })
+        const indices = []
+        for (let i = 0; i < geometry.index.array.length; i += 3) {
+            indices.push(geometry.index.array[i], geometry.index.array[i + 1], geometry.index.array[i + 2])
+        }
+
+        const body = this.createBody(new CANNON.Trimesh(vertices, indices))
+        this.world.addBody(body)
+    }
+
+    createBody(shape) {
+        const body = new CANNON.Body({
+            mass: 0,
+            shape,
+            material: this.defaultMaterial
+        })
+        return body
+    }
+
     update()
     {
         if (this.debug.active)
@@ -118,5 +152,11 @@ export default class Physics
 
     destroy() {
 
+        // remove all bodies
+        for (const object of this.objectsToUpdate) {
+            this.world.removeBody(object.body)
+        }
+
+        this.world.destroy()
     }
 }

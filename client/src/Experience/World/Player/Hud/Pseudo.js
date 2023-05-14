@@ -36,15 +36,9 @@ export default class Pseudo {
     }
 
     setPlayerPseudo() {
-        const material = new MeshBasicMaterial({ transparent: true });
-        const geometry = new PlaneGeometry(0.5, 0.2);
-        this.label = new Mesh(geometry, material);
-        this.label.position.set(0, 1, 0);
-        this.player.object.add(this.label);
-
         this.pseudoLabel = new CSS2DObject(this.followText);
-        this.pseudoLabel.position.set(0, 0, 0);
-        this.label.add(this.pseudoLabel);
+        this.pseudoLabel.position.set(0, 0.5, 0);
+        this.player.object.add(this.pseudoLabel);
 
     }
 
@@ -75,17 +69,12 @@ export default class Pseudo {
     destroy() {
 
         this.followText.remove()
-        this.label.visible = false
         this.pseudoLabel.visible = false
 
         this.experience = null
         this.player = null
         this.text = null
         this.followText = null
-        this.label.geometry.dispose()
-        this.label.material.dispose()
-
-        this.label = null
         this.pseudoLabel = null
     }
 }

@@ -1,5 +1,5 @@
-import * as THREE from 'three'
 import Experience from '../Experience.js'
+import {Mesh, MeshToonMaterial} from "three";
 
 export default class House
 {
@@ -16,7 +16,6 @@ export default class House
         this.resource = this.resources.items.house
 
         this.setModel()
-        //this.setAnimation()
     }
 
     setModel()
@@ -27,9 +26,11 @@ export default class House
 
         this.model.traverse((child) =>
         {
-            if(child instanceof THREE.Mesh)
+            if(child instanceof Mesh)
             {
-                child.material = new THREE.MeshToonMaterial({ // On crée le matériau du buisson
+                //this.experience.physics.createBoxShape(child)
+
+                child.material = new MeshToonMaterial({ // On crée le matériau du buisson
                     ...child.material,
                     type: 'MeshToonMaterial',
                     transparent: false,
@@ -44,7 +45,7 @@ export default class House
 
         this.model.traverse((child) =>
         {
-            if(child instanceof THREE.Mesh)
+            if(child instanceof Mesh)
             {
                 child.material.dispose()
                 child.geometry.dispose()

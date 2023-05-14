@@ -47,6 +47,7 @@ export default class Experience
         this.time = new Time()
         this.scene = new Scene()
         this.resources = new Resources(sources)
+        this.physics = new Physics()
         this.mainscreen = new Mainscreen()
         this.camera = new Camera()
         this.renderer = new Renderer()
@@ -77,7 +78,6 @@ export default class Experience
         this.resources.on('ready', () =>
         {
             this.mainscreen.showInput()
-            this.physics = new Physics()
             this.world = new World()
         })
 
@@ -105,10 +105,12 @@ export default class Experience
             this.physics.update()
         if(this.world)
             this.world.update()
-        if(this.localPlayer)
-            this.localPlayer.update()
         if(this.hud)
             this.hud.update()
+        if(this.network)
+            this.network.update()
+        if(this.localPlayer)
+            this.localPlayer.update()
 
 
         this.renderer.update()
@@ -118,9 +120,38 @@ export default class Experience
 
     destroy()
     {
+
+        // Destroy everything
+        this.sizes.destroy()
+        this.sizes.off('resize')
+        this.time.destroy()
+        this.time.off('tick')
+        this.resources.destroy()
+        this.world.destroy()
+        this.network.destroy()
+        this.physics.destroy()
+        this.mainscreen.destroy()
+        this.hud.destroy()
+        this.localPlayer.destroy()
+        this.camera.destroy()
+        this.renderer.destroy()
+        this.postProcessing.destroy()
+        this.monitoring.destroy()
+        if(this.debug.active)
+            this.debug.destroy()
+
         // Traverse the whole scene
         this.scene.traverse((child) =>
         {
+            for(const key in child)
+            {
+                // Test if there is a dispose function
+                if(key && typeof key.dispose === 'function')
+                {
+                    key.dispose()
+                }
+            }
+
             // Test if it's a mesh
             if(child instanceof Mesh)
             {
@@ -142,22 +173,7 @@ export default class Experience
             }
         })
 
-        // Destroy everything
-        this.sizes.destroy()
-        this.sizes.off('resize')
-        this.time.destroy()
-        this.time.off('tick')
-        this.resources.destroy()
-        this.world.destroy()
-        this.localPlayer.destroy()
-        this.camera.destroy()
-        this.renderer.destroy()
-        this.postProcessing.destroy()
-        this.monitoring.destroy()
-        if(this.debug.active)
-            this.debug.destroy()
-
-
+        this.scene.dispose()
 
         // Remove global access
         window.experience = null
