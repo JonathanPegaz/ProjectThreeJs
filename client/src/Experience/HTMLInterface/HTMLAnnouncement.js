@@ -38,7 +38,6 @@ export default class HTMLAnnouncement {
   }
 
   alert(message, duration) {
-    console.log(message, duration);
     return new Promise((resolve) => {
       setTimeout(() => {
         resolve(true);
@@ -47,7 +46,6 @@ export default class HTMLAnnouncement {
   }
 
   kill(message, duration) {
-    console.log(message, duration);
     return new Promise((resolve) => {
       setTimeout(() => {
         resolve(true);

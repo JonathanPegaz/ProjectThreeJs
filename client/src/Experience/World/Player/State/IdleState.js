@@ -28,9 +28,9 @@ export default class IdleState extends State {
     }
 
     Update(_, input) {
-        if (input._keys.forward || input._keys.backward) {
+        if (input.keys.down.forward || input.keys.down.backward) {
             this._parent.SetState('walk');
-        } else if (input._keys.space) {
+        } else if (input.keys.down.jump) {
             this._parent.SetState('dance');
         }
     }

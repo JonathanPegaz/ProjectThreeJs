@@ -1,6 +1,5 @@
 import * as THREE from 'three'
 import FiniteStateMachine from "../../Utils/FiniteStateMachine.js";
-import BasicCharacterControllerInput from "./BasicCharacterControllerInput.js";
 import Experience from "../../Experience.js";
 import IdleState from "./State/IdleState.js";
 import RunState from "./State/RunState.js";
@@ -36,11 +35,10 @@ export default class BasicCharacterController {
     constructor(localPlayer) {
         this.experience = new Experience()
         this.localPlayer = localPlayer
-
-        this.camera = this.experience.camera
         this.time = this.experience.time
         this.scene = this.experience.scene
         this.debug = this.experience.debug
+        this.input = this.experience.controls
 
         this.raycaster = new THREE.Raycaster(undefined, undefined)
         this.raycastDebug = null
@@ -54,7 +52,6 @@ export default class BasicCharacterController {
         this.acceleration = new THREE.Vector3(1, 0.25, 50.0);
         this.velocity = new THREE.Vector3(0, 0, 0);
 
-        this.input = new BasicCharacterControllerInput();
         this.stateMachine = new CharacterFSM(
             new BasicCharacterControllerProxy(this.localPlayer.animations));
 
@@ -127,19 +124,19 @@ export default class BasicCharacterController {
         let force = maxForce * this.joystickSetup.forward
         let steer = maxSteerVal * this.joystickSetup.turn
         if (this.joystickSetup.forward !== 0) {
-            if (this.input._keys.shift) {
+            if (this.input.keys.down.boost) {
                 force = force * 1.5;
             }
             this.localPlayer.object.translateZ(force)
             if(this.joystickSetup.forward > 0) {
-                this.input._keys.forward = true
+                this.input.keys.down.forward = true
             } else {
-                this.input._keys.backward = true
+                this.input.keys.down.backward = true
             }
         } else {
             if (this.isJoyStickTouch) {
-                this.input._keys.forward = false
-                this.input._keys.backward = false
+                this.input.keys.down.forward = false
+                this.input.keys.down.backward = false
                 this.isJoyStickTouch = false
             }
         }
@@ -165,22 +162,22 @@ export default class BasicCharacterController {
         const _R = controlObject.quaternion.clone();
 
         const acc = this.acceleration.clone();
-        if (this.input._keys.shift) {
+        if (this.input.keys.down.boost) {
             acc.multiplyScalar(2.0);
         }
 
-        if (this.input._keys.forward) {
+        if (this.input.keys.down.forward) {
             velocity.z += acc.z * timeInSeconds;
         }
-        if (this.input._keys.backward) {
+        if (this.input.keys.down.backward) {
             velocity.z -= acc.z * timeInSeconds;
         }
-        if (this.input._keys.left) {
+        if (this.input.keys.down.strafeLeft) {
             _A.set(0, 1, 0);
             _Q.setFromAxisAngle(_A, 4.0 * Math.PI * timeInSeconds * this.acceleration.y);
             _R.multiply(_Q);
         }
-        if (this.input._keys.right) {
+        if (this.input.keys.down.strafeRight) {
             _A.set(0, 1, 0);
             _Q.setFromAxisAngle(_A, 4.0 * -Math.PI * timeInSeconds * this.acceleration.y);
             _R.multiply(_Q);
@@ -209,7 +206,6 @@ export default class BasicCharacterController {
     }
 
     destroy() {
-        this.input.destroy()
         this.joystick.destroy()
 
         this.input = null
@@ -217,7 +213,6 @@ export default class BasicCharacterController {
         this.joystick = null
 
         this.localPlayer = null
-        this.camera = null
         this.time = null
 
         this.decceleration = null
