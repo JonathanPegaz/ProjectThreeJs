@@ -13,6 +13,7 @@ import House from "./House.js";
 import Rock from "./Rock.js";
 import Barriere from "./Barriere.js";
 import Buisson from "./Buisson.js";
+import Npc from "./Npc/Npc.js";
 
 export default class World
 {
@@ -37,6 +38,9 @@ export default class World
         this.rock = new Rock()
         this.barriere = new Barriere()
 
+        // NPC
+        this.npc = new Npc()
+
         //Environment
         this.ocean = new Ocean()
         this.environment = new Environment()
@@ -47,6 +51,7 @@ export default class World
     update()
     {
         this.ocean.update()
+        this.npc.update()
     }
 
     destroy() {
@@ -58,6 +63,9 @@ export default class World
         this.buisson.destroy()
         this.rock.destroy()
         this.barriere.destroy()
+
+        // Npc
+        this.npc.destroy()
 
         this.ocean.destroy()
         this.environment.destroy()
