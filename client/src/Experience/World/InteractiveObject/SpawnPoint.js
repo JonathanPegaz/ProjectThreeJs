@@ -7,22 +7,18 @@ export default class SpawnPoint extends InteractiveObject {
   constructor(position, name, radius = 1) {
     super()
     this.experience = new Experience()
-
     this.radius = null
-    //this.player = null
 
     this.init(position, name, radius)
   }
 
-  async init(position, name, radius) {
+  init(position, name, radius) {
     this.name = name
     this.radius = radius
     this.position = position
     this.object = new THREE.Object3D()
     this.object.position.set(this.position.x, this.position.y, this.position.z)
     this.scene.add(this.object)
-
-    this.player = this.experience.localPlayer
 
     this.setHitbox()
     this.add()
@@ -37,10 +33,8 @@ export default class SpawnPoint extends InteractiveObject {
   }
 
   interact(origin) {
-    const test = super.interact(origin)
-    if (!test) {
-      return
-    }
+    const isBusy = super.interact(origin)
+    if (isBusy) return
 
     this.wait(() => this.experience.world.htmlAnnouncement).then(() => {
       this.experience.world.htmlAnnouncement.addQueue(this.experience.world.htmlAnnouncement.type.AREA, this.name, 3000)

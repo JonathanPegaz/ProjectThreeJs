@@ -1,14 +1,16 @@
 import Experience from "../../Experience.js";
 import * as THREE from "three";
+import EventEmitter from "../../Utils/EventEmitter.js";
 
-export default class InteractiveObject {
+export default class InteractiveObject extends EventEmitter{
   constructor() {
+    super();
     this.experience = new Experience()
     this.scene = this.experience.scene
     this.debug = this.experience.debug
     this.resources = this.experience.resources
 
-    this.canInteract = true
+    this.isInteracting = false
     this.id = null
     this.hitbox = null
     this.name = null
@@ -25,26 +27,30 @@ export default class InteractiveObject {
   delete() {
     this.experience.world.interactiveObject.delete(this.id)
   }
-  interact(origin) {
-    if (!this.canInteract) {
-      return false
+  interact(origin, limit = null) {
+    if (this.isInteracting) {
+      return true
     }
-    this.canInteract = false
-    this.stay(origin.ray.origin).then(() => {
+    this.isInteracting = true
+    this.trigger(this.name, ["ENTER"])
+    this.stay(origin.ray.origin, limit).then(() => {
       this.leave()
     })
 
-    return true
+    return false
   }
 
-  stay(origin, limit = this.hitbox.geometry.parameters.radius+1) {
+  stay(origin, limit) {
+    limit = limit ?? this.hitbox.geometry.parameters.radius+0.5
     return new Promise((resolve) => {
       const check = () => {
-        const distance = origin.distanceTo(this.position)
-        if (distance > limit) {
-          resolve();
+        const origin2D = new THREE.Vector2(origin.x, origin.z)
+        const distance = origin2D.distanceTo(new THREE.Vector2(this.position.x, this.position.z))
+        if (distance < limit) {
+          this.trigger(this.name, ["STAY"])
+          setTimeout(check, 500);
         } else {
-          setTimeout(check, 100);
+          resolve();
         }
       };
       check();
@@ -52,12 +58,13 @@ export default class InteractiveObject {
   }
 
   leave() {
-    this.canInteract = true
+    this.isInteracting = false
+    this.trigger(this.name, ["LEAVE"])
   }
 
   destroy() {
     this.id = null
-    this.canInteract = null
+    this.isInteracting = null
     this.hitbox = null
     this.name = null
     this.position = null

@@ -5,6 +5,9 @@ import Landscape from "./Landscape.js";
 import RespawnController from "./RespawnController.js";
 import InteractiveObjectController from "./InteractiveObject/InteractiveObjectController.js";
 import HTMLAnnouncement from "../HTMLInterface/HTMLAnnouncement.js";
+import House from "./House.js";
+import QuestController from "./Quest/QuestController.js";
+import CollectZoneController from "./CollectZoneController.js";
 import NpcController from "./Npc/NpcController.js";
 import Experience from "../Experience.js";
 import { assets } from './Environments/assets.js';
@@ -48,12 +51,14 @@ export default class World
         this.interactiveObject = new InteractiveObjectController()
         this.npc = new NpcController()
         this.htmlAnnouncement = new HTMLAnnouncement()
+        //this.quest = new QuestController()
 
         this.flower = new Flower()
         this.ocean = new Ocean()
         this.environment = new Environment()
         this.landscape = new Landscape()
         this.respawn = new RespawnController()
+        this.collectZone = new CollectZoneController()
     }
 
     update()
@@ -90,6 +95,8 @@ export default class World
         this.interactiveObject = null
         this.htmlAnnouncement.destroy()
         this.htmlAnnouncement = null
+        this.collectZone.destroy()
+        this.collectZone = null
         this.npc.destroy()
         this.npc = null
 
