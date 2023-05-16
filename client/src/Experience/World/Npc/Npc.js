@@ -13,12 +13,12 @@ export default class Npc {
     setModel() {
         // create a cube and add it to the scene
         const geometry = new BoxGeometry(1, 1, 1)
-        const material = new MeshBasicMaterial({color: 0x00ff00})
+        const material = new MeshBasicMaterial({color: 0xff0000})
         const cube = new Mesh(geometry, material)
         this.object.add(cube)
         this.experience.scene.add(this.object)
 
-        this.object.position.set(-85, 18, 20)
+        this.object.position.set(-84, 15.5, -17)
     }
 
     update() {
