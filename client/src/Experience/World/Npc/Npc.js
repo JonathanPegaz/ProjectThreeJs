@@ -3,10 +3,17 @@ import Experience from "../../Experience.js";
 
 
 export default class Npc {
-    constructor() {
+    constructor(data) {
         this.experience = new Experience()
 
+        this.name = data.name
+
+        this.dialog = data.dialog
+
         this.object = new Object3D()
+        this.object.position.set(data.position.x, data.position.y, data.position.z)
+        this.object.rotation.set(data.rotation.x, data.rotation.y, data.rotation.z)
+
         this.setModel()
     }
 
@@ -17,8 +24,10 @@ export default class Npc {
         const cube = new Mesh(geometry, material)
         this.object.add(cube)
         this.experience.scene.add(this.object)
+    }
 
-        this.object.position.set(-84, 15.5, -17)
+    catch() {
+        console.log(this.name)
     }
 
     update() {
@@ -27,6 +36,12 @@ export default class Npc {
 
     destroy() {
         this.experience.scene.remove(this.object)
+
+        // null
+        this.object = null
+        this.experience = null
+        this.name = null
+        this.dialog = null
 
         // Dispose
         this.object.traverse((child) => {

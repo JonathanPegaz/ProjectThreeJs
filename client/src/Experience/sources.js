@@ -70,5 +70,10 @@ export default [
         name: 'fence',
         type: 'gltfModel',
         path: 'models/Barrieres.glb'
+    },
+    {
+        name:'exclamationMark',
+        type:'texture',
+        path:'icons/exclamation-mark-100.png'
     }
 ]

@@ -1,7 +1,6 @@
 import Experience from "../../../Experience.js";
-import {CanvasTexture, Mesh, MeshBasicMaterial, PlaneGeometry, Texture, Vector3} from "three";
-import RemotePlayer from "../RemotePlayer.js";
-import { CSS2DRenderer, CSS2DObject} from "three/addons/renderers/CSS2DRenderer.js";
+import { CSS2DObject} from "three/addons/renderers/CSS2DRenderer.js";
+import {Box3} from "three";
 
 export default class Pseudo {
     constructor(player, pseudo) {
@@ -37,7 +36,12 @@ export default class Pseudo {
 
     setPlayerPseudo() {
         this.pseudoLabel = new CSS2DObject(this.followText);
-        this.pseudoLabel.position.set(0, 0.5, 0);
+
+        // get height of the target
+        const box = new Box3().setFromObject(this.player.object)
+        const height = box.max.y - box.min.y
+
+        this.pseudoLabel.position.set(0, height + 0.3, 0);
         this.player.object.add(this.pseudoLabel);
 
     }
