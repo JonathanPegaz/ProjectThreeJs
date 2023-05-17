@@ -17,7 +17,6 @@ import Physics from "./Physics.js";
 import Mainscreen from "./Mainscreen.js";
 import Hud from "./World/Player/Hud/Hud.js";
 import Controls from "./Utils/Controls.js";
-import NpcController from "./World/Npc/NpcController.js";
 
 let instance = null
 
@@ -81,7 +80,6 @@ export default class Experience
         {
             this.mainscreen.showInput()
             this.world = new World()
-            this.npcController = new NpcController()
         })
 
         this.mainscreen.on('pseudo-entered', () => {
@@ -111,8 +109,6 @@ export default class Experience
             this.physics.update()
         if(this.world)
             this.world.update()
-        if(this.npcController)
-            this.npcController.update()
         if(this.controls)
             this.controls.update()
         if(this.hud)
@@ -137,7 +133,6 @@ export default class Experience
         this.controls.destroy()
         this.resources.destroy()
         this.world.destroy()
-        this.npcController.destroy()
         this.network.destroy()
         this.physics.destroy()
         this.mainscreen.destroy()

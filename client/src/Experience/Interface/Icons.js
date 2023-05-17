@@ -1,19 +1,18 @@
-import { CSS2DObject} from "three/addons/renderers/CSS2DRenderer.js";
 import Experience from "../Experience.js";
 import {Box3, Sprite, SpriteMaterial} from "three";
 
 
-export default class ExclamationMark {
-    constructor(target) {
-        this.target = target
-
+export default class Icons {
+    constructor(target, source) {
         this.experience = new Experience()
+        this.target = target
+        this.source = this.experience.resources.items.exclamationMark
         this.setObject()
     }
 
     setObject() {
-        this.exclamationMark = this.experience.resources.items.exclamationMark
-        this.material = new SpriteMaterial({map: this.exclamationMark, transparent: false, depthWrite: true, alphaTest: 0.5})
+        console.log(this.source)
+        this.material = new SpriteMaterial({map: this.source, transparent: false, depthWrite: true, alphaTest: 0.5})
         this.object = new Sprite(this.material)
 
         // get height of the target
@@ -31,16 +30,22 @@ export default class ExclamationMark {
         this.object.lookAt(this.experience.camera.instance.position)
     }
 
+    visible(isVisible) {
+        this.object.visible = isVisible
+    }
+
     destroy() {
         this.target.object.remove(this.object)
 
+        // dispose
+        this.object.material.map.dispose()
         this.object.material.dispose()
         this.object.geometry.dispose()
 
         // null
         this.object = null
         this.material = null
-        this.exclamationMark = null
+        this.source = null
         this.target = null
     }
 }

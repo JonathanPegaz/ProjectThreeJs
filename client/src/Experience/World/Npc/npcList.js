@@ -2,6 +2,7 @@ import Npc from "./Npc.js";
 
 export default [
     {
+        id: 1,
         name: 'jeaneude',
         type: Npc,
         model: 'jean-eude',
@@ -21,6 +22,7 @@ export default [
         ]
     },
     {
+        id: 2,
         name: 'jean-yves',
         type: Npc,
         path: 'jean-yves',

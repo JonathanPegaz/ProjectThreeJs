@@ -13,6 +13,7 @@ import House from "./House.js";
 import Rock from "./Rock.js";
 import Barriere from "./Barriere.js";
 import Buisson from "./Buisson.js";
+import NpcController from "./Npc/NpcController.js";
 
 export default class World
 {
@@ -24,6 +25,7 @@ export default class World
         this.resources = this.experience.resources
         this.time = this.experience.time
         this.interactiveObject = new InteractiveObjectController()
+        this.npc = new NpcController()
         this.htmlAnnouncement = new HTMLAnnouncement()
 
         //Assets
@@ -47,9 +49,14 @@ export default class World
     update()
     {
         this.ocean.update()
+        this.npc.update()
     }
 
     destroy() {
+
+        this.interactiveObject.destroy()
+        this.htmlAnnouncement.destroy()
+        this.npc.destroy()
 
         this.tree.destroy()
         this.flower.destroy()
@@ -63,8 +70,5 @@ export default class World
         this.environment.destroy()
         this.landscape.destroy()
         this.respawn.destroy()
-
-        this.interactiveObject.destroy()
-        this.htmlAnnouncement.destroy()
     }
 }

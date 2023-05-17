@@ -75,5 +75,10 @@ export default [
         name:'exclamationMark',
         type:'texture',
         path:'icons/exclamation-mark-100.png'
+    },
+    {
+        name:'speak',
+        type:'texture',
+        path:'icons/commentaires-64.png'
     }
 ]

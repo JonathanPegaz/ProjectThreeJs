@@ -100,6 +100,9 @@ export default class BasicCharacterController {
         if(this.experience.world.interactiveObject)
             this.experience.world.interactiveObject.catch(this.raycaster)
 
+        if(this.experience.world.npc)
+            this.experience.world.npc.catch(this.raycaster)
+
         if (this.debug.active && this.raycastDebug.isActive) {
             this.raycastDebug.execute(this.raycaster.ray.origin, this.raycaster.ray.direction, this.raycaster.far)
         }
