@@ -1,6 +1,5 @@
-import {BoxGeometry, Mesh, MeshBasicMaterial, Object3D} from "three";
+import {BoxGeometry, Mesh, MeshBasicMaterial, Object3D, SphereGeometry} from "three";
 import Experience from "../../Experience.js";
-import Icons from "../../Interface/Icons.js";
 
 
 export default class Npc {
@@ -17,12 +16,9 @@ export default class Npc {
         this.object.position.set(data.position.x, data.position.y, data.position.z)
         this.object.rotation.set(data.rotation.x, data.rotation.y, data.rotation.z)
 
-        if (this.dialog.length > 0) {
-            // create a speak icon
-            console.log('create speak icon')
-            this.speakIcon = new Icons(this, 'exclamationMark')
-            //this.speakIcon.visible(true)
-        }
+        this.speakIcon = null
+
+        this.isPlayerInteracting = false
 
         this.hitbox = null
 
@@ -33,7 +29,7 @@ export default class Npc {
     setModel() {
         // create a cube and add it to the scene
         const geometry = new BoxGeometry(1, 1, 1)
-        const material = new MeshBasicMaterial({color: 0xff0000})
+        const material = new MeshBasicMaterial({color: 0x00ff00})
         const cube = new Mesh(geometry, material)
         this.object.add(cube)
         this.experience.scene.add(this.object)
@@ -52,25 +48,43 @@ export default class Npc {
     }
 
     update() {
-        if (this.canInteract) {
+        if (this.canInteract && !this.isPlayerInteracting) {
             // display npc name
+            if (this.speakIcon) {
+                this.speakIcon.visible(true)
+                this.speakIcon.update()
+            }
+
+            // player press E
+            if (this.experience.controls.keys.down.action) {
+                this.isPlayerInteracting = true
+                this.experience.world.htmlDialog.open(this.dialog)
+            }
 
             this.canInteract = false
             // this.experience.world.htmlDialog.open(this.dialog)
+        } else {
+            if (this.speakIcon) {
+                this.speakIcon.visible(false)
+            }
         }
     }
 
+
+
     destroy() {
+        if (this.speakIcon)
+            this.speakIcon.destroy()
+
         this.experience.scene.remove(this.object)
 
         // null
+        this.id = null
         this.object = null
         this.experience = null
         this.name = null
         this.dialog = null
-
-        if (this.speakIcon)
-            this.speakIcon.destroy()
+        this.hitbox = null
 
         // Dispose
         this.object.traverse((child) => {

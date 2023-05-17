@@ -1,17 +1,18 @@
 import Experience from "../Experience.js";
 import {Box3, Sprite, SpriteMaterial} from "three";
+import { gsap } from 'gsap'
 
 
 export default class Icons {
     constructor(target, source) {
         this.experience = new Experience()
         this.target = target
-        this.source = this.experience.resources.items.exclamationMark
+        this.source = this.experience.resources.items[source]
         this.setObject()
+        this.setAnimation()
     }
 
     setObject() {
-        console.log(this.source)
         this.material = new SpriteMaterial({map: this.source, transparent: false, depthWrite: true, alphaTest: 0.5})
         this.object = new Sprite(this.material)
 
@@ -22,7 +23,11 @@ export default class Icons {
         // set position
         this.object.position.set(0, height + 1, 0)
         this.target.object.add(this.object)
+    }
 
+    setAnimation() {
+        // gsap animation up and down
+        gsap.to(this.object.position, {y: this.object.position.y + 0.2, duration: 0.5, yoyo: true, repeat: -1})
     }
 
     update() {
@@ -43,6 +48,7 @@ export default class Icons {
         this.object.geometry.dispose()
 
         // null
+        this.experience = null
         this.object = null
         this.material = null
         this.source = null

@@ -93,9 +93,9 @@ export default class BasicCharacterController {
 
     detectCollision() {
         // get player position and direction
-        this.raycastPosition = new Vector3(this.Position.x, this.Position.y + 0.5, this.Position.z)
+        this.raycastPosition = new Vector3(this.Position.x, this.Position.y + 0.25, this.Position.z)
         this.raycaster.set(this.raycastPosition, this.Direction);
-        this.raycaster.far = 3
+        this.raycaster.far = 5
 
         if(this.experience.world.interactiveObject)
             this.experience.world.interactiveObject.catch(this.raycaster)

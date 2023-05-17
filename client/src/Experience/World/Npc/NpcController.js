@@ -1,4 +1,5 @@
 import npcList from "./npcList.js";
+import Icons from "../../Interface/Icons.js";
 
 
 export default class NpcController {
@@ -12,6 +13,9 @@ export default class NpcController {
     createNpc() {
         this.npcs.forEach(npc => {
             const npcModel = new npc.type(npc)
+            if(npcModel.dialog.length > 0) {
+                npcModel.speakIcon = new Icons(npcModel, 'speak')
+            }
             this.store(npcModel)
         })
     }
@@ -47,6 +51,8 @@ export default class NpcController {
         for (const [key, value] of Object.entries(this.list)) {
             value.destroy()
         }
+        this.list = null
+        this.npcs = null
     }
 
 }

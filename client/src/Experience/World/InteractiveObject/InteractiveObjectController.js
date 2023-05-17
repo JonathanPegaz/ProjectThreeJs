@@ -34,8 +34,8 @@ export default class InteractiveObjectController {
   }
 
   destroy() {
-    this.list.forEach((element) => {
-      element.destroy()
-    })
+    for (const [key, value] of Object.entries(this.list)) {
+      value.destroy()
+    }
   }
 }

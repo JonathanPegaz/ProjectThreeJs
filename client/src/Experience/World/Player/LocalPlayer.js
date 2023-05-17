@@ -115,6 +115,12 @@ export default class LocalPlayer extends Player {
 
         // destroy debug
         if (this.debug.active) {
+
+            // remove debug object listener
+            this.debugFolder.remove(this.debugObject.position, 'x')
+            this.debugFolder.remove(this.debugObject.position, 'y')
+            this.debugFolder.remove(this.debugObject.position, 'z')
+
             this.debug.ui.removeFolder(this.debugFolder)
             this.debugObject = null
         }
@@ -124,6 +130,7 @@ export default class LocalPlayer extends Player {
         this.scene.remove(this.object)
         this.physics.world.removeBody(this.body)
 
+        this.id = null
         this.controller = null
         this.thirdPersonCamera = null
 
