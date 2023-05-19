@@ -44,9 +44,17 @@ export default class Landscape {
 
         this.model.traverse((child) => {
             if(child instanceof Mesh) {
+                child.material.map.dispose()
                 child.material.dispose()
                 child.geometry.dispose()
             }
         })
+
+        // null
+        this.experience = null
+        this.scene = null
+        this.resources = null
+        this.resource = null
     }
+
 }
