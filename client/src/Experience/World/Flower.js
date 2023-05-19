@@ -1,5 +1,5 @@
 import Experience from '../Experience.js'
-import {DynamicDrawUsage, InstancedMesh, MeshToonMaterial, Object3D} from "three";
+import {DynamicDrawUsage, InstancedMesh, Mesh, MeshToonMaterial, Object3D} from "three";
 
 export default class Flower
 {
@@ -8,9 +8,6 @@ export default class Flower
         this.experience = new Experience()
         this.scene = this.experience.scene
         this.resources = this.experience.resources
-        this.time = this.experience.time
-        this.debug = this.experience.debug
-
 
         // Resource
         this.resource = this.resources.items.flowers
@@ -62,12 +59,30 @@ export default class Flower
 
         this.model.traverse((child) =>
         {
-            if(child instanceof THREE.Mesh)
+            if(child instanceof Mesh)
             {
                 child.material.dispose()
                 child.geometry.dispose()
             }
         })
+
+        this.instancedMesh.traverse((child) =>
+        {
+            if(child instanceof Mesh)
+            {
+                child.material.dispose()
+                child.geometry.dispose()
+            }
+        })
+
+        // null
+        this.experience = null
+        this.scene = null
+        this.resources = null
+        this.resource = null
+        this.model = null
+        this.instancedMesh = null
+
     }
 
 }

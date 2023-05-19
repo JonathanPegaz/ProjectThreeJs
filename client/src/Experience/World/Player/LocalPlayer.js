@@ -45,7 +45,6 @@ export default class LocalPlayer extends Player {
         this.body = new CANNON.Body({
             shape: shape,
             mass: 1,
-            material: this.physics.defaultMaterial,
             position: new CANNON.Vec3(-80, 22, 22),
             fixedRotation: true,
         })
@@ -115,13 +114,6 @@ export default class LocalPlayer extends Player {
 
         // destroy debug
         if (this.debug.active) {
-
-            // remove debug object listener
-            this.debugFolder.remove(this.debugObject.position, 'x')
-            this.debugFolder.remove(this.debugObject.position, 'y')
-            this.debugFolder.remove(this.debugObject.position, 'z')
-
-            this.debug.ui.removeFolder(this.debugFolder)
             this.debugObject = null
         }
 

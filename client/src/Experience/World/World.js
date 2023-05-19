@@ -50,13 +50,10 @@ export default class World
 
     destroy() {
 
-        this.experience = null
-        this.scene = null
-        this.resources = null
-
         // Assets
         for (let asset of assets)
         {
+            // remove Mesh from the scene
             this.scene.remove(this[asset.resource].model)
             this[asset.resource].destroy()
             this[asset.resource] = null
@@ -81,5 +78,9 @@ export default class World
         this.landscape = null
         this.respawn.destroy()
         this.respawn = null
+
+        this.experience = null
+        this.scene = null
+        this.resources = null
     }
 }

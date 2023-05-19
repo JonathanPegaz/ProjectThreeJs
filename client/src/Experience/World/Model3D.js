@@ -34,9 +34,18 @@ export default class Model3D {
         {
             if(child instanceof Mesh)
             {
-                child.material.map.dispose()
-                child.material.dispose()
                 child.geometry.dispose()
+                // Loop through the material properties
+                for(const key in child.material)
+                {
+                    const value = child.material[key]
+                    // Test if there is a dispose function
+                    if(value && typeof value.dispose === 'function')
+                    {
+                        value.dispose()
+                    }
+                }
+                child.material.dispose()
             }
         })
 

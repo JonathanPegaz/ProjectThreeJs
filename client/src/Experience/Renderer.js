@@ -71,5 +71,15 @@ export default class Renderer
 
     destroy() {
         this.instance.dispose()
+
+        // null
+        this.instance = null
+        this.labelRenderer = null
+        this.experience = null
+        this.canvas = null
+        this.sizes = null
+        this.scene = null
+        this.camera = null
+
     }
 }

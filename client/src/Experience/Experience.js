@@ -130,14 +130,15 @@ export default class Experience
         this.sizes.off('resize')
         this.time.destroy()
         this.time.off('tick')
-        this.controls.destroy()
+        if (this.controls)
+            this.controls.destroy()
         this.resources.destroy()
         this.world.destroy()
+        this.localPlayer.destroy()
         this.network.destroy()
         this.physics.destroy()
         this.mainscreen.destroy()
         this.hud.destroy()
-        this.localPlayer.destroy()
         this.camera.destroy()
         this.renderer.destroy()
         //this.postProcessing.destroy()
@@ -184,8 +185,6 @@ export default class Experience
                 child.material.dispose()
             }
         })
-
-        this.scene.dispose()
 
         // null
         this.scene = null

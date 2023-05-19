@@ -78,6 +78,14 @@ export default class Npc {
 
         this.experience.scene.remove(this.object)
 
+        // Dispose
+        this.object.traverse((child) => {
+            if (child instanceof Mesh) {
+                child.geometry.dispose()
+                child.material.dispose()
+            }
+        })
+
         // null
         this.id = null
         this.object = null
@@ -85,13 +93,5 @@ export default class Npc {
         this.name = null
         this.dialog = null
         this.hitbox = null
-
-        // Dispose
-        this.object.traverse((child) => {
-            if (child instanceof THREE.Mesh) {
-                child.geometry.dispose()
-                child.material.dispose()
-            }
-        })
     }
 }
