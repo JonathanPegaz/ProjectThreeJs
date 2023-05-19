@@ -1,7 +1,6 @@
 import {WebGLRenderer, sRGBEncoding, CineonToneMapping, PCFSoftShadowMap, NoToneMapping, LinearToneMapping, ReinhardToneMapping, ACESFilmicToneMapping} from 'three'
 import Experience from './Experience.js'
 import {CSS2DRenderer} from "three/addons/renderers/CSS2DRenderer.js";
-import {NodeToyMaterial} from "@nodetoy/three-nodetoy";
 
 export default class Renderer
 {
