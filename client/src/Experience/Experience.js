@@ -1,4 +1,4 @@
-import {Scene, Mesh} from 'three'
+import {Scene, Mesh, SphereGeometry, BoxGeometry} from 'three'
 
 import Debug from './Utils/Debug.js'
 import Sizes from './Utils/Sizes.js'

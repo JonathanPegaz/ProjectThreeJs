@@ -15,6 +15,19 @@ export default class LocalPlayer extends Player {
         this.setThirdPersonCamera()
         this.setPhysics()
         this.setNetwork()
+
+        // add real time position in debug mode
+        if (this.debug.active) {
+            this.debugFolder = this.debug.ui.addFolder('LocalPlayer')
+            this.debugObject = {}
+            this.debugObject.position = {}
+            this.debugObject.position.x = this.object.position.x
+            this.debugObject.position.y = this.object.position.y
+            this.debugObject.position.z = this.object.position.z
+            this.debugFolder.add(this.debugObject.position, 'x').name('PositionX').listen()
+            this.debugFolder.add(this.debugObject.position, 'y').name('PositionY').listen()
+            this.debugFolder.add(this.debugObject.position, 'z').name('PositionZ').listen()
+        }
     }
 
 
@@ -64,6 +77,13 @@ export default class LocalPlayer extends Player {
     update() {
         this.controller.update()
 
+        // update debug position
+        if (this.debug.active) {
+            this.debugObject.position.x = this.object.position.x
+            this.debugObject.position.y = this.object.position.y
+            this.debugObject.position.z = this.object.position.z
+        }
+
         this.body.position.copy(this.object.position)
         this.body.quaternion.copy(this.object.quaternion)
 
@@ -93,11 +113,24 @@ export default class LocalPlayer extends Player {
         this.thirdPersonCamera.destroy()
         this.controller.destroy()
 
+        // destroy debug
+        if (this.debug.active) {
+
+            // remove debug object listener
+            this.debugFolder.remove(this.debugObject.position, 'x')
+            this.debugFolder.remove(this.debugObject.position, 'y')
+            this.debugFolder.remove(this.debugObject.position, 'z')
+
+            this.debug.ui.removeFolder(this.debugFolder)
+            this.debugObject = null
+        }
+
         this.pseudo.destroy()
 
         this.scene.remove(this.object)
         this.physics.world.removeBody(this.body)
 
+        this.id = null
         this.controller = null
         this.thirdPersonCamera = null
 

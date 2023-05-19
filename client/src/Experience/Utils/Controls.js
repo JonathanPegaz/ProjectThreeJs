@@ -46,8 +46,8 @@ export default class Controls extends EventEmitter
                 name: 'boost'
             },
             {
-                codes: [ 'KeyP' ],
-                name: 'pointerLock'
+                codes: [ 'KeyE' ],
+                name: 'action'
             },
             {
                 codes: [ 'KeyV' ],
@@ -56,10 +56,6 @@ export default class Controls extends EventEmitter
             {
                 codes: [ 'KeyB' ],
                 name: 'debug'
-            },
-            {
-                codes: [ 'KeyF' ],
-                name: 'fullscreen'
             },
             {
                 codes: [ 'Space' ],

@@ -6,6 +6,8 @@ import RunState from "./State/RunState.js";
 import WalkState from "./State/WalkState.js";
 import JoyStick from "../../Utils/JoyStick.js";
 import RaycastDebug from "../../Utils/RaycastDebug.js";
+import {Vector3} from "three";
+import Npc from "../Npc/Npc.js";
 
 class BasicCharacterControllerProxy {
     constructor(animations) {
@@ -90,11 +92,16 @@ export default class BasicCharacterController {
     }
 
     detectCollision() {
-        this.raycaster.set(this.Position, this.Direction);
+        // get player position and direction
+        this.raycastPosition = new Vector3(this.Position.x, this.Position.y + 0.25, this.Position.z)
+        this.raycaster.set(this.raycastPosition, this.Direction);
         this.raycaster.far = 5
 
         if(this.experience.world.interactiveObject)
             this.experience.world.interactiveObject.catch(this.raycaster)
+
+        if(this.experience.world.npc)
+            this.experience.world.npc.catch(this.raycaster)
 
         if (this.debug.active && this.raycastDebug.isActive) {
             this.raycastDebug.execute(this.raycaster.ray.origin, this.raycaster.ray.direction, this.raycaster.far)
