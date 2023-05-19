@@ -1,5 +1,4 @@
 import {Scene, Mesh, SphereGeometry, BoxGeometry} from 'three'
-import * as THREE from "three";
 
 import Debug from './Utils/Debug.js'
 import Sizes from './Utils/Sizes.js'
@@ -18,7 +17,6 @@ import Physics from "./Physics.js";
 import Mainscreen from "./Mainscreen.js";
 import Hud from "./World/Player/Hud/Hud.js";
 import Controls from "./Utils/Controls.js";
-import {NodeToyMaterial} from "@nodetoy/three-nodetoy";
 
 let instance = null
 
@@ -90,19 +88,6 @@ export default class Experience
             this.controls = new Controls()
             this.network = new Network()
             this.localPlayer = new LocalPlayer()
-
-            // Create geometry and NodeToy material
-            let geometry = new BoxGeometry(1, 1);
-            let material = new NodeToyMaterial({
-                url: "https://draft.nodetoy.co/rHG0vP1W2uyrpLUf"
-            });
-            console.log(material)
-
-            // Create mesh
-            let mesh = new Mesh(geometry, material);
-            mesh.position.set(-80, 15.5, 30);
-            this.scene.add(mesh);
-            console.log(mesh)
         })
 
     }
@@ -134,7 +119,6 @@ export default class Experience
             this.localPlayer.update()
 
         this.renderer.update()
-        NodeToyMaterial.tick()
         //this.postProcessing.update()
         this.monitoring.endMonitoring()
     }
