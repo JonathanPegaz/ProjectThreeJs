@@ -10,22 +10,23 @@ export default class CollectZoneController {
     this.debug = this.experience.debug
     this.resources = this.experience.resources
 
-    this.collectZone = []
+    this.list = []
 
     this.init()
   }
 
   init() {
-    this.collectZone = [
+    this.list = [
       new CollectZone(new THREE.Vector3(-5, 10.5, 42), "Mine", 19, 4.5, 4000, "diamond"),
       new CollectZone(new THREE.Vector3(-41, 9.5, 14), "Ferme", 19, 3, 2000, "vegetable"),
     ];
 
-    this.collectZone.forEach((element) => {
+    this.list.forEach((element) => {
       element.on(element.name, (event) => {
         if (event === "ENTER" || event === "LEAVE") {
           element.collect()
         }
+        //TODO: add a progress bar based on STAY event
       })
     })
 
@@ -38,7 +39,7 @@ export default class CollectZoneController {
     this.debugFolder = this.debug.ui.addFolder('CollectZone')
     this.debugFolder.close()
 
-    this.collectZone.forEach((element) => {
+    this.list.forEach((element) => {
       this.debugFolderCollectZone = this.debugFolder.addFolder(element.name)
       this.debugFolderCollectZone
         .add(element.position, 'x')
@@ -89,7 +90,7 @@ export default class CollectZoneController {
   }
 
   destroy() {
-    this.collectZone.forEach((element) => {
+    this.list.forEach((element) => {
       element.off(element.name)
       element.destroy()
     })

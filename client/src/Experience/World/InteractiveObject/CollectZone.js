@@ -59,6 +59,7 @@ export default class CollectZone extends InteractiveObject {
     return new Promise(() => {
       const check = () => {
         if (this.isCollecting) {
+          console.log("COLLECT", this.itemToCollect)
           this.trigger("collect", [this.itemToCollect]);
           setTimeout(check, this.collectTime);
         }
