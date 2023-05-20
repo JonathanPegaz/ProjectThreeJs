@@ -50,17 +50,16 @@ export default class World
 
         // Special
 
-        this.init().then(() => {
-            this.interactiveObject = new InteractiveObjectController()
+        this.interactiveObject = new InteractiveObjectController()
         this.npc = new NpcController()
 
-            this.respawn = new RespawnController()
-            this.collectZone = new CollectZoneController()
-            this.triggerZone = new TriggerZoneController()
+        this.respawn = new RespawnController()
+        this.collectZone = new CollectZoneController()
+        this.triggerZone = new TriggerZoneController()
 
-            this.htmlAnnouncement = new HTMLAnnouncement()
-            this.quest = new QuestManager()
-        })
+        this.htmlAnnouncement = new HTMLAnnouncement()
+        this.quest = new QuestManager()
+
 
         //Assets
         this.tree = new Tree()
@@ -68,10 +67,6 @@ export default class World
         this.ocean = new Ocean()
         this.environment = new Environment()
         this.landscape = new Landscape()
-    }
-
-    async init() {
-        await this.wait(() => this.experience.world)
     }
 
     update()
@@ -137,19 +132,5 @@ export default class World
         this.interactiveObject.destroy()
         this.htmlAnnouncement.destroy()
         this.quest.destroy()
-    }
-
-    wait(callback) {
-        return new Promise((resolve) => {
-            const check = () => {
-                const value = callback();
-                if (value) {
-                    resolve(value);
-                } else {
-                    setTimeout(check, 10);
-                }
-            };
-            check();
-        });
     }
 }
