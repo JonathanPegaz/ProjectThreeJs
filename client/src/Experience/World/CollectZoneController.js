@@ -6,9 +6,7 @@ import CollectZone from "./InteractiveObject/CollectZone.js";
 export default class CollectZoneController {
   constructor() {
     this.experience = new Experience()
-    this.scene = this.experience.scene
     this.debug = this.experience.debug
-    this.resources = this.experience.resources
 
     this.list = []
 
@@ -18,7 +16,7 @@ export default class CollectZoneController {
   init() {
     this.list = [
       new CollectZone(new THREE.Vector3(-5, 10.5, 42), "Mine", 19, 4.5, 4000, "diamond"),
-      new CollectZone(new THREE.Vector3(-41, 9.5, 14), "Ferme", 19, 3, 2000, "vegetable"),
+      new CollectZone(new THREE.Vector3(-41, 9.5, 14), "Ferme", 19, 3, 2000, "carrot"),
     ];
 
     this.list.forEach((element) => {

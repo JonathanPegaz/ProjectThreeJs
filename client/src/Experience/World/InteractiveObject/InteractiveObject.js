@@ -63,12 +63,12 @@ export default class InteractiveObject extends EventEmitter{
   }
 
   destroy() {
+    this.delete()
+    this.isInteracting = false
     this.id = null
-    this.isInteracting = null
     this.hitbox = null
     this.name = null
     this.position = null
-    this.debug = null
     this.object = null
   }
   updatePosition(newPosition) {
