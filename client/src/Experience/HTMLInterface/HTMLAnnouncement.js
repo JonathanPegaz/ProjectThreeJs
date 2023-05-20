@@ -21,7 +21,7 @@ export default class HTMLAnnouncement {
       AREA: (message, duration) => this.area(message, duration),
       ALERT: (message, duration) => this.alert(message, duration),
       KILL: (message, duration) => this.kill(message, duration),
-      GUEST: (message, duration) => this.guest(message, duration),
+      QUEST: (message, duration) => this.quest(message, duration),
     };
   }
 
@@ -54,9 +54,9 @@ export default class HTMLAnnouncement {
     });
   }
 
-  guest(message, duration) {
+  quest(message, duration) {
     return new Promise((resolve) => {
-      const areaInterface = this.interface.querySelector('.announcement-guest')
+      const areaInterface = this.interface.querySelector('.announcement-quest')
       areaInterface.innerHTML = '<h1>' + message + '</h1>';
       areaInterface.classList.add('announcement-active');
       setTimeout(() => {

@@ -6,11 +6,12 @@ import RespawnController from "./RespawnController.js";
 import InteractiveObjectController from "./InteractiveObject/InteractiveObjectController.js";
 import HTMLAnnouncement from "../HTMLInterface/HTMLAnnouncement.js";
 import House from "./House.js";
-import QuestController from "./Quest/QuestController.js";
+import QuestController from "./Quest/archive/QuestController.js";
 import CollectZoneController from "./CollectZoneController.js";
 import NpcController from "./Npc/NpcController.js";
 import Experience from "../Experience.js";
 import { assets } from './Environments/assets.js';
+import QuestManager from "./Quest/QuestManager.js";
 
 export default class World
 {
@@ -51,8 +52,14 @@ export default class World
         this.interactiveObject = new InteractiveObjectController()
         this.npc = new NpcController()
         this.htmlAnnouncement = new HTMLAnnouncement()
-        //this.quest = new QuestController()
+        this.quest = new QuestManager()
 
+        this.quest.add(1)
+
+        //Assets
+        //this.bush = new Bush()
+        //this.fox = new Fox()
+        this.tree = new Tree()
         this.flower = new Flower()
         this.ocean = new Ocean()
         this.environment = new Environment()
