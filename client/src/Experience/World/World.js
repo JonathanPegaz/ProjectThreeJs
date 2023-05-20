@@ -5,7 +5,6 @@ import Landscape from "./Landscape.js";
 import RespawnController from "./RespawnController.js";
 import InteractiveObjectController from "./InteractiveObject/InteractiveObjectController.js";
 import HTMLAnnouncement from "../HTMLInterface/HTMLAnnouncement.js";
-import House from "./House.js";
 import CollectZoneController from "./CollectZoneController.js";
 import NpcController from "./Npc/NpcController.js";
 import Experience from "../Experience.js";
@@ -60,9 +59,7 @@ export default class World
         this.htmlAnnouncement = new HTMLAnnouncement()
         this.quest = new QuestManager()
 
-
         //Assets
-        this.tree = new Tree()
         this.flower = new Flower()
         this.ocean = new Ocean()
         this.environment = new Environment()
@@ -99,12 +96,18 @@ export default class World
         }
 
         // Special
-        this.interactiveObject.destroy()
-        this.interactiveObject = null
+        this.triggerZone.destroy()
+        this.triggerZone = null
+        this.quest.destroy()
+        this.quest = null
         this.htmlAnnouncement.destroy()
         this.htmlAnnouncement = null
         this.collectZone.destroy()
         this.collectZone = null
+        this.respawn.destroy()
+        this.respawn = null
+        this.interactiveObject.destroy()
+        this.interactiveObject = null
         this.npc.destroy()
         this.npc = null
 
@@ -117,8 +120,6 @@ export default class World
         this.environment = null
         this.landscape.destroy()
         this.landscape = null
-        this.respawn.destroy()
-        this.respawn = null
 
         this.experience = null
         this.scene = null
@@ -127,10 +128,5 @@ export default class World
         this.smallMeshsDistance = null
         this.mediumMeshsDistance = null
         this.bigMeshsDistance = null
-        this.collectZone.destroy()
-        this.triggerZone.destroy()
-        this.interactiveObject.destroy()
-        this.htmlAnnouncement.destroy()
-        this.quest.destroy()
     }
 }

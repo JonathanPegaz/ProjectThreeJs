@@ -58,16 +58,16 @@ export default class QuestManager extends EventEmitter{
   }
 
   destroy() {
-    this.activeQuests.forEach((quest) => {
-      quest.off("completed")
-      quest.off("track")
-      quest.off("update")
-      quest.destroy()
-    })
+    for (const [key, value] of Object.entries(this.activeQuests)) {
+      value.off("completed")
+      value.off("track")
+      value.off("update")
+      value.destroy()
+    }
     this.activeQuests = null
-    this.completedQuests.forEach((quest) => {
-      quest.destroy()
-    })
+    for (const [key, value] of Object.entries(this.completedQuests)) {
+      value.destroy()
+    }
     this.completedQuests = null
   }
 }

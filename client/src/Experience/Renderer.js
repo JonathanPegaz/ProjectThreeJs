@@ -80,6 +80,5 @@ export default class Renderer
         this.sizes = null
         this.scene = null
         this.camera = null
-
     }
 }

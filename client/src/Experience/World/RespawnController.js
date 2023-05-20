@@ -90,7 +90,6 @@ export default class RespawnController {
 
   destroy() {
     this.repawnPoints.forEach((element) => {
-      element.off(element.name)
       element.destroy()
     })
   }

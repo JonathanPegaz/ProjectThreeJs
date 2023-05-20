@@ -80,7 +80,7 @@ export default class Experience
         {
             this.mainscreen.showInput()
             this.world = new World()
-            this.physics = new Physics()
+
         })
 
         this.mainscreen.on('pseudo-entered', () => {

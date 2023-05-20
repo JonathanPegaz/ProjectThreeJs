@@ -69,12 +69,12 @@ export default class CollectZone extends InteractiveObject {
   }
 
   destroy() {
-    super.destroy();
     this.radius = null
     this.size = null
     this.collectTime = null
     this.isCollecting = null
     this.itemToCollect = null
+    super.destroy();
   }
   updateHitboxRadius(radius) {
     this.hitbox.geometry.dispose();
