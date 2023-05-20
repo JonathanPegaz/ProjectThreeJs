@@ -6,12 +6,12 @@ import RespawnController from "./RespawnController.js";
 import InteractiveObjectController from "./InteractiveObject/InteractiveObjectController.js";
 import HTMLAnnouncement from "../HTMLInterface/HTMLAnnouncement.js";
 import House from "./House.js";
-import QuestController from "./Quest/archive/QuestController.js";
 import CollectZoneController from "./CollectZoneController.js";
 import NpcController from "./Npc/NpcController.js";
 import Experience from "../Experience.js";
 import { assets } from './Environments/assets.js';
 import QuestManager from "./Quest/QuestManager.js";
+import TriggerZoneController from "./TriggerZoneController.js";
 
 export default class World
 {
@@ -49,23 +49,29 @@ export default class World
         }
 
         // Special
-        this.interactiveObject = new InteractiveObjectController()
-        this.npc = new NpcController()
-        this.htmlAnnouncement = new HTMLAnnouncement()
-        this.quest = new QuestManager()
 
-        this.quest.add(1)
+        this.init().then(() => {
+            this.interactiveObject = new InteractiveObjectController()
+        this.npc = new NpcController()
+
+            this.respawn = new RespawnController()
+            this.collectZone = new CollectZoneController()
+            this.triggerZone = new TriggerZoneController()
+
+            this.htmlAnnouncement = new HTMLAnnouncement()
+            this.quest = new QuestManager()
+        })
 
         //Assets
-        //this.bush = new Bush()
-        //this.fox = new Fox()
         this.tree = new Tree()
         this.flower = new Flower()
         this.ocean = new Ocean()
         this.environment = new Environment()
         this.landscape = new Landscape()
-        this.respawn = new RespawnController()
-        this.collectZone = new CollectZoneController()
+    }
+
+    async init() {
+        await this.wait(() => this.experience.world)
     }
 
     update()
@@ -126,5 +132,24 @@ export default class World
         this.smallMeshsDistance = null
         this.mediumMeshsDistance = null
         this.bigMeshsDistance = null
+        this.collectZone.destroy()
+        this.triggerZone.destroy()
+        this.interactiveObject.destroy()
+        this.htmlAnnouncement.destroy()
+        this.quest.destroy()
+    }
+
+    wait(callback) {
+        return new Promise((resolve) => {
+            const check = () => {
+                const value = callback();
+                if (value) {
+                    resolve(value);
+                } else {
+                    setTimeout(check, 10);
+                }
+            };
+            check();
+        });
     }
 }
