@@ -11,16 +11,19 @@ export default class Collect extends Task{
   }
 
   init(param) {
-    super.init(param).then(() => {
-      this.requirements = {
-        item: param.requirements.item,
-        quantity: param.requirements.quantity,
-      }
-      this.goal = this.requirements.quantity
-      this.world.collectZone.list.forEach((collectZone) => {
-        collectZone.on("collect", (item) => {
-          this.catch(item)
-        })
+    super.init(param)
+
+    this.requirements = {
+      item: param.requirements.item,
+      quantity: param.requirements.quantity,
+    }
+    this.goal = {
+      objective: this.requirements.quantity,
+      progress: 0,
+    }
+    this.world.collectZone.list.forEach((collectZone) => {
+      collectZone.on("collect", (item) => {
+        this.catch(item)
       })
     })
   }
@@ -28,10 +31,16 @@ export default class Collect extends Task{
   catch(item) {
     if (item === this.requirements.item) {
       this.requirements.quantity--
+      this.goal.progress++
+      this.trigger("update")
       if (this.requirements.quantity === 0) {
         this.isComplete()
       }
     }
+  }
+
+  isComplete() {
+    super.isComplete();
   }
 
   destroy() {

@@ -1,23 +1,23 @@
 {
   "1": {
     "title": "La fête du village",
-    "description": "Aujourd'hui, le chef du village a décidé de célébrer la naissance du gourou, c'est pourquoi il vous demande de l'aider à organiser cet événement qui prendra place dans les anciennes ruines.",
+    "description": "Le chef du village vous demande de lui ramener cette liste de courses : ",
     "tasks": {
       "1": {
         "type": "COLLECT",
-        "name": "2 diamants",
+        "name": "Diamants",
         "description": "collecter 2 diamants",
         "requirements": {
-          "item": "diamant",
+          "item": "diamond",
           "quantity": "2"
         }
       },
       "2": {
         "type": "COLLECT",
-        "name": "3 carottes",
+        "name": "Carottes",
         "description": "collecter 3 carottes",
         "requirements": {
-          "item": "carotte",
+          "item": "carrot",
           "quantity": "3"
         }
       }

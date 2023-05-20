@@ -19,12 +19,21 @@ export default class QuestManager extends EventEmitter{
   add(questId) {
     const quest = new Quest(this.resources.items.quest[questId])
     this.activeQuests[quest.id] = quest
-    quest.on("complete", () => {
-      this.complete(quest)
+    quest.on("completed", () => {
+      this.completed(quest)
     })
     quest.on("track", () => {
       this.track(quest)
     })
+    quest.on("update", () => {
+      this.trigger("update")
+    })
+    this.experience.world.htmlAnnouncement.addQueue(this.experience.world.htmlAnnouncement.type.QUEST,
+      "Quête : " + quest.title,
+      4000
+    )
+    console.log("Quest add")
+    this.trigger("update")
   }
 
   track(quest, active = true) {
@@ -34,19 +43,25 @@ export default class QuestManager extends EventEmitter{
     return this.completedQuests[quest.id]
   }
 
-  complete(quest) {
-    quest.off("complete")
+  completed(quest) {
+    console.log("Quest completed")
+    quest.off("completed")
     quest.off("track")
+    quest.off("update")
     this.completedQuests[quest.id] = quest
     delete this.activeQuests[quest.id]
-    this.experience.world.htmlAnnouncement.addQueue(this.experience.world.htmlAnnouncement.type.QUEST(
-      quest.name + " complété !",
-      2000
-    ))
+    this.experience.world.htmlAnnouncement.addQueue(this.experience.world.htmlAnnouncement.type.QUEST,
+      "Quête complété : " +quest.title,
+      4000
+    )
+    this.trigger("update")
   }
 
   destroy() {
     this.activeQuests.forEach((quest) => {
+      quest.off("completed")
+      quest.off("track")
+      quest.off("update")
       quest.destroy()
     })
     this.activeQuests = null

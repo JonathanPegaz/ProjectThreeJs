@@ -10,23 +10,19 @@ export default class Task extends EventEmitter{
     this.id = null
     this.name = null
     this.description = null
-    this.state = null
     this.type = null
     this.requirements = null
     this.world = null
 
   }
 
-  async init(param) {
-    await this.wait(() => this.experience.world).then(() => {
-      this.id = crypto.randomUUID()
-      this.world = this.experience.world
+  init(param) {
+    this.id = crypto.randomUUID()
+    this.world = this.experience.world
 
-      this.state = "active"
-      this.name = param.name
-      this.description = param.description
-      this.type = this.constructor.name
-    });
+    this.name = param.name
+    this.description = param.description
+    this.type = this.constructor.name
   }
 
   catch() {
@@ -34,31 +30,15 @@ export default class Task extends EventEmitter{
   }
 
   isComplete() {
-    this.state = "complete"
-    this.trigger("complete")
+    this.trigger("completed")
   }
 
   destroy() {
     this.id = null
     this.name = null
     this.description = null
-    this.state = null
     this.type = null
     this.requirements = null
     this.world = null
-  }
-
-  wait(callback) {
-    return new Promise((resolve) => {
-      const check = () => {
-        const value = callback();
-        if (value) {
-          resolve(value);
-        } else {
-          setTimeout(check, 10);
-        }
-      };
-      check();
-    });
   }
 }
