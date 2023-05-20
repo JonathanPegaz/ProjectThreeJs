@@ -17,6 +17,7 @@ body
     top: 0;
     left: 0;
     outline: none;
+    z-index: -1;
 }
 
 .fade-in {
@@ -96,7 +97,7 @@ body
     font-family: 'Roboto', sans-serif;
 }
 
-.quest {
+#quest {
     width: 100%;
 }
 .quest-info {

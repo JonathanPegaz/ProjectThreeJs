@@ -57,11 +57,11 @@ export default class HTMLAnnouncement {
   quest(message, duration) {
     return new Promise((resolve) => {
       const areaInterface = this.interface.querySelector('.announcement-quest')
-      areaInterface.innerHTML = '<h1>' + message + '</h1>';
+      areaInterface.innerHTML = '<h1 class="announcement-content-h1">' + message + '</h1>';
       areaInterface.classList.add('announcement-active');
       setTimeout(() => {
         this.interface.classList.remove('announcement-active');
-        this.interface.querySelector('.announcement-area').innerHTML = '';
+        this.interface.querySelector('.announcement-quest').innerHTML = '';
         resolve(true);
       }, duration);
     });
