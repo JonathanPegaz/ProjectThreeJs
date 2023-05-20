@@ -22,6 +22,21 @@ export default [
         path: 'models/Fox/glTF/Fox.gltf'
     },
     {
+        name: 'idle',
+        type: 'gltfModel',
+        path: 'models/character/idle.gltf'
+    },
+    {
+        name: 'walking',
+        type: 'gltfModel',
+        path: 'models/character/walking.gltf'
+    },
+    {
+        name: 'player',
+        type: 'gltfModel',
+        path: 'models/perso.gltf'
+    },
+    {
         name: 'Buissons',
         type: 'gltfModel',
         path: 'models/Buissons.glb'

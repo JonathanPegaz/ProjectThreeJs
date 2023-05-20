@@ -1,8 +1,9 @@
-import {DoubleSide, Mesh, MeshToonMaterial} from "three";
+import {Mesh, MeshToonMaterial} from "three";
 
 export default class Model3D {
     constructor(model) {
         this.model = model.scene
+        this.meshs = []
         this.physicsMeshs = []
         this.setModel()
     }
@@ -14,8 +15,10 @@ export default class Model3D {
             {
                 this.setMaterial(child)
                 this.setPhysicsMeshs(child)
+                this.meshs.push(child)
             }
         })
+        this.model.matrixAutoUpdate = false
     }
 
     setMaterial(child) {
@@ -52,5 +55,6 @@ export default class Model3D {
         // null
         this.model = null
         this.physicsMeshs = null
+        this.meshs = null
     }
 }

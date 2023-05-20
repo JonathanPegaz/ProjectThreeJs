@@ -17,10 +17,9 @@ export default class World
         this.scene = this.experience.scene
         this.resources = this.experience.resources
 
-        // Special
-        this.interactiveObject = new InteractiveObjectController()
-        this.npc = new NpcController()
-        this.htmlAnnouncement = new HTMLAnnouncement()
+        this.smallMeshsDistance = []
+        this.mediumMeshsDistance = []
+        this.bigMeshsDistance = []
 
         for (let asset of assets)
         {
@@ -33,19 +32,49 @@ export default class World
             // remove physics meshs
             this[asset.resource].physicsMeshs = []
             this.scene.add(this[asset.resource].model)
+
+            if (asset.display === 0) {
+                this.smallMeshsDistance.push(...this[asset.resource].meshs)
+            }
+            else if (asset.display === 1) {
+                this.mediumMeshsDistance.push(...this[asset.resource].meshs)
+            }
+            else if (asset.display === 2) {
+                this.bigMeshsDistance.push(...this[asset.resource].meshs)
+            }
         }
+
+        // Special
+        this.interactiveObject = new InteractiveObjectController()
+        this.npc = new NpcController()
+        this.htmlAnnouncement = new HTMLAnnouncement()
 
         this.flower = new Flower()
         this.ocean = new Ocean()
         this.environment = new Environment()
         this.landscape = new Landscape()
         this.respawn = new RespawnController()
+
+        console.log(this.smallMeshsDistance)
+        console.log(this.mediumMeshsDistance)
     }
 
     update()
     {
         this.ocean.update()
         this.npc.update()
+        // loop through all the small meshs and check if they are close enough to be displayed
+        for (let mesh of this.smallMeshsDistance) {
+            mesh.visible = this.experience.camera.instance.position.distanceTo(mesh.geometry.boundingSphere.center) < 40;
+        }
+        // loop through all the medium meshs and check if they are close enough to be displayed
+        for (let mesh of this.mediumMeshsDistance) {
+            mesh.visible = this.experience.camera.instance.position.distanceTo(mesh.geometry.boundingSphere.center) < 60;
+        }
+        // loop through all the big meshs and check if they are close enough to be displayed
+        for (let mesh of this.bigMeshsDistance) {
+            mesh.visible = this.experience.camera.instance.position.distanceTo(mesh.geometry.boundingSphere.center) < 100;
+        }
     }
 
     destroy() {
@@ -82,5 +111,12 @@ export default class World
         this.experience = null
         this.scene = null
         this.resources = null
+
+        this.smallMeshsDistance = null
+        this.mediumMeshsDistance = null
+        this.bigMeshsDistance = null
+
+        this.worldWorker.terminate()
+        this.worldWorker = null
     }
 }

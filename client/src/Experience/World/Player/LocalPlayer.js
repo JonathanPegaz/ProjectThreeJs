@@ -41,7 +41,7 @@ export default class LocalPlayer extends Player {
 
     setPhysics() {
 
-        const shape = new CANNON.Sphere(0.5); // dimensions de la boîte
+        const shape = new CANNON.Sphere(0.4); // dimensions de la boîte
         this.body = new CANNON.Body({
             shape: shape,
             mass: 1,

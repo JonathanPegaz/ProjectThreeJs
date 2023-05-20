@@ -70,8 +70,6 @@ export default class Npc {
         }
     }
 
-
-
     destroy() {
         if (this.speakIcon)
             this.speakIcon.destroy()

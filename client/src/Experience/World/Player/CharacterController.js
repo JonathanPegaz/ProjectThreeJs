@@ -51,7 +51,7 @@ export default class BasicCharacterController {
     setParams()
     {
         this.decceleration = new THREE.Vector3(-0.0005, -0.0001, -5.0);
-        this.acceleration = new THREE.Vector3(1, 0.25, 50.0);
+        this.acceleration = new THREE.Vector3(1, 0.25, 25.0);
         this.velocity = new THREE.Vector3(0, 0, 0);
 
         this.stateMachine = new CharacterFSM(

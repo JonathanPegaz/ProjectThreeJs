@@ -12,7 +12,7 @@ export default class Player {
         this.time = this.experience.time
         this.debug = this.experience.debug
         this.network = this.experience.network
-        this.resource = this.resources.items.foxModel
+        this.resource = this.resources.items.player
 
         this.object = new THREE.Object3D()
         this.object.position.set(0, 0, 0)
@@ -22,9 +22,10 @@ export default class Player {
     }
 
     setModel() {
-        this.model = clone(this.resource.scene)
-        this.model.scale.set(0.006, 0.006, 0.006)
-        this.model.position.set(0, -0.2, 0)
+        this.model = clone(this.resource.scene.children[0])
+        this.model.scale.set(0.1, 0.1, 0.1)
+        this.model.position.set(0, -0.3, 0)
+
         this.model.traverse((child) =>
         {
             if(child instanceof THREE.Mesh)
@@ -40,18 +41,23 @@ export default class Player {
     setAnimation()
     {
         this.animations = {}
+        this.resource.animations.push(this.resources.items.idle.animations[0])
+        this.resource.animations.push(this.resources.items.walking.animations[0])
+
+        // console.log(this.resource)
+        // console.log(this.resources.items.foxModel)
 
         this.mixer = new THREE.AnimationMixer(this.model)
 
         // action
         this.animations.idle = {
-            clip: this.resource.animations[0],
-            action: this.mixer.clipAction(this.resource.animations[0])
+            clip: this.resource.animations[1],
+            action: this.mixer.clipAction(this.resource.animations[1])
         }
 
         this.animations.walk = {
-            clip: this.resource.animations[1],
-            action: this.mixer.clipAction(this.resource.animations[1])
+            clip: this.resource.animations[2],
+            action: this.mixer.clipAction(this.resource.animations[2])
         }
 
         this.animations.run = {
