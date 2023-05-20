@@ -10,7 +10,6 @@ export default class Hud {
 
     update() {
         this.chat.update()
-        this.QuestWindow.update()
     }
 
     destroy() {
