@@ -1,75 +1,76 @@
 import Experience from "../../Experience.js";
+import EventEmitter from "../../Utils/EventEmitter.js";
+import Collect from "./Task/Collect.js";
 
 
-export default class Quest {
-  constructor(name, description, objective, reward) {
+export default class Quest extends EventEmitter{
+  constructor(quest) {
+    super();
     this.experience = new Experience()
-    this.scene = this.experience.scene
-    this.debug = this.experience.debug
     this.resources = this.experience.resources
 
+    this.activeTasks = {}
+    this.completedTasks = {}
+
     this.id = null
-    this.name = null
+    this.title = null
     this.description = null
-    this.objective = {}
-    this.reward = {}
-    this.status = null
+    this.state = null
+    this.taskEnum = {
+      COLLECT: (param) => new Collect(param),
+      // ESCORT: (param) => new Escort(param),
+      // DELIVERY: (param) => new Delivery(param),
+    }
 
-    this.init(name, description, objective, reward)
+    this.init(quest)
   }
 
-  async init(name, description, objective, reward) {
-    this.name = name
-    this.description = description
-    this.objective = objective
-    this.reward = reward
-    await this.wait(() => this.experience.world).then(() => {
-      this.id = crypto.randomUUID()
-      this.experience.world.quest.store(this)
-    });
+  init(quest) {
+    this.id = crypto.randomUUID()
+    this.title = quest.title
+    this.description = quest.description
+    this.state = "active"
+    Object.values(quest.tasks).forEach((param) => {
+      this.addTask(param)
+    })
   }
 
-  start() {
-    this.status = "started"
+  addTask(param) {
+    const task = param.type in this.taskEnum ? this.taskEnum[param.type](param) : null
+    if (!task) return
+
+    this.activeTasks[task.id] = task
+    this.activeTasks[task.id].on("complete", () => {
+      this.completeTask(task)
+    })
   }
 
-  setTarget() {
-    this.status = "targeted"
+  completeTask(task) {
+    this.completedTasks[task.id] = task
+    delete this.activeTasks[task.id]
+    if (Object.keys(this.activeTasks).length === 0) {
+      this.isComplete()
+    }
   }
 
-  setComplete() {
-    this.status = "completed"
-    this.getReward()
-    this.experience.world.quest.complete(this)
+  isComplete() {
+    this.state = "completed"
+    this.trigger("completed")
   }
 
-  getReward() {
-    //TODO: must be override
-  }
-
-  delete() {
-    this.experience.world.quest.delete(this.id)
-  }
   destroy() {
+    this.activeTasks.forEach((task) => {
+      task.destroy()
+    })
+    this.activeTasks = null
+    this.completedTasks.forEach((task) => {
+      task.destroy()
+    })
+    this.completedTasks = null
     this.id = null
-    this.name = null
+    this.title = null
     this.description = null
-    this.objective = null
-    this.reward = null
-    this.status = null
-  }
-
-  wait(callback) {
-    return new Promise((resolve) => {
-      const check = () => {
-        const value = callback();
-        if (value) {
-          resolve(value);
-        } else {
-          setTimeout(check, 10);
-        }
-      };
-      check();
-    });
+    this.state = null
+    this.taskEnum = null
   }
 }

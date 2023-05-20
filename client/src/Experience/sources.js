@@ -184,5 +184,11 @@ export default [
         name:'speak',
         type:'texture',
         path:'icons/commentaires-64.png'
+
+    },
+    {
+        name: 'quest',
+        type: 'json',
+        path: 'quest/questRepository.json'
     }
 ]

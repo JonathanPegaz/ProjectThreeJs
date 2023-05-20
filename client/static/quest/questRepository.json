@@ -1,0 +1,31 @@
+{
+  "1": {
+    "title": "La fête du village",
+    "description": "Aujourd'hui, le chef du village a décidé de célébrer la naissance du gourou, c'est pourquoi il vous demande de l'aider à organiser cet événement qui prendra place dans les anciennes ruines.",
+    "tasks": {
+      "1": {
+        "type": "COLLECT",
+        "name": "2 diamants",
+        "description": "collecter 2 diamants",
+        "requirements": {
+          "item": "diamant",
+          "quantity": "2"
+        }
+      },
+      "2": {
+        "type": "COLLECT",
+        "name": "3 carottes",
+        "description": "collecter 3 carottes",
+        "requirements": {
+          "item": "carotte",
+          "quantity": "3"
+        }
+      }
+    },
+    "reward": {
+      "xp": "100",
+      "item": "diamant",
+      "quantity": "1"
+    }
+  }
+}
