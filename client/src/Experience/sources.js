@@ -166,6 +166,11 @@ export default [
         type: 'gltfModel',
         path: 'models/Stele3.glb'
     },
+    {
+        name: 'Ferme',
+        type: 'gltfModel',
+        path: 'models/Ferme.glb'
+    },
 
 
 

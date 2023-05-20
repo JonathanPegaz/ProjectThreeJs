@@ -54,9 +54,6 @@ export default class World
         this.environment = new Environment()
         this.landscape = new Landscape()
         this.respawn = new RespawnController()
-
-        console.log(this.smallMeshsDistance)
-        console.log(this.mediumMeshsDistance)
     }
 
     update()
@@ -115,8 +112,5 @@ export default class World
         this.smallMeshsDistance = null
         this.mediumMeshsDistance = null
         this.bigMeshsDistance = null
-
-        this.worldWorker.terminate()
-        this.worldWorker = null
     }
 }

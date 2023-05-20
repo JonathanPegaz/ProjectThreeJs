@@ -41,7 +41,7 @@ export default class Pseudo {
         const box = new Box3().setFromObject(this.player.object)
         const height = box.max.y - box.min.y
 
-        this.pseudoLabel.position.set(0, height + 0.3, 0);
+        this.pseudoLabel.position.set(0, height + 0.01, 0);
         this.player.object.add(this.pseudoLabel);
 
     }

@@ -21,6 +21,7 @@ import Ruine3 from "./Nature/Ruine3.js";
 import Stele1 from "./Nature/Stele1.js";
 import Stele2 from "./Nature/Stele2.js";
 import Stele3 from "./Nature/Stele3.js";
+import Ferme from "./Buildings/Ferme.js";
 
 export const assets = [
     // display : 0 = small, 1 = medium, 2 = big
@@ -43,6 +44,12 @@ export const assets = [
         resource: 'Dalles',
         hasPhysics: false,
         display: 0,
+    },
+    {
+        type: Ferme,
+        resource: 'Ferme',
+        hasPhysics: true,
+        display: 2,
     },
     {
         type: Panneaux,
@@ -106,7 +113,7 @@ export const assets = [
         type: DebrisCarriere,
         resource: 'Debris_carriere',
         hasPhysics: false,
-        display: 0,
+        display: 2,
     },
     {
         type: Ilot,

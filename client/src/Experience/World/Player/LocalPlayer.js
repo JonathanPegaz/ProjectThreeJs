@@ -49,6 +49,9 @@ export default class LocalPlayer extends Player {
             fixedRotation: true,
         })
 
+        // Rotate the body so that the x-axis faces in the direction of v
+        this.body.quaternion.setFromAxisAngle(new CANNON.Vec3(0, 1, 0), Math.PI / 2);
+
         this.physics.world.addBody(this.body)
 
         this.physics.objectsToUpdate.push({
