@@ -1,6 +1,6 @@
 import * as THREE from 'three'
 import Experience from "../Experience.js";
-import SpawnPoint from "./InteractiveObject/SpawnPoint.js";
+import SpawnPoint from "./SpawnPoint.js";
 
 export default class RespawnController {
 

@@ -34,7 +34,7 @@ export default class InteractiveObject extends EventEmitter{
     }
     this.isInteracting = true
     this.trigger(this.name, ["ENTER"])
-    this.stay(origin.ray.origin, limit).then(() => {
+    this.stay(origin, limit).then(() => {
       this.leave()
     })
 
@@ -42,10 +42,10 @@ export default class InteractiveObject extends EventEmitter{
   }
 
   stay(origin, limit) {
-    limit = limit ?? this.hitbox.geometry.parameters.radius+0.5
+    limit = limit ?? this.hitbox.geometry.parameters.radius+origin.far
     return new Promise((resolve) => {
       const check = () => {
-        const origin2D = new THREE.Vector2(origin.x, origin.z)
+        const origin2D = new THREE.Vector2(origin.ray.origin.x, origin.ray.origin.z)
         const distance = origin2D.distanceTo(new THREE.Vector2(this.position.x, this.position.z))
         if (distance < limit) {
           this.trigger(this.name, ["STAY"])

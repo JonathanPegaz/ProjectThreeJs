@@ -1,5 +1,5 @@
 import * as THREE from 'three'
-import AnnouncementZone from "../AnnouncementZone.js";
+import AnnouncementZone from "../Object/AnnouncementZone.js";
 import Experience from "../../../Experience.js";
 
 export default class AnnouncementZoneController {
