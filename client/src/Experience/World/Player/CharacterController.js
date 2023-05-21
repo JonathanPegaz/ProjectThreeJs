@@ -112,17 +112,22 @@ export default class BasicCharacterController {
         if (!this.localPlayer.object) {
             return;
         }
+        this.detectCollision()
+
+        if (this.input.pause) {
+            return;
+        }
+
+        if (this.Position.y < -15) {
+            this.respawn()
+        }
+
         const timeInSeconds = this.time.delta / 1000;
         if (this.isJoyStickTouch) {
             this.handleJoystick(timeInSeconds)
         }
         this.handleKeyboard(timeInSeconds)
         this.stateMachine.Update(timeInSeconds, this.input);
-        if (this.Position.y < -15) {
-            this.respawn()
-        }
-
-        this.detectCollision()
     }
 
     handleJoystick(timeInSeconds) {

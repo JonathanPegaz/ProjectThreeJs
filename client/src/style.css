@@ -106,3 +106,30 @@ body
 .quest-objectives {
 
 }
+
+.dialog-container {
+    position: fixed;
+    max-width: 90%;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: #fff;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.dialog-container::after {
+    content: "";
+    position: absolute;
+    bottom: -19px; /* Ajustez la valeur selon vos besoins */
+    border-width: 10px;
+    transform: rotate(180deg);
+    border-style: solid;
+    border-color: transparent transparent rgba(0, 0, 0, 0.7) transparent;
+}

@@ -5,6 +5,7 @@ export default class Controls extends EventEmitter
     constructor()
     {
         super()
+        this.pause = false
         this.setKeys()
         this.setPointer()
 
@@ -53,10 +54,10 @@ export default class Controls extends EventEmitter
                 codes: [ 'KeyV' ],
                 name: 'cameraMode'
             },
-            {
+            /*{
                 codes: [ 'KeyB' ],
                 name: 'debug'
-            },
+            },*/
             {
                 codes: [ 'Space' ],
                 name: 'jump'
@@ -160,6 +161,7 @@ export default class Controls extends EventEmitter
 
         this.keys = null
         this.pointer = null
+        this.pause = null
 
     }
 }

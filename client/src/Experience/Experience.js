@@ -17,6 +17,7 @@ import Physics from "./Physics.js";
 import Mainscreen from "./Mainscreen.js";
 import Hud from "./World/Player/Hud/Hud.js";
 import Controls from "./Utils/Controls.js";
+import HTMLDialog from "./HTMLInterface/HTMLDialog.js";
 
 let instance = null
 

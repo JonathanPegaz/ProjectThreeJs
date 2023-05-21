@@ -1,5 +1,7 @@
 import {BoxGeometry, Mesh, MeshBasicMaterial, Object3D, SphereGeometry} from "three";
 import Experience from "../../Experience.js";
+import HTMLDialog from "../../HTMLInterface/HTMLDialog.js";
+import Dialog from "./Dialog.js";
 
 
 export default class Npc {
@@ -8,7 +10,7 @@ export default class Npc {
 
         this.id = data.id
         this.name = data.name
-        this.dialog = data.dialog
+        this.dialog = new Dialog(data.dialog, this)
 
         this.canInteract = false
 
@@ -48,24 +50,44 @@ export default class Npc {
     }
 
     update() {
-        if (this.canInteract && !this.isPlayerInteracting) {
-            // display npc name
+        if (!this.experience.controls)
+            return;
+
+        if(!this.canInteract){
             if (this.speakIcon) {
+                this.speakIcon.visible(false)
+            }
+            return;
+        }
+
+        if (!this.isPlayerInteracting) {
+            // display npc name
+            if (this.speakIcon && !this.dialog.isFinished) {
                 this.speakIcon.visible(true)
                 this.speakIcon.update()
             }
 
             // player press E
             if (this.experience.controls.keys.down.action) {
-                this.isPlayerInteracting = true
-                this.experience.world.htmlDialog.open(this.dialog)
+                if (!this.dialog.isFinished) {
+                    this.isPlayerInteracting = true
+                    this.dialog.start()
+                }
             }
 
             this.canInteract = false
-            // this.experience.world.htmlDialog.open(this.dialog)
-        } else {
-            if (this.speakIcon) {
-                this.speakIcon.visible(false)
+            return;
+        }
+
+        if (this.experience.controls.keys.down.action && this.isPlayerInteracting) {
+            if (!this.dialog.isFinished) {
+                this.dialog.nextLine()
+            } else {
+                if (this.speakIcon)
+                    this.speakIcon.destroy()
+                this.speakIcon = null
+                this.isPlayerInteracting = false
+                this.canInteract = false
             }
         }
     }
