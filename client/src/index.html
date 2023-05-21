@@ -7,15 +7,29 @@
     <link rel="stylesheet" href="./style.css">
 </head>
 <body id="webgl">
+    <div id="hud">
+        <div class="col-l"></div>
+        <div class="col-m">
+            <div class="announcement">
+                <div class="announcement-content announcement-area"></div>
+                <div class="announcement-content announcement-alert"></div>
+                <div class="announcement-content announcement-kill"></div>
+                <div class="announcement-content announcement-quest"></div>
+            </div>
+        </div>
+        <div class="col-r">
+            <div id="quest">
+<!--                <div class="quest-info"></div>-->
+<!--                <div class="quest-objectives">-->
+<!--                    <ul>-->
+
+<!--                    </ul>-->
+<!--                </div>-->
+            </div>
+        </div>
+    </div>
     <canvas class="webgl"></canvas>
 
-    <div class="announcement">
-        <div class="announcement-content announcement-area">
-            <h1 class="announcement-content-h1">Test</h1>
-        </div>
-        <div class="announcement-content announcement-alert"></div>
-        <div class="announcement-content announcement-kill"></div>
-    </div>
 
     <script type="module" src="./script.js"></script>
 </body>

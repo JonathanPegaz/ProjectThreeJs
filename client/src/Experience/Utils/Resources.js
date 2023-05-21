@@ -1,4 +1,4 @@
-import { PlaneGeometry, Mesh, LoadingManager, TextureLoader, CubeTextureLoader } from 'three'
+import {PlaneGeometry, Mesh, LoadingManager, TextureLoader, CubeTextureLoader, FileLoader} from 'three'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
 import EventEmitter from './EventEmitter.js'
 import { gsap } from 'gsap'
@@ -82,6 +82,7 @@ export default class Resources extends EventEmitter
         this.loaders.gltfLoader.setDRACOLoader(this.loaders.dracoLoader)
         this.loaders.textureLoader = new TextureLoader()
         this.loaders.cubeTextureLoader = new CubeTextureLoader()
+        this.loaders.fileLoader = new FileLoader();
     }
 
     startLoading()
@@ -118,6 +119,15 @@ export default class Resources extends EventEmitter
                         this.sourceLoaded(source, file)
                     }
                 )
+            }
+            else if (source.type === 'json') {
+                this.loaders.fileLoader.load(
+                  source.path,
+                  (jsonText) => {
+                      const json = JSON.parse(jsonText);
+                      this.sourceLoaded(source, json);
+                  }
+                );
             }
         }
     }

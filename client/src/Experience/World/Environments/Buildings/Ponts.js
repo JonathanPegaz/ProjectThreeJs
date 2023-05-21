@@ -6,4 +6,9 @@ export default class Ponts extends Model3D
     {
         super(model)
     }
+
+    setMaterial(child) {
+        super.setMaterial(child);
+        child.receiveShadow = true;
+    }
 }

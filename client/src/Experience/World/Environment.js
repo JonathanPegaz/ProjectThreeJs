@@ -24,12 +24,22 @@ export default class Environment
     setSunLight()
     {
         this.sunLight = new THREE.DirectionalLight('#ffffff', 4)
+        this.sunLight.position.set(0, 90, 30)
         this.sunLight.castShadow = true
-        this.sunLight.shadow.camera.far = 15
-        this.sunLight.shadow.mapSize.set(1024, 1024)
-        this.sunLight.shadow.normalBias = 0.05
-        this.sunLight.position.set(3.5, 2, - 1.25)
+        this.sunLight.shadow.camera.far = 300
+        this.sunLight.shadow.mapSize.set(8192, 8192)
+        this.sunLight.shadow.normalBias = -0.002
+        this.sunLight.shadow.camera.top = 100
+        this.sunLight.shadow.camera.bottom = - 100
+        this.sunLight.shadow.camera.left = - 100
+        this.sunLight.shadow.camera.right = 100
+
         this.scene.add(this.sunLight)
+
+        // add hemisphere light green and blue
+        this.hemiLight = new THREE.HemisphereLight( 0xffffff, 0x444444 );
+        this.hemiLight.position.set( 0, 20, 0 );
+        this.scene.add( this.hemiLight );
 
         // Debug
         if(this.debug.active)
@@ -61,6 +71,42 @@ export default class Environment
                 .min(- 5)
                 .max(5)
                 .step(0.001)
+            this.debugFolder
+                .add(this.sunLight.shadow.camera, 'left')
+                .name('left')
+                .min(- 5)
+                .max(500)
+                .step(1)
+                .onChange(() => {
+                    helper.update()
+                })
+            this.debugFolder
+                .add(this.sunLight.shadow.camera, 'right')
+                .name('right')
+                .min(- 5)
+                .max(500)
+                .step(1)
+                .onChange(() => {
+                    helper.update()
+                })
+            this.debugFolder
+                .add(this.sunLight.shadow.camera, 'top')
+                .name('top')
+                .min(- 5)
+                .max(500)
+                .step(1)
+                .onChange(() => {
+                    helper.update()
+                })
+            this.debugFolder
+                .add(this.sunLight.shadow.camera, 'bottom')
+                .name('bottom')
+                .min(- 5)
+                .max(500)
+                .step(1)
+                .onChange(() => {
+                    helper.update()
+                })
         }
     }
 
@@ -105,6 +151,10 @@ export default class Environment
         this.sunLight.dispose()
         this.scene.remove(this.sunLight)
         this.sunLight = null
+
+        this.hemiLight.dispose()
+        this.scene.remove(this.hemiLight)
+        this.hemiLight = null
 
         this.environmentMap.texture.dispose()
         this.scene.background = null

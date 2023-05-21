@@ -1,16 +1,21 @@
 import Experience from "../../Experience.js";
+import * as THREE from "three";
+import EventEmitter from "../../Utils/EventEmitter.js";
 
-export default class InteractiveObject {
+export default class InteractiveObject extends EventEmitter{
   constructor() {
+    super();
     this.experience = new Experience()
     this.scene = this.experience.scene
     this.debug = this.experience.debug
     this.resources = this.experience.resources
 
+    this.isInteracting = false
     this.id = null
-    this.canInteract = true
-
-    this.add()
+    this.hitbox = null
+    this.name = null
+    this.position = null
+    this.object = null
   }
 
   async add() {
@@ -22,18 +27,58 @@ export default class InteractiveObject {
   delete() {
     this.experience.world.interactiveObject.delete(this.id)
   }
-  interact() { //TODO : must be override
-    if (!this.canInteract) {
-      return
+  interact(origin, limit = null) {
+    if (this.isInteracting) {
+      return true
     }
-    this.canInteract = false
+    this.isInteracting = true
+    this.trigger(this.name, ["ENTER"])
+    this.stay(origin.ray.origin, limit).then(() => {
+      this.leave()
+    })
 
-    setTimeout(() => {
-      this.canInteract = true
-    }, 1000)
+    return false
   }
-  update(uuid) {
-    //TODO : update object inside the list if his source change
+
+  stay(origin, limit) {
+    limit = limit ?? this.hitbox.geometry.parameters.radius+0.5
+    return new Promise((resolve) => {
+      const check = () => {
+        const origin2D = new THREE.Vector2(origin.x, origin.z)
+        const distance = origin2D.distanceTo(new THREE.Vector2(this.position.x, this.position.z))
+        if (distance < limit) {
+          this.trigger(this.name, ["STAY"])
+          setTimeout(check, 500);
+        } else {
+          resolve();
+        }
+      };
+      check();
+    });
+  }
+
+  leave() {
+    this.isInteracting = false
+    this.trigger(this.name, ["LEAVE"])
+  }
+
+  destroy() {
+    this.delete()
+    this.isInteracting = false
+    this.id = null
+    this.hitbox = null
+    this.name = null
+    this.position = null
+    this.object = null
+  }
+  updatePosition(newPosition) {
+    this.position = newPosition
+    this.object.position.copy(newPosition)
+    this.hitbox.position.copy(newPosition)
+  }
+  updateHitboxRadius(radius) {
+    this.hitbox.geometry.dispose();
+    this.hitbox.geometry = new THREE.SphereGeometry(radius, 16, 16);
   }
   wait(callback) {
     return new Promise((resolve) => {
@@ -47,9 +92,5 @@ export default class InteractiveObject {
       };
       check();
     });
-  }
-  destroy() {
-    this.id = null
-    this.canInteract = null
   }
 }

@@ -17,6 +17,7 @@ body
     top: 0;
     left: 0;
     outline: none;
+    z-index: -1;
 }
 
 .fade-in {
@@ -49,14 +50,32 @@ body
     }
 }
 
-.announcement {
-    width: 50%;
-    height: 10vh;
-    position: absolute;
-    top: 100px;
-    left: 25%;
+#hud {
+    height: calc(100vh - 2rem);
+    width: calc(100vw - 2rem);
+    display: flex;
+    padding: 1rem;
 }
 
+#hud .col-l {
+    width: 25%;
+    height: 100%;
+}
+#hud .col-m {
+    width: 50%;
+    height: 100%;
+    padding: 0 2rem;
+}
+#hud .col-r {
+    width: 25%;
+    height: 100%;
+}
+
+.announcement {
+    width: 100%;
+    min-height: 4rem;
+    margin: 2rem 0 1rem 0;
+}
 .announcement-content {
     width: 100%;
     height: 100%;
@@ -67,15 +86,23 @@ body
     justify-content: center;
     align-items: center;
 }
-
 .announcement-active {
     display: flex;
     opacity: 1;
     transition: .5s;
 }
-
 .announcement-content-h1 {
     color: #ff0000;
     font-size: 3rem;
     font-family: 'Roboto', sans-serif;
+}
+
+#quest {
+    width: 100%;
+}
+.quest-info {
+
+}
+.quest-objectives {
+
 }

@@ -80,14 +80,15 @@ export default class Experience
         {
             this.mainscreen.showInput()
             this.world = new World()
+
         })
 
         this.mainscreen.on('pseudo-entered', () => {
-            this.resources.removeOverlay()
             this.hud = new Hud()
             this.controls = new Controls()
             this.network = new Network()
             this.localPlayer = new LocalPlayer()
+            this.resources.removeOverlay()
         })
 
     }

@@ -1,9 +1,10 @@
-import * as THREE from 'three'
 import Experience from "../../Experience.js";
+import EventEmitter from "../../Utils/EventEmitter.js";
 
-export default class InteractiveObjectController {
+export default class InteractiveObjectController extends EventEmitter{
 
   constructor() {
+    super();
     this.experience = new Experience()
     this.scene = this.experience.scene
     this.debug = this.experience.debug
@@ -28,7 +29,7 @@ export default class InteractiveObjectController {
     for (const [key, value] of Object.entries(this.list)) {
       const intersects = raycaster.intersectObject(value.hitbox);
       if (intersects.length > 0) {
-        value.interact();
+        value.interact(raycaster);
       }
     }
   }

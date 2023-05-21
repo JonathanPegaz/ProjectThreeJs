@@ -5,9 +5,13 @@ import Landscape from "./Landscape.js";
 import RespawnController from "./RespawnController.js";
 import InteractiveObjectController from "./InteractiveObject/InteractiveObjectController.js";
 import HTMLAnnouncement from "../HTMLInterface/HTMLAnnouncement.js";
+import CollectZoneController from "./CollectZoneController.js";
 import NpcController from "./Npc/NpcController.js";
 import Experience from "../Experience.js";
 import { assets } from './Environments/assets.js';
+import QuestManager from "./Quest/QuestManager.js";
+import TriggerZoneController from "./TriggerZoneController.js";
+import {Fog} from "three";
 
 export default class World
 {
@@ -20,6 +24,9 @@ export default class World
         this.smallMeshsDistance = []
         this.mediumMeshsDistance = []
         this.bigMeshsDistance = []
+        this.shadowMeshs = []
+
+        this.scene.fog = new Fog(0xDFE9F3, 0, 100)
 
         for (let asset of assets)
         {
@@ -42,18 +49,28 @@ export default class World
             else if (asset.display === 2) {
                 this.bigMeshsDistance.push(...this[asset.resource].meshs)
             }
+            if (asset.castShadow) {
+                this.shadowMeshs.push(...this[asset.resource].meshs)
+            }
         }
 
         // Special
+
         this.interactiveObject = new InteractiveObjectController()
         this.npc = new NpcController()
-        this.htmlAnnouncement = new HTMLAnnouncement()
 
+        this.respawn = new RespawnController()
+        this.collectZone = new CollectZoneController()
+        this.triggerZone = new TriggerZoneController()
+
+        this.htmlAnnouncement = new HTMLAnnouncement()
+        this.quest = new QuestManager()
+
+        //Assets
         this.flower = new Flower()
         this.ocean = new Ocean()
         this.environment = new Environment()
         this.landscape = new Landscape()
-        this.respawn = new RespawnController()
     }
 
     update()
@@ -72,6 +89,10 @@ export default class World
         for (let mesh of this.bigMeshsDistance) {
             mesh.visible = this.experience.camera.instance.position.distanceTo(mesh.geometry.boundingSphere.center) < 100;
         }
+        // loop through all the shadow meshs and check if they are close enough to be displayed
+        for (let mesh of this.shadowMeshs) {
+            mesh.castShadow = this.experience.camera.instance.position.distanceTo(mesh.geometry.boundingSphere.center) < 50;
+        }
     }
 
     destroy() {
@@ -86,10 +107,18 @@ export default class World
         }
 
         // Special
-        this.interactiveObject.destroy()
-        this.interactiveObject = null
+        this.triggerZone.destroy()
+        this.triggerZone = null
+        this.quest.destroy()
+        this.quest = null
         this.htmlAnnouncement.destroy()
         this.htmlAnnouncement = null
+        this.collectZone.destroy()
+        this.collectZone = null
+        this.respawn.destroy()
+        this.respawn = null
+        this.interactiveObject.destroy()
+        this.interactiveObject = null
         this.npc.destroy()
         this.npc = null
 
@@ -102,15 +131,15 @@ export default class World
         this.environment = null
         this.landscape.destroy()
         this.landscape = null
-        this.respawn.destroy()
-        this.respawn = null
 
         this.experience = null
+        this.scene.fog = null
         this.scene = null
         this.resources = null
 
         this.smallMeshsDistance = null
         this.mediumMeshsDistance = null
         this.bigMeshsDistance = null
+        this.shadowMeshs = null
     }
 }

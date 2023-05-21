@@ -151,9 +151,7 @@ export default class PostProcessing
             this.debugFolderDisplacement = this.debugFolder.addFolder('Displacement')
             this.debugFolderDisplacement.add(displacementPass, 'enabled').name('enabled')
             this.debugFolderDisplacement.add(displacementPass.material.uniforms.uTime, 'value').min(0).max(1).step(0.001).name('time')
-
         }
-
     }
 
     resize()

@@ -7,26 +7,21 @@ export default class SpawnPoint extends InteractiveObject {
   constructor(position, name, radius = 1) {
     super()
     this.experience = new Experience()
-    this.scene = this.experience.scene
-    this.debug = this.experience.debug
-    this.resources = this.experience.resources
+    this.radius = null
 
-    this.name = name
-    this.position = position
-    this.radius = radius
-
-    this.hitbox = null
-
-    this.init(position, name)
+    this.init(position, name, radius)
   }
 
-  init(position, name) {
+  init(position, name, radius) {
     this.name = name
+    this.radius = radius
+    this.position = position
     this.object = new THREE.Object3D()
-    this.object.position.set(position.x, position.y, position.z)
+    this.object.position.set(this.position.x, this.position.y, this.position.z)
     this.scene.add(this.object)
 
     this.setHitbox()
+    this.add()
   }
 
   setHitbox() {
@@ -37,38 +32,17 @@ export default class SpawnPoint extends InteractiveObject {
     this.scene.add(this.hitbox)
   }
 
-  interact() {
-    if (!this.canInteract) {
-      return
-    }
-    this.canInteract = false
+  interact(origin) {
+    const isBusy = super.interact(origin)
+    if (isBusy) return
 
     this.wait(() => this.experience.world.htmlAnnouncement).then(() => {
       this.experience.world.htmlAnnouncement.addQueue(this.experience.world.htmlAnnouncement.type.AREA, this.name, 3000)
     })
-
-    setTimeout(() => {
-      this.canInteract = true
-    }, 2000)
   }
 
   destroy() {
-    this.name = null
-    this.position = null
-    this.debug = null
-    this.hitbox = null
-    //this.radius = null
-  }
-
-  // DEBUG
-  updatePosition(newPosition) {
-    this.position = newPosition
-    this.object.position.copy(newPosition)
-    this.hitbox.position.copy(newPosition)
-  }
-
-  updateHitboxRadius(radius) {
-    this.hitbox.geometry.dispose();
-    this.hitbox.geometry = new THREE.SphereGeometry(radius, 16, 16);
+    super.destroy()
+    this.radius = null
   }
 }
