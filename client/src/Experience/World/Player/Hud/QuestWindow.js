@@ -17,7 +17,6 @@ export default class QuestWindow extends EventEmitter{
         this.quest = this.experience.world.quest
         this.updateUI()
         this.experience.world.quest.on("update", () => {
-          console.log("UIQuest update")
           this.quest = this.experience.world.quest
           this.updateUI()
         })

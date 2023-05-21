@@ -32,7 +32,6 @@ export default class QuestManager extends EventEmitter{
       "Quête : " + quest.title,
       4000
     )
-    console.log("Quest add")
     this.trigger("update")
   }
 
@@ -44,7 +43,6 @@ export default class QuestManager extends EventEmitter{
   }
 
   completed(quest) {
-    console.log("Quest completed")
     quest.off("completed")
     quest.off("track")
     quest.off("update")
