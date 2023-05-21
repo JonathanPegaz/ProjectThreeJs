@@ -17,8 +17,16 @@ export default class RespawnController {
 
   init() {
     this.repawnPoints = [
-      new SpawnPoint(new THREE.Vector3(0, 10, 0), "Village", 20),
-      new SpawnPoint(new THREE.Vector3(-80, 30, 22), "Temple", 20)
+      new SpawnPoint(new THREE.Vector3(-95, 18, -20), "initial-spawn"),
+      new SpawnPoint(new THREE.Vector3(-68.5, 18, -11), "village-entrance"),
+      new SpawnPoint(new THREE.Vector3(-5, 15.5, 6.5), "tree-bridge-1"),
+      new SpawnPoint(new THREE.Vector3(33, 15.5, -19), "tree-bridge-2"),
+      new SpawnPoint(new THREE.Vector3(37, 16, -41), "forest-entrance"),
+      new SpawnPoint(new THREE.Vector3(-87, 19.5, 16), "runestone-1"),
+      new SpawnPoint(new THREE.Vector3(73, 16, -12), "runestone-2"),
+      new SpawnPoint(new THREE.Vector3(7, 17.5, 26), "church-entrance"),
+      new SpawnPoint(new THREE.Vector3(53, 15, -5), "church-exit"),
+      new SpawnPoint(new THREE.Vector3(-39, 18.5, 34), "mines-entrance"),
     ];
 
     if (this.debug.active) {
@@ -35,18 +43,18 @@ export default class RespawnController {
       this.debugFolderSpawnPoint
         .add(element.position, 'x')
         .name('Position x')
-        .min(-100)
-        .max(100)
-        .step(1)
+        .min(-1000)
+        .max(1000)
+        .step(0.5)
         .onChange(() => {
           element.updatePosition(element.position);
         })
       this.debugFolderSpawnPoint
         .add(element.position, 'y')
         .name('Position y')
-        .min(-10)
-        .max(10)
-        .step(0.001)
+        .min(-1000)
+        .max(1000)
+        .step(0.5)
         .onChange(() => {
           element.updatePosition(element.position);
         })
@@ -55,18 +63,9 @@ export default class RespawnController {
         .name('Position z')
         .min(-100)
         .max(100)
-        .step(1)
-        .onChange(() => {
-          element.updatePosition(element.position);
-        })
-      this.debugFolderSpawnPoint
-        .add(element, 'radius')
-        .name('Hitbox radius')
-        .min(0)
-        .max(100)
         .step(0.5)
         .onChange(() => {
-          element.updateHitboxRadius(element.radius);
+          element.updatePosition(element.position);
         })
     })
   }

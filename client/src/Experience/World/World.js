@@ -11,6 +11,7 @@ import { assets } from './Environments/assets.js';
 import QuestManager from "./Quest/QuestManager.js";
 import TriggerZoneController from "./TriggerZoneController.js";
 import {Fog} from "three";
+import AnnouncementZoneController from "./InteractiveObject/Controller/AnnouncementZoneController.js";
 
 export default class World
 {
@@ -39,6 +40,7 @@ export default class World
         this.interactiveObject = new InteractiveObjectController()
 
         this.respawn = new RespawnController()
+        this.announcementZone = new AnnouncementZoneController()
         this.collectZone = new CollectZoneController()
         this.triggerZone = new TriggerZoneController()
 
@@ -141,6 +143,8 @@ export default class World
         this.collectZone = null
         this.respawn.destroy()
         this.respawn = null
+        this.announcementZone.destroy()
+        this.announcementZone = null
         this.interactiveObject.destroy()
         this.interactiveObject = null
 
