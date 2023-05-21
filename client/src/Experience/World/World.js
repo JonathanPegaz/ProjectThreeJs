@@ -11,6 +11,7 @@ import Experience from "../Experience.js";
 import { assets } from './Environments/assets.js';
 import QuestManager from "./Quest/QuestManager.js";
 import TriggerZoneController from "./TriggerZoneController.js";
+import {Fog} from "three";
 
 export default class World
 {
@@ -23,6 +24,9 @@ export default class World
         this.smallMeshsDistance = []
         this.mediumMeshsDistance = []
         this.bigMeshsDistance = []
+        this.shadowMeshs = []
+
+        this.scene.fog = new Fog(0xDFE9F3, 0, 100)
 
         for (let asset of assets)
         {
@@ -44,6 +48,9 @@ export default class World
             }
             else if (asset.display === 2) {
                 this.bigMeshsDistance.push(...this[asset.resource].meshs)
+            }
+            if (asset.castShadow) {
+                this.shadowMeshs.push(...this[asset.resource].meshs)
             }
         }
 
@@ -81,6 +88,10 @@ export default class World
         // loop through all the big meshs and check if they are close enough to be displayed
         for (let mesh of this.bigMeshsDistance) {
             mesh.visible = this.experience.camera.instance.position.distanceTo(mesh.geometry.boundingSphere.center) < 100;
+        }
+        // loop through all the shadow meshs and check if they are close enough to be displayed
+        for (let mesh of this.shadowMeshs) {
+            mesh.castShadow = this.experience.camera.instance.position.distanceTo(mesh.geometry.boundingSphere.center) < 50;
         }
     }
 
@@ -122,11 +133,13 @@ export default class World
         this.landscape = null
 
         this.experience = null
+        this.scene.fog = null
         this.scene = null
         this.resources = null
 
         this.smallMeshsDistance = null
         this.mediumMeshsDistance = null
         this.bigMeshsDistance = null
+        this.shadowMeshs = null
     }
 }
