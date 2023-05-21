@@ -25,37 +25,18 @@ export default class World
         this.mediumMeshsDistance = []
         this.bigMeshsDistance = []
         this.shadowMeshs = []
+        this.animatedAsset = []
 
         this.scene.fog = new Fog(0xDFE9F3, 0, 100)
 
+        this.loaded = 0
+
         for (let asset of assets)
         {
-            this[asset.resource] = new asset.type(this.resources.items[asset.resource])
-            if (asset.hasPhysics) {
-                this[asset.resource].physicsMeshs.forEach((mesh) => {
-                    this.experience.physics.createTrimeshShape(mesh)
-                })
-            }
-            // remove physics meshs
-            this[asset.resource].physicsMeshs = []
-            this.scene.add(this[asset.resource].model)
-
-            if (asset.display === 0) {
-                this.smallMeshsDistance.push(...this[asset.resource].meshs)
-            }
-            else if (asset.display === 1) {
-                this.mediumMeshsDistance.push(...this[asset.resource].meshs)
-            }
-            else if (asset.display === 2) {
-                this.bigMeshsDistance.push(...this[asset.resource].meshs)
-            }
-            if (asset.castShadow) {
-                this.shadowMeshs.push(...this[asset.resource].meshs)
-            }
+            this[asset.resource] = new asset.type(asset)
         }
 
         // Special
-
         this.interactiveObject = new InteractiveObjectController()
         this.npc = new NpcController()
 
@@ -73,10 +54,54 @@ export default class World
         this.landscape = new Landscape()
     }
 
+    setAsset(asset) {
+        if (this[asset].hasPhysics) {
+            this[asset].physicsMeshs.forEach((mesh) => {
+                this.experience.physics.createTrimeshShape(mesh)
+            })
+        }
+        // remove physics meshs
+        this[asset].physicsMeshs = []
+        this.scene.add(this[asset].model)
+
+        if (this[asset].display === 0) {
+            this.smallMeshsDistance.push(...this[asset].meshs)
+        }
+        else if (this[asset].display === 1) {
+            this.mediumMeshsDistance.push(...this[asset].meshs)
+        }
+        else if (this[asset].display === 2) {
+            this.bigMeshsDistance.push(...this[asset].meshs)
+        }
+        if (this[asset].castShadow) {
+            this.shadowMeshs.push(...this[asset].meshs)
+        }
+        if(this[asset].isAnimated) {
+            this.animatedAsset.push(this[asset])
+        }
+        this.loaded++
+
+        if (this.loaded === assets.length) {
+            this.meshsDisplayUpdate()
+        }
+    }
+
     update()
     {
         this.ocean.update()
         this.npc.update()
+
+        if (this.experience.controls && (this.experience.controls.keys.down.forward || this.experience.controls.keys.down.backward)) {
+            this.meshsDisplayUpdate()
+        }
+
+        // update mixer animatedAsset
+        for (let asset of this.animatedAsset) {
+            //asset.mixer.update(this.experience.time.delta / 1000)
+        }
+    }
+
+    meshsDisplayUpdate() {
         // loop through all the small meshs and check if they are close enough to be displayed
         for (let mesh of this.smallMeshsDistance) {
             mesh.visible = this.experience.camera.instance.position.distanceTo(mesh.geometry.boundingSphere.center) < 40;
@@ -93,6 +118,8 @@ export default class World
         for (let mesh of this.shadowMeshs) {
             mesh.castShadow = this.experience.camera.instance.position.distanceTo(mesh.geometry.boundingSphere.center) < 50;
         }
+
+        this.experience.renderer.instance.shadowMap.needsUpdate = true
     }
 
     destroy() {

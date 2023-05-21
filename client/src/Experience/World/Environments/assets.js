@@ -22,6 +22,7 @@ import Stele1 from "./Nature/Stele1.js";
 import Stele2 from "./Nature/Stele2.js";
 import Stele3 from "./Nature/Stele3.js";
 import Ferme from "./Buildings/Ferme.js";
+import TreeAnimated from "./Nature/Vegetations/Trees/TreeAnimated.js";
 
 export const assets = [
     // display : 0 = small, 1 = medium, 2 = big
@@ -33,6 +34,7 @@ export const assets = [
         hasPhysics: true,
         display: 0,
         castShadow: true,
+        source: 'models/Barrieres.glb'
     },
     {
         type: Batiments,
@@ -40,6 +42,7 @@ export const assets = [
         hasPhysics: true,
         display: 2,
         castShadow: true,
+        source: 'models/Batiments.glb'
     },
     {
         type: Dalles,
@@ -47,6 +50,7 @@ export const assets = [
         hasPhysics: false,
         display: 0,
         castShadow: false,
+        source: 'models/Dalles.glb'
     },
     {
         type: Ferme,
@@ -54,6 +58,7 @@ export const assets = [
         hasPhysics: true,
         display: 2,
         castShadow: true,
+        source: 'models/Ferme.glb'
     },
     {
         type: Panneaux,
@@ -61,6 +66,7 @@ export const assets = [
         hasPhysics: true,
         display: 1,
         castShadow: true,
+        source: 'models/Panneaux.glb'
     },
     {
         type: Ponts,
@@ -68,6 +74,7 @@ export const assets = [
         hasPhysics: true,
         display: 2,
         castShadow: true,
+        source: 'models/Ponts.glb'
     },
     {
         type: Props,
@@ -75,6 +82,7 @@ export const assets = [
         hasPhysics: true,
         display: 0,
         castShadow: true,
+        source: 'models/Props.glb'
     },
     // Nature
     //  Vegetations
@@ -85,6 +93,7 @@ export const assets = [
         hasPhysics: true,
         display: 2,
         castShadow: true,
+        source: 'models/Arbre_sacre.glb'
     },
     {
         type: ArbreRose,
@@ -92,6 +101,7 @@ export const assets = [
         hasPhysics: true,
         display: 2,
         castShadow: true,
+        source: 'models/Arbre_rose.glb'
     },
     {
         type: Pine,
@@ -99,6 +109,7 @@ export const assets = [
         hasPhysics: true,
         display: 2,
         castShadow: true,
+        source: 'models/Pine.glb'
     },
     {
         type: Arbres,
@@ -106,6 +117,7 @@ export const assets = [
         hasPhysics: true,
         display: 2,
         castShadow: true,
+        source: 'models/Arbres.glb'
     },
     // Others
     {
@@ -114,6 +126,7 @@ export const assets = [
         hasPhysics: false,
         display: 0,
         castShadow: false,
+        source: 'models/Buissons.glb'
     },
     {
         type: Crystal,
@@ -121,6 +134,7 @@ export const assets = [
         hasPhysics: true,
         display: 1,
         castShadow: true,
+        source: 'models/Crystal.glb'
     },
     {
         type: DebrisCarriere,
@@ -128,6 +142,7 @@ export const assets = [
         hasPhysics: false,
         display: 2,
         castShadow: false,
+        source: 'models/Debris_carriere.glb'
     },
     {
         type: Ilot,
@@ -135,6 +150,7 @@ export const assets = [
         hasPhysics: true,
         display: 2,
         castShadow: false,
+        source: 'models/Ilot.glb'
     },
     {
         type: Lac,
@@ -142,6 +158,7 @@ export const assets = [
         hasPhysics: false,
         display: 2,
         castShadow: false,
+        source: 'models/Lac.glb'
     },
     {
         type: RocherLivre,
@@ -149,6 +166,7 @@ export const assets = [
         hasPhysics: true,
         display: 1,
         castShadow: true,
+        source: 'models/Rocher_livre.glb'
     },
     {
         type: Rochers,
@@ -156,6 +174,7 @@ export const assets = [
         hasPhysics: true,
         display: 2,
         castShadow: true,
+        source: 'models/Rochers.glb'
     },
     {
         type: Ruine1,
@@ -163,6 +182,7 @@ export const assets = [
         hasPhysics: true,
         display: 1,
         castShadow: true,
+        source: 'models/Ruine1.glb'
     },
     {
         type: Ruine2,
@@ -170,6 +190,7 @@ export const assets = [
         hasPhysics: true,
         display: 1,
         castShadow: true,
+        source: 'models/Ruine2.glb'
     },
     {
         type: Ruine3,
@@ -177,6 +198,7 @@ export const assets = [
         hasPhysics: true,
         display: 1,
         castShadow: true,
+        source: 'models/Ruine3.glb'
     },
     {
         type: Stele1,
@@ -184,6 +206,7 @@ export const assets = [
         hasPhysics: true,
         display: 0,
         castShadow: true,
+        source: 'models/Stele1.glb'
     },
     {
         type: Stele2,
@@ -191,6 +214,7 @@ export const assets = [
         hasPhysics: true,
         display: 0,
         castShadow: true,
+        source: 'models/Stele2.glb'
     },
     {
         type: Stele3,
@@ -198,5 +222,14 @@ export const assets = [
         hasPhysics: true,
         display: 0,
         castShadow: true,
+        source: 'models/Stele3.glb'
+    },
+    {
+        type: TreeAnimated,
+        resource: 'tree_animated',
+        hasPhysics: true,
+        display: 2,
+        castShadow: true,
+        source: 'models/tree_animated.glb',
     }
 ]

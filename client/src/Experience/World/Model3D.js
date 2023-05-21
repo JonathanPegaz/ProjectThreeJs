@@ -1,24 +1,51 @@
-import {Mesh, MeshToonMaterial} from "three";
+import {AnimationMixer, LoopRepeat, Mesh, MeshToonMaterial} from "three";
+import Experience from "../Experience.js";
 
 export default class Model3D {
-    constructor(model) {
-        this.model = model.scene
+    constructor(data) {
+        this.experience = new Experience()
+
+        this.hasPhysics = data.hasPhysics
+        this.display = data.display
+        this.castShadow = data.castShadow
+        this.resource = data.resource
+        this.source = data.source
+
         this.meshs = []
         this.physicsMeshs = []
+        this.isAnimated = false
         this.setModel()
     }
 
     setModel() {
-        this.model.traverse((child) =>
-        {
-            if(child instanceof Mesh)
-            {
-                this.setMaterial(child)
-                this.setPhysicsMeshs(child)
-                this.meshs.push(child)
+        this.experience.resources.loaders.gltfLoader.load(
+            this.source, (file) => {
+                this.experience.resources.items[this.resource] = file
+
+                // set model
+                this.model = file.scene
+                this.model.traverse((child) =>
+                {
+                    if(child instanceof Mesh)
+                    {
+                        this.setMaterial(child)
+                        this.setPhysicsMeshs(child)
+                        this.meshs.push(child)
+                    }
+                })
+                this.model.matrixAutoUpdate = false
+
+                // set animations
+                this.animations = file.animations
+                if (this.animations.length > 0) {
+                    this.setAnimation()
+                    this.isAnimated = true
+                }
+
+                this.experience.world.setAsset(this.resource)
+                this.experience = null
             }
-        })
-        this.model.matrixAutoUpdate = false
+        )
     }
 
     setMaterial(child) {
@@ -30,6 +57,14 @@ export default class Model3D {
 
     setPhysicsMeshs(child) {
         this.physicsMeshs.push(child)
+    }
+
+    setAnimation() {
+        this.mixer = new AnimationMixer(this.model)
+        for (let i = 0; i < this.animations.length; i++) {
+            this.mixer.clipAction(this.animations[i]).loop = LoopRepeat
+            this.mixer.clipAction(this.animations[i]).play()
+        }
     }
 
     destroy() {
@@ -53,8 +88,19 @@ export default class Model3D {
         })
 
         // null
+        this.hasPhysics = null
+        this.display = null
+        this.castShadow = null
+        this.source = null
+        this.resource = null
         this.model = null
         this.physicsMeshs = null
         this.meshs = null
+        this.animations = null
+        if (this.mixer)
+            this.mixer = null
+        this.isAnimated = null
+
+        this.experience = null
     }
 }

@@ -30,7 +30,6 @@ export default class Landscape {
                     type: 'MeshToonMaterial',
                     transparent: false,
                 })
-
                 child.receiveShadow = true
             }
         })

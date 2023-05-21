@@ -64,6 +64,21 @@ export default class Experience
             this.debugFolder.add(this.debugObject, 'cleanMemory').name('Clean memory')
         }
 
+        // Wait for resources
+        this.resources.on('ready', () =>
+        {
+            this.mainscreen.showInput()
+            this.world = new World()
+        })
+
+        this.mainscreen.on('pseudo-entered', () => {
+            this.hud = new Hud()
+            this.controls = new Controls()
+            this.network = new Network()
+            this.localPlayer = new LocalPlayer()
+            this.resources.removeOverlay()
+        })
+
         // Resize event
         this.sizes.on('resize', () =>
         {
@@ -75,22 +90,6 @@ export default class Experience
         {
             this.update()
         })
-        // Wait for resources
-        this.resources.on('ready', () =>
-        {
-            this.mainscreen.showInput()
-            this.world = new World()
-
-        })
-
-        this.mainscreen.on('pseudo-entered', () => {
-            this.hud = new Hud()
-            this.controls = new Controls()
-            this.network = new Network()
-            this.localPlayer = new LocalPlayer()
-            this.resources.removeOverlay()
-        })
-
     }
 
     resize()

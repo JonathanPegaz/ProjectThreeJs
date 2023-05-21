@@ -20,9 +20,11 @@ export default class Renderer
     {
         this.instance = new WebGLRenderer({
             canvas: this.canvas,
-            antialias: true
+            antialias: true,
+            powerPreference: "high-performance"
         })
         this.instance.physicallyCorrectLights = true
+        this.instance.gammaFactor = 2.2
         this.instance.outputEncoding = sRGBEncoding
         this.instance.toneMapping = NoToneMapping
         this.instance.toneMappingExposure = 1.75
@@ -31,6 +33,7 @@ export default class Renderer
         this.instance.setClearColor('#211d20')
         this.instance.setSize(this.sizes.width, this.sizes.height)
         this.instance.setPixelRatio(Math.min(this.sizes.pixelRatio, 2))
+        this.instance.shadowMap.autoUpdate = false
 
         if(this.experience.debug.active) {
             this.debugFolder = this.experience.debug.ui.addFolder('renderer')
