@@ -1,6 +1,7 @@
 import Experience from "../../Experience.js";
 import * as THREE from "three";
 import EventEmitter from "../../Utils/EventEmitter.js";
+import { v4 as uuidv4 } from 'uuid';
 
 export default class InteractiveObject extends EventEmitter{
   constructor() {
@@ -20,7 +21,7 @@ export default class InteractiveObject extends EventEmitter{
 
   async add() {
     await this.wait(() => this.experience.world).then(() => {
-      this.id = crypto.randomUUID()
+      this.id = uuidv4()
       this.experience.world.interactiveObject.store(this)
     });
   }

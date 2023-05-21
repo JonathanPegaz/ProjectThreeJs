@@ -1,5 +1,6 @@
 import EventEmitter from "../../Utils/EventEmitter.js";
 import Collect from "./Task/Collect.js";
+import { v4 as uuidv4 } from 'uuid';
 
 
 export default class Quest extends EventEmitter{
@@ -22,7 +23,7 @@ export default class Quest extends EventEmitter{
   }
 
   init(quest) {
-    this.id = crypto.randomUUID()
+    this.id = uuidv4()
     this.title = quest.title
     this.description = quest.description
     this.activeTasks = {}

@@ -1,5 +1,6 @@
 import * as THREE from 'three'
 import InteractiveObject from "./InteractiveObject.js";
+import { v4 as uuidv4 } from 'uuid';
 
 export default class TriggerZone extends InteractiveObject {
   constructor(position, size, radius = 1, callback = () => {console.log("TriggerZone callback not set")}) {
@@ -14,7 +15,7 @@ export default class TriggerZone extends InteractiveObject {
   }
 
   init(position, size, radius, callback) {
-    this.id = crypto.randomUUID()
+    this.id = uuidv4()
     this.radius = radius
     this.size = size
     this.position = position

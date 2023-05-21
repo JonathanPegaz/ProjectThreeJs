@@ -1,5 +1,6 @@
 import EventEmitter from "../../../Utils/EventEmitter.js";
 import Experience from "../../../Experience.js";
+import { v4 as uuidv4 } from 'uuid';
 
 
 export default class Task extends EventEmitter{
@@ -17,7 +18,7 @@ export default class Task extends EventEmitter{
   }
 
   init(param) {
-    this.id = crypto.randomUUID()
+    this.id = uuidv4()
     this.world = this.experience.world
 
     this.name = param.name
