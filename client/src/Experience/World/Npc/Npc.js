@@ -27,7 +27,6 @@ export default class Npc extends EventEmitter{
         this.hitbox = null
 
         this.icon = new Icons(this, '')
-        this.marker = new QuestMarker(this, 0.0)
 
         this.setModel()
         this.setAnimation()
@@ -35,6 +34,7 @@ export default class Npc extends EventEmitter{
         this.name = new Pseudo(this, data.name, false)
         this.setDialog(data.dialog)
         this.setQuest(data.quest)
+        this.marker = new QuestMarker(this, 0.0)
     }
 
     setModel() {

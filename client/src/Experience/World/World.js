@@ -13,6 +13,7 @@ import QuestManager from "./Quest/QuestManager.js";
 import TriggerZoneController from "./InteractiveObject/Controller/TriggerZoneController.js";
 import {Fog} from "three";
 import AnnouncementZoneController from "./InteractiveObject/Controller/AnnouncementZoneController.js";
+import Fireflies from "./Fireflies.js";
 
 export default class World
 {
@@ -28,7 +29,7 @@ export default class World
         this.shadowMeshs = []
         this.animatedAsset = []
 
-        this.scene.fog = new Fog(0xDFE9F3, 0, 100)
+        this.scene.fog = new Fog(0xDFE9F3, 0, 95)
 
         this.loaded = 0
 
@@ -53,6 +54,7 @@ export default class World
         this.ocean = new Ocean()
         this.environment = new Environment()
         this.landscape = new Landscape()
+        this.portal = new Fireflies()
     }
 
     setAsset(asset) {
@@ -90,6 +92,7 @@ export default class World
     update()
     {
         this.ocean.update()
+        this.portal.update()
 
         if (this.experience.controls && (this.experience.controls.keys.down.forward || this.experience.controls.keys.down.backward)) {
             this.meshsDisplayUpdate()
@@ -97,10 +100,14 @@ export default class World
 
         // update mixer animatedAsset
         for (let asset of this.animatedAsset) {
-            //asset.mixer.update(this.experience.time.delta / 1000)
-            if(asset.videoTexture) {
+            if (asset.mixer)
+                asset.mixer.update(this.experience.time.delta / 1000)
+            if(asset.videoTexture)
                 asset.videoTexture.needsUpdate = true
+            if(asset.shaderMaterial) {
+                asset.model.children[0].material.uniforms.uTime.value = this.experience.time.elapsed * 0.001
             }
+
         }
     }
 
@@ -161,6 +168,8 @@ export default class World
         this.environment = null
         this.landscape.destroy()
         this.landscape = null
+        this.portal.destroy()
+        this.portal = null
 
         this.experience = null
         this.scene.fog = null
