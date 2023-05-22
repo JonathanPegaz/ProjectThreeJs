@@ -2,22 +2,35 @@
 
 export default class HTMLDialog {
     constructor() {
-        this.dialog = null
-        this.dialogBox = null
-        this.dialogText = null
-        this.dialogName = null
-        this.dialogOptions = null
-        this.dialogOption = null
-        this.dialogOptionText = null
-        this.dialogOptionIcon = null
-        this.dialogOptionIconImage = null
-        this.dialogOptionIconText = null
+        this.dialogContainer = document.createElement('div');
+        this.dialogContainer.id = 'dialog-container';
+        this.dialogContainer.classList.add('dialog-container');
     }
 
-    createDialogBox() {
-        this.dialogBox = document.createElement('div')
-        this.dialogBox.id = 'dialogBox'
-        this.dialogBox.classList.add('dialogBox')
-        document.body.appendChild(this.dialogBox)
+    open(dialog) {
+        this.clearDialog();
+
+        for (let i = 0; i < dialog.length; i++) {
+            const paragraph = document.createElement('p');
+            paragraph.textContent = dialog[i];
+        }
+
+        this.dialogContainer.style.display = 'block';
+    }
+
+    clearDialog() {
+        while (this.dialogContainer.firstChild) {
+            this.dialogContainer.removeChild(this.dialogContainer.firstChild);
+        }
+    }
+
+    close() {
+        this.clearDialog();
+        this.dialogContainer.style.display = 'none';
+    }
+
+    destroy() {
+        this.clearDialog();
+        this.dialogContainer.remove();
     }
 }

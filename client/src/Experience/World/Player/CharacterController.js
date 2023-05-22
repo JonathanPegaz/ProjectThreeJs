@@ -57,19 +57,36 @@ export default class BasicCharacterController {
         this.stateMachine = new CharacterFSM(
             new BasicCharacterControllerProxy(this.localPlayer.animations));
 
-        this.isJoyStickTouch = false
-        this.joystickSetup =  {forward: 0, turn: 0 }
-        this.joystick = new JoyStick({
-            onMove: (forward, turn) => {
-                this.isJoyStickTouch = true
-                this.joystickSetup.forward = forward
-                this.joystickSetup.turn = -turn
-            }
+        this.setJoystick()
+        this.experience.sizes.on('resize', () => {
+            this.setJoystick()
         })
 
         this.stateMachine.SetState('idle');
 
         this.raycastDebug = new RaycastDebug(50)
+    }
+
+    setJoystick() {
+        if (!this.joystick && this.experience.sizes.width <= 1023) {
+            this.isJoyStickTouch = false
+            this.joystickSetup = {forward: 0, turn: 0}
+            this.joystick = new JoyStick({
+                onMove: (forward, turn) => {
+                    this.isJoyStickTouch = true
+                    this.joystickSetup.forward = forward
+                    this.joystickSetup.turn = -turn
+                }
+            })
+            return
+        }
+
+        if (this.joystick && this.experience.sizes.width >= 1023) {
+            this.isJoyStickTouch = false
+            this.joystickSetup = {forward: 0, turn: 0}
+            this.joystick.destroy()
+            this.joystick = null
+        }
     }
 
     get Position() {
@@ -91,38 +108,43 @@ export default class BasicCharacterController {
         this.experience.world.respawn.execute(this.localPlayer)
     }
 
-    detectCollision() {
-        // get player position and direction
-        this.raycastPosition = new Vector3(this.Position.x, this.Position.y + 0.25, this.Position.z)
-        this.raycaster.set(this.raycastPosition, this.Direction);
-        this.raycaster.far = 1
-
-        if(this.experience.world.interactiveObject)
-            this.experience.world.interactiveObject.catch(this.raycaster)
-
-        if(this.experience.world.npc)
-            this.experience.world.npc.catch(this.raycaster)
-
-        if (this.debug.active && this.raycastDebug.isActive) {
-            this.raycastDebug.execute(this.raycaster.ray.origin, this.raycaster.ray.direction, this.raycaster.far)
-        }
-    }
-
     update() {
         if (!this.localPlayer.object) {
             return;
         }
-        const timeInSeconds = this.time.delta / 1000;
-        if (this.isJoyStickTouch) {
-            this.handleJoystick(timeInSeconds)
+        this.detectCollision()
+
+        if (this.input.pause) {
+            return;
         }
-        this.handleKeyboard(timeInSeconds)
-        this.stateMachine.Update(timeInSeconds, this.input);
+
         if (this.Position.y < -15) {
             this.respawn()
         }
 
-        this.detectCollision()
+        const timeInSeconds = this.time.delta / 1000;
+        if (this.joystick && this.isJoyStickTouch) {
+            this.handleJoystick(timeInSeconds)
+        }
+        this.handleKeyboard(timeInSeconds)
+        this.stateMachine.Update(timeInSeconds, this.input);
+    }
+
+    detectCollision() {
+        // get player position and direction
+        this.raycastPosition = new Vector3(this.Position.x, this.Position.y + 0.25, this.Position.z)
+        this.raycaster.set(this.raycastPosition, this.Direction);
+        this.raycaster.far = 3
+
+        if(this.experience.world.interactiveObject)
+            this.experience.world.interactiveObject.catch(this.raycaster)
+
+        if(this.experience.npc)
+            this.experience.npc.catch(this.raycaster)
+
+        if (this.debug.active && this.raycastDebug.isActive) {
+            this.raycastDebug.execute(this.raycaster.ray.origin, this.raycaster.ray.direction, this.raycaster.far)
+        }
     }
 
     handleJoystick(timeInSeconds) {

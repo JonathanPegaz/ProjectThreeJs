@@ -1,4 +1,4 @@
-import Pseudo from "./Hud/Pseudo.js";
+import Pseudo from "../../Interface/Pseudo.js";
 import Player from "./Player.js";
 import {Euler} from "three";
 

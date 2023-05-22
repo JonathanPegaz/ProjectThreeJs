@@ -1,7 +1,7 @@
 import BasicCharacterController from "./CharacterController.js";
 import ThirdPersonCamera from "./ThirdPersonCamera.js";
 import * as CANNON from "cannon-es";
-import Pseudo from "./Hud/Pseudo.js";
+import Pseudo from "../../Interface/Pseudo.js";
 import Player from "./Player.js";
 
 export default class LocalPlayer extends Player {

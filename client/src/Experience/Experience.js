@@ -17,6 +17,7 @@ import Physics from "./Physics.js";
 import Mainscreen from "./Mainscreen.js";
 import Hud from "./World/Player/Hud/Hud.js";
 import Controls from "./Utils/Controls.js";
+import NpcController from "./World/Npc/NpcController.js";
 
 let instance = null
 
@@ -68,12 +69,13 @@ export default class Experience
         this.resources.on('ready', () =>
         {
             this.mainscreen.showInput()
+            this.controls = new Controls()
             this.world = new World()
         })
 
         this.mainscreen.on('pseudo-entered', () => {
             this.hud = new Hud()
-            this.controls = new Controls()
+            this.npc = new NpcController()
             this.network = new Network()
             this.localPlayer = new LocalPlayer()
             this.resources.removeOverlay()
@@ -117,6 +119,8 @@ export default class Experience
             this.network.update()
         if(this.localPlayer)
             this.localPlayer.update()
+        if(this.npc)
+            this.npc.update()
 
         this.renderer.update()
         //this.postProcessing.update()
@@ -136,6 +140,8 @@ export default class Experience
         this.world.destroy()
         if (this.localPlayer)
             this.localPlayer.destroy()
+        if (this.npc)
+            this.npc.destroy()
         if (this.network)
             this.network.destroy()
         if (this.physics)
@@ -200,6 +206,7 @@ export default class Experience
         this.mainscreen = null
         this.hud = null
         this.localPlayer = null
+        this.npc = null
         this.network = null
         this.controls = null
         this.time = null

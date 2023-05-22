@@ -60,7 +60,7 @@ export default [
     {
         name:'speak',
         type:'texture',
-        path:'icons/commentaires-64.png'
+        path:'icons/chat-bubble-50.png'
 
     },
     {

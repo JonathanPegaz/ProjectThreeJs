@@ -1,7 +1,8 @@
 export default class JoyStick {
     constructor(props) {
-        const circle = document.createElement('div');
-        circle.style.cssText = `
+        this.circle = document.createElement('div');
+        this.circle.id = 'circle';
+        this.circle.style.cssText = `
       position: absolute;
       bottom: 16px;
       width: 100px;
@@ -27,8 +28,8 @@ export default class JoyStick {
       box-shadow: 0px 1px 2px rgba(200, 200, 200, .25);
       user-select: none:
     `;
-        circle.appendChild(thumb);
-        document.getElementById('webgl').appendChild(circle);
+        this.circle.appendChild(thumb);
+        document.getElementById('webgl').appendChild(this.circle);
         this.domElement = thumb;
         this.maxRadius = props.maxRadius || 40;
         this.maxRadiusSquared = this.maxRadius * this.maxRadius;
@@ -122,5 +123,9 @@ export default class JoyStick {
 
     destroy() {
         this.domElement.parentNode.removeChild(this.domElement);
+        const circleElement = document.getElementById('circle');
+        if (circleElement) {
+            circleElement.parentNode.removeChild(circleElement);
+        }
     }
 }
