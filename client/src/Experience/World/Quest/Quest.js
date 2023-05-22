@@ -2,6 +2,7 @@ import EventEmitter from "../../Utils/EventEmitter.js"
 import Collect from "./Task/Collect.js"
 import { v4 as uuidv4 } from 'uuid'
 import Escort from "./Task/Escort.js"
+import Talk from "./Task/Talk.js";
 
 
 export default class Quest extends EventEmitter{
@@ -19,6 +20,8 @@ export default class Quest extends EventEmitter{
     this.taskEnum = {
       COLLECT: (param) => new Collect(param),
       ESCORT: (param) => new Escort(param),
+      TALK: (param) => new Talk(param),
+      // ESCORT: (param) => new Escort(param),
       // DELIVERY: (param) => new Delivery(param),
     }
 

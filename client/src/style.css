@@ -185,3 +185,8 @@ body
 .npc-name-text {
     white-space: nowrap;
 }
+
+.icon-image {
+    width: 40px; /* Ajustez la valeur selon la taille de votre image */
+    height: 40px; /* Ajustez la valeur selon la taille de votre image */
+}

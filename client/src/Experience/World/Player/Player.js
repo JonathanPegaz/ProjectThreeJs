@@ -44,9 +44,6 @@ export default class Player {
         this.resource.animations.push(this.resources.items.idle.animations[0])
         this.resource.animations.push(this.resources.items.walking.animations[0])
 
-        // console.log(this.resource)
-        // console.log(this.resources.items.foxModel)
-
         this.mixer = new THREE.AnimationMixer(this.model)
 
         // action

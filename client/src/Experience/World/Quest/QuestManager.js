@@ -58,6 +58,7 @@ export default class QuestManager extends EventEmitter{
     })
 
     this.trigger("update")
+    this.trigger("completed")
   }
 
   destroy() {

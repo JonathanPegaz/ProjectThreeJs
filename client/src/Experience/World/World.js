@@ -98,6 +98,9 @@ export default class World
         // update mixer animatedAsset
         for (let asset of this.animatedAsset) {
             //asset.mixer.update(this.experience.time.delta / 1000)
+            if(asset.videoTexture) {
+                asset.videoTexture.needsUpdate = true
+            }
         }
     }
 

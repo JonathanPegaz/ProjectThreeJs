@@ -15,9 +15,9 @@ export default class TriggerZoneController {
 
   init() {
     this.list = [
-      new TriggerZone(new THREE.Vector3(-91, 12, -7), 19, 4.5, () => {
-        this.experience.world.quest.add(1)
-      }),
+      // new TriggerZone(new THREE.Vector3(-91, 12, -7), 19, 4.5, () => {
+      //   this.experience.world.quest.add(1)
+      // }),
     ];
 
     this.list.forEach((element) => {
