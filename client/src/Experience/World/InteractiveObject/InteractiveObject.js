@@ -2,6 +2,7 @@ import Experience from "../../Experience.js";
 import * as THREE from "three";
 import EventEmitter from "../../Utils/EventEmitter.js";
 import { v4 as uuidv4 } from 'uuid';
+import QuestMarker from "../../Interface/QuestMarker.js";
 
 export default class InteractiveObject extends EventEmitter{
   constructor() {
@@ -17,13 +18,14 @@ export default class InteractiveObject extends EventEmitter{
     this.name = null
     this.position = null
     this.object = null
+    this.marker = null
   }
 
   async add() {
     await this.wait(() => this.experience.world).then(() => {
       this.id = uuidv4()
       this.experience.world.interactiveObject.store(this)
-    });
+    })
   }
   delete() {
     this.experience.world.interactiveObject.delete(this.id)
@@ -71,6 +73,7 @@ export default class InteractiveObject extends EventEmitter{
     this.name = null
     this.position = null
     this.object = null
+    this.marker = null
   }
   updatePosition(newPosition) {
     this.position = newPosition

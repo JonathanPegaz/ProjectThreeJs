@@ -51,7 +51,12 @@ export default class QuestManager extends EventEmitter{
     this.experience.world.htmlAnnouncement.addQueue(this.experience.world.htmlAnnouncement.type.QUEST,
       "Quête complété : " +quest.title,
       4000
-    )
+    ).then(() => {
+      if (quest.nextQuest !== undefined && quest.nextQuest !== null) {
+        this.add(quest.nextQuest)
+      }
+    })
+
     this.trigger("update")
   }
 

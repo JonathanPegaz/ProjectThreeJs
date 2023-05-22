@@ -60,6 +60,7 @@ export default class Quest extends EventEmitter{
 
     Object.values(this.taskOrders[this.currentOrder]).forEach((task) => {
       this.activeTasks[task.id] = task
+      this.activeTasks[task.id].target.marker.mark()
       task.on("completed", () => {
         this.completeTask(task)
       })
