@@ -1,6 +1,6 @@
 import * as THREE from 'three'
-import Experience from "../Experience.js";
-import CollectZone from "./InteractiveObject/CollectZone.js";
+import Experience from "../../../Experience.js";
+import CollectZone from "../Object/CollectZone.js";
 
 
 export default class CollectZoneController {
@@ -15,8 +15,8 @@ export default class CollectZoneController {
 
   init() {
     this.list = [
-      new CollectZone(new THREE.Vector3(-5, 10.5, 42), "Mine", 19, 4.5, 4000, "diamond"),
-      new CollectZone(new THREE.Vector3(-41, 9.5, 14), "Ferme", 19, 3, 2000, "carrot"),
+      new CollectZone(new THREE.Vector3(-20, 11.5, 42), "Mine", 25, 17.5, 4000, "diamond"),
+      new CollectZone(new THREE.Vector3(-57, 9.5, 13), "Ferme", 19, 4.5, 2000, "carrot"),
     ];
 
     this.list.forEach((element) => {
@@ -42,17 +42,17 @@ export default class CollectZoneController {
       this.debugFolderCollectZone
         .add(element.position, 'x')
         .name('Position x')
-        .min(-100)
-        .max(100)
-        .step(1)
+        .min(-1000)
+        .max(1000)
+        .step(0.5)
         .onChange(() => {
           element.updatePosition(element.position);
         })
       this.debugFolderCollectZone
         .add(element.position, 'y')
         .name('Position y')
-        .min(-10)
-        .max(100)
+        .min(-1000)
+        .max(1000)
         .step(0.5)
         .onChange(() => {
           element.updatePosition(element.position);
@@ -62,7 +62,7 @@ export default class CollectZoneController {
         .name('Position z')
         .min(-100)
         .max(100)
-        .step(1)
+        .step(0.5)
         .onChange(() => {
           element.updatePosition(element.position);
         })

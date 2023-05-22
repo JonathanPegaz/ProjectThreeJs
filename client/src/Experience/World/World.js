@@ -5,12 +5,14 @@ import Landscape from "./Landscape.js";
 import RespawnController from "./RespawnController.js";
 import InteractiveObjectController from "./InteractiveObject/InteractiveObjectController.js";
 import HTMLAnnouncement from "../HTMLInterface/HTMLAnnouncement.js";
-import CollectZoneController from "./CollectZoneController.js";
+import CollectZoneController from "./InteractiveObject/Controller/CollectZoneController.js";
+import NpcController from "./Npc/NpcController.js";
 import Experience from "../Experience.js";
 import { assets } from './Environments/assets.js';
 import QuestManager from "./Quest/QuestManager.js";
-import TriggerZoneController from "./TriggerZoneController.js";
+import TriggerZoneController from "./InteractiveObject/Controller/TriggerZoneController.js";
 import {Fog} from "three";
+import AnnouncementZoneController from "./InteractiveObject/Controller/AnnouncementZoneController.js";
 
 export default class World
 {
@@ -39,6 +41,7 @@ export default class World
         this.interactiveObject = new InteractiveObjectController()
 
         this.respawn = new RespawnController()
+        this.announcementZone = new AnnouncementZoneController()
         this.collectZone = new CollectZoneController()
         this.triggerZone = new TriggerZoneController()
 
@@ -141,6 +144,8 @@ export default class World
         this.collectZone = null
         this.respawn.destroy()
         this.respawn = null
+        this.announcementZone.destroy()
+        this.announcementZone = null
         this.interactiveObject.destroy()
         this.interactiveObject = null
 

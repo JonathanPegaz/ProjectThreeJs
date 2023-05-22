@@ -1,5 +1,5 @@
 import * as THREE from 'three'
-import InteractiveObject from "./InteractiveObject.js";
+import InteractiveObject from "../InteractiveObject.js";
 import { v4 as uuidv4 } from 'uuid';
 
 export default class TriggerZone extends InteractiveObject {

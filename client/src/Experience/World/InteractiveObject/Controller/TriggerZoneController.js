@@ -1,6 +1,6 @@
 import * as THREE from 'three'
-import Experience from "../Experience.js";
-import TriggerZone from "./InteractiveObject/TriggerZone.js";
+import Experience from "../../../Experience.js";
+import TriggerZone from "../Object/TriggerZone.js";
 
 
 export default class TriggerZoneController {
@@ -42,17 +42,17 @@ export default class TriggerZoneController {
       this.debugFolderTiggerZone
         .add(element.position, 'x')
         .name('Position x')
-        .min(-100)
-        .max(100)
-        .step(1)
+        .min(-1000)
+        .max(1000)
+        .step(0.5)
         .onChange(() => {
           element.updatePosition(element.position);
         })
       this.debugFolderTiggerZone
         .add(element.position, 'y')
         .name('Position y')
-        .min(-10)
-        .max(100)
+        .min(-1000)
+        .max(1000)
         .step(0.5)
         .onChange(() => {
           element.updatePosition(element.position);
@@ -62,7 +62,7 @@ export default class TriggerZoneController {
         .name('Position z')
         .min(-100)
         .max(100)
-        .step(1)
+        .step(0.5)
         .onChange(() => {
           element.updatePosition(element.position);
         })

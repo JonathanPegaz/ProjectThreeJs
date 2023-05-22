@@ -1,5 +1,5 @@
 import * as THREE from 'three'
-import InteractiveObject from "./InteractiveObject.js";
+import InteractiveObject from "../InteractiveObject.js";
 
 export default class CollectZone extends InteractiveObject {
   constructor(position, name, size, radius = 1, collectTime = 1000, itemToCollect = null) {
@@ -59,7 +59,6 @@ export default class CollectZone extends InteractiveObject {
     return new Promise(() => {
       const check = () => {
         if (this.isCollecting) {
-          console.log("COLLECT", this.itemToCollect)
           this.trigger("collect", [this.itemToCollect]);
           setTimeout(check, this.collectTime);
         }
