@@ -85,11 +85,9 @@ export default class Npc {
     setDialog(dialog) {
         this.dialog = new Dialog(dialog, this)
         this.experience.controls.on('actionDown', () => {
-            console.log(this.canInteract)
             if (!this.canInteract)
                 return;
-
-            console.log(this.dialog.isStarted)
+            
             if (!this.dialog.isStarted) {
                 this.isPlayerInteracting = true
                 this.dialog.start()
