@@ -5,6 +5,7 @@ import {clone} from "three/examples/jsm/utils/SkeletonUtils.js";
 import Pseudo from "../../Interface/Pseudo.js";
 import Icons from "../../Interface/Icons.js";
 import EventEmitter from "../../Utils/EventEmitter.js";
+import QuestMarker from "../../Interface/QuestMarker.js";
 
 
 export default class Npc extends EventEmitter{
@@ -26,6 +27,7 @@ export default class Npc extends EventEmitter{
         this.hitbox = null
 
         this.icon = new Icons(this, '')
+        this.marker = new QuestMarker(this, 0.0)
 
         this.setModel()
         this.setAnimation()

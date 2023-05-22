@@ -21,9 +21,14 @@ export default class Talk extends Task{
             progress: 0,
         }
         for (const [key, value] of Object.entries(this.experience.npc.list)) {
-            value.on("talk", (item) => {
-                this.catch(item)
-            })
+            if (value.id === this.requirements.item) {
+                this.target = value
+                console.log(this.target)
+
+                value.on("talk", (item) => {
+                    this.catch(item)
+                })
+            }
         }
     }
 

@@ -25,8 +25,9 @@ export default class QuestMarker {
   }
 
   setCSS2DObject() {
+    console.log(this.target)
     this.markerObject = new CSS2DObject(this.questMarkerContainer)
-    this.markerObject.position.set(0, this.target.position.y + this.offset, 0);
+    this.markerObject.position.set(0, this.target.object.position.y + this.offset, 0);
     this.target.object.add(this.markerObject);
   }
 
