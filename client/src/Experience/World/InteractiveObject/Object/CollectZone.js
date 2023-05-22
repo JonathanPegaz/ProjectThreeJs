@@ -46,8 +46,8 @@ export default class CollectZone extends InteractiveObject {
     this.scene.add(this.hitbox)
   }
 
-  interact(origin, limit = null) {
-    return super.interact(origin, this.radius+0.5);
+  interact(origin) {
+    return super.interact(origin, this.radius+1);
   }
 
   collect() {
@@ -59,7 +59,8 @@ export default class CollectZone extends InteractiveObject {
     return new Promise(() => {
       const check = () => {
         if (this.isCollecting) {
-          this.trigger("collect", [this.itemToCollect]);
+          console.log("COLLECT", this.itemToCollect)
+          this.trigger(`collect-${this.id}`, [this.itemToCollect]);
           setTimeout(check, this.collectTime);
         }
       };

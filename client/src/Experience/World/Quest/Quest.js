@@ -1,21 +1,24 @@
-import EventEmitter from "../../Utils/EventEmitter.js";
-import Collect from "./Task/Collect.js";
-import { v4 as uuidv4 } from 'uuid';
+import EventEmitter from "../../Utils/EventEmitter.js"
+import Collect from "./Task/Collect.js"
+import { v4 as uuidv4 } from 'uuid'
+import Escort from "./Task/Escort.js"
 
 
 export default class Quest extends EventEmitter{
   constructor(quest) {
-    super();
+    super()
 
     this.activeTasks = null
     this.completedTasks = null
+    this.taskOrders = {}
+    this.currentOrder = 0
 
     this.id = null
     this.title = null
     this.description = null
     this.taskEnum = {
       COLLECT: (param) => new Collect(param),
-      // ESCORT: (param) => new Escort(param),
+      ESCORT: (param) => new Escort(param),
       // DELIVERY: (param) => new Delivery(param),
     }
 
@@ -31,18 +34,39 @@ export default class Quest extends EventEmitter{
     Object.values(quest.tasks).forEach((param) => {
       this.addTask(param)
     })
+
+    this.startNextOrder()
   }
 
   addTask(param) {
     const task = param.type in this.taskEnum ? this.taskEnum[param.type](param) : null
     if (!task) return
 
-    this.activeTasks[task.id] = task
-    this.activeTasks[task.id].on("completed", () => {
-      this.completeTask(task)
-    })
-    this.activeTasks[task.id].on("update", () => {
-      this.update()
+    const order = param.order || 1
+
+    if (!this.taskOrders[order]) {
+      this.taskOrders[order] = {}
+    }
+
+    this.taskOrders[order][task.id] = task
+  }
+
+  startNextOrder() {
+    this.currentOrder++
+    if (!this.taskOrders[this.currentOrder]) {
+      this.isComplete()
+      return
+    }
+
+    Object.values(this.taskOrders[this.currentOrder]).forEach((task) => {
+      this.activeTasks[task.id] = task
+      task.on("completed", () => {
+        this.completeTask(task)
+      })
+      task.on("update", () => {
+        this.update()
+      })
+      task.setActive()
     })
   }
 
@@ -51,13 +75,13 @@ export default class Quest extends EventEmitter{
     task.off("update")
     this.completedTasks[task.id] = task
     delete this.activeTasks[task.id]
-    if (Object.keys(this.activeTasks).length === 0) {
-      return this.isComplete()
-    }
     this.update()
   }
 
   update() {
+    if (Object.keys(this.activeTasks).length === 0) {
+      this.startNextOrder()
+    }
     this.trigger("update")
   }
 

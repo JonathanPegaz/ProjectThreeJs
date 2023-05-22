@@ -134,7 +134,7 @@ export default class BasicCharacterController {
         // get player position and direction
         this.raycastPosition = new Vector3(this.Position.x, this.Position.y + 0.25, this.Position.z)
         this.raycaster.set(this.raycastPosition, this.Direction);
-        this.raycaster.far = 3
+        this.raycaster.far = 1
 
         if(this.experience.world.interactiveObject)
             this.experience.world.interactiveObject.catch(this.raycaster)

@@ -1,7 +1,6 @@
 import Task from "./Task.js";
 
-
-export default class Collect extends Task{
+export default class Collect extends Task {
   constructor(param) {
     super();
 
@@ -22,24 +21,29 @@ export default class Collect extends Task{
       progress: 0,
     }
     this.world.collectZone.list.forEach((collectZone) => {
-      collectZone.on("collect", (item) => {
-        this.catch(item)
-      })
+      if (collectZone.itemToCollect === this.requirements.item) {
+        collectZone.on(`collect-${collectZone.id}`, (item) => {
+          this.catch(item, collectZone)
+        })
+      }
     })
   }
 
-  catch(item) {
-    if (item === this.requirements.item) {
+  catch(item, collectZone) {
+    if (!this.active) return
+
+    if (item === this.requirements.item && this.requirements.quantity > 0) {
       this.requirements.quantity--
       this.goal.progress++
       this.trigger("update")
       if (this.requirements.quantity === 0) {
-        this.isComplete()
+        this.isComplete(collectZone)
       }
     }
   }
 
-  isComplete() {
+  isComplete(collectZone) {
+    collectZone.off(`collect-${collectZone.id}`)
     super.isComplete();
   }
 
