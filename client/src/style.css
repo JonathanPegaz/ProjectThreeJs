@@ -106,6 +106,27 @@ body
 .quest-objectives {
 
 }
+.quest-marker-container {
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 50%;
+    background-color: rgba(0, 0, 0, 0.07);
+    border: 1px solid #ffb700;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+.quest-marker-icon-container {
+    width: 65%;
+    height: 65%;
+    fill: red;
+}
+
+
 .dialog-container {
     position: fixed;
     max-width: 90%;

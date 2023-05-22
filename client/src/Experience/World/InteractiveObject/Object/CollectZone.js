@@ -1,5 +1,6 @@
 import * as THREE from 'three'
 import InteractiveObject from "../InteractiveObject.js";
+import QuestMarker from "../../../Interface/QuestMarker.js";
 
 export default class CollectZone extends InteractiveObject {
   constructor(position, name, size, radius = 1, collectTime = 1000, itemToCollect = null) {
@@ -27,6 +28,8 @@ export default class CollectZone extends InteractiveObject {
     this.collectTime = collectTime
     this.setHitbox()
     this.add()
+
+    this.marker = new QuestMarker(this, -3)
   }
 
   setHitbox() {
@@ -46,8 +49,8 @@ export default class CollectZone extends InteractiveObject {
     this.scene.add(this.hitbox)
   }
 
-  interact(origin, limit = null) {
-    return super.interact(origin, this.radius+0.5);
+  interact(origin) {
+    return super.interact(origin, this.radius+1);
   }
 
   collect() {
@@ -59,7 +62,8 @@ export default class CollectZone extends InteractiveObject {
     return new Promise(() => {
       const check = () => {
         if (this.isCollecting) {
-          this.trigger("collect", [this.itemToCollect]);
+          console.log("COLLECT", this.itemToCollect)
+          this.trigger(`collect-${this.id}`, [this.itemToCollect]);
           setTimeout(check, this.collectTime);
         }
       };
@@ -73,6 +77,7 @@ export default class CollectZone extends InteractiveObject {
     this.collectTime = null
     this.isCollecting = null
     this.itemToCollect = null
+    this.marker = null
     super.destroy();
   }
   updateHitboxRadius(radius) {

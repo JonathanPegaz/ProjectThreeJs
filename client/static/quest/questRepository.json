@@ -4,6 +4,7 @@
     "description": "Le chef du village vous demande de lui ramener cette liste de courses : ",
     "tasks": {
       "1": {
+        "order": 1,
         "type": "COLLECT",
         "name": "Diamants",
         "description": "collecter 2 diamants",
@@ -13,6 +14,7 @@
         }
       },
       "2": {
+        "order": 2,
         "type": "COLLECT",
         "name": "Carottes",
         "description": "collecter 3 carottes",

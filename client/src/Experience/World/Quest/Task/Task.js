@@ -7,23 +7,25 @@ export default class Task extends EventEmitter{
   constructor() {
     super();
     this.experience = new Experience()
+    this.world = this.experience.world
 
     this.id = null
     this.name = null
     this.description = null
     this.type = null
     this.requirements = null
-    this.world = null
-
+    this.order = null
+    this.active = null
   }
 
   init(param) {
     this.id = uuidv4()
-    this.world = this.experience.world
 
     this.name = param.name
     this.description = param.description
     this.type = this.constructor.name
+    this.order = param.order !== undefined ? param.order : 0
+    this.active = false
   }
 
   catch() {
@@ -34,6 +36,10 @@ export default class Task extends EventEmitter{
     this.trigger("completed")
   }
 
+  setActive() {
+    this.active = true
+  }
+
   destroy() {
     this.id = null
     this.name = null
@@ -41,5 +47,9 @@ export default class Task extends EventEmitter{
     this.type = null
     this.requirements = null
     this.world = null
+    this.order = null
+    this.world.collectZone.list.forEach((collectZone) => {
+      collectZone.off("collect")
+    })
   }
 }
