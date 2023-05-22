@@ -106,7 +106,6 @@ body
 .quest-objectives {
 
 }
-
 .dialog-container {
     position: fixed;
     max-width: 90%;
@@ -132,4 +131,36 @@ body
     transform: rotate(180deg);
     border-style: solid;
     border-color: transparent transparent rgba(0, 0, 0, 0.7) transparent;
+}
+
+.action-container {
+    display: flex;
+    align-items: center;
+    margin-top: 10px; /* Ajustez la valeur selon vos besoins */
+}
+
+.action-image {
+    width: 20px; /* Ajustez la valeur selon la taille de votre image */
+    height: 20px; /* Ajustez la valeur selon la taille de votre image */
+    margin-right: 5px; /* Ajustez la valeur selon vos besoins */
+}
+
+.action-icon {
+    font-size: 16px; /* Ajustez la valeur selon vos besoins */
+    color: #ccc;
+}
+
+.npc-name-container {
+    position: relative;
+    display: inline-block;
+    padding: 4px 8px;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: #fff;
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    border-radius: 4px;
+}
+
+.npc-name-text {
+    white-space: nowrap;
 }

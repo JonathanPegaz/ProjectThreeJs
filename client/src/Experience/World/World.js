@@ -6,7 +6,6 @@ import RespawnController from "./RespawnController.js";
 import InteractiveObjectController from "./InteractiveObject/InteractiveObjectController.js";
 import HTMLAnnouncement from "../HTMLInterface/HTMLAnnouncement.js";
 import CollectZoneController from "./CollectZoneController.js";
-import NpcController from "./Npc/NpcController.js";
 import Experience from "../Experience.js";
 import { assets } from './Environments/assets.js';
 import QuestManager from "./Quest/QuestManager.js";
@@ -38,7 +37,6 @@ export default class World
 
         // Special
         this.interactiveObject = new InteractiveObjectController()
-        this.npc = new NpcController()
 
         this.respawn = new RespawnController()
         this.collectZone = new CollectZoneController()
@@ -89,7 +87,6 @@ export default class World
     update()
     {
         this.ocean.update()
-        this.npc.update()
 
         if (this.experience.controls && (this.experience.controls.keys.down.forward || this.experience.controls.keys.down.backward)) {
             this.meshsDisplayUpdate()
@@ -146,8 +143,6 @@ export default class World
         this.respawn = null
         this.interactiveObject.destroy()
         this.interactiveObject = null
-        this.npc.destroy()
-        this.npc = null
 
         this.flower.destroy()
         this.flower = null

@@ -13,7 +13,7 @@ export default class NpcController {
     createNpc() {
         this.npcs.forEach(npc => {
             const npcModel = new npc.type(npc)
-            if(npcModel.dialog.length > 0) {
+            if(npcModel.dialog.dialog.length > 0) {
                 npcModel.speakIcon = new Icons(npcModel, 'speak')
             }
             this.store(npcModel)
@@ -35,9 +35,7 @@ export default class NpcController {
     catch(raycaster) {
         for (const [key, value] of Object.entries(this.list)) {
             const intersects = raycaster.intersectObject(value.hitbox);
-            if (intersects.length > 0) {
-                value.interact();
-            }
+            value.canInteract = intersects.length > 0
         }
     }
 

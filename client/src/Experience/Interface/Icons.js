@@ -21,7 +21,7 @@ export default class Icons {
         const height = box.max.y - box.min.y
 
         // set position
-        this.object.position.set(0, height + 1, 0)
+        this.object.position.set(0, height + 0.2, 0)
         this.target.object.add(this.object)
     }
 
