@@ -23,7 +23,7 @@ export default class Player {
 
     setModel() {
         this.model = clone(this.resource.scene.children[0])
-        this.model.scale.set(0.2, 0.2, 0.2)
+        this.model.scale.set(0.175, 0.175, 0.175)
         this.model.position.set(0, -0.5, 0)
 
         this.model.traverse((child) =>
@@ -43,9 +43,6 @@ export default class Player {
         this.animations = {}
         this.resource.animations.push(this.resources.items.idle.animations[0])
         this.resource.animations.push(this.resources.items.walking.animations[0])
-
-        // console.log(this.resource)
-        // console.log(this.resources.items.foxModel)
 
         this.mixer = new THREE.AnimationMixer(this.model)
 

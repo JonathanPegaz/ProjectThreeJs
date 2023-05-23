@@ -1,57 +1,79 @@
 import Experience from "../Experience.js";
-import {Box3, Sprite, SpriteMaterial} from "three";
 import { gsap } from 'gsap'
+import {CSS2DObject} from "three/addons/renderers/CSS2DRenderer.js";
 
 
 export default class Icons {
-    constructor(target, source) {
+    constructor(target, icons) {
         this.experience = new Experience()
         this.target = target
-        this.source = this.experience.resources.items[source]
-        this.setObject()
+        this.icons = icons
+
+        this.setHTML()
+        this.setCSS2DObject()
         this.setAnimation()
     }
 
-    setObject() {
-        this.material = new SpriteMaterial({map: this.source, transparent: false, depthWrite: true, alphaTest: 0.5})
-        this.object = new Sprite(this.material)
+    setHTML() {
+        this.iconImage = document.createElement('img');
+        this.iconImage.src = 'icons/'+ this.icons +'.png';
+        this.iconImage.classList.add('icon-image');
+        this.iconImage.style.transform = `scale(0.5)`
+    }
 
-        // get height of the target
-        const box = new Box3().setFromObject(this.target.object)
-        const height = box.max.y - box.min.y
-
-        // set position
-        this.object.position.set(0, height + 0.2, 0)
-        this.target.object.add(this.object)
+    setCSS2DObject() {
+        this.iconLabel = new CSS2DObject(this.iconImage);
+        this.iconLabel.position.set(0, 1.5, 0);
+        this.target.object.add(this.iconLabel);
     }
 
     setAnimation() {
         // gsap animation up and down
-        gsap.to(this.object.position, {y: this.object.position.y + 0.2, duration: 0.5, yoyo: true, repeat: -1})
+        gsap.to(this.iconLabel.position, {y: this.iconLabel.position.y + 0.2, duration: 0.5, yoyo: true, repeat: -1})
     }
 
-    update() {
-        // look at the camera
-        this.object.lookAt(this.experience.camera.instance.position)
+    change(source) {
+        this.iconImage.src = 'icons/'+ source +'.png';
     }
 
     visible(isVisible) {
-        this.object.visible = isVisible
+        this.iconLabel.visible = isVisible
+    }
+
+    update() {
+        const maxDistance = 30; // the maximum distance at which the pseudo disappears completely
+        const distance = this.experience.camera.instance.position.distanceTo(this.target.object.position);
+
+        if (distance >= maxDistance) {
+            this.fadeOut();
+        } else {
+            this.fadeIn();
+        }
+    }
+    fadeIn() {
+        // fade in the pseudo
+        this.iconLabel.element.classList.add("fade-in");
+        this.iconLabel.element.classList.remove("fade-out");
+    }
+
+    fadeOut() {
+        this.iconLabel.element.classList.add("fade-out");
+        this.iconLabel.element.classList.remove("fade-in");
     }
 
     destroy() {
         this.target.object.remove(this.object)
 
-        // dispose
-        this.object.material.map.dispose()
-        this.object.material.dispose()
-        this.object.geometry.dispose()
+        // remove dialog label
+        this.target.object.remove(this.iconLabel)
+        this.iconLabel = null
+        this.iconImage = null
 
         // null
         this.experience = null
         this.object = null
         this.material = null
-        this.source = null
+        this.icons = null
         this.target = null
     }
 }

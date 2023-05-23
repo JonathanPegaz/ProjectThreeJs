@@ -3,10 +3,14 @@ import Experience from "../../Experience.js";
 import Dialog from "./Dialog.js";
 import {clone} from "three/examples/jsm/utils/SkeletonUtils.js";
 import Pseudo from "../../Interface/Pseudo.js";
+import Icons from "../../Interface/Icons.js";
+import EventEmitter from "../../Utils/EventEmitter.js";
+import QuestMarker from "../../Interface/QuestMarker.js";
 
 
-export default class Npc {
+export default class Npc extends EventEmitter{
     constructor(data) {
+        super()
         this.experience = new Experience()
         this.resources = this.experience.resources
         this.resource = this.resources.items.player
@@ -18,21 +22,24 @@ export default class Npc {
         this.object.rotation.set(data.rotation.x, data.rotation.y, data.rotation.z)
 
         this.canInteract = false
-        this.speakIcon =  null
         this.isPlayerInteracting = false
 
         this.hitbox = null
+
+        this.icon = new Icons(this, '')
 
         this.setModel()
         this.setAnimation()
         this.setHitbox()
         this.name = new Pseudo(this, data.name, false)
         this.setDialog(data.dialog)
+        this.setQuest(data.quest)
+        this.marker = new QuestMarker(this, 0.0)
     }
 
     setModel() {
         this.model = clone(this.resource.scene.children[0])
-        this.model.scale.set(0.2, 0.2, 0.2)
+        this.model.scale.set(0.175, 0.175, 0.175)
         this.model.position.set(0, -0.5, 0)
 
         this.model.traverse((child) =>
@@ -83,15 +90,21 @@ export default class Npc {
     }
 
     setDialog(dialog) {
+        if (dialog.length === 0) {
+            return;
+        }
         this.dialog = new Dialog(dialog, this)
+        this.icon.change('commentaires-64')
         this.experience.controls.on('actionDown', () => {
             if (!this.canInteract)
                 return;
+
+            this.trigger(`talk`, [this.id])
             
             if (!this.dialog.isStarted) {
                 this.isPlayerInteracting = true
                 this.dialog.start()
-                this.speakIcon.visible(false)
+                this.icon.visible(false)
                 return;
             }
 
@@ -101,10 +114,31 @@ export default class Npc {
                 this.isPlayerInteracting = false
                 this.dialog.isFinished = false
                 this.dialog.isStarted = false
-                this.speakIcon.visible(true)
+
+                if (this.quest) {
+                    this.experience.world.quest.add(this.quest.id)
+                    this.endDialog = this.quest.endDialog
+                    this.experience.world.quest.on('completed', () => {
+                        console.log(this.quest)
+                        this.icon.change('commentaires-64')
+                        this.experience.world.quest.off('completed')
+                        this.dialog.dialog = this.endDialog
+                    })
+                    this.quest = null
+                }
+
+                this.icon.visible(true)
                 return;
             }
         })
+    }
+
+    setQuest(quest) {
+        if (!quest)
+            return;
+
+        this.quest = quest
+        this.icon.change('exclamation-mark-100')
     }
 
     interact(value) {
@@ -114,32 +148,24 @@ export default class Npc {
     update() {
         this.mixer.update(this.experience.time.delta / 1000)
         this.name.update()
+        this.icon.update()
 
         if (!this.experience.controls)
             return;
 
         if(!this.canInteract){
-            if (this.speakIcon) {
-                this.speakIcon.visible(false)
-            }
             return;
         }
 
         if (!this.isPlayerInteracting) {
-            // display npc name
-            if (this.speakIcon) {
-                this.speakIcon.visible(true)
-                this.speakIcon.update()
-            }
-
             return;
         }
 
     }
 
     destroy() {
-        if (this.speakIcon)
-            this.speakIcon.destroy()
+        if (this.icon)
+            this.icon.destroy()
 
         this.experience.scene.remove(this.object)
 

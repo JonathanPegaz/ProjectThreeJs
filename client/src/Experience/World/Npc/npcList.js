@@ -18,8 +18,16 @@ export default [
         },
         dialog: [
             'Bonjour, je suis Jean-Eude',
-            'Je suis un PNJ',
-        ]
+            'Je suis le chef du village',
+            'Je suis là pour vous donner une quête',
+            'Ramenez moi 2 diamants et 3 carottes pour la fête du village',
+        ],
+        quest: {
+            id: 1,
+            endDialog: [
+                'Merci d\'avoir fait ma quête',
+            ]
+        }
     },
     {
         id: 2,

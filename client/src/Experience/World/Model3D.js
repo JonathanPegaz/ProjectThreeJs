@@ -13,7 +13,7 @@ export default class Model3D {
 
         this.meshs = []
         this.physicsMeshs = []
-        this.isAnimated = false
+        this.isAnimated = data.isAnimated
         this.setModel()
     }
 

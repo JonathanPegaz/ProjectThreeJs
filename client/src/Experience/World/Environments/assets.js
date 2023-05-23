@@ -23,6 +23,18 @@ import Stele2 from "./Nature/Stele2.js";
 import Stele3 from "./Nature/Stele3.js";
 import Ferme from "./Buildings/Ferme.js";
 import TreeAnimated from "./Nature/Vegetations/Trees/TreeAnimated.js";
+import Champi from "./Nature/Vegetations/Champi.js";
+import Ecume1 from "./Nature/Ecume1.js";
+import Cascade from "./Nature/Cascade.js";
+import Ecume2 from "./Nature/Ecume2.js";
+import Flag from "./Buildings/Flag.js";
+import Pancarte from "./Buildings/Pancarte.js";
+import Place from "./Buildings/Place.js";
+import PortailPlace from "./Buildings/PortailPlace.js";
+import PortailShader from "./Buildings/PortailShader.js";
+import Miasme from "./Nature/Miasme.js";
+import Modele from "./Nature/Modele.js";
+import Ecume3 from "./Nature/Ecume3.js";
 
 export const assets = [
     // display : 0 = small, 1 = medium, 2 = big
@@ -34,7 +46,8 @@ export const assets = [
         hasPhysics: true,
         display: 0,
         castShadow: true,
-        source: 'models/Barrieres.glb'
+        source: 'models/Barrieres.glb',
+        isAnimated: false
     },
     {
         type: Batiments,
@@ -42,7 +55,8 @@ export const assets = [
         hasPhysics: true,
         display: 2,
         castShadow: true,
-        source: 'models/Batiments.glb'
+        source: 'models/Batiments.glb',
+        isAnimated: false
     },
     {
         type: Dalles,
@@ -50,7 +64,8 @@ export const assets = [
         hasPhysics: false,
         display: 0,
         castShadow: false,
-        source: 'models/Dalles.glb'
+        source: 'models/Dalles.glb',
+        isAnimated: false
     },
     {
         type: Ferme,
@@ -58,7 +73,26 @@ export const assets = [
         hasPhysics: true,
         display: 2,
         castShadow: true,
-        source: 'models/Ferme.glb'
+        source: 'models/Ferme.glb',
+        isAnimated: false
+    },
+    {
+        type: Flag,
+        resource: 'flag',
+        hasPhysics: false,
+        display: 1,
+        castShadow: true,
+        source: 'models/flag.glb',
+        isAnimated: true
+    },
+    {
+        type: Pancarte,
+        resource: 'pancarte',
+        hasPhysics: true,
+        display: 1,
+        castShadow: true,
+        source: 'models/pancarte.glb',
+        isAnimated: false
     },
     {
         type: Panneaux,
@@ -66,23 +100,53 @@ export const assets = [
         hasPhysics: true,
         display: 1,
         castShadow: true,
-        source: 'models/Panneaux.glb'
+        source: 'models/Panneaux.glb',
+        isAnimated: false
+    },
+    {
+        type: Place,
+        resource: 'place',
+        hasPhysics: true,
+        display: 2,
+        castShadow: true,
+        source: 'models/place.glb',
+        isAnimated: false
     },
     {
         type: Ponts,
         resource: 'Ponts',
         hasPhysics: true,
         display: 2,
+        castShadow: false,
+        source: 'models/Ponts.glb',
+        isAnimated: false
+    },
+    {
+        type: PortailPlace,
+        resource: 'portail_place',
+        hasPhysics: true,
+        display: 1,
         castShadow: true,
-        source: 'models/Ponts.glb'
+        source: 'models/portail_place.glb',
+        isAnimated: false
+    },
+    {
+        type: PortailShader,
+        resource: 'portail_shader',
+        hasPhysics: true,
+        display: 1,
+        castShadow: false,
+        source: 'models/portail_shader.glb',
+        isAnimated: true
     },
     {
         type: Props,
         resource: 'Props',
         hasPhysics: true,
         display: 0,
-        castShadow: true,
-        source: 'models/Props.glb'
+        castShadow: false,
+        source: 'models/Props.glb',
+        isAnimated: false
     },
     // Nature
     //  Vegetations
@@ -93,7 +157,8 @@ export const assets = [
         hasPhysics: true,
         display: 2,
         castShadow: true,
-        source: 'models/Arbre_sacre.glb'
+        source: 'models/Arbre_sacre.glb',
+        isAnimated: false
     },
     {
         type: ArbreRose,
@@ -101,7 +166,8 @@ export const assets = [
         hasPhysics: true,
         display: 2,
         castShadow: true,
-        source: 'models/Arbre_rose.glb'
+        source: 'models/Arbre_rose.glb',
+        isAnimated: false
     },
     {
         type: Pine,
@@ -109,7 +175,8 @@ export const assets = [
         hasPhysics: true,
         display: 2,
         castShadow: true,
-        source: 'models/Pine.glb'
+        source: 'models/Pine.glb',
+        isAnimated: false
     },
     {
         type: Arbres,
@@ -117,112 +184,8 @@ export const assets = [
         hasPhysics: true,
         display: 2,
         castShadow: true,
-        source: 'models/Arbres.glb'
-    },
-    // Others
-    {
-        type: Buisson,
-        resource: 'Buissons',
-        hasPhysics: false,
-        display: 0,
-        castShadow: false,
-        source: 'models/Buissons.glb'
-    },
-    {
-        type: Crystal,
-        resource: 'Crystal',
-        hasPhysics: true,
-        display: 1,
-        castShadow: true,
-        source: 'models/Crystal.glb'
-    },
-    {
-        type: DebrisCarriere,
-        resource: 'Debris_carriere',
-        hasPhysics: false,
-        display: 2,
-        castShadow: false,
-        source: 'models/Debris_carriere.glb'
-    },
-    {
-        type: Ilot,
-        resource: 'Ilot',
-        hasPhysics: true,
-        display: 2,
-        castShadow: false,
-        source: 'models/Ilot.glb'
-    },
-    {
-        type: Lac,
-        resource: 'Lac',
-        hasPhysics: false,
-        display: 2,
-        castShadow: false,
-        source: 'models/Lac.glb'
-    },
-    {
-        type: RocherLivre,
-        resource: 'Rocher_livre',
-        hasPhysics: true,
-        display: 1,
-        castShadow: true,
-        source: 'models/Rocher_livre.glb'
-    },
-    {
-        type: Rochers,
-        resource: 'Rochers',
-        hasPhysics: true,
-        display: 2,
-        castShadow: true,
-        source: 'models/Rochers.glb'
-    },
-    {
-        type: Ruine1,
-        resource: 'Ruine1',
-        hasPhysics: true,
-        display: 1,
-        castShadow: true,
-        source: 'models/Ruine1.glb'
-    },
-    {
-        type: Ruine2,
-        resource: 'Ruine2',
-        hasPhysics: true,
-        display: 1,
-        castShadow: true,
-        source: 'models/Ruine2.glb'
-    },
-    {
-        type: Ruine3,
-        resource: 'Ruine3',
-        hasPhysics: true,
-        display: 1,
-        castShadow: true,
-        source: 'models/Ruine3.glb'
-    },
-    {
-        type: Stele1,
-        resource: 'Stele1',
-        hasPhysics: true,
-        display: 0,
-        castShadow: true,
-        source: 'models/Stele1.glb'
-    },
-    {
-        type: Stele2,
-        resource: 'Stele2',
-        hasPhysics: true,
-        display: 0,
-        castShadow: true,
-        source: 'models/Stele2.glb'
-    },
-    {
-        type: Stele3,
-        resource: 'Stele3',
-        hasPhysics: true,
-        display: 0,
-        castShadow: true,
-        source: 'models/Stele3.glb'
+        source: 'models/Arbres.glb',
+        isAnimated: false
     },
     {
         type: TreeAnimated,
@@ -231,5 +194,187 @@ export const assets = [
         display: 2,
         castShadow: true,
         source: 'models/tree_animated.glb',
+        isAnimated: true
+    },
+    // Others
+    {
+        type: Buisson,
+        resource: 'Buissons',
+        hasPhysics: false,
+        display: 0,
+        castShadow: false,
+        source: 'models/Buissons.glb',
+        isAnimated: false
+    },
+    {
+        type: Champi,
+        resource: 'champi',
+        hasPhysics: false,
+        display: 0,
+        castShadow: false,
+        source: 'models/champi.glb',
+        isAnimated: false
+    },
+    {
+        type: Crystal,
+        resource: 'Crystal',
+        hasPhysics: true,
+        display: 1,
+        castShadow: false,
+        source: 'models/Crystal.glb',
+        isAnimated: false
+    },
+    {
+        type: DebrisCarriere,
+        resource: 'Debris_carriere',
+        hasPhysics: false,
+        display: 1,
+        castShadow: false,
+        source: 'models/Debris_carriere.glb',
+        isAnimated: false
+    },
+    {
+        type: Ecume1,
+        resource: 'ecume1',
+        hasPhysics: false,
+        display: 1,
+        castShadow: false,
+        source: 'models/ecume1.glb',
+        isAnimated: true
+    },
+    {
+        type: Ecume2,
+        resource: 'ecume2',
+        hasPhysics: false,
+        display: 1,
+        castShadow: false,
+        source: 'models/ecume2.glb',
+        isAnimated: true
+    },
+    {
+        type: Ecume3,
+        resource: 'ecume3',
+        hasPhysics: false,
+        display: 1,
+        castShadow: false,
+        source: 'models/ecume3.glb',
+        isAnimated: true
+    },
+    {
+        type: Ilot,
+        resource: 'Ilot',
+        hasPhysics: true,
+        display: 2,
+        castShadow: false,
+        source: 'models/Ilot.glb',
+        isAnimated: false
+    },
+    {
+        type: Lac,
+        resource: 'Lac',
+        hasPhysics: false,
+        display: 2,
+        castShadow: false,
+        source: 'models/Lac.glb',
+        isAnimated: true
+    },
+    {
+        type: Miasme,
+        resource: 'miasme',
+        hasPhysics: true,
+        display: 2,
+        castShadow: false,
+        source: 'models/miasme.glb',
+        isAnimated: false
+    },
+    {
+        type: Modele,
+        resource: 'modele',
+        hasPhysics: false,
+        display: 0,
+        castShadow: false,
+        source: 'models/modele.glb',
+        isAnimated: false
+    },
+    {
+        type: Cascade,
+        resource: 'cascade',
+        hasPhysics: false,
+        display: 1,
+        castShadow: false,
+        source: 'models/cascade.glb',
+        isAnimated: true
+    },
+    {
+        type: RocherLivre,
+        resource: 'Rocher_livre',
+        hasPhysics: true,
+        display: 1,
+        castShadow: false,
+        source: 'models/Rocher_livre.glb',
+        isAnimated: false
+    },
+    {
+        type: Rochers,
+        resource: 'Rochers',
+        hasPhysics: true,
+        display: 2,
+        castShadow: true,
+        source: 'models/Rochers.glb',
+        isAnimated: false
+    },
+    {
+        type: Ruine1,
+        resource: 'Ruine1',
+        hasPhysics: true,
+        display: 1,
+        castShadow: true,
+        source: 'models/Ruine1.glb',
+        isAnimated: false
+    },
+    {
+        type: Ruine2,
+        resource: 'Ruine2',
+        hasPhysics: true,
+        display: 1,
+        castShadow: true,
+        source: 'models/Ruine2.glb',
+        isAnimated: false
+    },
+    {
+        type: Ruine3,
+        resource: 'Ruine3',
+        hasPhysics: true,
+        display: 1,
+        castShadow: true,
+        source: 'models/Ruine3.glb',
+        isAnimated: false
+    },
+    {
+        type: Stele1,
+        resource: 'Stele1',
+        hasPhysics: true,
+        display: 0,
+        castShadow: false,
+        source: 'models/Stele1.glb',
+        isAnimated: false
+    },
+    {
+        type: Stele2,
+        resource: 'Stele2',
+        hasPhysics: true,
+        display: 0,
+        castShadow: false,
+        source: 'models/Stele2.glb',
+        isAnimated: false
+    },
+    {
+        type: Stele3,
+        resource: 'Stele3',
+        hasPhysics: true,
+        display: 0,
+        castShadow: false,
+        source: 'models/Stele3.glb',
+        isAnimated: false
     }
 ]
