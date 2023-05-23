@@ -34,6 +34,7 @@ import PortailPlace from "./Buildings/PortailPlace.js";
 import PortailShader from "./Buildings/PortailShader.js";
 import Miasme from "./Nature/Miasme.js";
 import Modele from "./Nature/Modele.js";
+import Ecume3 from "./Nature/Ecume3.js";
 
 export const assets = [
     // display : 0 = small, 1 = medium, 2 = big
@@ -78,7 +79,7 @@ export const assets = [
     {
         type: Flag,
         resource: 'flag',
-        hasPhysics: true,
+        hasPhysics: false,
         display: 1,
         castShadow: true,
         source: 'models/flag.glb',
@@ -116,7 +117,7 @@ export const assets = [
         resource: 'Ponts',
         hasPhysics: true,
         display: 2,
-        castShadow: true,
+        castShadow: false,
         source: 'models/Ponts.glb',
         isAnimated: false
     },
@@ -143,7 +144,7 @@ export const assets = [
         resource: 'Props',
         hasPhysics: true,
         display: 0,
-        castShadow: true,
+        castShadow: false,
         source: 'models/Props.glb',
         isAnimated: false
     },
@@ -193,7 +194,7 @@ export const assets = [
         display: 2,
         castShadow: true,
         source: 'models/tree_animated.glb',
-        isAnimated: false
+        isAnimated: true
     },
     // Others
     {
@@ -251,6 +252,15 @@ export const assets = [
         isAnimated: true
     },
     {
+        type: Ecume3,
+        resource: 'ecume3',
+        hasPhysics: false,
+        display: 1,
+        castShadow: false,
+        source: 'models/ecume3.glb',
+        isAnimated: true
+    },
+    {
         type: Ilot,
         resource: 'Ilot',
         hasPhysics: true,
@@ -266,7 +276,7 @@ export const assets = [
         display: 2,
         castShadow: false,
         source: 'models/Lac.glb',
-        isAnimated: false
+        isAnimated: true
     },
     {
         type: Miasme,

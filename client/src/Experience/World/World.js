@@ -29,7 +29,7 @@ export default class World
         this.shadowMeshs = []
         this.animatedAsset = []
 
-        this.scene.fog = new Fog(0xDFE9F3, 0, 95)
+        this.scene.fog = new Fog(0xDFE9F3, 0, 65)
 
         this.loaded = 0
 
@@ -114,7 +114,7 @@ export default class World
     meshsDisplayUpdate() {
         // loop through all the small meshs and check if they are close enough to be displayed
         for (let mesh of this.smallMeshsDistance) {
-            mesh.visible = this.experience.camera.instance.position.distanceTo(mesh.geometry.boundingSphere.center) < 40;
+            mesh.visible = this.experience.camera.instance.position.distanceTo(mesh.geometry.boundingSphere.center) < 50;
         }
         // loop through all the medium meshs and check if they are close enough to be displayed
         for (let mesh of this.mediumMeshsDistance) {
@@ -122,7 +122,7 @@ export default class World
         }
         // loop through all the big meshs and check if they are close enough to be displayed
         for (let mesh of this.bigMeshsDistance) {
-            mesh.visible = this.experience.camera.instance.position.distanceTo(mesh.geometry.boundingSphere.center) < 100;
+            mesh.visible = this.experience.camera.instance.position.distanceTo(mesh.geometry.boundingSphere.center) < 70;
         }
         // loop through all the shadow meshs and check if they are close enough to be displayed
         for (let mesh of this.shadowMeshs) {
