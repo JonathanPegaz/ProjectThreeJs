@@ -287,15 +287,15 @@ export const assets = [
         source: 'models/miasme.glb',
         isAnimated: false
     },
-    {
-        type: Modele,
-        resource: 'modele',
-        hasPhysics: false,
-        display: 0,
-        castShadow: false,
-        source: 'models/modele.glb',
-        isAnimated: false
-    },
+    // {
+    //     type: Modele,
+    //     resource: 'modele',
+    //     hasPhysics: false,
+    //     display: 0,
+    //     castShadow: false,
+    //     source: 'models/modele.glb',
+    //     isAnimated: false
+    // },
     {
         type: Cascade,
         resource: 'cascade',

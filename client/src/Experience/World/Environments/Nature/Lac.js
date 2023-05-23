@@ -10,7 +10,7 @@ export default class Lac extends Model3D
 
     setMaterial(child) {
         let video = document.getElementById('lacvideo')
-        video.play()
+
         this.videoTexture = new VideoTexture(video)
 
         this.videoTexture.minFilter = LinearFilter
@@ -21,5 +21,7 @@ export default class Lac extends Model3D
             side: FrontSide,
             toneMapped: false,
         })
+
+        video.play()
     }
 }

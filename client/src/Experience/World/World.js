@@ -105,7 +105,7 @@ export default class World
                 asset.mixer.update(this.experience.time.delta / 1000)
             if(asset.videoTexture)
                 asset.videoTexture.needsUpdate = true
-            if(asset.shaderMaterial) {
+            if(asset.isShader) {
                 asset.model.children[0].material.uniforms.uTime.value = this.experience.time.elapsed * 0.001
             }
 
