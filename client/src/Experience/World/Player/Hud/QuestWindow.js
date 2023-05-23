@@ -41,19 +41,26 @@ export default class QuestWindow extends EventEmitter{
           <h3 class="quest-title">${quest.title}</h3>
           <p class="quest-title">${quest.description}</p>
         </div>
+        <hr>
         <ul class="quest-tasks">
           ${Object.values(quest.activeTasks).map((task) => {
             return `
-              <li id="${task.id}" class="quest-task">
+              <li id="${task.id}" class="quest-task quest-task-active">
                 <span class="quest-task-name">${task.name}</span>
                 <span class="quest-task-goal">${task.goal.progress} / ${task.goal.objective}</span>
+                <div class="quest-task-mark">
+                  <img src="icons/ui-quest-mark-empty.svg" alt="hexagon">
+                </div>
               </li>`
           }).join('')}
           ${Object.values(quest.completedTasks).map((task) => {
             return `
-              <li id="${task.id}" class="quest-task">
+              <li id="${task.id}" class="quest-task quest-task-completed">
                 <span class="quest-task-name">${task.name}</span>
                 <span class="quest-task-goal">${task.goal.progress} / ${task.goal.objective}</span>
+                <div class="quest-task-mark">
+                  <img src="icons/ui-quest-mark-check.svg" alt="hexagon">
+                </div>
               </li>`
             }).join('')}
         </ul>
