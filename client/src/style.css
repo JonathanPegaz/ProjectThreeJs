@@ -3,6 +3,7 @@
     margin: 0;
     padding: 0;
     user-select: none;
+    font-family: Roboto, sans-serif;
 }
 
 html,
@@ -98,7 +99,24 @@ body
 }
 
 #quest {
+    margin-top: 200px;
     width: 100%;
+    text-align: end;
+    color: #f1f1f1;
+    text-shadow: 0px 0px 5px rgba(0, 0, 0, 0.8);
+    font-weight: 200;
+}
+#quest h3 {
+    text-transform: uppercase;
+    font-weight: 600;
+}
+#quest hr {
+    background: linear-gradient(to left, rgb(255, 255, 255), rgba(0, 0, 0, 0));
+    height: 1px;
+    border: none;
+    width: 100%;
+    margin: 10px 0;
+    box-shadow: 0 20px 20px -20px #333;
 }
 .quest-info {
 
@@ -106,6 +124,59 @@ body
 .quest-objectives {
 
 }
+.quest-tasks {
+    text-align: right;
+    list-style: none;
+    padding: 0px;
+}
+
+.quest-task {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.quest-task-active {
+    list-style-position: inside;
+    position: relative;
+    border-color: rgb(255, 183, 0);
+    padding-right: 20px;
+    margin-bottom: 10px;
+}
+
+.quest-task-completed {
+    list-style-position: inside;
+    position: relative;
+    border-color: rgba(255, 255, 255, 0.53);
+    color: rgba(255, 255, 255, 0.53);
+    padding-right: 20px;
+    margin-bottom: 10px;
+}
+
+.quest-task-goal {
+    margin-left: .5rem;
+}
+
+.quest-task-mark {
+    width: 1.2rem;
+    height: 1.2rem;
+    margin-left: .5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.quest-task-mark img {
+    width: 80%;
+    height: 80%;
+    position: absolute;
+}
+
+.quest-task-active .quest-task-mark img {
+    filter: invert(65%) sepia(60%) saturate(891%) hue-rotate(359deg) brightness(102%) contrast(105%);
+}
+
 .quest-marker-container {
     width: 1.5rem;
     height: 1.5rem;
