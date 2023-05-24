@@ -48,7 +48,7 @@ export default class Collect extends Task {
   isComplete() {
     console.log("Collect task is complete")
     this.target.marker.unmark(this.target.id)
-    this.target.off(`collect-${this.target.id}`)
+    //this.target.off(`collect-${this.target.id}`)
     super.isComplete();
   }
 

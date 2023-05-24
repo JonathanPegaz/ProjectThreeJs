@@ -235,7 +235,9 @@ export default class BasicCharacterController {
     }
 
     destroy() {
-        this.joystick.destroy()
+        if(this.joystick) {
+            this.joystick.destroy()
+        }
 
         this.input = null
         this.stateMachine = null

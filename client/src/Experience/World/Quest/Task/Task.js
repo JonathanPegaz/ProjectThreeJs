@@ -48,8 +48,8 @@ export default class Task extends EventEmitter{
     this.requirements = null
     this.world = null
     this.order = null
-    this.world.collectZone.list.forEach((collectZone) => {
-      collectZone.off("collect")
-    })
+    // this.world.collectZone.list.forEach((collectZone) => {
+    //   collectZone.off(`collect-${collectZone.id}`)
+    // })
   }
 }

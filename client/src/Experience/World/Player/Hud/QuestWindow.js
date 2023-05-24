@@ -26,7 +26,11 @@ export default class QuestWindow extends EventEmitter{
 
   updateUI() {
     const questWindow = document.getElementById("quest")
+    questWindow.classList.remove("quest-active")
     questWindow.innerHTML = ""
+    if (Object.keys(this.quest.activeQuests).length === 0) return
+
+    questWindow.classList.add("quest-active")
     let questList = ""
     Object.entries(this.quest.activeQuests).forEach(([id, quest]) => {
       questList += this.setUIQuest(quest)

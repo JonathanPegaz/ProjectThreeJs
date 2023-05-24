@@ -36,7 +36,6 @@ export default class QuestMarker {
   }
 
   unmark() {
-    console.log(`quest-marker-${this.target.id}`)
     this.target.object.remove(this.markerObject)
     this.questMarkerContainer = null
   }

@@ -86,7 +86,9 @@ export default class Dialog {
     }
 
     destroy() {
-        this.dialogContainer.remove();
+        if (this.dialogContainer) {
+            this.dialogContainer.remove();
+        }
         this.height = null
         this.dialog = null
         this.target = null
