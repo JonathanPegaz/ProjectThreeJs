@@ -27,10 +27,37 @@ export default class Resources extends EventEmitter
     setLoaders()
     {
         // Overlay
-        const overlayGeometry = new PlaneGeometry(2, 2, 1, 1)
-        const overlay = new Mesh(overlayGeometry, overlayMaterial)
-        this.scene.add(overlay)
+        // const overlayGeometry = new PlaneGeometry(2, 2, 1, 1)
+        // const overlay = new Mesh(overlayGeometry, overlayMaterial)
+        // this.scene.add(overlay)
 
+        // add Html home video full screen
+        this.homeVideoDiv = document.createElement('div')
+        this.homeVideoDiv.style.cssText = `
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        `
+        this.homeVideo = document.createElement('video')
+        this.homeVideo.src = './video/home.mp4'
+        this.homeVideo.autoplay = true
+        this.homeVideo.loop = true
+        this.homeVideo.muted = true
+        this.homeVideo.style.cssText = `
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transform: translate(-50%, -50%);
+        `
+        this.homeVideoDiv.appendChild(this.homeVideo)
+        document.body.appendChild(this.homeVideoDiv)
+
+        // Loading bar
         const loadingBarElement = document.createElement('div')
         loadingBarElement.style.cssText = `
             position: absolute;

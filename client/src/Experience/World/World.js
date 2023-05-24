@@ -51,11 +51,11 @@ export default class World
         this.quest = new QuestManager()
 
         //Assets
-        this.flower = new Flower()
+        // this.flower = new Flower()
         this.ocean = new Ocean()
         this.environment = new Environment()
         this.landscape = new Landscape()
-        this.portal = new Fireflies()
+        this.fireflies = new Fireflies()
     }
 
     setAsset(asset) {
@@ -93,7 +93,7 @@ export default class World
     update()
     {
         this.ocean.update()
-        this.portal.update()
+        this.fireflies.update()
 
         if (this.experience.controls && (this.experience.controls.keys.down.forward || this.experience.controls.keys.down.backward)) {
             this.meshsDisplayUpdate()
@@ -105,7 +105,7 @@ export default class World
                 asset.mixer.update(this.experience.time.delta / 1000)
             if(asset.videoTexture)
                 asset.videoTexture.needsUpdate = true
-            if(asset.shaderMaterial) {
+            if(asset.isShader) {
                 asset.model.children[0].material.uniforms.uTime.value = this.experience.time.elapsed * 0.001
             }
 
@@ -160,8 +160,8 @@ export default class World
         this.interactiveObject.destroy()
         this.interactiveObject = null
 
-        this.flower.destroy()
-        this.flower = null
+        // this.flower.destroy()
+        // this.flower = null
 
         this.ocean.destroy()
         this.ocean = null
@@ -169,8 +169,8 @@ export default class World
         this.environment = null
         this.landscape.destroy()
         this.landscape = null
-        this.portal.destroy()
-        this.portal = null
+        this.fireflies.destroy()
+        this.fireflies = null
 
         this.experience = null
         this.scene.fog = null

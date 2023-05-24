@@ -78,6 +78,8 @@ export default class Experience
             this.npc = new NpcController()
             this.network = new Network()
             this.localPlayer = new LocalPlayer()
+            this.world.meshsDisplayUpdate()
+            this.resources.homeVideoDiv.remove()
             this.resources.removeOverlay()
         })
 

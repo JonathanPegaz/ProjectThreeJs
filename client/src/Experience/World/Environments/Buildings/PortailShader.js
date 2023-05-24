@@ -4,16 +4,13 @@ import {
     BufferAttribute,
     BufferGeometry,
     Color,
-    DoubleSide,
-    MeshToonMaterial,
+    DoubleSide, Mesh,
+    MeshToonMaterial, PlaneGeometry,
     Points,
     ShaderMaterial
 } from "three";
 import portalVertexShader from "../../../Shaders/portal/vertex.glsl";
 import portalFragmentShader from "../../../Shaders/portal/fragment.glsl";
-import firefliesVertexShader from "../../../Shaders/fireflies/vertex.glsl";
-import firefliesFragmentShader from "../../../Shaders/fireflies/fragment.glsl";
-
 
 export default class PortailShader extends Model3D
 {
@@ -22,9 +19,43 @@ export default class PortailShader extends Model3D
         super(model)
     }
 
-    setMaterial(child) {
-        this.shaderMaterial =  new ShaderMaterial({
+    /*setModel() {
+        this.debugObject = {
+            portalColorStart: '#cbc8c8',
+            portalColorEnd: '#6a6a71'
+        }
+        this.isShader = true
+         // create rounded plane and a texture
+
+        const geometry = new PlaneGeometry(3, 3, 1, 1)
+        const portalShader = new ShaderMaterial({
             side: DoubleSide,
+            uniforms:
+                {
+                    uTime: { value: 0 },
+                    uColorStart: { value: new Color(this.debugObject.portalColorStart) },
+                    uColorEnd: { value: new Color(this.debugObject.portalColorEnd) }
+                },
+            vertexShader: portalVertexShader,
+            fragmentShader: portalFragmentShader,
+        })
+        this.portal = new Mesh(geometry, portalShader)
+        this.portal.position.set(52, 14, -71)
+        this.portal.scale.set(1, 1, 1)
+        this.experience.scene.add(this.portal)
+    }*/
+
+    setMaterial(child) {
+        child.position.set(52, 14, -71)
+
+        this.debugObject = {
+            portalColorStart: '#cbc8c8',
+            portalColorEnd: '#6a6a71'
+        }
+
+
+        this.isShader = true
+        child.material =   new ShaderMaterial({
             uniforms:
                 {
                     uTime: { value: 0 },
@@ -34,40 +65,18 @@ export default class PortailShader extends Model3D
             vertexShader: portalVertexShader,
             fragmentShader: portalFragmentShader,
         })
-        child.material = this.shaderMaterial
 
-        // Fireflies
-        const firefliesGeometry = new BufferGeometry()
-        const firefliesCount = 30
-        const positionArray = new Float32Array(firefliesCount * 3)
-        const scaleArray = new Float32Array(firefliesCount)
-
-        for(let i = 0; i < firefliesCount; i++)
+        if(this.experience.debug.active)
         {
-            positionArray[i * 3 + 0] = child.position.x + (Math.random() - 0.5) * 4
-            positionArray[i * 3 + 1] = child.position.y + Math.random() * 1.5
-            positionArray[i * 3 + 2] = child.position.z + (Math.random() - 0.5) * 4
-
-            scaleArray[i] = Math.random()
+            this.debugFolder = this.experience.debug.ui.addFolder('portal')
+            this.debugFolder.addColor(this.debugObject, 'portalColorStart').onChange(() =>
+            {
+                child.material.uniforms.uColorStart.value.set(this.debugObject.portalColorStart)
+            })
+            this.debugFolder.addColor(this.debugObject, 'portalColorEnd').onChange(() =>
+            {
+                child.material.uniforms.uColorEnd.value.set(this.debugObject.portalColorEnd)
+            })
         }
-
-        firefliesGeometry.setAttribute('position', new BufferAttribute(positionArray, 3))
-        firefliesGeometry.setAttribute('aScale', new BufferAttribute(scaleArray, 1))
-
-        // Material
-        this.firefliesMaterial = new ShaderMaterial({
-            uniforms:
-                {
-                    uTime: { value: 0 },
-                    uPixelRatio: { value: Math.min(window.devicePixelRatio, 2) },
-                    uSize: { value: 100 }
-                },
-            vertexShader: firefliesVertexShader,
-            fragmentShader: firefliesFragmentShader,
-            transparent: true,
-            blending: AdditiveBlending,
-            depthWrite: false
-        })
-        this.experience.scene.add(new Points(firefliesGeometry, this.firefliesMaterial))
     }
 }

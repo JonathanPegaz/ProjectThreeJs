@@ -3,7 +3,7 @@ import Npc from "./Npc.js";
 export default [
     {
         id: 1,
-        name: 'jeaneude',
+        name: 'Eric Chef du village',
         type: Npc,
         model: 'jean-eude',
         position: {
@@ -17,8 +17,7 @@ export default [
             z: 0
         },
         dialog: [
-            'Bonjour, je suis Jean-Eude',
-            'Je suis le chef du village',
+            'Bonjour, Je suis le chef du village',
             'Je suis là pour vous donner une quête',
             'Ramenez moi 2 diamants et 3 carottes pour la fête du village',
         ],
@@ -31,9 +30,9 @@ export default [
     },
     {
         id: 2,
-        name: 'jean-yves',
+        name: 'Yann Bras droit du chef',
         type: Npc,
-        path: 'jean-yves',
+        model: 'jean-yves',
         position: {
             x: -80,
             y: 15.5,
@@ -45,7 +44,7 @@ export default [
             z: 0
         },
         dialog: [
-            'Bonjour, je suis Jean-Yves',
+            'Bonjour, je suis Yann',
             'Je suis un autre PNJ',
         ]
     }
