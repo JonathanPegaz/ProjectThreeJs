@@ -14,6 +14,7 @@ import TriggerZoneController from "./InteractiveObject/Controller/TriggerZoneCon
 import {Fog} from "three";
 import AnnouncementZoneController from "./InteractiveObject/Controller/AnnouncementZoneController.js";
 import Fireflies from "./Fireflies.js";
+import LootWindow from "./Player/Hud/LootWindow.js";
 
 export default class World
 {
