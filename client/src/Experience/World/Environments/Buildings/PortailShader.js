@@ -46,8 +46,6 @@ export default class PortailShader extends Model3D
     }*/
 
     setMaterial(child) {
-
-        console.log(child)
         child.position.set(52, 14, -71)
 
         this.debugObject = {
@@ -80,8 +78,5 @@ export default class PortailShader extends Model3D
                 child.material.uniforms.uColorEnd.value.set(this.debugObject.portalColorEnd)
             })
         }
-
-        console.log(child)
-
     }
 }

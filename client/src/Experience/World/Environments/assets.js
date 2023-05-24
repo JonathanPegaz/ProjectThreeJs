@@ -35,6 +35,7 @@ import PortailShader from "./Buildings/PortailShader.js";
 import Miasme from "./Nature/Miasme.js";
 import Modele from "./Nature/Modele.js";
 import Ecume3 from "./Nature/Ecume3.js";
+import Carotte from "./Nature/Vegetations/Carrote.js";
 
 export const assets = [
     // display : 0 = small, 1 = medium, 2 = big
@@ -187,7 +188,7 @@ export const assets = [
         source: 'models/Arbres.glb',
         isAnimated: false
     },
-    {
+    /*{
         type: TreeAnimated,
         resource: 'tree_animated',
         hasPhysics: true,
@@ -195,7 +196,7 @@ export const assets = [
         castShadow: true,
         source: 'models/tree_animated.glb',
         isAnimated: true
-    },
+    },*/
     // Others
     {
         type: Buisson,
@@ -204,6 +205,15 @@ export const assets = [
         display: 0,
         castShadow: false,
         source: 'models/Buissons.glb',
+        isAnimated: false
+    },
+    {
+        type: Carotte,
+        resource: 'carotte',
+        hasPhysics: false,
+        display: 0,
+        castShadow: false,
+        source: 'models/carotte.glb',
         isAnimated: false
     },
     {
