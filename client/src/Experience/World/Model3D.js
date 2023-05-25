@@ -9,7 +9,6 @@ export default class Model3D {
         this.display = data.display
         this.castShadow = data.castShadow
         this.resource = data.resource
-        this.source = data.source
 
         this.meshs = []
         this.physicsMeshs = []
@@ -18,34 +17,30 @@ export default class Model3D {
     }
 
     setModel() {
-        this.experience.resources.loaders.gltfLoader.load(
-            this.source, (file) => {
-                this.experience.resources.items[this.resource] = file
+        const file = this.experience.resources.items[this.resource]
 
-                // set model
-                this.model = file.scene
-                this.model.traverse((child) =>
-                {
-                    if(child instanceof Mesh)
-                    {
-                        this.setMaterial(child)
-                        this.setPhysicsMeshs(child)
-                        this.meshs.push(child)
-                    }
-                })
-                this.model.matrixAutoUpdate = false
-
-                // set animations
-                this.animations = file.animations
-                if (this.animations.length > 0) {
-                    this.setAnimation()
-                    this.isAnimated = true
-                }
-
-                this.experience.world.setAsset(this.resource)
-                this.experience = null
+        // set model
+        this.model = file.scene
+        this.model.traverse((child) =>
+        {
+            if(child instanceof Mesh)
+            {
+                this.setMaterial(child)
+                this.setPhysicsMeshs(child)
+                this.meshs.push(child)
             }
-        )
+        })
+        this.model.matrixAutoUpdate = false
+
+        // set animations
+        this.animations = file.animations
+        if (this.animations.length > 0) {
+            this.setAnimation()
+            this.isAnimated = true
+        }
+
+        this.experience.world.setAsset(this.resource)
+        this.experience = null
     }
 
     setMaterial(child) {
@@ -91,7 +86,6 @@ export default class Model3D {
         this.hasPhysics = null
         this.display = null
         this.castShadow = null
-        this.source = null
         this.resource = null
         this.model = null
         this.physicsMeshs = null

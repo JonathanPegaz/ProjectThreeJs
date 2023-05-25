@@ -71,6 +71,7 @@ export default class Experience
             this.mainscreen.showInput()
             this.controls = new Controls()
             this.world = new World()
+            this.world.init()
         })
 
         this.mainscreen.on('pseudo-entered', () => {

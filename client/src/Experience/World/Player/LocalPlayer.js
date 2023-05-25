@@ -10,7 +10,6 @@ export default class LocalPlayer extends Player {
         this.id = null
 
         this.pseudo = new Pseudo(this, this.experience.mainscreen.pseudo)
-
         this.setController()
         this.setThirdPersonCamera()
         this.setPhysics()
@@ -29,7 +28,6 @@ export default class LocalPlayer extends Player {
             this.debugFolder.add(this.debugObject.position, 'z').name('PositionZ').listen()
         }
     }
-
 
     setController() {
         this.controller = new BasicCharacterController(this)

@@ -11,7 +11,7 @@ import Experience from "../Experience.js";
 import { assets } from './Environments/assets.js';
 import QuestManager from "./Quest/QuestManager.js";
 import TriggerZoneController from "./InteractiveObject/Controller/TriggerZoneController.js";
-import {Fog} from "three";
+import {BackSide, Fog, FogExp2, Mesh, MeshBasicMaterial, SphereGeometry} from "three";
 import AnnouncementZoneController from "./InteractiveObject/Controller/AnnouncementZoneController.js";
 import Fireflies from "./Fireflies.js";
 import LootWindow from "./Player/Hud/LootWindow.js";
@@ -34,10 +34,13 @@ export default class World
 
         this.loaded = 0
 
-        for (let asset of assets)
-        {
-            this[asset.resource] = new asset.type(asset)
-        }
+        this.ocean = new Ocean()
+        this.environment = new Environment()
+        this.landscape = new Landscape()
+        this.fireflies = new Fireflies()
+    }
+
+    init() {
 
         // Special
         this.interactiveObject = new InteractiveObjectController()
@@ -52,13 +55,17 @@ export default class World
 
         //Assets
         // this.flower = new Flower()
-        this.ocean = new Ocean()
-        this.environment = new Environment()
-        this.landscape = new Landscape()
-        this.fireflies = new Fireflies()
+
+        for (let asset of assets)
+        {
+            this[asset.resource] = new asset.type(asset)
+        }
     }
 
     setAsset(asset) {
+        console.log(asset)
+        console.log(this)
+
         if (this[asset].hasPhysics) {
             this[asset].physicsMeshs.forEach((mesh) => {
                 this.experience.physics.createTrimeshShape(mesh)

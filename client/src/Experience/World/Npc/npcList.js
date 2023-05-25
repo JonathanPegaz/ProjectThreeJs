@@ -5,10 +5,10 @@ export default [
         id: 1,
         name: 'Eric Chef du village',
         type: Npc,
-        model: 'jean-eude',
+        model: 'chief_idle',
         position: {
-            x: -84,
-            y: 15.5,
+            x: -83,
+            y: 16,
             z: -17
         },
         rotation: {
@@ -26,16 +26,17 @@ export default [
             endDialog: [
                 'Merci d\'avoir fait ma quête',
             ]
-        }
+        },
+        animations_type: 'chief'
     },
     {
         id: 2,
         name: 'Yann Bras droit du chef',
         type: Npc,
-        model: 'jean-yves',
+        model: 'pnj_idle',
         position: {
             x: -80,
-            y: 15.5,
+            y: 16,
             z: -17
         },
         rotation: {
@@ -46,6 +47,8 @@ export default [
         dialog: [
             'Bonjour, je suis Yann',
             'Je suis un autre PNJ',
-        ]
+        ],
+        quest: null,
+        animations_type: 'pnj'
     }
 ]

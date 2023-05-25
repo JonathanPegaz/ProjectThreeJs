@@ -1,5 +1,5 @@
 import Model3D from "../../../../Model3D.js";
-import {MeshToonMaterial} from "three";
+import {Group, Mesh, MeshToonMaterial} from "three";
 
 export default class Pine extends Model3D
 {

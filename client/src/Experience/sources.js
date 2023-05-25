@@ -22,14 +22,59 @@ export default [
         path: 'models/Fox/glTF/Fox.gltf'
     },
     {
+        name: 'chief_idle',
+        type: 'gltfModel',
+        path: 'models/character/Chef village/chief_idle.glb'
+    },
+    {
+        name: 'chief_walking',
+        type: 'gltfModel',
+        path: 'models/character/Chef village/chief_walking.glb'
+    },
+    {
+        name: 'player_crouching',
+        type: 'gltfModel',
+        path: 'models/character/Joueur/player_crouching.glb'
+    },
+    {
+        name: 'player_idle',
+        type: 'gltfModel',
+        path: 'models/character/Joueur/player_idle.glb'
+    },
+    {
+        name: 'player_picking',
+        type: 'gltfModel',
+        path: 'models/character/Joueur/player_picking.glb'
+    },
+    {
+        name: 'player_walking',
+        type: 'gltfModel',
+        path: 'models/character/Joueur/player_walking.glb'
+    },
+    {
+        name: 'pnj_greeting',
+        type: 'gltfModel',
+        path: 'models/character/PNJ/pnj_greeting.glb'
+    },
+    {
+        name: 'pnj_idle',
+        type: 'gltfModel',
+        path: 'models/character/PNJ/pnj_idle.glb'
+    },
+    {
+        name: 'pnj_walking',
+        type: 'gltfModel',
+        path: 'models/character/PNJ/pnj_walking.glb'
+    },
+    {
         name: 'idle',
         type: 'gltfModel',
-        path: 'models/character/idle.gltf'
+        path: 'models/character/Joueur/player_idle.glb'
     },
     {
         name: 'walking',
         type: 'gltfModel',
-        path: 'models/character/walking.gltf'
+        path: 'models/character/Joueur/player_walking.glb'
     },
     {
         name: 'player',
@@ -46,11 +91,11 @@ export default [
         type: 'gltfModel',
         path: 'models/island_lowpoly.glb'
     },
-    {
-        name: 'flowers',
-        type: 'gltfModel',
-        path: 'models/fleurs.glb'
-    },
+    // {
+    //     name: 'flowers',
+    //     type: 'gltfModel',
+    //     path: 'models/fleurs.glb'
+    // },
     // Icons
     {
         name:'exclamationMark',
@@ -73,24 +118,67 @@ export default [
         name: 'quest',
         type: 'json',
         path: 'quest/questRepository.json'
-    }
-]
-
-/*
+    },
+    // Environnements
     {
-        name: 'Buissons',
+        name: 'Barrieres',
         type: 'gltfModel',
-        path: 'models/Buissons.glb'
+        path: 'models/Barrieres.glb'
     },
     {
-        name: 'Arbres',
+        name: 'Batiments',
         type: 'gltfModel',
-        path: 'models/Arbres.glb'
+        path: 'models/Batiments.glb'
     },
     {
-        name: 'Arbre_rose',
+        name: 'Dalles',
         type: 'gltfModel',
-        path: 'models/Arbre_rose.glb'
+        path: 'models/Dalles.glb'
+    },
+    {
+        name: 'Ferme',
+        type: 'gltfModel',
+        path: 'models/Ferme.glb'
+    },
+    {
+        name: 'Flag',
+        type: 'gltfModel',
+        path: 'models/flag.glb'
+    },
+    {
+        name: 'Pancarte',
+        type: 'gltfModel',
+        path: 'models/pancarte.glb'
+    },
+    {
+        name: 'Panneaux',
+        type: 'gltfModel',
+        path: 'models/Panneaux.glb'
+    },
+    {
+        name: 'Place',
+        type: 'gltfModel',
+        path: 'models/place.glb'
+    },
+    {
+        name: 'Ponts',
+        type: 'gltfModel',
+        path: 'models/Ponts.glb'
+    },
+    {
+        name: 'Portail_place',
+        type: 'gltfModel',
+        path: 'models/portail_place.glb'
+    },
+    {
+        name: 'Portail_shader',
+        type: 'gltfModel',
+        path: 'models/portail_shader.glb'
+    },
+    {
+        name: 'Props',
+        type: 'gltfModel',
+        path: 'models/Props.glb'
     },
     {
         name: 'Arbre_sacre',
@@ -98,102 +186,118 @@ export default [
         path: 'models/Arbre_sacre.glb'
     },
     {
+        name: 'Arbre_rose',
+        type: 'gltfModel',
+        path: 'models/Arbre_rose.glb'
+    },
+    {
         name: 'Pine',
         type: 'gltfModel',
         path: 'models/Pine.glb'
     },
-{
-    name: 'Batiments',
+    {
+        name: 'Arbres',
         type: 'gltfModel',
-    path: 'models/Batiments.glb'
-},
-{
-    name: 'Dalles',
+        path: 'models/Arbres.glb'
+    },
+    {
+        name: 'Buissons',
         type: 'gltfModel',
-    path: 'models/Dalles.glb'
-},
-{
-    name: 'Props',
+        path: 'models/Buissons.glb'
+    },
+    {
+        name: 'Carotte',
         type: 'gltfModel',
-    path: 'models/Props.glb'
-},
-{
-    name: 'Debris_carriere',
+        path: 'models/carotte.glb'
+    },
+    {
+        name: 'Champi',
         type: 'gltfModel',
-    path: 'models/Debris_carriere.glb'
-},
-{
-    name: 'Rochers',
+        path: 'models/champi.glb'
+    },
+    {
+        name: 'Crystal',
         type: 'gltfModel',
-    path: 'models/Rochers.glb'
-},
-{
-    name: 'Crystal',
+        path: 'models/Crystal.glb'
+    },
+    {
+        name: 'Debris_carriere',
         type: 'gltfModel',
-    path: 'models/Crystal.glb'
-},
-{
-    name: 'Barrieres',
+        path: 'models/Debris_carriere.glb'
+    },
+    {
+        name: 'Ecume1',
         type: 'gltfModel',
-    path: 'models/Barrieres.glb'
-},
-{
-    name: 'Ilot',
+        path: 'models/ecume1.glb'
+    },
+    {
+        name: 'Ecume2',
         type: 'gltfModel',
-    path: 'models/Ilot.glb'
-},
-{
-    name: 'Ponts',
+        path: 'models/ecume2.glb'
+    },
+    {
+        name: 'Ecume3',
         type: 'gltfModel',
-    path: 'models/Ponts.glb'
-},
-{
-    name: 'Lac',
+        path: 'models/ecume3.glb'
+    },
+    {
+        name: 'Ilot',
         type: 'gltfModel',
-    path: 'models/Lac.glb'
-},
-{
-    name: 'Panneaux',
+        path: 'models/Ilot.glb'
+    },
+    {
+        name: 'Lac',
         type: 'gltfModel',
-    path: 'models/Panneaux.glb'
-},
-{
-    name: 'Rocher_livre',
+        path: 'models/Lac.glb'
+    },
+    {
+        name: 'Miasme',
         type: 'gltfModel',
-    path: 'models/Rocher_livre.glb'
-},
-{
-    name: 'Ruine1',
+        path: 'models/miasme.glb'
+    },
+    {
+        name: 'Cascade',
         type: 'gltfModel',
-    path: 'models/Ruine1.glb'
-},
-{
-    name: 'Ruine2',
+        path: 'models/cascade.glb'
+    },
+    {
+        name: 'Rocher_livre',
         type: 'gltfModel',
-    path: 'models/Ruine2.glb'
-},
-{
-    name: 'Ruine3',
+        path: 'models/Rocher_livre.glb'
+    },
+    {
+        name: 'Rochers',
         type: 'gltfModel',
-    path: 'models/Ruine3.glb'
-},
-{
-    name: 'Stele1',
+        path: 'models/Rochers.glb'
+    },
+    {
+        name: 'Ruine1',
         type: 'gltfModel',
-    path: 'models/Stele1.glb'
-},
-{
-    name: 'Stele2',
+        path: 'models/Ruine1.glb'
+    },
+    {
+        name: 'Ruine2',
         type: 'gltfModel',
-    path: 'models/Stele2.glb'
-},
-{
-    name: 'Stele3',
+        path: 'models/Ruine2.glb'
+    },
+    {
+        name: 'Ruine3',
         type: 'gltfModel',
-    path: 'models/Stele3.glb'
-},
-{
-    name: 'Ferme',
+        path: 'models/Ruine3.glb'
+    },
+    {
+        name: 'Stele1',
         type: 'gltfModel',
-    path: 'models/Ferme.glb'
-},*/
+        path: 'models/Stele1.glb'
+    },
+    {
+        name: 'Stele2',
+        type: 'gltfModel',
+        path: 'models/Stele2.glb'
+    },
+    {
+        name: 'Stele3',
+        type: 'gltfModel',
+        path: 'models/Stele3.glb'
+    }
+]
