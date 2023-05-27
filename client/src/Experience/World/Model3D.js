@@ -38,9 +38,6 @@ export default class Model3D {
             this.setAnimation()
             this.isAnimated = true
         }
-
-        this.experience.world.setAsset(this.resource)
-        this.experience = null
     }
 
     setMaterial(child) {

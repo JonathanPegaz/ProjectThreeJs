@@ -59,12 +59,11 @@ export default class World
         for (let asset of assets)
         {
             this[asset.resource] = new asset.type(asset)
+            this.setAsset(asset.resource)
         }
     }
 
     setAsset(asset) {
-        console.log(asset)
-        console.log(this)
 
         if (this[asset].hasPhysics) {
             this[asset].physicsMeshs.forEach((mesh) => {
