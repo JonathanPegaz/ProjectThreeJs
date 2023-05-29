@@ -11,10 +11,11 @@ import Experience from "../Experience.js";
 import { assets } from './Environments/assets.js';
 import QuestManager from "./Quest/QuestManager.js";
 import TriggerZoneController from "./InteractiveObject/Controller/TriggerZoneController.js";
-import {Fog} from "three";
+import {BackSide, Fog, FogExp2, Mesh, MeshBasicMaterial, SphereGeometry, Vector3} from "three";
 import AnnouncementZoneController from "./InteractiveObject/Controller/AnnouncementZoneController.js";
 import Fireflies from "./Fireflies.js";
 import LootWindow from "./Player/Hud/LootWindow.js";
+import {NodeToyMaterial} from "@nodetoy/three-nodetoy";
 
 export default class World
 {
@@ -34,10 +35,13 @@ export default class World
 
         this.loaded = 0
 
-        for (let asset of assets)
-        {
-            this[asset.resource] = new asset.type(asset)
-        }
+        this.ocean = new Ocean()
+        this.environment = new Environment()
+        this.landscape = new Landscape()
+        this.fireflies = new Fireflies()
+    }
+
+    init() {
 
         // Special
         this.interactiveObject = new InteractiveObjectController()
@@ -52,13 +56,16 @@ export default class World
 
         //Assets
         // this.flower = new Flower()
-        this.ocean = new Ocean()
-        this.environment = new Environment()
-        this.landscape = new Landscape()
-        this.fireflies = new Fireflies()
+
+        for (let asset of assets)
+        {
+            this[asset.resource] = new asset.type(asset)
+            this.setAsset(asset.resource)
+        }
     }
 
     setAsset(asset) {
+
         if (this[asset].hasPhysics) {
             this[asset].physicsMeshs.forEach((mesh) => {
                 this.experience.physics.createTrimeshShape(mesh)
@@ -95,7 +102,7 @@ export default class World
         this.ocean.update()
         this.fireflies.update()
 
-        if (this.experience.controls && (this.experience.controls.keys.down.forward || this.experience.controls.keys.down.backward)) {
+        if (this.experience.controls && (this.experience.controls.keys.down.forward || this.experience.controls.keys.down.backward || this.experience.controls.keys.down.strafeLeft || this.experience.controls.keys.down.strafeRight)) {
             this.meshsDisplayUpdate()
         }
 
@@ -108,18 +115,18 @@ export default class World
             if(asset.isShader) {
                 asset.model.children[0].material.uniforms.uTime.value = this.experience.time.elapsed * 0.001
             }
-
         }
+        NodeToyMaterial.tick();
     }
 
     meshsDisplayUpdate() {
         // loop through all the small meshs and check if they are close enough to be displayed
         for (let mesh of this.smallMeshsDistance) {
-            mesh.visible = this.experience.camera.instance.position.distanceTo(mesh.geometry.boundingSphere.center) < 50;
+            mesh.visible = this.experience.camera.instance.position.distanceTo(mesh.geometry.boundingSphere.center) < 50
         }
         // loop through all the medium meshs and check if they are close enough to be displayed
         for (let mesh of this.mediumMeshsDistance) {
-            mesh.visible = this.experience.camera.instance.position.distanceTo(mesh.geometry.boundingSphere.center) < 60;
+            mesh.visible = this.experience.camera.instance.position.distanceTo(mesh.geometry.boundingSphere.center) < 60
         }
         // loop through all the big meshs and check if they are close enough to be displayed
         for (let mesh of this.bigMeshsDistance) {
@@ -127,10 +134,20 @@ export default class World
         }
         // loop through all the shadow meshs and check if they are close enough to be displayed
         for (let mesh of this.shadowMeshs) {
-            mesh.castShadow = this.experience.camera.instance.position.distanceTo(mesh.geometry.boundingSphere.center) < 50;
+            let distance = this.experience.camera.instance.position.distanceTo(mesh.geometry.boundingSphere.center) < 50;
+            if (!distance) {
+                mesh.castShadow = false
+                continue
+            }
+            let dot = this.experience.camera.instance.getWorldDirection(new Vector3()).dot(mesh.geometry.boundingSphere.center.clone().sub(this.experience.camera.instance.position).normalize())
+            if (dot < 0 && this.experience.camera.instance.position.distanceTo(mesh.geometry.boundingSphere.center) > 10) {
+                mesh.castShadow = false
+                continue
+            }
+            mesh.castShadow = true
         }
 
-        this.experience.renderer.instance.shadowMap.needsUpdate = true
+       this.experience.renderer.instance.shadowMap.needsUpdate = true
     }
 
     destroy() {

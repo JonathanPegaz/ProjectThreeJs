@@ -36,6 +36,11 @@ import Miasme from "./Nature/Miasme.js";
 import Modele from "./Nature/Modele.js";
 import Ecume3 from "./Nature/Ecume3.js";
 import Carotte from "./Nature/Vegetations/Carrote.js";
+import CristauxPortail from "./Nature/CristauxPortail.js";
+import PanneauxCollec from "./Buildings/PanneauxCollec.js";
+import PanneauxDirection from "./Buildings/PanneauxDirection.js";
+import PortailIntro from "./Buildings/PortailIntro.js";
+import Stand from "./Buildings/Stand.js";
 
 export const assets = [
     // display : 0 = small, 1 = medium, 2 = big
@@ -46,8 +51,7 @@ export const assets = [
         resource: 'Barrieres',
         hasPhysics: true,
         display: 0,
-        castShadow: true,
-        source: 'models/Barrieres.glb',
+        castShadow: false,
         isAnimated: false
     },
     {
@@ -56,7 +60,6 @@ export const assets = [
         hasPhysics: true,
         display: 2,
         castShadow: true,
-        source: 'models/Batiments.glb',
         isAnimated: false
     },
     {
@@ -65,7 +68,6 @@ export const assets = [
         hasPhysics: false,
         display: 0,
         castShadow: false,
-        source: 'models/Dalles.glb',
         isAnimated: false
     },
     {
@@ -74,25 +76,22 @@ export const assets = [
         hasPhysics: true,
         display: 2,
         castShadow: true,
-        source: 'models/Ferme.glb',
         isAnimated: false
     },
     {
         type: Flag,
-        resource: 'flag',
+        resource: 'Flag',
         hasPhysics: false,
         display: 1,
         castShadow: true,
-        source: 'models/flag.glb',
         isAnimated: true
     },
     {
         type: Pancarte,
-        resource: 'pancarte',
+        resource: 'Pancarte',
         hasPhysics: true,
         display: 1,
         castShadow: true,
-        source: 'models/pancarte.glb',
         isAnimated: false
     },
     {
@@ -101,16 +100,30 @@ export const assets = [
         hasPhysics: true,
         display: 1,
         castShadow: true,
-        source: 'models/Panneaux.glb',
+        isAnimated: false
+    },
+    {
+        type: PanneauxCollec,
+        resource: 'Panneaux_collec',
+        hasPhysics: true,
+        display: 0,
+        castShadow: true,
+        isAnimated: false
+    },
+    {
+        type: PanneauxDirection,
+        resource: 'Panneaux_direction',
+        hasPhysics: true,
+        display: 0,
+        castShadow: true,
         isAnimated: false
     },
     {
         type: Place,
-        resource: 'place',
+        resource: 'Place',
         hasPhysics: true,
         display: 2,
-        castShadow: true,
-        source: 'models/place.glb',
+        castShadow: false,
         isAnimated: false
     },
     {
@@ -119,25 +132,30 @@ export const assets = [
         hasPhysics: true,
         display: 2,
         castShadow: false,
-        source: 'models/Ponts.glb',
+        isAnimated: false
+    },
+    {
+        type: PortailIntro,
+        resource: 'Portail_intro',
+        hasPhysics: true,
+        display: 1,
+        castShadow: true,
         isAnimated: false
     },
     {
         type: PortailPlace,
-        resource: 'portail_place',
+        resource: 'Portail_place',
         hasPhysics: true,
         display: 1,
         castShadow: true,
-        source: 'models/portail_place.glb',
         isAnimated: false
     },
     {
         type: PortailShader,
-        resource: 'portail_shader',
+        resource: 'Portail_shader',
         hasPhysics: true,
         display: 1,
         castShadow: false,
-        source: 'models/portail_shader.glb',
         isAnimated: true
     },
     {
@@ -146,7 +164,14 @@ export const assets = [
         hasPhysics: true,
         display: 0,
         castShadow: false,
-        source: 'models/Props.glb',
+        isAnimated: false
+    },
+    {
+        type: Stand,
+        resource: 'Stand',
+        hasPhysics: true,
+        display: 1,
+        castShadow: true,
         isAnimated: false
     },
     // Nature
@@ -158,7 +183,6 @@ export const assets = [
         hasPhysics: true,
         display: 2,
         castShadow: true,
-        source: 'models/Arbre_sacre.glb',
         isAnimated: false
     },
     {
@@ -167,7 +191,6 @@ export const assets = [
         hasPhysics: true,
         display: 2,
         castShadow: true,
-        source: 'models/Arbre_rose.glb',
         isAnimated: false
     },
     {
@@ -176,7 +199,6 @@ export const assets = [
         hasPhysics: true,
         display: 2,
         castShadow: true,
-        source: 'models/Pine.glb',
         isAnimated: false
     },
     {
@@ -185,18 +207,8 @@ export const assets = [
         hasPhysics: true,
         display: 2,
         castShadow: true,
-        source: 'models/Arbres.glb',
         isAnimated: false
     },
-    /*{
-        type: TreeAnimated,
-        resource: 'tree_animated',
-        hasPhysics: true,
-        display: 2,
-        castShadow: true,
-        source: 'models/tree_animated.glb',
-        isAnimated: true
-    },*/
     // Others
     {
         type: Buisson,
@@ -204,25 +216,22 @@ export const assets = [
         hasPhysics: false,
         display: 0,
         castShadow: false,
-        source: 'models/Buissons.glb',
         isAnimated: false
     },
     {
         type: Carotte,
-        resource: 'carotte',
+        resource: 'Carotte',
         hasPhysics: false,
         display: 0,
         castShadow: false,
-        source: 'models/carotte.glb',
         isAnimated: false
     },
     {
         type: Champi,
-        resource: 'champi',
+        resource: 'Champi',
         hasPhysics: false,
         display: 0,
         castShadow: false,
-        source: 'models/champi.glb',
         isAnimated: false
     },
     {
@@ -231,43 +240,38 @@ export const assets = [
         hasPhysics: true,
         display: 1,
         castShadow: false,
-        source: 'models/Crystal.glb',
         isAnimated: false
     },
     {
         type: DebrisCarriere,
         resource: 'Debris_carriere',
         hasPhysics: false,
-        display: 1,
+        display: 0,
         castShadow: false,
-        source: 'models/Debris_carriere.glb',
         isAnimated: false
     },
     {
         type: Ecume1,
-        resource: 'ecume1',
+        resource: 'Ecume1',
         hasPhysics: false,
         display: 1,
         castShadow: false,
-        source: 'models/ecume1.glb',
         isAnimated: true
     },
     {
         type: Ecume2,
-        resource: 'ecume2',
+        resource: 'Ecume2',
         hasPhysics: false,
         display: 1,
         castShadow: false,
-        source: 'models/ecume2.glb',
         isAnimated: true
     },
     {
         type: Ecume3,
-        resource: 'ecume3',
+        resource: 'Ecume3',
         hasPhysics: false,
         display: 1,
         castShadow: false,
-        source: 'models/ecume3.glb',
         isAnimated: true
     },
     {
@@ -276,7 +280,6 @@ export const assets = [
         hasPhysics: true,
         display: 2,
         castShadow: false,
-        source: 'models/Ilot.glb',
         isAnimated: false
     },
     {
@@ -285,18 +288,16 @@ export const assets = [
         hasPhysics: false,
         display: 2,
         castShadow: false,
-        source: 'models/Lac.glb',
         isAnimated: true
     },
-    {
+    /*{
         type: Miasme,
-        resource: 'miasme',
+        resource: 'Miasme',
         hasPhysics: true,
         display: 2,
         castShadow: false,
-        source: 'models/miasme.glb',
         isAnimated: false
-    },
+    },*/
     // {
     //     type: Modele,
     //     resource: 'modele',
@@ -308,11 +309,10 @@ export const assets = [
     // },
     {
         type: Cascade,
-        resource: 'cascade',
+        resource: 'Cascade',
         hasPhysics: false,
         display: 1,
         castShadow: false,
-        source: 'models/cascade.glb',
         isAnimated: true
     },
     {
@@ -321,7 +321,6 @@ export const assets = [
         hasPhysics: true,
         display: 1,
         castShadow: false,
-        source: 'models/Rocher_livre.glb',
         isAnimated: false
     },
     {
@@ -330,7 +329,6 @@ export const assets = [
         hasPhysics: true,
         display: 2,
         castShadow: true,
-        source: 'models/Rochers.glb',
         isAnimated: false
     },
     {
@@ -339,7 +337,6 @@ export const assets = [
         hasPhysics: true,
         display: 1,
         castShadow: true,
-        source: 'models/Ruine1.glb',
         isAnimated: false
     },
     {
@@ -348,7 +345,6 @@ export const assets = [
         hasPhysics: true,
         display: 1,
         castShadow: true,
-        source: 'models/Ruine2.glb',
         isAnimated: false
     },
     {
@@ -357,7 +353,6 @@ export const assets = [
         hasPhysics: true,
         display: 1,
         castShadow: true,
-        source: 'models/Ruine3.glb',
         isAnimated: false
     },
     {
@@ -366,7 +361,6 @@ export const assets = [
         hasPhysics: true,
         display: 0,
         castShadow: false,
-        source: 'models/Stele1.glb',
         isAnimated: false
     },
     {
@@ -375,7 +369,6 @@ export const assets = [
         hasPhysics: true,
         display: 0,
         castShadow: false,
-        source: 'models/Stele2.glb',
         isAnimated: false
     },
     {
@@ -384,7 +377,14 @@ export const assets = [
         hasPhysics: true,
         display: 0,
         castShadow: false,
-        source: 'models/Stele3.glb',
+        isAnimated: false
+    },
+   {
+        type: CristauxPortail,
+        resource: 'Cristaux_portail',
+        hasPhysics: false,
+        display: 0,
+        castShadow: false,
         isAnimated: false
     }
 ]

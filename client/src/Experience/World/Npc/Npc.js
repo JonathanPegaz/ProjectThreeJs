@@ -1,4 +1,13 @@
-import {AnimationMixer, BoxGeometry, Mesh, MeshBasicMaterial, Object3D, SphereGeometry} from "three";
+import {
+    AnimationMixer,
+    BoxGeometry,
+    FrontSide,
+    Mesh,
+    MeshBasicMaterial,
+    MeshToonMaterial,
+    Object3D,
+    SphereGeometry
+} from "three";
 import Experience from "../../Experience.js";
 import Dialog from "./Dialog.js";
 import {clone} from "three/examples/jsm/utils/SkeletonUtils.js";
@@ -6,17 +15,18 @@ import Pseudo from "../../Interface/Pseudo.js";
 import Icons from "../../Interface/Icons.js";
 import EventEmitter from "../../Utils/EventEmitter.js";
 import QuestMarker from "../../Interface/QuestMarker.js";
-
+import * as CANNON from "cannon-es";
 
 export default class Npc extends EventEmitter{
     constructor(data) {
         super()
         this.experience = new Experience()
+        this.physics = this.experience.physics
         this.resources = this.experience.resources
-        this.resource = this.resources.items.player
+
+        this.animations_type = data.animations_type
 
         this.id = data.id
-
         this.object = new Object3D()
         this.object.position.set(data.position.x, data.position.y, data.position.z)
         this.object.rotation.set(data.rotation.x, data.rotation.y, data.rotation.z)
@@ -30,6 +40,7 @@ export default class Npc extends EventEmitter{
 
         this.setModel()
         this.setAnimation()
+        this.setPhysics()
         this.setHitbox()
         this.name = new Pseudo(this, data.name, false)
         this.setDialog(data.dialog)
@@ -38,15 +49,20 @@ export default class Npc extends EventEmitter{
     }
 
     setModel() {
-        this.model = clone(this.resource.scene.children[0])
+        this.model = clone(this.resources.items[`${this.animations_type}_idle`].scene)
         this.model.scale.set(0.175, 0.175, 0.175)
-        this.model.position.set(0, -0.5, 0)
+        this.model.position.set(0, -0.6, 0)
 
         this.model.traverse((child) =>
         {
             if(child instanceof Mesh)
             {
                 child.castShadow = true
+                child.material = new MeshToonMaterial({
+                    ...child.material,
+                    side: FrontSide,
+                    type: 'MeshToonMaterial',
+                })
             }
         })
 
@@ -62,18 +78,18 @@ export default class Npc extends EventEmitter{
 
         // action
         this.animations.idle = {
-            clip: this.resources.items.idle.animations[0],
-            action: this.mixer.clipAction(this.resources.items.idle.animations[0])
+            clip: this.resources.items[`${this.animations_type}_idle`].animations[0],
+            action: this.mixer.clipAction(this.resources.items[`${this.animations_type}_idle`].animations[0])
         }
 
         this.animations.walk = {
-            clip: this.resources.items.walking.animations[0],
-            action: this.mixer.clipAction(this.resources.items.walking.animations[0])
+            clip: this.resources.items[`${this.animations_type}_walking`].animations[0],
+            action: this.mixer.clipAction(this.resources.items[`${this.animations_type}_walking`].animations[0])
         }
 
         this.animations.run = {
-            clip: this.resources.items.walking.animations[0],
-            action: this.mixer.clipAction(this.resources.items.walking.animations[0])
+            clip: this.resources.items[`${this.animations_type}_walking`].animations[0],
+            action: this.mixer.clipAction(this.resources.items[`${this.animations_type}_walking`].animations[0])
         }
 
         // start idle animation at random time
@@ -81,8 +97,27 @@ export default class Npc extends EventEmitter{
         this.animations.idle.action.play()
     }
 
+    setPhysics() {
+
+        const shape = new CANNON.Sphere(0.6); // dimensions de la boîte
+        this.body = new CANNON.Body({
+            shape: shape,
+            mass: 100,
+            position: new CANNON.Vec3(this.object.position.x, this.object.position.y, this.object.position.z),
+            // position: new CANNON.Vec3(53, 14, -68),
+            fixedRotation: true,
+        })
+
+        this.physics.world.addBody(this.body)
+
+        this.physics.objectsToUpdate.push({
+            mesh: this.object,
+            body: this.body
+        })
+    }
+
     setHitbox() {
-        const geometry = new BoxGeometry(2, 1.5, 2)
+        const geometry = new BoxGeometry(1.5, 2, 1.5)
         const material = new MeshBasicMaterial({color: 0xff00ff, wireframe: true, visible: this.experience.debug.active ?? false})
         this.hitbox = new Mesh(geometry, material)
         this.hitbox.position.set(this.object.position.x, this.object.position.y, this.object.position.z)

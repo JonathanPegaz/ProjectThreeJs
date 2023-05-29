@@ -71,6 +71,7 @@ export default class Experience
             this.mainscreen.showInput()
             this.controls = new Controls()
             this.world = new World()
+            this.world.init()
         })
 
         this.mainscreen.on('pseudo-entered', () => {
@@ -109,10 +110,15 @@ export default class Experience
 
         this.camera.update()
 
+        //console.time()
         if(this.physics)
             this.physics.update()
+        //console.timeEnd()
+        //console.time()
         if(this.world)
             this.world.update()
+        //console.timeEnd()
+        //console.time()
         if(this.controls)
             this.controls.update()
         if(this.hud)
@@ -125,6 +131,7 @@ export default class Experience
             this.npc.update()
 
         this.renderer.update()
+        //console.timeEnd()
         //this.postProcessing.update()
         this.monitoring.endMonitoring()
     }

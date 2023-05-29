@@ -7,4 +7,9 @@ export default class Place extends Model3D
     {
         super(model)
     }
+
+    setMaterial(child) {
+        super.setMaterial(child);
+        child.receiveShadow = true;
+    }
 }

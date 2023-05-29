@@ -1,9 +1,8 @@
-import * as THREE from 'three'
 import * as CANNON from 'cannon-es'
 import Experience from "./Experience.js";
 import CannonDebugger from 'cannon-es-debugger'
-import {Mesh} from "three";
 import { threeToCannon, ShapeType } from 'three-to-cannon';
+
 
 export default class Physics
 {
@@ -17,6 +16,7 @@ export default class Physics
         this.world = new CANNON.World()
         this.world.gravity.set(0, -29.82, 0)
         this.world.broadphase = new CANNON.SAPBroadphase(this.world)
+        this.world.allowSleep = true
 
         this.objectsToUpdate = []
         this.setupDebug()
@@ -77,6 +77,7 @@ export default class Physics
             this.debugger.update()
 
         this.world.step(1 / 60, this.time.delta * 0.001, 3)
+
         for(const object of this.objectsToUpdate)
         {
             object.mesh.position.copy(object.body.position)

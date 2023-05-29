@@ -1,5 +1,4 @@
 import npcList from "./npcList.js";
-import Icons from "../../Interface/Icons.js";
 
 
 export default class NpcController {
@@ -32,7 +31,7 @@ export default class NpcController {
     catch(raycaster) {
         for (const [key, value] of Object.entries(this.list)) {
             const intersects = raycaster.intersectObject(value.hitbox);
-            value.canInteract = intersects.length > 0
+            value.canInteract = raycaster.intersectObject(value.hitbox).length > 0 || raycaster.intersectObject(value.object).length > 0
         }
     }
 
