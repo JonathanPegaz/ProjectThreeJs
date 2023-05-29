@@ -52,7 +52,8 @@ export const assets = [
         hasPhysics: true,
         display: 0,
         castShadow: false,
-        isAnimated: false
+        isAnimated: false,
+        isInteractive: false
     },
     {
         type: Batiments,
@@ -60,7 +61,8 @@ export const assets = [
         hasPhysics: true,
         display: 2,
         castShadow: true,
-        isAnimated: false
+        isAnimated: false,
+        isInteractive: false
     },
     {
         type: Dalles,
@@ -68,7 +70,8 @@ export const assets = [
         hasPhysics: false,
         display: 0,
         castShadow: false,
-        isAnimated: false
+        isAnimated: false,
+        isInteractive: false
     },
     {
         type: Ferme,
@@ -76,7 +79,8 @@ export const assets = [
         hasPhysics: true,
         display: 2,
         castShadow: true,
-        isAnimated: false
+        isAnimated: false,
+        isInteractive: false
     },
     {
         type: Flag,
@@ -84,7 +88,8 @@ export const assets = [
         hasPhysics: false,
         display: 1,
         castShadow: true,
-        isAnimated: true
+        isAnimated: true,
+        isInteractive: false
     },
     {
         type: Pancarte,
@@ -92,7 +97,8 @@ export const assets = [
         hasPhysics: true,
         display: 1,
         castShadow: true,
-        isAnimated: false
+        isAnimated: false,
+        isInteractive: false
     },
     {
         type: Panneaux,
@@ -100,7 +106,8 @@ export const assets = [
         hasPhysics: true,
         display: 1,
         castShadow: true,
-        isAnimated: false
+        isAnimated: false,
+        isInteractive: false
     },
     {
         type: PanneauxCollec,
@@ -108,7 +115,8 @@ export const assets = [
         hasPhysics: true,
         display: 0,
         castShadow: true,
-        isAnimated: false
+        isAnimated: false,
+        isInteractive: false
     },
     {
         type: PanneauxDirection,
@@ -116,7 +124,8 @@ export const assets = [
         hasPhysics: true,
         display: 0,
         castShadow: true,
-        isAnimated: false
+        isAnimated: false,
+        isInteractive: false
     },
     {
         type: Place,
@@ -124,7 +133,8 @@ export const assets = [
         hasPhysics: true,
         display: 2,
         castShadow: false,
-        isAnimated: false
+        isAnimated: false,
+        isInteractive: false
     },
     {
         type: Ponts,
@@ -132,7 +142,8 @@ export const assets = [
         hasPhysics: true,
         display: 2,
         castShadow: false,
-        isAnimated: false
+        isAnimated: false,
+        isInteractive: false
     },
     {
         type: PortailIntro,
@@ -140,7 +151,8 @@ export const assets = [
         hasPhysics: true,
         display: 1,
         castShadow: true,
-        isAnimated: false
+        isAnimated: false,
+        isInteractive: false
     },
     {
         type: PortailPlace,
@@ -148,7 +160,8 @@ export const assets = [
         hasPhysics: true,
         display: 1,
         castShadow: true,
-        isAnimated: false
+        isAnimated: false,
+        isInteractive: false
     },
     {
         type: PortailShader,
@@ -156,7 +169,8 @@ export const assets = [
         hasPhysics: true,
         display: 1,
         castShadow: false,
-        isAnimated: true
+        isAnimated: true,
+        isInteractive: false
     },
     {
         type: Props,
@@ -164,7 +178,8 @@ export const assets = [
         hasPhysics: true,
         display: 0,
         castShadow: false,
-        isAnimated: false
+        isAnimated: false,
+        isInteractive: false
     },
     {
         type: Stand,
@@ -172,7 +187,8 @@ export const assets = [
         hasPhysics: true,
         display: 1,
         castShadow: true,
-        isAnimated: false
+        isAnimated: false,
+        isInteractive: false
     },
     // Nature
     //  Vegetations
@@ -183,7 +199,8 @@ export const assets = [
         hasPhysics: true,
         display: 2,
         castShadow: true,
-        isAnimated: false
+        isAnimated: false,
+        isInteractive: false
     },
     {
         type: ArbreRose,
@@ -191,7 +208,8 @@ export const assets = [
         hasPhysics: true,
         display: 2,
         castShadow: true,
-        isAnimated: false
+        isAnimated: false,
+        isInteractive: false
     },
     {
         type: Pine,
@@ -199,7 +217,8 @@ export const assets = [
         hasPhysics: true,
         display: 2,
         castShadow: true,
-        isAnimated: false
+        isAnimated: false,
+        isInteractive: false
     },
     {
         type: Arbres,
@@ -207,7 +226,8 @@ export const assets = [
         hasPhysics: true,
         display: 2,
         castShadow: true,
-        isAnimated: false
+        isAnimated: false,
+        isInteractive: false
     },
     // Others
     {
@@ -216,7 +236,8 @@ export const assets = [
         hasPhysics: false,
         display: 0,
         castShadow: false,
-        isAnimated: false
+        isAnimated: false,
+        isInteractive: false
     },
     {
         type: Carotte,
@@ -224,7 +245,8 @@ export const assets = [
         hasPhysics: false,
         display: 0,
         castShadow: false,
-        isAnimated: false
+        isAnimated: false,
+        isInteractive: false
     },
     {
         type: Champi,
@@ -232,7 +254,8 @@ export const assets = [
         hasPhysics: false,
         display: 0,
         castShadow: false,
-        isAnimated: false
+        isAnimated: false,
+        isInteractive: false
     },
     {
         type: Crystal,
@@ -240,7 +263,8 @@ export const assets = [
         hasPhysics: true,
         display: 1,
         castShadow: false,
-        isAnimated: false
+        isAnimated: false,
+        isInteractive: true
     },
     {
         type: DebrisCarriere,
@@ -248,7 +272,8 @@ export const assets = [
         hasPhysics: false,
         display: 0,
         castShadow: false,
-        isAnimated: false
+        isAnimated: false,
+        isInteractive: false
     },
     {
         type: Ecume1,
@@ -256,7 +281,8 @@ export const assets = [
         hasPhysics: false,
         display: 1,
         castShadow: false,
-        isAnimated: true
+        isAnimated: true,
+        isInteractive: false
     },
     {
         type: Ecume2,
@@ -264,7 +290,8 @@ export const assets = [
         hasPhysics: false,
         display: 1,
         castShadow: false,
-        isAnimated: true
+        isAnimated: true,
+        isInteractive: false
     },
     {
         type: Ecume3,
@@ -272,7 +299,8 @@ export const assets = [
         hasPhysics: false,
         display: 1,
         castShadow: false,
-        isAnimated: true
+        isAnimated: true,
+        isInteractive: false
     },
     {
         type: Ilot,
@@ -280,7 +308,8 @@ export const assets = [
         hasPhysics: true,
         display: 2,
         castShadow: false,
-        isAnimated: false
+        isAnimated: false,
+        isInteractive: false
     },
     {
         type: Lac,
@@ -288,7 +317,8 @@ export const assets = [
         hasPhysics: false,
         display: 2,
         castShadow: false,
-        isAnimated: true
+        isAnimated: true,
+        isInteractive: false
     },
     /*{
         type: Miasme,
@@ -296,7 +326,8 @@ export const assets = [
         hasPhysics: true,
         display: 2,
         castShadow: false,
-        isAnimated: false
+        isAnimated: false,
+        isInteractive: false
     },*/
     // {
     //     type: Modele,
@@ -305,7 +336,8 @@ export const assets = [
     //     display: 0,
     //     castShadow: false,
     //     source: 'models/modele.glb',
-    //     isAnimated: false
+    //     isAnimated: false,
+    //     isInteractive: false
     // },
     {
         type: Cascade,
@@ -313,7 +345,8 @@ export const assets = [
         hasPhysics: false,
         display: 1,
         castShadow: false,
-        isAnimated: true
+        isAnimated: true,
+        isInteractive: false
     },
     {
         type: RocherLivre,
@@ -321,7 +354,8 @@ export const assets = [
         hasPhysics: true,
         display: 1,
         castShadow: false,
-        isAnimated: false
+        isAnimated: false,
+        isInteractive: false
     },
     {
         type: Rochers,
@@ -329,7 +363,8 @@ export const assets = [
         hasPhysics: true,
         display: 2,
         castShadow: true,
-        isAnimated: false
+        isAnimated: false,
+        isInteractive: false
     },
     {
         type: Ruine1,
@@ -337,7 +372,8 @@ export const assets = [
         hasPhysics: true,
         display: 1,
         castShadow: true,
-        isAnimated: false
+        isAnimated: false,
+        isInteractive: false
     },
     {
         type: Ruine2,
@@ -345,7 +381,8 @@ export const assets = [
         hasPhysics: true,
         display: 1,
         castShadow: true,
-        isAnimated: false
+        isAnimated: false,
+        isInteractive: false
     },
     {
         type: Ruine3,
@@ -353,7 +390,8 @@ export const assets = [
         hasPhysics: true,
         display: 1,
         castShadow: true,
-        isAnimated: false
+        isAnimated: false,
+        isInteractive: false
     },
     {
         type: Stele1,
@@ -361,7 +399,8 @@ export const assets = [
         hasPhysics: true,
         display: 0,
         castShadow: false,
-        isAnimated: false
+        isAnimated: false,
+        isInteractive: false
     },
     {
         type: Stele2,
@@ -369,7 +408,8 @@ export const assets = [
         hasPhysics: true,
         display: 0,
         castShadow: false,
-        isAnimated: false
+        isAnimated: false,
+        isInteractive: false
     },
     {
         type: Stele3,
@@ -377,7 +417,8 @@ export const assets = [
         hasPhysics: true,
         display: 0,
         castShadow: false,
-        isAnimated: false
+        isAnimated: false,
+        isInteractive: false
     },
    {
         type: CristauxPortail,
@@ -385,6 +426,7 @@ export const assets = [
         hasPhysics: false,
         display: 0,
         castShadow: false,
-        isAnimated: false
+        isAnimated: false,
+        isInteractive: false
     }
 ]

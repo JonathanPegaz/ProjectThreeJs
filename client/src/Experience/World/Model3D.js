@@ -1,10 +1,15 @@
-import {AnimationMixer, LoopRepeat, Mesh, MeshToonMaterial, FrontSide} from "three";
+import {AnimationMixer, LoopRepeat, Mesh, MeshToonMaterial, SphereGeometry, MeshBasicMaterial, Object3D, FrontSide} from "three";
 import Experience from "../Experience.js";
+import InteractiveObject from "./InteractiveObject/InteractiveObject.js";
+import InteractMarker from "../Interface/InteractMarker.js";
+import * as THREE from "three";
 
-export default class Model3D {
+export default class Model3D extends InteractiveObject{
     constructor(data) {
+        super(data.isInteractive)
         this.experience = new Experience()
 
+        this.isInteractive = data.isInteractive
         this.hasPhysics = data.hasPhysics
         this.display = data.display
         this.castShadow = data.castShadow
@@ -20,27 +25,32 @@ export default class Model3D {
     setModel() {
         const file = this.experience.resources.items[this.resource]
 
-        // set model
-        this.model = file.scene
-        this.model.traverse((child) =>
-        {
-            if(child instanceof Mesh)
-            {
-                this.setMaterial(child)
-                this.setPhysicsMeshs(child)
-                this.meshs.push(child)
-            }
-            child.matrixAutoUpdate = false
-            child.matrixWorldAutoUpdate = false
-        })
+                // set model
+                this.model = file.scene
+                let interactive = false
+                this.model.traverse((child) =>
+                {
+                    if(child instanceof Mesh)
+                    {
+                        this.setMaterial(child)
+                        this.setPhysicsMeshs(child)
+                        interactive = this.setInteraction(child)
+                        this.meshs.push(child)
+                    }
+                    child.matrixAutoUpdate = false
+                    child.matrixWorldAutoUpdate = false
+                })
+                if (interactive) {
+                    this.add()
+                }
 
-        // set animations
-        this.animations = file.animations
-        if (this.animations.length > 0) {
-            this.setAnimation()
-            this.isAnimated = true
-        }
-    }
+                // set animations
+                this.animations = file.animations
+                if (this.animations.length > 0) {
+                    this.setAnimation()
+                    this.isAnimated = true
+                }
+            }
 
     setMaterial(child) {
         // check if child material name already exist in materials
@@ -69,6 +79,24 @@ export default class Model3D {
             this.mixer.clipAction(this.animations[i]).loop = LoopRepeat
             this.mixer.clipAction(this.animations[i]).play()
         }
+    }
+
+    setInteraction(child) {
+        if (!this.isInteractive) return
+        const geometry = new SphereGeometry(0.5, 16, 16)
+        const material = new MeshBasicMaterial({ color: 0xff00ff, wireframe: true, visible: this.debug.active ?? false })
+        const hitbox = new Mesh(geometry, material)
+        hitbox.position.set(child.geometry.boundingSphere.center.x, child.geometry.boundingSphere.center.y, child.geometry.boundingSphere.center.z)
+        child.hitbox = hitbox
+        this.scene.add(child.hitbox)
+        this.name = child.name
+        child.object = new Object3D()
+        child.object.position.set(hitbox.position.x, hitbox.position.y, hitbox.position.z)
+        this.scene.add(child.object)
+        child.interacting = false
+        child.marker = new InteractMarker(child)
+
+        return true
     }
 
     destroy() {
@@ -104,7 +132,8 @@ export default class Model3D {
         if (this.mixer)
             this.mixer = null
         this.isAnimated = null
-
+        this.isInteractive = null
         this.experience = null
+        this.name = null
     }
 }

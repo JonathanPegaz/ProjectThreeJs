@@ -27,9 +27,24 @@ export default class InteractiveObjectController extends EventEmitter{
 
   catch(raycaster) {
     for (const [key, value] of Object.entries(this.list)) {
+      if (value.meshs) {
+        value.meshs.forEach(mesh => {
+          const intersects = raycaster.intersectObject(mesh.hitbox);
+
+          if (intersects.length > 0) {
+            value.interact(raycaster, mesh);
+          } else if (mesh.interacting) {
+            value.stopInteract(mesh);
+          }
+        })
+        continue
+      }
+
       const intersects = raycaster.intersectObject(value.hitbox);
       if (intersects.length > 0) {
         value.interact(raycaster);
+      } else if (value.isInteracting) {
+        value.stopInteract();
       }
     }
   }

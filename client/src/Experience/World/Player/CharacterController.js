@@ -118,7 +118,7 @@ export default class BasicCharacterController {
             return;
         }
 
-        if (this.Position.y < -15) {
+        if (this.Position.y < 10.5) {
             this.respawn()
         }
 
