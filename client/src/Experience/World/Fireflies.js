@@ -19,8 +19,6 @@ export default class Fireflies
 
     setModel()
     {
-
-
         // Fireflies
         this.firefliesGeometry = new BufferGeometry()
         const firefliesCount = 6000
@@ -78,6 +76,5 @@ export default class Fireflies
         this.debug = null
         this.debugFolder = null
         this.debugObject = null
-
     }
 }

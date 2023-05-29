@@ -7,7 +7,7 @@ export default class Panneaux extends Model3D
         super(model)
     }
     setPhysicsMeshs(child) {
-        if(!child.name.endsWith('_1')) {
+        if(!child.name.endsWith('_2')) {
             this.physicsMeshs.push(child)
         }
     }

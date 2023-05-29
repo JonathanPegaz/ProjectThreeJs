@@ -1,4 +1,4 @@
-import { Object3D, Mesh, DoubleSide, MeshToonMaterial} from 'three';
+import {Object3D, Mesh, FrontSide, MeshToonMaterial} from 'three';
 import Experience from '../Experience.js';
 
 
@@ -12,7 +12,6 @@ export default class Landscape {
 
         this.object = new Object3D()
         this.object.position.set(0, 0, 0)
-        this.object.frustumCulled = false
 
         this.setModel()
     }
@@ -26,11 +25,13 @@ export default class Landscape {
                 this.experience.physics.createTrimeshShape(child)
                 child.material = new MeshToonMaterial({ // On crée le matériau du buisson
                     ...child.material,
+                    side: FrontSide,
                     depthWrite: true,
                     type: 'MeshToonMaterial',
                     transparent: false,
                 })
                 child.receiveShadow = true
+                child.castShadow = false
             }
         })
 

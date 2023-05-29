@@ -1,4 +1,13 @@
-import {AnimationMixer, BoxGeometry, Mesh, MeshBasicMaterial, Object3D, SphereGeometry} from "three";
+import {
+    AnimationMixer,
+    BoxGeometry,
+    FrontSide,
+    Mesh,
+    MeshBasicMaterial,
+    MeshToonMaterial,
+    Object3D,
+    SphereGeometry
+} from "three";
 import Experience from "../../Experience.js";
 import Dialog from "./Dialog.js";
 import {clone} from "three/examples/jsm/utils/SkeletonUtils.js";
@@ -49,6 +58,11 @@ export default class Npc extends EventEmitter{
             if(child instanceof Mesh)
             {
                 child.castShadow = true
+                child.material = new MeshToonMaterial({
+                    ...child.material,
+                    side: FrontSide,
+                    type: 'MeshToonMaterial',
+                })
             }
         })
 

@@ -6,4 +6,10 @@ export default class Props extends Model3D
     {
         super(model)
     }
+
+    setPhysicsMeshs(child) {
+        if(!child.name.includes("Mesh")) {
+            this.physicsMeshs.push(child)
+        }
+    }
 }

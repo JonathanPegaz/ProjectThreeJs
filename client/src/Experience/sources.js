@@ -12,6 +12,18 @@ export default [
         ]
     },
     {
+        name: 'skybox_night',
+        type: 'cubeTexture',
+        path: [
+            'textures/environmentMap/Skybox/FS017/FS017_Night_Cubemap_front.png',
+            'textures/environmentMap/Skybox/FS017/FS017_Night_Cubemap_back.png',
+            'textures/environmentMap/Skybox/FS017/FS017_Night_Cubemap_up.png',
+            'textures/environmentMap/Skybox/FS017/FS017_Night_Cubemap_down.png',
+            'textures/environmentMap/Skybox/FS017/FS017_Night_Cubemap_right.png',
+            'textures/environmentMap/Skybox/FS017/FS017_Night_Cubemap_left.png'
+        ]
+    },
+    {
         name: 'interfaceNormalMap',
         type: 'texture',
         path: 'textures/interfaceNormalMap.png'
@@ -218,7 +230,7 @@ export default [
     {
         name: 'Crystal',
         type: 'gltfModel',
-        path: 'models/Crystal.glb'
+        path: 'models/crystal.glb'
     },
     {
         name: 'Debris_carriere',
@@ -299,5 +311,35 @@ export default [
         name: 'Stele3',
         type: 'gltfModel',
         path: 'models/Stele3.glb'
+    },
+    {
+        name: 'Cristaux_portail',
+        type: 'gltfModel',
+        path: 'models/Cristaux_portail.glb'
+    },
+    {
+        name: 'Panneaux_collec',
+        type: 'gltfModel',
+        path: 'models/panneaux_collec.glb'
+    },
+    {
+        name: 'Panneaux_direction',
+        type: 'gltfModel',
+        path: 'models/panneaux_direction.glb'
+    },
+    {
+        name: 'Portail_intro',
+        type: 'gltfModel',
+        path: 'models/portail_intro.glb'
+    },
+    {
+        name: 'Portail',
+        type: 'gltfModel',
+        path: 'models/portail.glb'
+    },
+    {
+        name: 'Stand',
+        type: 'gltfModel',
+        path: 'models/stand.glb'
     }
 ]

@@ -23,6 +23,7 @@ export default class Environment
 
     setSunLight()
     {
+        //this.sunLight = new THREE.DirectionalLight('#001624', 4)
         this.sunLight = new THREE.DirectionalLight('#ffffff', 4)
         this.sunLight.position.set(0, 90, 30)
         this.sunLight.castShadow = true
@@ -118,13 +119,13 @@ export default class Environment
         this.environmentMap.texture.encoding = THREE.sRGBEncoding
 
         this.scene.background = this.environmentMap.texture
-        this.scene.environment = this.environmentMap.texture
+        //this.scene.environment = this.environmentMap.texture
 
         this.environmentMap.updateMaterials = () =>
         {
             this.scene.traverse((child) =>
             {
-                if(child instanceof THREE.Mesh && child.material instanceof THREE.MeshStandardMaterial)
+                if(child instanceof THREE.Mesh)
                 {
                     child.material.envMap = this.environmentMap.texture
                     child.material.envMapIntensity = this.environmentMap.intensity

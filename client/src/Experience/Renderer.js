@@ -21,11 +21,11 @@ export default class Renderer
         this.instance = new WebGLRenderer({
             canvas: this.canvas,
             antialias: true,
-            powerPreference: "high-performance"
+            powerPreference: "high-performance",
         })
         this.instance.physicallyCorrectLights = true
         this.instance.gammaFactor = 2.2
-        this.instance.outputEncoding = sRGBEncoding
+        //this.instance.outputColorSpace = sRGBEncoding
         this.instance.toneMapping = NoToneMapping
         this.instance.toneMappingExposure = 1.75
         this.instance.shadowMap.enabled = true
@@ -46,6 +46,18 @@ export default class Renderer
                 ACESFilmic: ACESFilmicToneMapping
             })
             this.debugFolder.add(this.instance, 'toneMappingExposure').min(0).max(10).step(0.001)
+            // listen number of draw calls
+            this.debugFolder.add(this.instance.info.render, 'calls').listen()
+            // listen number of triangles
+            this.debugFolder.add(this.instance.info.render, 'triangles').listen()
+            // listen number of frame
+            this.debugFolder.add(this.instance.info.render, 'frame').listen()
+            // listen number of points
+            this.debugFolder.add(this.instance.info.render, 'points').listen()
+            // listen number of geometries
+            this.debugFolder.add(this.instance.info.memory, 'geometries').listen()
+            // listen number of textures
+            this.debugFolder.add(this.instance.info.memory, 'textures').listen()
         }
     }
 
@@ -69,7 +81,7 @@ export default class Renderer
     update()
     {
         this.instance.render(this.scene, this.camera.instance)
-        this.labelRenderer.render(this.scene, this.camera.instance);
+        this.labelRenderer.render(this.scene, this.camera.instance)
     }
 
     destroy() {

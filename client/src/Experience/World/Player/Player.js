@@ -1,6 +1,6 @@
 import Experience from "../../Experience.js";
 import {clone} from "three/examples/jsm/utils/SkeletonUtils.js";
-import {AnimationMixer, Mesh, Object3D} from "three";
+import {AnimationMixer, FrontSide, Mesh, MeshToonMaterial, Object3D} from "three";
 
 
 export default class Player {
@@ -56,6 +56,11 @@ export default class Player {
             if(child instanceof Mesh)
             {
                 child.castShadow = true
+                child.material = new MeshToonMaterial({
+                    ...child.material,
+                    side: FrontSide,
+                    type: 'MeshToonMaterial',
+                })
             }
         })
 

@@ -1,4 +1,4 @@
-import {AnimationMixer, LoopRepeat, Mesh, MeshToonMaterial} from "three";
+import {AnimationMixer, LoopRepeat, Mesh, MeshToonMaterial, FrontSide} from "three";
 import Experience from "../Experience.js";
 
 export default class Model3D {
@@ -12,6 +12,7 @@ export default class Model3D {
 
         this.meshs = []
         this.physicsMeshs = []
+        this.materials = []
         this.isAnimated = data.isAnimated
         this.setModel()
     }
@@ -29,8 +30,9 @@ export default class Model3D {
                 this.setPhysicsMeshs(child)
                 this.meshs.push(child)
             }
+            child.matrixAutoUpdate = false
+            child.matrixWorldAutoUpdate = false
         })
-        this.model.matrixAutoUpdate = false
 
         // set animations
         this.animations = file.animations
@@ -41,10 +43,20 @@ export default class Model3D {
     }
 
     setMaterial(child) {
+        // check if child material name already exist in materials
+        for (let i = 0; i < this.materials.length; i++) {
+            if (this.materials[i].name === child.material.name) {
+                child.material = this.materials[i]
+                return
+            }
+        }
+
         child.material = new MeshToonMaterial({
             ...child.material,
+            side: FrontSide,
             type: 'MeshToonMaterial',
         })
+        this.materials.push(child.material)
     }
 
     setPhysicsMeshs(child) {
@@ -88,6 +100,7 @@ export default class Model3D {
         this.physicsMeshs = null
         this.meshs = null
         this.animations = null
+        this.materials = null
         if (this.mixer)
             this.mixer = null
         this.isAnimated = null

@@ -36,6 +36,11 @@ import Miasme from "./Nature/Miasme.js";
 import Modele from "./Nature/Modele.js";
 import Ecume3 from "./Nature/Ecume3.js";
 import Carotte from "./Nature/Vegetations/Carrote.js";
+import CristauxPortail from "./Nature/CristauxPortail.js";
+import PanneauxCollec from "./Buildings/PanneauxCollec.js";
+import PanneauxDirection from "./Buildings/PanneauxDirection.js";
+import PortailIntro from "./Buildings/PortailIntro.js";
+import Stand from "./Buildings/Stand.js";
 
 export const assets = [
     // display : 0 = small, 1 = medium, 2 = big
@@ -46,7 +51,7 @@ export const assets = [
         resource: 'Barrieres',
         hasPhysics: true,
         display: 0,
-        castShadow: true,
+        castShadow: false,
         isAnimated: false
     },
     {
@@ -98,11 +103,27 @@ export const assets = [
         isAnimated: false
     },
     {
+        type: PanneauxCollec,
+        resource: 'Panneaux_collec',
+        hasPhysics: true,
+        display: 0,
+        castShadow: true,
+        isAnimated: false
+    },
+    {
+        type: PanneauxDirection,
+        resource: 'Panneaux_direction',
+        hasPhysics: true,
+        display: 0,
+        castShadow: true,
+        isAnimated: false
+    },
+    {
         type: Place,
         resource: 'Place',
         hasPhysics: true,
         display: 2,
-        castShadow: true,
+        castShadow: false,
         isAnimated: false
     },
     {
@@ -111,6 +132,14 @@ export const assets = [
         hasPhysics: true,
         display: 2,
         castShadow: false,
+        isAnimated: false
+    },
+    {
+        type: PortailIntro,
+        resource: 'Portail_intro',
+        hasPhysics: true,
+        display: 1,
+        castShadow: true,
         isAnimated: false
     },
     {
@@ -135,6 +164,14 @@ export const assets = [
         hasPhysics: true,
         display: 0,
         castShadow: false,
+        isAnimated: false
+    },
+    {
+        type: Stand,
+        resource: 'Stand',
+        hasPhysics: true,
+        display: 1,
+        castShadow: true,
         isAnimated: false
     },
     // Nature
@@ -172,15 +209,6 @@ export const assets = [
         castShadow: true,
         isAnimated: false
     },
-    /*{
-        type: TreeAnimated,
-        resource: 'tree_animated',
-        hasPhysics: true,
-        display: 2,
-        castShadow: true,
-        source: 'models/tree_animated.glb',
-        isAnimated: true
-    },*/
     // Others
     {
         type: Buisson,
@@ -218,7 +246,7 @@ export const assets = [
         type: DebrisCarriere,
         resource: 'Debris_carriere',
         hasPhysics: false,
-        display: 1,
+        display: 0,
         castShadow: false,
         isAnimated: false
     },
@@ -232,7 +260,7 @@ export const assets = [
     },
     {
         type: Ecume2,
-        resource: 'ecume2',
+        resource: 'Ecume2',
         hasPhysics: false,
         display: 1,
         castShadow: false,
@@ -240,7 +268,7 @@ export const assets = [
     },
     {
         type: Ecume3,
-        resource: 'ecume3',
+        resource: 'Ecume3',
         hasPhysics: false,
         display: 1,
         castShadow: false,
@@ -262,14 +290,14 @@ export const assets = [
         castShadow: false,
         isAnimated: true
     },
-    {
+    /*{
         type: Miasme,
         resource: 'Miasme',
         hasPhysics: true,
         display: 2,
         castShadow: false,
         isAnimated: false
-    },
+    },*/
     // {
     //     type: Modele,
     //     resource: 'modele',
@@ -347,6 +375,14 @@ export const assets = [
         type: Stele3,
         resource: 'Stele3',
         hasPhysics: true,
+        display: 0,
+        castShadow: false,
+        isAnimated: false
+    },
+   {
+        type: CristauxPortail,
+        resource: 'Cristaux_portail',
+        hasPhysics: false,
         display: 0,
         castShadow: false,
         isAnimated: false
