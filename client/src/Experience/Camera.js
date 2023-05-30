@@ -64,8 +64,7 @@ export default class Camera
     destroy() {
         this.control.dispose()
         this.control = null
-
-        this.audioListener.dispose()
+        
         this.audioListener = null
     }
 }

@@ -34,4 +34,16 @@ export default class Cascade extends Model3D
 
         this.model.add( sound );
     }
+
+    destroy() {
+        this.model.traverse((child) =>
+        {
+          // remove audio
+            if (child.type === 'PositionalAudio') {
+                child.stop()
+                child.remove()
+            }
+        })
+        super.destroy();
+    }
 }
