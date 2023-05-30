@@ -22,7 +22,7 @@ export default class TriggerZoneController {
 
     this.list.forEach((element) => {
       element.on(element.id, (event) => {
-        if (event === "ENTER") {
+        if (event === "INTERACT") {
           element.trigger()
         }
       })

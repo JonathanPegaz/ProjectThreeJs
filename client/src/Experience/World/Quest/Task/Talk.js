@@ -23,8 +23,6 @@ export default class Talk extends Task{
         for (const [key, value] of Object.entries(this.experience.npc.list)) {
             if (value.id === this.requirements.item) {
                 this.target = value
-                console.log(this.target)
-
                 value.on("talk", (item) => {
                     this.catch(item)
                 })

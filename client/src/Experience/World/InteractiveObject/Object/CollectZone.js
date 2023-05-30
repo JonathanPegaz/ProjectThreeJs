@@ -11,6 +11,7 @@ export default class CollectZone extends InteractiveObject {
     this.itemToCollect = null
     this.collectTime = null
     this.isCollecting = false
+    this.type = "collectable"
 
     this.init(position, name, size, radius, collectTime, itemToCollect)
   }
@@ -62,8 +63,7 @@ export default class CollectZone extends InteractiveObject {
     return new Promise(() => {
       const check = () => {
         if (this.isCollecting) {
-          console.log("COLLECT", this.itemToCollect)
-          this.trigger(`collect-${this.id}`, [this.itemToCollect]);
+          this.trigger(`collect`, [this.itemToCollect]);
           setTimeout(check, this.collectTime);
         }
       };

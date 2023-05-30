@@ -21,15 +21,15 @@ export default class Collect extends Task {
       objective: this.requirements.quantity,
       progress: 0,
     }
-    this.world.collectZone.list.forEach((collectZone) => {
-      if (collectZone.itemToCollect === this.requirements.item) {
-        //TODO: replace by an array if multiple collectZone can be used
-        this.target = collectZone
-        this.target.on(`collect-${this.target.id}`, (item) => {
+
+    for (const [key, value] of Object.entries(this.world.interactiveObject.list)) {
+      if (value.type === 'collectable' && value.itemToCollect === this.requirements.item) {
+        this.target = value
+        value.on('collect', (item) => {
           this.catch(item)
         })
       }
-    })
+    }
   }
 
   catch(item) {
@@ -46,9 +46,7 @@ export default class Collect extends Task {
   }
 
   isComplete() {
-    console.log("Collect task is complete")
     this.target.marker.unmark(this.target.id)
-    //this.target.off(`collect-${this.target.id}`)
     super.isComplete();
   }
 

@@ -154,7 +154,6 @@ export default class Npc extends EventEmitter{
                     this.experience.world.quest.add(this.quest.id)
                     this.endDialog = this.quest.endDialog
                     this.experience.world.quest.on('completed', () => {
-                        console.log(this.quest)
                         this.icon.change('commentaires-64')
                         this.experience.world.quest.off('completed')
                         this.dialog.dialog = this.endDialog

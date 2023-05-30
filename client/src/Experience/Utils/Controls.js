@@ -47,7 +47,7 @@ export default class Controls extends EventEmitter
                 name: 'boost'
             },
             {
-                codes: [ 'KeyE' ],
+                codes: [ 'KeyF' ],
                 name: 'action'
             },
             {

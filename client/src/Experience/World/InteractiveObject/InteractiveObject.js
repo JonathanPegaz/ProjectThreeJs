@@ -2,15 +2,14 @@ import Experience from "../../Experience.js";
 import * as THREE from "three";
 import EventEmitter from "../../Utils/EventEmitter.js";
 import { v4 as uuidv4 } from 'uuid';
-import QuestMarker from "../../Interface/QuestMarker.js";
 
 export default class InteractiveObject extends EventEmitter{
-  constructor() {
+  constructor(isInteractive = true) {
     super();
+    if (isInteractive === false) return
     this.experience = new Experience()
     this.scene = this.experience.scene
     this.debug = this.experience.debug
-    this.resources = this.experience.resources
 
     this.isInteracting = false
     this.id = null
@@ -21,26 +20,29 @@ export default class InteractiveObject extends EventEmitter{
     this.marker = null
   }
 
-  async add() {
-    await this.wait(() => this.experience.world).then(() => {
-      this.id = uuidv4()
-      this.experience.world.interactiveObject.store(this)
-    })
+  add() {
+    this.id = uuidv4()
+    this.experience.world.interactiveObject.store(this)
   }
   delete() {
     this.experience.world.interactiveObject.delete(this.id)
   }
-  interact(origin, limit = null) {
-    if (this.isInteracting) {
-      return true
-    }
+  interact(origin, limit = null, zone = true) {
+    if (this.isInteracting) return true
     this.isInteracting = true
-    this.trigger(this.name, ["ENTER"])
-    this.stay(origin, limit).then(() => {
-      this.leave()
-    })
 
+    this.trigger(this.name, ["INTERACT"])
+
+    if (zone) {
+      this.stay(origin, limit).then(() => {
+        this.leave()
+      })
+    }
     return false
+  }
+
+  stopInteract() {
+    this.isInteracting = false
   }
 
   stay(origin, limit) {
