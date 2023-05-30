@@ -94,15 +94,15 @@ export default class Quest extends EventEmitter{
   }
 
   destroy() {
-    this.activeTasks.forEach((task) => {
-      task.off("completed")
-      task.off("update")
-      task.destroy()
-    })
+    for (const [key, value] of Object.entries(this.activeTasks)) {
+      value.off("completed")
+      value.off("update")
+      value.destroy()
+    }
     this.activeTasks = null
-    this.completedTasks.forEach((task) => {
-      task.destroy()
-    })
+    for (const [key, value] of Object.entries(this.completedTasks)) {
+      value.destroy()
+    }
     this.completedTasks = null
     this.id = null
     this.title = null

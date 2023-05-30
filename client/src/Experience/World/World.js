@@ -43,13 +43,7 @@ export default class World
 
     init() {
 
-        // Special
         this.interactiveObject = new InteractiveObjectController()
-
-    }
-
-    init() {
-
         this.respawn = new RespawnController()
         this.announcementZone = new AnnouncementZoneController()
         this.collectZone = new CollectZoneController()

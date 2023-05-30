@@ -230,7 +230,7 @@ export default [
     {
         name: 'Crystal',
         type: 'gltfModel',
-        path: 'models/crystal.glb'
+        path: 'models/Crystal.glb'
     },
     {
         name: 'Debris_carriere',

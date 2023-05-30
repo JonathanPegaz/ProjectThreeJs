@@ -51,7 +51,8 @@ export default class Crystal extends Model3D
         this.pressAction = null
         this.type = null
         this.itemToCollect = null
-        this.marker.destroy()
+        if (this.marker)
+            this.marker.destroy()
         this.marker = null
     }
 }
