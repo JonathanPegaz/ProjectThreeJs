@@ -1,4 +1,4 @@
-import { Vector3, PerspectiveCamera } from 'three'
+import { Vector3, PerspectiveCamera, AudioListener } from 'three'
 import Experience from './Experience.js'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 
@@ -24,6 +24,7 @@ export default class Camera
         }
 
         this.setInstance()
+        this.setAudioListener()
     }
 
     setInstance()
@@ -34,6 +35,12 @@ export default class Camera
 
         this.control = new OrbitControls(this.instance, this.canvas)
         this.control.enableDamping = true
+    }
+
+    setAudioListener()
+    {
+        this.audioListener = new AudioListener()
+        this.instance.add(this.audioListener)
     }
 
     resize()
@@ -56,5 +63,9 @@ export default class Camera
 
     destroy() {
         this.control.dispose()
+        this.control = null
+
+        this.audioListener.dispose()
+        this.audioListener = null
     }
 }

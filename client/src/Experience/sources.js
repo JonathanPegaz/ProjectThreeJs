@@ -101,7 +101,7 @@ export default [
     {
         name: 'islandHigh',
         type: 'gltfModel',
-        path: 'models/island_lowpoly.glb'
+        path: 'models/Ile.glb'
     },
     // {
     //     name: 'flowers',
@@ -341,5 +341,25 @@ export default [
         name: 'Stand',
         type: 'gltfModel',
         path: 'models/stand.glb'
+    },
+    {
+        name: 'Bol',
+        type: 'gltfModel',
+        path: 'models/bol.glb'
+    },
+    {
+        name: 'Fruit_pose',
+        type: 'gltfModel',
+        path: 'models/fruit_pose.glb'
+    },
+    {
+        name: 'Fruit_ramasse',
+        type: 'gltfModel',
+        path: 'models/fruit_ramasse.glb'
+    },
+    {
+        name: 'Waterfall_audio',
+        type: 'audio',
+        path: 'audio/waterfall.mp3'
     }
 ]
