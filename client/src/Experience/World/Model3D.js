@@ -35,6 +35,7 @@ export default class Model3D extends InteractiveObject{
                         this.setMaterial(child)
                         this.setPhysicsMeshs(child)
                         interactive = this.setInteraction(child)
+                        child.castShadow = this.castShadow
                         this.meshs.push(child)
                     }
                     child.matrixAutoUpdate = false
