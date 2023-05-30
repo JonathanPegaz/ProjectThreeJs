@@ -1,7 +1,5 @@
 import Experience from '../Experience.js'
 import {AdditiveBlending, BufferAttribute, BufferGeometry, Points, ShaderMaterial} from "three";
-import portalVertexShader from '../shaders/portal/vertex.glsl'
-import portalFragmentShader from '../shaders/portal/fragment.glsl'
 import firefliesVertexShader from '../shaders/fireflies/vertex.glsl'
 import firefliesFragmentShader from '../shaders/fireflies/fragment.glsl'
 
