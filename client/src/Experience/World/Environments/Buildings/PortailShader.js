@@ -2,9 +2,9 @@ import Model3D from "../../Model3D.js";
 import {
     AdditiveBlending,
     BufferAttribute,
-    BufferGeometry,
+    BufferGeometry, CircleGeometry,
     Color,
-    DoubleSide, Mesh,
+    DoubleSide, Mesh, MeshBasicMaterial,
     MeshToonMaterial, PlaneGeometry,
     Points,
     ShaderMaterial
@@ -17,7 +17,7 @@ export default class PortailShader extends Model3D
         super(model)
     }
 
-    /*setModel() {
+    setModel() {
         this.debugObject = {
             portalColorStart: '#cbc8c8',
             portalColorEnd: '#6a6a71'
@@ -25,7 +25,7 @@ export default class PortailShader extends Model3D
         this.isShader = true
          // create rounded plane and a texture
 
-        const geometry = new PlaneGeometry(3, 3, 1, 1)
+        const geometry = new CircleGeometry( 1.35, 32 )
         const portalShader = new ShaderMaterial({
             side: DoubleSide,
             uniforms:
@@ -33,32 +33,6 @@ export default class PortailShader extends Model3D
                     uTime: { value: 0 },
                     uColorStart: { value: new Color(this.debugObject.portalColorStart) },
                     uColorEnd: { value: new Color(this.debugObject.portalColorEnd) }
-                },
-            vertexShader: portalVertexShader,
-            fragmentShader: portalFragmentShader,
-        })
-        this.portal = new Mesh(geometry, portalShader)
-        this.portal.position.set(52, 14, -71)
-        this.portal.scale.set(1, 1, 1)
-        this.experience.scene.add(this.portal)
-    }*/
-
-    setMaterial(child) {
-        child.position.set(52, 14, -71)
-
-        this.debugObject = {
-            portalColorStart: '#cbc8c8',
-            portalColorEnd: '#6a6a71'
-        }
-
-
-        this.isShader = true
-        child.material =   new ShaderMaterial({
-            uniforms:
-                {
-                    uTime: { value: 0 },
-                    uColorStart: { value: new Color('#cbc8c8') },
-                    uColorEnd: { value: new Color('#6a6a71') }
                 },
             vertexShader: `
             varying vec2 vUv;
@@ -182,17 +156,30 @@ void main()
 }`,
         })
 
+        this.model = new Mesh(geometry, portalShader)
+        this.model.position.set(52.5230598449707, 14.867735862731934, -71.97135925292969)
+        this.model.rotation.set(0, Math.PI/11, 0)
+        this.model.scale.set(1, 1, 1)
+        this.model.castShadow = true
+        this.setPhysicsMeshs(this.model)
+
         if(this.experience.debug.active)
         {
             this.debugFolder = this.experience.debug.ui.addFolder('portal')
             this.debugFolder.addColor(this.debugObject, 'portalColorStart').onChange(() =>
             {
-                child.material.uniforms.uColorStart.value.set(this.debugObject.portalColorStart)
+                portalShader.uniforms.uColorStart.value.set(this.debugObject.portalColorStart)
             })
             this.debugFolder.addColor(this.debugObject, 'portalColorEnd').onChange(() =>
             {
-                child.material.uniforms.uColorEnd.value.set(this.debugObject.portalColorEnd)
+                portalShader.uniforms.uColorEnd.value.set(this.debugObject.portalColorEnd)
+            })
+            // rotation model
+            this.debugFolder.add(this.model.rotation, 'y').min(0).max(Math.PI * 2).step(0.001).name('rotationY').onChange(() =>
+            {
+                this.model.rotation.y = this.model.rotation.y
             })
         }
+
     }
 }

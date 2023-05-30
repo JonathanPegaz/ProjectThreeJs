@@ -117,7 +117,7 @@ export default class World
             if(asset.videoTexture)
                 asset.videoTexture.needsUpdate = true
             if(asset.isShader) {
-                asset.model.children[0].material.uniforms.uTime.value = this.experience.time.elapsed * 0.001
+                asset.model.material.uniforms.uTime.value = this.experience.time.elapsed * 0.001
             }
         }
         NodeToyMaterial.tick();

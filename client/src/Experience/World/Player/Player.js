@@ -24,8 +24,10 @@ export default class Player {
     setAnimation()
     {
         this.animations = {}
-        this.resource.animations.push(this.resources.items.idle.animations[0])
-        this.resource.animations.push(this.resources.items.walking.animations[0])
+        this.resource.animations.push(this.resources.items.player_idle.animations[0])
+        this.resource.animations.push(this.resources.items.player_walking.animations[0])
+        this.resource.animations.push(this.resources.items.player_picking.animations[0])
+        this.resource.animations.push(this.resources.items.player_crouching.animations[0])
 
         this.mixer = new AnimationMixer(this.model)
 
@@ -43,6 +45,16 @@ export default class Player {
         this.animations.run = {
             clip: this.resource.animations[2],
             action: this.mixer.clipAction(this.resource.animations[2])
+        }
+
+        this.animations.pick = {
+            clip: this.resource.animations[3],
+            action: this.mixer.clipAction(this.resource.animations[3])
+        }
+
+        this.animations.crouch = {
+            clip: this.resource.animations[4],
+            action: this.mixer.clipAction(this.resource.animations[4])
         }
     }
 

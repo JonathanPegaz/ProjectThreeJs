@@ -262,11 +262,11 @@ export default [
         type: 'gltfModel',
         path: 'models/Lac.glb'
     },
-    {
+    /*{
         name: 'Miasme',
         type: 'gltfModel',
         path: 'models/miasme.glb'
-    },
+    },*/
     {
         name: 'Cascade',
         type: 'gltfModel',

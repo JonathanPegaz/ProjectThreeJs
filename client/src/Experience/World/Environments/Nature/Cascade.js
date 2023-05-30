@@ -25,8 +25,9 @@ export default class Cascade extends Model3D
 
         // create the PositionalAudio object (passing in the listener)
         const sound = new PositionalAudio( this.experience.camera.audioListener );
+        sound.position.set(child.geometry.boundingSphere.center.x, child.geometry.boundingSphere.center.y, child.geometry.boundingSphere.center.z)
         sound.setBuffer( this.experience.resources.items.Waterfall_audio );
-        sound.setRefDistance(0.2);
+        sound.setRefDistance(0.1)
         sound.setLoop(true)
         sound.setVolume(1)
         sound.play()
