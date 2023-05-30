@@ -96,7 +96,8 @@ export default class World
         this.loaded++
 
         if (this.loaded === assets.length) {
-            this.meshsDisplayUpdate()
+            //this.meshsDisplayUpdate()
+            this.experience.renderer.instance.shadowMap.needsUpdate = true
         }
     }
 
@@ -105,9 +106,9 @@ export default class World
         this.ocean.update()
         this.fireflies.update()
 
-        if (this.experience.controls && (this.experience.controls.keys.down.forward || this.experience.controls.keys.down.backward || this.experience.controls.keys.down.strafeLeft || this.experience.controls.keys.down.strafeRight)) {
+        /*if (this.experience.controls && (this.experience.controls.keys.down.forward || this.experience.controls.keys.down.backward || this.experience.controls.keys.down.strafeLeft || this.experience.controls.keys.down.strafeRight)) {
             this.meshsDisplayUpdate()
-        }
+        }*/
 
         // update mixer animatedAsset
         for (let asset of this.animatedAsset) {
@@ -116,7 +117,7 @@ export default class World
             if(asset.videoTexture)
                 asset.videoTexture.needsUpdate = true
             if(asset.isShader) {
-                asset.model.children[0].material.uniforms.uTime.value = this.experience.time.elapsed * 0.001
+                asset.model.material.uniforms.uTime.value = this.experience.time.elapsed * 0.001
             }
         }
         NodeToyMaterial.tick();
@@ -124,7 +125,7 @@ export default class World
 
     meshsDisplayUpdate() {
         // loop through all the small meshs and check if they are close enough to be displayed
-        for (let mesh of this.smallMeshsDistance) {
+        /*for (let mesh of this.smallMeshsDistance) {
             mesh.visible = this.experience.camera.instance.position.distanceTo(mesh.geometry.boundingSphere.center) < 50
         }
         // loop through all the medium meshs and check if they are close enough to be displayed
@@ -135,7 +136,7 @@ export default class World
         for (let mesh of this.bigMeshsDistance) {
             mesh.visible = this.experience.camera.instance.position.distanceTo(mesh.geometry.boundingSphere.center) < 70;
         }
-        // loop through all the shadow meshs and check if they are close enough to be displayed
+        loop through all the shadow meshs and check if they are close enough to be displayed
         for (let mesh of this.shadowMeshs) {
             let distance = this.experience.camera.instance.position.distanceTo(mesh.geometry.boundingSphere.center) < 50;
             if (!distance) {
@@ -148,9 +149,8 @@ export default class World
                 continue
             }
             mesh.castShadow = true
-        }
+        }*/
 
-       this.experience.renderer.instance.shadowMap.needsUpdate = true
     }
 
     destroy() {

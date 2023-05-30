@@ -41,6 +41,9 @@ import PanneauxCollec from "./Buildings/PanneauxCollec.js";
 import PanneauxDirection from "./Buildings/PanneauxDirection.js";
 import PortailIntro from "./Buildings/PortailIntro.js";
 import Stand from "./Buildings/Stand.js";
+import Bol from "./Buildings/Bol.js";
+import FruitPose from "./Nature/FruitPose.js";
+import FruitRamasse from "./Nature/FruitRamasse.js";
 
 export const assets = [
     // display : 0 = small, 1 = medium, 2 = big
@@ -51,7 +54,7 @@ export const assets = [
         resource: 'Barrieres',
         hasPhysics: true,
         display: 0,
-        castShadow: false,
+        castShadow: true,
         isAnimated: false,
         isInteractive: false
     },
@@ -60,6 +63,15 @@ export const assets = [
         resource: 'Batiments',
         hasPhysics: true,
         display: 2,
+        castShadow: true,
+        isAnimated: false,
+        isInteractive: false
+    },
+    {
+        type: Bol,
+        resource: 'Bol',
+        hasPhysics: false,
+        display: 0,
         castShadow: true,
         isAnimated: false,
         isInteractive: false
@@ -91,7 +103,7 @@ export const assets = [
         isAnimated: true,
         isInteractive: false
     },
-    {
+    /*{
         type: Pancarte,
         resource: 'Pancarte',
         hasPhysics: true,
@@ -99,7 +111,7 @@ export const assets = [
         castShadow: true,
         isAnimated: false,
         isInteractive: false
-    },
+    },*/
     {
         type: Panneaux,
         resource: 'Panneaux',
@@ -132,7 +144,7 @@ export const assets = [
         resource: 'Place',
         hasPhysics: true,
         display: 2,
-        castShadow: false,
+        castShadow: true,
         isAnimated: false,
         isInteractive: false
     },
@@ -141,7 +153,7 @@ export const assets = [
         resource: 'Ponts',
         hasPhysics: true,
         display: 2,
-        castShadow: false,
+        castShadow: true,
         isAnimated: false,
         isInteractive: false
     },
@@ -168,7 +180,7 @@ export const assets = [
         resource: 'Portail_shader',
         hasPhysics: true,
         display: 1,
-        castShadow: false,
+        castShadow: true,
         isAnimated: true,
         isInteractive: false
     },
@@ -177,7 +189,7 @@ export const assets = [
         resource: 'Props',
         hasPhysics: true,
         display: 0,
-        castShadow: false,
+        castShadow: true,
         isAnimated: false,
         isInteractive: false
     },
@@ -244,7 +256,7 @@ export const assets = [
         resource: 'Carotte',
         hasPhysics: false,
         display: 0,
-        castShadow: false,
+        castShadow: true,
         isAnimated: false,
         isInteractive: false
     },
@@ -253,7 +265,7 @@ export const assets = [
         resource: 'Champi',
         hasPhysics: false,
         display: 0,
-        castShadow: false,
+        castShadow: true,
         isAnimated: false,
         isInteractive: false
     },
@@ -271,7 +283,7 @@ export const assets = [
         resource: 'Debris_carriere',
         hasPhysics: false,
         display: 0,
-        castShadow: false,
+        castShadow: true,
         isAnimated: false,
         isInteractive: false
     },
@@ -302,12 +314,30 @@ export const assets = [
         isAnimated: true,
         isInteractive: false
     },
+    /*{
+        type: FruitPose,
+        resource: 'Fruit_pose',
+        hasPhysics: false,
+        display: 0,
+        castShadow: true,
+        isAnimated: false,
+        isInteractive: false
+    },
+    {
+        type: FruitRamasse,
+        resource: 'Fruit_ramasse',
+        hasPhysics: false,
+        display: 0,
+        castShadow: true,
+        isAnimated: false,
+        isInteractive: false
+    },*/
     {
         type: Ilot,
         resource: 'Ilot',
         hasPhysics: true,
         display: 2,
-        castShadow: false,
+        castShadow: true,
         isAnimated: false,
         isInteractive: false
     },
@@ -344,7 +374,7 @@ export const assets = [
         resource: 'Cascade',
         hasPhysics: false,
         display: 1,
-        castShadow: false,
+        castShadow: true,
         isAnimated: true,
         isInteractive: false
     },
@@ -353,7 +383,7 @@ export const assets = [
         resource: 'Rocher_livre',
         hasPhysics: true,
         display: 1,
-        castShadow: false,
+        castShadow: true,
         isAnimated: false,
         isInteractive: false
     },
@@ -398,7 +428,7 @@ export const assets = [
         resource: 'Stele1',
         hasPhysics: true,
         display: 0,
-        castShadow: false,
+        castShadow: true,
         isAnimated: false,
         isInteractive: false
     },
@@ -407,7 +437,7 @@ export const assets = [
         resource: 'Stele2',
         hasPhysics: true,
         display: 0,
-        castShadow: false,
+        castShadow: true,
         isAnimated: false,
         isInteractive: false
     },
@@ -416,7 +446,7 @@ export const assets = [
         resource: 'Stele3',
         hasPhysics: true,
         display: 0,
-        castShadow: false,
+        castShadow: true,
         isAnimated: false,
         isInteractive: false
     },

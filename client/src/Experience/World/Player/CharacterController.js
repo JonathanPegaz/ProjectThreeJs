@@ -1,4 +1,3 @@
-import * as THREE from 'three'
 import FiniteStateMachine from "../../Utils/FiniteStateMachine.js";
 import Experience from "../../Experience.js";
 import IdleState from "./State/IdleState.js";
@@ -6,8 +5,10 @@ import RunState from "./State/RunState.js";
 import WalkState from "./State/WalkState.js";
 import JoyStick from "../../Utils/JoyStick.js";
 import RaycastDebug from "../../Utils/RaycastDebug.js";
-import {Vector3} from "three";
+import {Raycaster, Vector3, Quaternion} from "three";
 import Npc from "../Npc/Npc.js";
+import PickState from "./State/PickState.js";
+import CrouchState from "./State/CrouchState.js";
 
 class BasicCharacterControllerProxy {
     constructor(animations) {
@@ -30,6 +31,8 @@ class CharacterFSM extends FiniteStateMachine {
         this._AddState('idle', IdleState);
         this._AddState('walk', WalkState);
         this._AddState('run', RunState);
+        this._AddState('pick', PickState);
+        this._AddState('crouch', CrouchState);
     }
 }
 
@@ -42,7 +45,7 @@ export default class BasicCharacterController {
         this.debug = this.experience.debug
         this.input = this.experience.controls
 
-        this.raycaster = new THREE.Raycaster(undefined, undefined)
+        this.raycaster = new Raycaster(undefined, undefined)
         this.raycastDebug = null
 
         this.setParams()
@@ -50,9 +53,9 @@ export default class BasicCharacterController {
 
     setParams()
     {
-        this.decceleration = new THREE.Vector3(-0.0005, -0.0001, -5.0);
-        this.acceleration = new THREE.Vector3(1, 0.25, 25.0);
-        this.velocity = new THREE.Vector3(0, 0, 0);
+        this.decceleration = new Vector3(-0.0005, -0.0001, -5.0);
+        this.acceleration = new Vector3(1, 0.25, 25.0);
+        this.velocity = new Vector3(0, 0, 0);
 
         this.stateMachine = new CharacterFSM(
             new BasicCharacterControllerProxy(this.localPlayer.animations));
@@ -94,12 +97,12 @@ export default class BasicCharacterController {
     }
 
     get Direction() {
-        return this.localPlayer.model.getWorldDirection(new THREE.Vector3())
+        return this.localPlayer.model.getWorldDirection(new Vector3())
     }
 
     get Rotation() {
         if(!this.localPlayer.object) {
-            return new THREE.Quaternion();
+            return new Quaternion();
         }
         return this.localPlayer.object.quaternion;
     }
@@ -174,7 +177,7 @@ export default class BasicCharacterController {
 
     handleKeyboard(timeInSeconds) {
         const velocity = this.velocity;
-        const frameDecceleration = new THREE.Vector3(
+        const frameDecceleration = new Vector3(
             velocity.x * this.decceleration.x,
             velocity.y * this.decceleration.y,
             velocity.z * this.decceleration.z
@@ -186,8 +189,8 @@ export default class BasicCharacterController {
         velocity.add(frameDecceleration);
 
         const controlObject = this.localPlayer.object;
-        const _Q = new THREE.Quaternion();
-        const _A = new THREE.Vector3();
+        const _Q = new Quaternion();
+        const _A = new Vector3();
         const _R = controlObject.quaternion.clone();
 
         const acc = this.acceleration.clone();
@@ -214,14 +217,14 @@ export default class BasicCharacterController {
 
         controlObject.quaternion.copy(_R);
 
-        const oldPosition = new THREE.Vector3();
+        const oldPosition = new Vector3();
         oldPosition.copy(controlObject.position);
 
-        const forward = new THREE.Vector3(0, 0, 1);
+        const forward = new Vector3(0, 0, 1);
         forward.applyQuaternion(controlObject.quaternion);
         forward.normalize();
 
-        const sideways = new THREE.Vector3(1, 0, 0);
+        const sideways = new Vector3(1, 0, 0);
         sideways.applyQuaternion(controlObject.quaternion);
         sideways.normalize();
 

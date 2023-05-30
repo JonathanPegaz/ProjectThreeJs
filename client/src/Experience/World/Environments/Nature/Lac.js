@@ -24,6 +24,7 @@ export default class Lac extends Model3D
             side: FrontSide,
             toneMapped: false,
         })
+        child.receiveShadow = true;
 
         video.play()
     }

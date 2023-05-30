@@ -28,7 +28,7 @@ export default class Environment
         this.sunLight.position.set(0, 90, 30)
         this.sunLight.castShadow = true
         this.sunLight.shadow.camera.far = 300
-        this.sunLight.shadow.mapSize.set(8192, 8192)
+        this.sunLight.shadow.mapSize.set(16384, 16384)
         this.sunLight.shadow.normalBias = 0.05
         this.sunLight.shadow.camera.top = 100
         this.sunLight.shadow.camera.bottom = - 100
@@ -119,7 +119,7 @@ export default class Environment
         this.environmentMap.texture.encoding = THREE.sRGBEncoding
 
         this.scene.background = this.environmentMap.texture
-        //this.scene.environment = this.environmentMap.texture
+        this.scene.environment = this.environmentMap.texture
 
         this.environmentMap.updateMaterials = () =>
         {
