@@ -91,7 +91,7 @@ export const assets = [
         isAnimated: true,
         isInteractive: false
     },
-    {
+    /*{
         type: Pancarte,
         resource: 'Pancarte',
         hasPhysics: true,
@@ -99,7 +99,7 @@ export const assets = [
         castShadow: true,
         isAnimated: false,
         isInteractive: false
-    },
+    },*/
     {
         type: Panneaux,
         resource: 'Panneaux',

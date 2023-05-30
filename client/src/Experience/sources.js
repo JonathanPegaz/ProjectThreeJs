@@ -157,11 +157,11 @@ export default [
         type: 'gltfModel',
         path: 'models/flag.glb'
     },
-    {
+    /*{
         name: 'Pancarte',
         type: 'gltfModel',
         path: 'models/pancarte.glb'
-    },
+    },*/
     {
         name: 'Panneaux',
         type: 'gltfModel',
