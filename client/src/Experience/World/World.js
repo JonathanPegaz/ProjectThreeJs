@@ -144,7 +144,6 @@ export default class World
             }
             mesh.castShadow = true
         }*/
-
     }
 
     destroy() {

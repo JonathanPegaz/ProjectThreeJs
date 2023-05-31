@@ -1,5 +1,5 @@
 import Experience from '../Experience.js'
-import {AdditiveBlending, BufferAttribute, BufferGeometry, Points, ShaderMaterial} from "three";
+import {AdditiveBlending, BufferAttribute, BufferGeometry, Color, Points, ShaderMaterial} from "three";
 
 
 export default class Fireflies
@@ -39,7 +39,8 @@ export default class Fireflies
                 {
                     uTime: { value: 0 },
                     uPixelRatio: { value: Math.min(window.devicePixelRatio, 2) },
-                    uSize: { value: 100 }
+                    uSize: { value: 100 },
+                    uColor: { value: new Color('#ffffff') },
                 },
             vertexShader: `uniform float uTime;
                         uniform float uPixelRatio;
@@ -61,12 +62,13 @@ export default class Fireflies
                             gl_PointSize *= (1.0 / - viewPosition.z);
                         }`,
             fragmentShader: `
+                            uniform vec3 uColor;
                             void main()
                             {
                                 float distanceToCenter = distance(gl_PointCoord, vec2(0.5));
                                 float strength = 0.05 / distanceToCenter - 0.1;
                             
-                                gl_FragColor = vec4(1.0, 1.0, 1.0, strength);
+                                gl_FragColor = vec4(uColor, strength);
                             }`,
             blending: AdditiveBlending,
             alphaTest: 0.9,

@@ -57,19 +57,19 @@ export default class Resources extends EventEmitter
         this.homeVideoDiv.appendChild(this.homeVideo)
         document.body.appendChild(this.homeVideoDiv)
 
-        // Loading bar
-        const loadingBarElement = document.createElement('div')
-        loadingBarElement.style.cssText = `
+        const loadingPercentageElement = document.createElement('div');
+        loadingPercentageElement.style.cssText = `
             position: absolute;
-            top: 50%;
-            width: 100%;
-            height: 2px;
-            background: #ffffff;
-            transform: scaleX(0.3);
-            transform-origin: top left;
-            transition: transform 0.5s;
-        `
-        document.body.appendChild(loadingBarElement)
+            top: 70%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-family: sans-serif;
+            font-size: 24px;
+            color: #ffffff;
+        `;
+        document.body.appendChild(loadingPercentageElement);
+
+
         const loadingManager = new LoadingManager(
             // Loaded
             () =>
@@ -88,17 +88,19 @@ export default class Resources extends EventEmitter
                     document.getElementsByTagName('head')[0].appendChild(style)
 
                     // Update loadingBarElement
-                    loadingBarElement.classList.add('ended')
-                    loadingBarElement.style.transform = ''
+                    //loadingCircleElement.classList.add('ended')
+                    loadingPercentageElement.style.transform = 'scaleY(0)'
                 }, 500)
             },
 
             // Progress
             (itemUrl, itemsLoaded, itemsTotal) =>
             {
-                // Calculate the progress and update the loadingBarElement
-                const progressRatio = itemsLoaded / itemsTotal
-                loadingBarElement.style.transform = `scaleX(${progressRatio})`
+                // Calculate the progress in percentage
+                const progressPercentage = Math.floor((itemsLoaded / itemsTotal) * 100);
+
+                // Update loadingPercentageElement
+                loadingPercentageElement.textContent = `${progressPercentage}%`;
             }
         )
 

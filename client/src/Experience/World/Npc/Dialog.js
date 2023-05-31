@@ -39,7 +39,7 @@ export default class Dialog {
 
 
         this.actionImage = document.createElement('img');
-        this.actionImage.src = 'icons/e-key-50.png';
+        this.actionImage.src = 'icons/f-key-50.png';
         this.actionImage.classList.add('action-image');
         this.actionContainer.appendChild(this.actionImage);
 

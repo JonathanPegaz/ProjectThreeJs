@@ -145,7 +145,41 @@ export default class Environment
                 .max(4)
                 .step(0.001)
                 .onChange(this.environmentMap.updateMaterials)
+
+            // setNight
+            this.debugFolder
+                .add(this, 'setNight')
+                .name('setNight')
+
+            // setDay
+            this.debugFolder
+                .add(this, 'setDay')
+                .name('setDay')
         }
+    }
+
+    setNight() {
+        this.sunLight.color.setHex(0x001624)
+        this.hemiLight.color.setHex(0x5196BD)
+
+        this.environmentMap.texture = this.resources.items.skybox_night
+        this.scene.background = this.environmentMap.texture
+        this.scene.environment = this.environmentMap.texture
+        this.experience.scene.fog.color.setHex(0x001624)
+        this.experience.world.fireflies.firefliesMaterial.uniforms.uColor.value.setHex(0xe3cf3e)
+        //this.environmentMap.updateMaterials()
+    }
+
+    setDay() {
+        this.sunLight.color.setHex(0xffffff)
+        this.hemiLight.color.setHex(0xffffff)
+
+        this.environmentMap.texture = this.resources.items.skybox
+        this.scene.background = this.environmentMap.texture
+        this.scene.environment = this.environmentMap.texture
+        this.experience.scene.fog.color.setHex(0xffffff)
+        this.experience.world.fireflies.firefliesMaterial.uniforms.uColor.value.setHex(0xffffff)
+        //this.environmentMap.updateMaterials()
     }
 
     destroy() {

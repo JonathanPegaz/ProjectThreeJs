@@ -1,12 +1,8 @@
 import Model3D from "../../Model3D.js";
 import {
-    AdditiveBlending,
-    BufferAttribute,
-    BufferGeometry, CircleGeometry,
+    CircleGeometry,
     Color,
-    DoubleSide, Mesh, MeshBasicMaterial,
-    MeshToonMaterial, PlaneGeometry,
-    Points,
+    DoubleSide, Mesh,
     ShaderMaterial
 } from "three";
 
@@ -173,11 +169,6 @@ void main()
             this.debugFolder.addColor(this.debugObject, 'portalColorEnd').onChange(() =>
             {
                 portalShader.uniforms.uColorEnd.value.set(this.debugObject.portalColorEnd)
-            })
-            // rotation model
-            this.debugFolder.add(this.model.rotation, 'y').min(0).max(Math.PI * 2).step(0.001).name('rotationY').onChange(() =>
-            {
-                this.model.rotation.y = this.model.rotation.y
             })
         }
 

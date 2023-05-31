@@ -140,7 +140,7 @@ export default [
     {
         name: 'Batiments',
         type: 'gltfModel',
-        path: 'models/Batiments.glb'
+        path: 'models/batiments.glb'
     },
     {
         name: 'Dalles',
