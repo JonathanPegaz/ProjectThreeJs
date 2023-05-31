@@ -42,17 +42,11 @@ export default class World
     }
 
     init() {
-
         this.interactiveObject = new InteractiveObjectController()
         this.respawn = new RespawnController()
         this.announcementZone = new AnnouncementZoneController()
         this.collectZone = new CollectZoneController()
         this.triggerZone = new TriggerZoneController()
-
-        for (let asset of assets)
-        {
-            this[asset.resource] = new asset.type(asset)
-        }
 
         this.htmlAnnouncement = new HTMLAnnouncement()
         this.quest = new QuestManager()

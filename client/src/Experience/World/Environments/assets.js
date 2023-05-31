@@ -314,7 +314,7 @@ export const assets = [
         isAnimated: true,
         isInteractive: false
     },
-    /*{
+    {
         type: FruitPose,
         resource: 'Fruit_pose',
         hasPhysics: false,
@@ -331,7 +331,7 @@ export const assets = [
         castShadow: true,
         isAnimated: false,
         isInteractive: false
-    },*/
+    },
     {
         type: Ilot,
         resource: 'Ilot',
