@@ -28,7 +28,7 @@ export default class Physics
             this.debugFolder.close()
 
             this.debugObject = {}
-            this.debugObject.debugger = true
+            this.debugObject.debugger = false
 
             this.debugFolder.add(this.debugObject, 'debugger')
 

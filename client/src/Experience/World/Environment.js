@@ -17,6 +17,8 @@ export default class Environment
             this.debugFolder.close()
         }
 
+        this.flameLights = []
+
         this.setSunLight()
         this.setEnvironmentMap()
     }
@@ -51,63 +53,54 @@ export default class Environment
                 .min(0)
                 .max(10)
                 .step(0.001)
-            
+
             this.debugFolder
                 .add(this.sunLight.position, 'x')
                 .name('sunLightX')
                 .min(- 5)
                 .max(5)
                 .step(0.001)
-            
+
             this.debugFolder
                 .add(this.sunLight.position, 'y')
                 .name('sunLightY')
                 .min(- 5)
                 .max(5)
                 .step(0.001)
-            
+
             this.debugFolder
                 .add(this.sunLight.position, 'z')
                 .name('sunLightZ')
                 .min(- 5)
                 .max(5)
                 .step(0.001)
+
+            // color
             this.debugFolder
-                .add(this.sunLight.shadow.camera, 'left')
-                .name('left')
-                .min(- 5)
-                .max(500)
-                .step(1)
-                .onChange(() => {
-                    helper.update()
-                })
+                .addColor(this.sunLight, 'color')
+                .name('sunLightColor')
+                .onChange(() =>
+                {
+                    this.sunLight.color.set(this.sunLight.color)
+                }).listen()
+
+            // Hemisphere color
             this.debugFolder
-                .add(this.sunLight.shadow.camera, 'right')
-                .name('right')
-                .min(- 5)
-                .max(500)
-                .step(1)
-                .onChange(() => {
-                    helper.update()
-                })
+                .addColor(this.hemiLight, 'color')
+                .name('hemiLightColor')
+                .onChange(() =>
+                {
+                    this.hemiLight.color.set(this.hemiLight.color)
+                }).listen()
+
+            // Hemisphere ground color
             this.debugFolder
-                .add(this.sunLight.shadow.camera, 'top')
-                .name('top')
-                .min(- 5)
-                .max(500)
-                .step(1)
-                .onChange(() => {
-                    helper.update()
-                })
-            this.debugFolder
-                .add(this.sunLight.shadow.camera, 'bottom')
-                .name('bottom')
-                .min(- 5)
-                .max(500)
-                .step(1)
-                .onChange(() => {
-                    helper.update()
-                })
+                .addColor(this.hemiLight, 'groundColor')
+                .name('hemiLightGroundColor')
+                .onChange(() =>
+                {
+                    this.hemiLight.groundColor.set(this.hemiLight.groundColor)
+                }).listen()
         }
     }
 
@@ -125,7 +118,7 @@ export default class Environment
         {
             this.scene.traverse((child) =>
             {
-                if(child instanceof THREE.Mesh)
+                if(child instanceof THREE.Mesh && child.material instanceof THREE.MeshStandardMaterial)
                 {
                     child.material.envMap = this.environmentMap.texture
                     child.material.envMapIntensity = this.environmentMap.intensity
@@ -160,14 +153,17 @@ export default class Environment
 
     setNight() {
         this.sunLight.color.setHex(0x001624)
-        this.hemiLight.color.setHex(0x5196BD)
+        this.hemiLight.color.setHex(0x000000)
 
         this.environmentMap.texture = this.resources.items.skybox_night
         this.scene.background = this.environmentMap.texture
         this.scene.environment = this.environmentMap.texture
         this.experience.scene.fog.color.setHex(0x001624)
         this.experience.world.fireflies.firefliesMaterial.uniforms.uColor.value.setHex(0xe3cf3e)
-        //this.environmentMap.updateMaterials()
+
+        this.flameLights.forEach(flameLight => {
+            flameLight.visible = true
+        })
     }
 
     setDay() {
@@ -179,7 +175,10 @@ export default class Environment
         this.scene.environment = this.environmentMap.texture
         this.experience.scene.fog.color.setHex(0xffffff)
         this.experience.world.fireflies.firefliesMaterial.uniforms.uColor.value.setHex(0xffffff)
-        //this.environmentMap.updateMaterials()
+
+        this.flameLights.forEach(flameLight => {
+            flameLight.visible = false
+        })
     }
 
     destroy() {

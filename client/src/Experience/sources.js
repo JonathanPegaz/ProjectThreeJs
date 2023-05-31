@@ -64,6 +64,21 @@ export default [
         path: 'models/character/Joueur/player_walking.glb'
     },
     {
+        name: 'player_idle_nocape',
+        type: 'gltfModel',
+        path: 'models/character/Joueur/player_idle_nocape.glb'
+    },
+    {
+        name: 'player_picking_nocape',
+        type: 'gltfModel',
+        path: 'models/character/Joueur/player_picking_nocape.glb'
+    },
+    {
+        name: 'player_walking_nocape',
+        type: 'gltfModel',
+        path: 'models/character/Joueur/player_walking_nocape.glb'
+    },
+    {
         name: 'pnj_greeting',
         type: 'gltfModel',
         path: 'models/character/PNJ/pnj_greeting.glb'
@@ -140,7 +155,7 @@ export default [
     {
         name: 'Batiments',
         type: 'gltfModel',
-        path: 'models/batiments.glb'
+        path: 'models/Batiments.glb'
     },
     {
         name: 'Dalles',
