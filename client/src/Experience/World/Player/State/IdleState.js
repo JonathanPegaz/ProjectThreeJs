@@ -13,7 +13,7 @@ export default class IdleState extends State {
         const idleAction = this._parent._proxy._animations['idle'].action;
         if (prevState) {
             const prevAction = this._parent._proxy._animations[prevState.Name].action;
-            idleAction.time = 0.0;
+            idleAction.time = 1.0;
             idleAction.enabled = true;
             idleAction.setEffectiveTimeScale(1.0);
             idleAction.setEffectiveWeight(1.0);

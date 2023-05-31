@@ -44,6 +44,7 @@ import Stand from "./Buildings/Stand.js";
 import Bol from "./Buildings/Bol.js";
 import FruitPose from "./Nature/FruitPose.js";
 import FruitRamasse from "./Nature/FruitRamasse.js";
+import PortailIntroShader from "./Buildings/PortailIntroShader.js";
 
 export const assets = [
     // display : 0 = small, 1 = medium, 2 = big
@@ -184,6 +185,15 @@ export const assets = [
         isAnimated: true,
         isInteractive: false
     },
+    /*{
+        type: PortailIntroShader,
+        resource: 'Portail_shader',
+        hasPhysics: true,
+        display: 1,
+        castShadow: true,
+        isAnimated: true,
+        isInteractive: false
+    },*/
     {
         type: Props,
         resource: 'Props',
