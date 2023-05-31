@@ -6,10 +6,10 @@
       "1": {
         "order": 1,
         "type": "COLLECT",
-        "name": "Diamants",
-        "description": "collecter 2 diamants",
+        "name": "Cristaux",
+        "description": "collecter 2 cristaux",
         "requirements": {
-          "item": "diamond",
+          "item": "crystal",
           "quantity": "2"
         }
       },

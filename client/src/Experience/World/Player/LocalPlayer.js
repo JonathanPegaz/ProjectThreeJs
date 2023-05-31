@@ -46,6 +46,9 @@ export default class LocalPlayer extends Player {
             allowSleep: false,
             position: new CANNON.Vec3(-96.1349, 15.562, -16.916),
             // position: new CANNON.Vec3(57, 15, -56),
+            //position: new CANNON.Vec3(-99, 17, -19), //SPAWN
+            //position: new CANNON.Vec3(57, 15, -56), //PARTY
+            position: new CANNON.Vec3(-27, 20, 47), //CRYSTAL
             fixedRotation: true,
         })
 
