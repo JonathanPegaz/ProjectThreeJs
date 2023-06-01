@@ -16,6 +16,7 @@ import Icons from "../../Interface/Icons.js";
 import EventEmitter from "../../Utils/EventEmitter.js";
 import QuestMarker from "../../Interface/QuestMarker.js";
 import * as CANNON from "cannon-es";
+import {gsap} from "gsap";
 
 export default class Npc extends EventEmitter{
     constructor(data) {
@@ -45,6 +46,8 @@ export default class Npc extends EventEmitter{
         this.name = new Pseudo(this, data.name, false)
         this.setDialog(data.dialog)
         this.setQuest(data.quest)
+        this.travelIndex = 0
+        this.setTravelPoint(data.travelPoints)
         this.marker = new QuestMarker(this, 0.0)
     }
 
@@ -130,8 +133,7 @@ export default class Npc extends EventEmitter{
         const geometry = new BoxGeometry(1.5, 2, 1.5)
         const material = new MeshBasicMaterial({color: 0xff00ff, wireframe: true, visible: this.experience.debug.active ?? false})
         this.hitbox = new Mesh(geometry, material)
-        this.hitbox.position.set(this.object.position.x, this.object.position.y, this.object.position.z)
-        this.experience.scene.add(this.hitbox)
+        this.object.add(this.hitbox)
     }
 
     setDialog(dialog) {
@@ -150,6 +152,13 @@ export default class Npc extends EventEmitter{
                 this.isPlayerInteracting = true
                 this.dialog.start()
                 this.icon.visible(false)
+                if (this.anim) {
+                    this.anim.pause()
+                    this.setBodyRotation(
+                        this.experience.localPlayer.object.position.x - this.object.position.x,
+                        this.experience.localPlayer.object.position.z - this.object.position.z)
+                }
+
                 return;
             }
 
@@ -171,6 +180,14 @@ export default class Npc extends EventEmitter{
                     this.quest = null
                 }
 
+                if (this.anim) {
+                    this.anim.resume()
+                    this.setBodyRotation(
+                        this.travelPoints[this.travelIndex].x - this.body.position.x,
+                        this.travelPoints[this.travelIndex].z - this.body.position.z)
+                }
+
+
                 this.icon.visible(true)
                 return;
             }
@@ -183,6 +200,38 @@ export default class Npc extends EventEmitter{
 
         this.quest = quest
         this.icon.change('exclamation-mark-100')
+    }
+
+    setTravelPoint(travelPoints) {
+        if (!travelPoints)
+            return;
+
+        this.travelPoints = travelPoints
+        this.setBodyRotation(
+            this.travelPoints[this.travelIndex].x - this.body.position.x,
+            this.travelPoints[this.travelIndex].z - this.body.position.z)
+
+        this.anim = gsap.to(this.body.position, {
+            duration: 10,
+            x: travelPoints[this.travelIndex].x,
+            z: travelPoints[this.travelIndex].z,
+            onComplete: () => {
+                this.travelIndex++
+                if (this.travelIndex >= this.travelPoints.length) {
+                    this.travelIndex = 0
+                }
+                gsap.delayedCall(1, () => {
+                    this.setTravelPoint(this.travelPoints)
+                })
+            },
+        })
+    }
+
+    setBodyRotation(x, z) {
+        const rotation = Math.atan2(
+            x, z
+        )
+        this.body.quaternion.setFromEuler(0, rotation, 0, 'XYZ')
     }
 
     interact(value) {
