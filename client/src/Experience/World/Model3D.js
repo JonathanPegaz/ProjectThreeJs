@@ -85,6 +85,7 @@ export default class Model3D extends InteractiveObject{
 
     setInteraction(child) {
         if (!this.isInteractive) return
+
         const geometry = new SphereGeometry(0.5, 16, 16)
         const material = new MeshBasicMaterial({ color: 0xff00ff, wireframe: true, visible: this.debug.active ?? false })
         const hitbox = new Mesh(geometry, material)

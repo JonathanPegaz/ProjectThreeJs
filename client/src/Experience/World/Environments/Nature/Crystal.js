@@ -54,14 +54,12 @@ export default class Crystal extends Model3D
     interact(origin, mesh) {
         mesh.interacting = true
         mesh.marker.mark()
-        console.log(this.experience.world.interactiveObject.list)
         if (this.input.keys.down.action) {
             this.pressAction++
             mesh.marker.press(this.pressAction, 200)
             if (this.pressAction > 200) {
                 this.pressAction = 0
                 mesh.marker.stopPress()
-                console.log('collect')
                 this.trigger('collect', ['crystal'])
             }
         } else {

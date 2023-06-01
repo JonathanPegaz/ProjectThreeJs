@@ -48,7 +48,8 @@ export default class LocalPlayer extends Player {
             // position: new CANNON.Vec3(57, 15, -56),
             //position: new CANNON.Vec3(-99, 17, -19), //SPAWN
             //position: new CANNON.Vec3(57, 15, -56), //PARTY
-            position: new CANNON.Vec3(-27, 20, 47), //CRYSTAL
+            //position: new CANNON.Vec3(-27, 20, 47), //CRYSTAL
+            position: new CANNON.Vec3(32, 14, -32), //MUSHROOM
             fixedRotation: true,
         })
 
