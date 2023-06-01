@@ -1,6 +1,5 @@
-import * as THREE from 'three'
 import Experience from '../Experience.js'
-import {Mesh, PlaneGeometry} from "three";
+import {DirectionalLight, HemisphereLight, Mesh, MeshStandardMaterial, PlaneGeometry, sRGBEncoding} from "three";
 import {overlayMaterial} from "../Shaders/OverlayShaders.js";
 import {gsap} from "gsap";
 
@@ -33,7 +32,7 @@ export default class Environment
     setSunLight()
     {
         //this.sunLight = new THREE.DirectionalLight('#001624', 4)
-        this.sunLight = new THREE.DirectionalLight('#ffffff', 4)
+        this.sunLight = new DirectionalLight('#ffffff', 4)
         this.sunLight.position.set(0, 90, 30)
         this.sunLight.castShadow = true
         this.sunLight.shadow.camera.far = 300
@@ -47,7 +46,7 @@ export default class Environment
         this.scene.add(this.sunLight)
 
         // add hemisphere light green and blue
-        this.hemiLight = new THREE.HemisphereLight( 0xffffff, 0x444444 );
+        this.hemiLight = new HemisphereLight( 0xffffff, 0x444444 );
         this.hemiLight.position.set( 0, 20, 0 );
         this.scene.add( this.hemiLight );
 
@@ -116,7 +115,7 @@ export default class Environment
         this.environmentMap = {}
         this.environmentMap.intensity = 0.4
         this.environmentMap.texture = this.resources.items.skybox
-        this.environmentMap.texture.encoding = THREE.sRGBEncoding
+        this.environmentMap.texture.encoding = sRGBEncoding
 
         this.scene.background = this.environmentMap.texture
         this.scene.environment = this.environmentMap.texture
@@ -125,7 +124,7 @@ export default class Environment
         {
             this.scene.traverse((child) =>
             {
-                if(child instanceof THREE.Mesh && child.material instanceof THREE.MeshStandardMaterial)
+                if(child instanceof Mesh && child.material instanceof MeshStandardMaterial)
                 {
                     child.material.envMap = this.environmentMap.texture
                     child.material.envMapIntensity = this.environmentMap.intensity

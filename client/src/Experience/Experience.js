@@ -80,6 +80,8 @@ export default class Experience
             this.network = new Network()
             this.localPlayer = new LocalPlayer()
             this.world.meshsDisplayUpdate()
+            if(this.world.Cascade)
+                this.world.Cascade.sound.play()
             this.resources.homeVideoDiv.remove()
         })
 
