@@ -376,5 +376,10 @@ export default [
         name: 'Waterfall_audio',
         type: 'audio',
         path: 'audio/waterfall.mp3'
+    },
+    {
+        name: 'roundshadow',
+        type: 'texture',
+        path: 'textures/roundshadow.png'
     }
 ]

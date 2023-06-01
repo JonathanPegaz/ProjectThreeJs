@@ -5,7 +5,7 @@ import {
     Mesh,
     MeshBasicMaterial,
     MeshToonMaterial,
-    Object3D,
+    Object3D, PlaneGeometry,
     SphereGeometry
 } from "three";
 import Experience from "../../Experience.js";
@@ -57,7 +57,7 @@ export default class Npc extends EventEmitter{
         {
             if(child instanceof Mesh)
             {
-                child.castShadow = true
+                child.castShadow = false
                 child.material = new MeshToonMaterial({
                     ...child.material,
                     side: FrontSide,
@@ -67,6 +67,14 @@ export default class Npc extends EventEmitter{
         })
 
         this.object.add(this.model)
+        // Fake shadow
+        const shadowgeo = new PlaneGeometry( 1, 1 );
+        const shadowmat = new MeshBasicMaterial( { map: this.resources.items.roundshadow, transparent: true, depthWrite: false } );
+        const shadow = new Mesh( shadowgeo, shadowmat );
+        shadow.rotation.x = - Math.PI / 2;
+        shadow.position.y = -0.55;
+        this.object.add( shadow );
+
         this.experience.scene.add(this.object)
     }
 

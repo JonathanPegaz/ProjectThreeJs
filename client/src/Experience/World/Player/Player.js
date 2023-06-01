@@ -1,6 +1,6 @@
 import Experience from "../../Experience.js";
 import {clone} from "three/examples/jsm/utils/SkeletonUtils.js";
-import {AnimationMixer, FrontSide, Mesh, MeshToonMaterial, Object3D} from "three";
+import {AnimationMixer, FrontSide, Mesh, MeshBasicMaterial, MeshToonMaterial, Object3D, PlaneGeometry} from "three";
 
 
 export default class Player {
@@ -30,7 +30,7 @@ export default class Player {
         {
             if(child instanceof Mesh)
             {
-                child.castShadow = true
+                child.castShadow = false
                 child.material = new MeshToonMaterial({
                     ...child.material,
                     side: FrontSide,
@@ -40,6 +40,15 @@ export default class Player {
         })
 
         this.object.add(this.model)
+
+        // Fake shadow
+        const shadowgeo = new PlaneGeometry( 0.75, 0.75 );
+        const shadowmat = new MeshBasicMaterial( { map: this.resources.items.roundshadow, transparent: true, depthWrite: false } );
+        const shadow = new Mesh( shadowgeo, shadowmat );
+        shadow.rotation.x = - Math.PI / 2;
+        shadow.position.y = -0.35;
+        this.object.add( shadow );
+
         this.scene.add(this.object);
     }
 
@@ -83,6 +92,9 @@ export default class Player {
         this.object.traverse((child) => {
             if (child.isMesh) {
                 child.geometry.dispose()
+                if (child.material.texture) {
+                    child.material.texture.dispose()
+                }
                 child.material.dispose()
             }
         })
