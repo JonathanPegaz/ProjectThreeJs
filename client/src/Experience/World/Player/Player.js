@@ -1,6 +1,15 @@
 import Experience from "../../Experience.js";
 import {clone} from "three/examples/jsm/utils/SkeletonUtils.js";
-import {AnimationMixer, FrontSide, Mesh, MeshBasicMaterial, MeshToonMaterial, Object3D, PlaneGeometry} from "three";
+import {
+    AnimationMixer,
+    CircleGeometry, DoubleSide,
+    FrontSide,
+    Mesh,
+    MeshBasicMaterial,
+    MeshToonMaterial,
+    Object3D,
+    PlaneGeometry
+} from "three";
 
 
 export default class Player {
@@ -43,11 +52,26 @@ export default class Player {
 
         // Fake shadow
         const shadowgeo = new PlaneGeometry( 0.75, 0.75 );
-        const shadowmat = new MeshBasicMaterial( { map: this.resources.items.roundshadow, transparent: true, depthWrite: false } );
+        const shadowmat = new MeshBasicMaterial( {
+            map: this.resources.items.roundshadow, transparent: true, depthWrite: false
+        } );
         const shadow = new Mesh( shadowgeo, shadowmat );
+        shadow.renderOrder = -1;
         shadow.rotation.x = - Math.PI / 2;
         shadow.position.y = -0.35;
         this.object.add( shadow );
+
+       /*// Fake shadow
+        //Circle geometry
+        const circleGeometry = new CircleGeometry( 0.25, 32 );
+        // Gray color
+        const circleMaterial = new MeshBasicMaterial( {
+            color: 0x00000, opacity: 0.5, transparent: true, depthWrite: false });
+        const circle = new Mesh( circleGeometry, circleMaterial );
+        circle.renderOrder = -1;
+        circle.rotation.x = - Math.PI / 2;
+        circle.position.y = -0.35;
+        this.object.add( circle );*/
 
         this.scene.add(this.object);
     }

@@ -69,8 +69,10 @@ export default class Npc extends EventEmitter{
         this.object.add(this.model)
         // Fake shadow
         const shadowgeo = new PlaneGeometry( 1, 1 );
-        const shadowmat = new MeshBasicMaterial( { map: this.resources.items.roundshadow, transparent: true, depthWrite: false } );
+        const shadowmat = new MeshBasicMaterial( {
+            map: this.resources.items.roundshadow, transparent: true, depthWrite: false} );
         const shadow = new Mesh( shadowgeo, shadowmat );
+        shadow.renderOrder = -1;
         shadow.rotation.x = - Math.PI / 2;
         shadow.position.y = -0.55;
         this.object.add( shadow );

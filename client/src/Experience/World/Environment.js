@@ -1,5 +1,8 @@
 import * as THREE from 'three'
 import Experience from '../Experience.js'
+import {Mesh, PlaneGeometry} from "three";
+import {overlayMaterial} from "../Shaders/OverlayShaders.js";
+import {gsap} from "gsap";
 
 export default class Environment
 {
@@ -21,6 +24,10 @@ export default class Environment
 
         this.setSunLight()
         this.setEnvironmentMap()
+        // black overlay
+        this.overlayGeometry = new PlaneGeometry(2, 2, 1, 1)
+        this.overlay = new Mesh(this.overlayGeometry, overlayMaterial)
+        this.scene.add(this.overlay)
     }
 
     setSunLight()
@@ -152,6 +159,8 @@ export default class Environment
     }
 
     setNight() {
+        this.addOverlay()
+
         this.sunLight.color.setHex(0x001624)
         this.hemiLight.color.setHex(0x000000)
 
@@ -164,9 +173,19 @@ export default class Environment
         this.flameLights.forEach(flameLight => {
             flameLight.visible = true
         })
+
+        window.setTimeout(() => {
+            this.removeOverlay()
+        }, 500)
     }
 
     setDay() {
+        this.addOverlay()
+
+        const overlayGeometry = new PlaneGeometry(2, 2, 1, 1)
+        const overlay = new Mesh(overlayGeometry, overlayMaterial)
+        this.scene.add(overlay)
+
         this.sunLight.color.setHex(0xffffff)
         this.hemiLight.color.setHex(0xffffff)
 
@@ -179,9 +198,28 @@ export default class Environment
         this.flameLights.forEach(flameLight => {
             flameLight.visible = false
         })
+
+        window.setTimeout(() => {
+            this.removeOverlay()
+        }, 500)
+    }
+
+    addOverlay() {
+        // Animate overlay
+        overlayMaterial.uniforms.uAlpha.value = 1
+    }
+
+    removeOverlay() {
+        // Animate overlay
+        gsap.to(overlayMaterial.uniforms.uAlpha, { duration: 3, value: 0, delay: 1 })
     }
 
     destroy() {
+        this.overlay.geometry.dispose()
+        this.overlay.material.dispose()
+        this.scene.remove(this.overlay)
+        this.overlay = null
+
         this.sunLight.dispose()
         this.scene.remove(this.sunLight)
         this.sunLight = null
