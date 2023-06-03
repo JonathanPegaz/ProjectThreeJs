@@ -8,61 +8,118 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 </head>
 <body id="webgl">
-    <video
-            id="video"
-            playsinline
-            loop
-            muted=true
-            src="./video/waterfall.mp4"
-            style="display: none"
-    ></video>
-    <video
-            id="lacvideo"
-            playsinline
-            loop
-            muted=true
-            src="./video/lac.mp4"
-            style="display: none"
-    ></video>
-    <div class="ui">
-        <div class="controls">
-            <div class="group">
-                <div class="element">
-                    <div class="keys is-arrows">
-                        <div class="key">Q/◀</div>
-                        <div class="key">S/▼</div>
-                        <div class="key">D/▶</div>
-                        <div class="key">Z/▲</div>
-                    </div>
-                    move
+<video
+  id="video"
+  playsinline
+  loop
+  muted=true
+  src="./video/waterfall.mp4"
+  style="display: none"
+></video>
+<video
+  id="lacvideo"
+  playsinline
+  loop
+  muted=true
+  src="./video/lac.mp4"
+  style="display: none"
+></video>
+<div class="ui">
+    <div class="controls">
+        <div class="group">
+            <div class="element">
+                <div class="keys is-arrows">
+                    <div class="key">Q/◀</div>
+                    <div class="key">S/▼</div>
+                    <div class="key">D/▶</div>
+                    <div class="key">Z/▲</div>
                 </div>
-                <div class="element">
-                    <div class="keys">
-                        <div class="key">F</div>
-                    </div>
-                    Action / Parler
+                move
+            </div>
+            <div class="element">
+                <div class="keys">
+                    <div class="key">F</div>
                 </div>
+                Action / Parler
             </div>
         </div>
     </div>
-    <div id="hud">
-        <div class="col-l"></div>
-        <div class="col-m">
-            <div class="announcement">
-                <div class="announcement-content announcement-area"></div>
-                <div class="announcement-content announcement-alert"></div>
-                <div class="announcement-content announcement-kill"></div>
-                <div class="announcement-content announcement-quest"></div>
-            </div>
-        </div>
-        <div class="col-r">
-            <div id="quest"></div>
-            <div id="loot"></div>
+</div>
+<div id="hud">
+    <div class="col-l"></div>
+    <div class="col-m">
+        <div class="announcement">
+            <div class="announcement-content announcement-area"></div>
+            <div class="announcement-content announcement-alert"></div>
+            <div class="announcement-content announcement-kill"></div>
+            <div class="announcement-content announcement-quest"></div>
         </div>
     </div>
-    <canvas class="webgl"></canvas>
+    <div class="col-r">
+        <div id="quest"></div>
+        <div id="loot"></div>
+    </div>
+</div>
+<div id="loadingScreen">
+    <div class="loadingScreen-content">
+        <div class="loadingScreen-landing">
+            <img src="icons/logo_white.svg" alt="Logo">
+            <div>
+                <button class="loadingScreen-landing__button-login btn btn-primary">Connexion</button>
+                <button class="loadingScreen-register__button-register btn">Inscription</button>
+            </div>
+        </div>
+        <div class="loadingScreen-login">
+            <p>login</p>
+        </div>
+        <div class="loadingScreen-registration">
+            <button class="btn btn-return loadingScreen-registration-return">
+                <img src="icons/arrow_icon.svg" alt="arrow">
+            </button>
+            <div>
+                <h2>Inscription</h2>
+                <form class="loadingScreen-registration__form"  method="post">
+                    <label for="register-form-sponsorship"></label>
+                    <input class="input-primary" type="text" name="sponsorship" id="register-form-sponsorship" placeholder="Code de parrainage" required>
+
+                    <label for="register-form-email"></label>
+                    <input class="input-primary" type="email" name="email" id="register-form-email" placeholder="Email" required>
+
+                    <label for="register-form-tel"></label>
+                    <input class="input-primary" type="tel" name="tel" id="register-form-tel" placeholder="Téléphone" required>
+
+                    <label for="register-form-password"></label>
+                    <input class="input-primary" type="password" name="password" id="register-form-password" placeholder="Mot de passe" required>
+
+                    <label for="register-form-password_confirmation"></label>
+                    <input class="input-primary" type="password" name="password" id="register-form-password_confirmation" placeholder="Confirmer le mot de passe" required>
+
+                    <div class="register-form-rules-container">
+                        <input type="checkbox" id="register-form-rules" name="rules">
+                        <label for="register-form-rules">J’ai lu et j’accepte la <a href="#">politique de confidentialité</a>.</label>
+                    </div>
+
+                    <input class="btn btn-primary"  type="submit" value="Créer mon compte">
+                </form>
+            </div>
+        </div>
+        <div class="loadingScreen-starting">
+            <div>
+                <form class="loadingScreen-starting__form" method="post">
+                    <label for="register-form-pseudo"></label>
+                    <input class="input-primary" type="text" name="pseudo" id="register-form-pseudo" placeholder="Pseudo" required>
+                    <button class="loadingScreen-starting__button-start btn-primary btn">
+                        <img src="icons/tchat_arrow_icon.svg" alt="arrow">
+                        <span>Commencer</span>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<canvas class="webgl"></canvas>
 
 
-    <script type="module" src="./script.js"></script>
+<script type="module" src="./script.js"></script>
 </body>
 </html>

@@ -1,72 +1,67 @@
 import EventEmitter from "./Utils/EventEmitter.js";
+import Experience from "./Experience.js";
 
 export default class Mainscreen extends EventEmitter{
     constructor() {
         super()
+        this.experience = new Experience()
+        this.debug = this.experience.debug
         this.pseudo = null
+        this.steps = {
+            landing: () => {
+                const landing = document.querySelector('.loadingScreen-landing')
+                landing.classList.add('loadingScreen--active')
+                landing.querySelector('.loadingScreen-landing__button-login').addEventListener('click', () => {
+                    landing.classList.remove('loadingScreen--active')
+                    //this.steps.login()
+                    this.steps.starting()
+                })
+                landing.querySelector('.loadingScreen-register__button-register').addEventListener('click', () => {
+                    landing.classList.remove('loadingScreen--active')
+                    this.steps.registration()
+                })
+            },
+            login: () => {
+                const landing = document.querySelector('.loadingScreen-login')
+                landing.classList.add('loadingScreen--active')
+            },
+            registration: () => {
+                const landing = document.querySelector('.loadingScreen-registration')
+                landing.classList.add('loadingScreen--active')
+                landing.querySelector('.loadingScreen-registration-return').addEventListener('click', () => {
+                    landing.classList.remove('loadingScreen--active')
+                    this.steps.landing()
+                })
+                landing.querySelector('.loadingScreen-registration__form').addEventListener('submit', (event) => {
+                    event.preventDefault()
+                    landing.classList.remove('loadingScreen--active')
+                    this.steps.starting()
+                })
+            },
+            starting: () => {
+                const landing = document.querySelector('.loadingScreen-starting')
+                landing.classList.add('loadingScreen--active')
+                landing.querySelector('.loadingScreen-starting__form').addEventListener('submit', (event) => {
+                    event.preventDefault()
+                    landing.classList.remove('loadingScreen--active')
+                    this.pseudo = landing.querySelector('#register-form-pseudo').value
+                    this.trigger('pseudo-entered')
+                    this.destroy()
+                })
+            }
+        }
     }
 
     showInput()
     {
-        // Ajouter l'input pour rentrer le pseudo
-        const inputContainer = document.createElement('div')
-        inputContainer.style.position = 'absolute'
-        inputContainer.style.top = '50%'
-        inputContainer.style.left = '50%'
-        inputContainer.style.transform = 'translate(-50%, -50%)'
-        inputContainer.style.display = 'flex'
-        inputContainer.style.flexDirection = 'column'
-        inputContainer.style.alignItems = 'center'
-
-        const inputLabel = document.createElement('label')
-        inputLabel.innerText = 'Entrez votre pseudo :'
-        inputLabel.style.marginBottom = '10px'
-        inputLabel.style.fontFamily = 'Arial, sans-serif'
-        inputLabel.style.fontSize = '24px'
-        inputLabel.style.color = 'white'
-
-        const inputElement = document.createElement('input')
-        inputElement.type = 'text'
-        inputElement.style.width = '200px'
-        inputElement.style.padding = '10px'
-        inputElement.style.borderRadius = '5px'
-        inputElement.style.border = 'none'
-        inputElement.style.background = '#555555'
-        inputElement.style.color = 'white'
-        inputElement.style.fontFamily = 'Arial, sans-serif'
-        inputElement.style.fontSize = '18px'
-        inputElement.style.textAlign = 'center'
-
-        const submitButton = document.createElement('button')
-        submitButton.type = 'submit'
-        submitButton.innerText = 'Valider'
-        submitButton.style.padding = '10px'
-        submitButton.style.marginTop = '20px'
-        submitButton.style.borderRadius = '5px'
-        submitButton.style.border = 'none'
-        submitButton.style.background = '#555555'
-        submitButton.style.color = 'white'
-        submitButton.style.fontFamily = 'Arial, sans-serif'
-        submitButton.style.fontSize = '18px'
-        submitButton.style.cursor = 'pointer'
-
-        this.form = document.createElement('form')
-
-        inputContainer.appendChild(inputLabel)
-        inputContainer.appendChild(inputElement)
-        inputContainer.appendChild(submitButton)
-        this.form.appendChild(inputContainer)
-        document.body.appendChild(this.form)
-
-        this.form.addEventListener('submit', (event) => {
-            event.preventDefault();
-            this.pseudo = inputElement.value;
-            this.trigger('pseudo-entered')
-            this.destroy()
-        });
+        if (this.debug.active) {
+            this.steps.starting()
+        } else {
+            this.steps.landing()
+        }
     }
 
     destroy() {
-        this.form.remove()
+        this.steps = null
     }
 }

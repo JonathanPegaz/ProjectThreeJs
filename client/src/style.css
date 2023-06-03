@@ -1,3 +1,8 @@
+@font-face {
+    font-family: Athena;
+    src: url(../static/fonts/athena.ttf);
+}
+
 *
 {
     margin: 0;
@@ -10,6 +15,175 @@ html,
 body
 {
     overflow: hidden;
+}
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+    display: block;
+}
+body {
+    line-height: 1;
+}
+ol, ul {
+    list-style: none;
+}
+blockquote, q {
+    quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+    content: '';
+    content: none;
+}
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+h2 {
+    font-size: 2.5rem;
+    font-weight: 400;
+    font-family: Athena, Roboto, sans-serif;
+    margin-bottom: 1rem;
+    color: #21B4D6;
+    text-align: center;
+}
+
+.btn {
+    min-width: fit-content;
+    font-weight: 400;
+    font-family: Athena, Roboto, sans-serif;
+    color: #21B4D6;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    background-color: #FFFFFF;
+    border: 1px solid transparent;
+    padding: .375rem 1.75rem;
+    font-size: 1.7rem;
+    line-height: 1.5;
+    border-radius: .5rem;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.btn-primary {
+    color: #fff;
+    background-color: #21B4D6;
+}
+.btn-primary>img {
+    fill: #FFFFFF;
+    filter: brightness(0) saturate(100%) invert(98%) sepia(0%) saturate(0%) hue-rotate(19deg) brightness(103%) contrast(104%);
+}
+
+.btn-important {
+    border: 2px solid #21B4D6;
+}
+
+.btn-important>img, .btn-primary>img {
+    padding-right: 1rem;
+    width: 1rem;
+}
+
+.btn-important>span, .btn-primary>span {
+    width: fit-content;
+}
+
+.btn-return {
+    padding: 1rem;
+}
+
+.input-primary {
+    color: #21B4D6;
+    background-color: #ffffff;
+    border: rgba(33, 180, 214, 0.71) 2px solid;
+    border-radius: .5rem;
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    padding: .375rem 1rem;
+    font-family: Athena, Roboto, sans-serif;
+    width: 100%;
+    box-sizing: border-box;
+    text-transform: none;
+}
+
+.input-primary:focus {
+    outline: none;
+    border: #21B4D6 2px solid;
+}
+
+input[type="checkbox"] {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    outline: none;
+    width: 20px;
+    height: 20px;
+    border: 2px solid #21B4D6;
+    border-radius: 3px;
+    background-color: #F4F4F4;
+    padding: 2px;
+    pointer-events: auto;
+}
+
+input[type="checkbox"]::before {
+    background-color: #21B4D6;
+    content: "";
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    position: relative;
+    top: -2px;
+    transform: scale(0);
+    transition: transform 0.2s ease;
+    clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+}
+
+
+input[type="checkbox"]:checked::before {
+    transform: scale(1);
+    animation: checkmarkAnimation 0.5s ease-in-out;
+}
+
+@keyframes checkmarkAnimation {
+    0% {
+        transform: scale(0);
+    }
+    50% {
+        transform: scale(1.2);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+.input-primary::placeholder {
+    color: #21B4D6;
+    opacity: .5;
 }
 
 .webgl
@@ -415,3 +589,121 @@ body
     border: 1px solid;
     font-size: 9px
 }
+
+#loadingScreen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    height: calc(100vh - 2rem);
+    width: calc(100vw - 2rem);
+    padding: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.loadingScreen-content>div {
+    display: none;
+    opacity: 0;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.loadingScreen-content .loadingScreen--active {
+    animation: fade-in 0.5s ease-in-out forwards;
+}
+
+.loadingScreen-content .loadingScreen--active {
+    display: flex;
+    opacity: 1;
+}
+
+
+.loadingScreen-landing>div {
+    display: flex;
+    gap: 1rem;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 2rem;
+    width: fit-content;
+}
+
+.loadingScreen-landing>img {
+    width: 100%;
+    max-width: 20rem;
+}
+
+.loadingScreen-landing .btn {
+    width: 100%;
+}
+
+.loadingScreen-registration, .loadingScreen-starting {
+    width: 100%;
+    position: relative;
+}
+
+.loadingScreen-registration > div, .loadingScreen-starting > div {
+    background-color: #FFFFFF;
+    border-radius: 1rem;
+    border: 4px solid #21B4D6;
+    padding: 3rem;
+    width: 65%;
+    display: flex;
+    flex-direction: column;
+}
+
+.loadingScreen-registration__form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1rem;
+    width: 100%;
+}
+
+.loadingScreen-registration__form .btn {
+    font-size: 1.2rem;
+}
+
+.loadingScreen-registration__form .register-form-rules-container {
+    width: 100%;
+    padding-bottom: 3rem;
+    display: flex;
+}
+
+.loadingScreen-registration__form .register-form-rules-container #register-form-rules{
+    margin-right: .5rem;
+}
+
+.loadingScreen-registration__form .register-form-rules-container label, .loadingScreen-registration__form .register-form-rules-container a {
+    font-size: 1rem;
+    font-family: Athena, Roboto, sans-serif;
+    color: #21B4D6;
+}
+
+.loadingScreen-registration .loadingScreen-registration-return {
+    position: absolute;
+    width: 3rem;
+    height: 3rem;
+    background-color: #FFFFFF;
+    border-radius: 1rem;
+    border: 4px solid #21B4D6;
+
+    left: -5rem;
+    margin-right: 2rem;
+    box-sizing: content-box;
+    top: 0;
+}
+
+.loadingScreen-registration .loadingScreen-registration-return img {
+    max-width: 1.5rem;
+    max-height: 1.5rem;
+    transform: rotate(180deg);
+}
+
+
+
+
