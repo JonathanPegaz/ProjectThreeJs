@@ -1,6 +1,6 @@
 import Barriere from "./Buildings/Barriere.js";
 import Batiments from "./Buildings/Batiments.js";
-import Dalles from "./Nature/Crystal.js";
+import Dalles from "./Buildings/Dalles.js";
 import Panneaux from "./Buildings/Panneaux.js";
 import Ponts from "./Buildings/Ponts.js";
 import Props from "./Buildings/Props.js";
@@ -45,6 +45,8 @@ import Bol from "./Buildings/Bol.js";
 import FruitPose from "./Nature/FruitPose.js";
 import FruitRamasse from "./Nature/FruitRamasse.js";
 import PortailIntroShader from "./Buildings/PortailIntroShader.js";
+import Flamme from "./Buildings/Flamme.js";
+import Torch from "./Buildings/Torch.js";
 
 export const assets = [
     // display : 0 = small, 1 = medium, 2 = big
@@ -467,6 +469,24 @@ export const assets = [
         display: 0,
         castShadow: false,
         isAnimated: false,
+        isInteractive: false
+    },
+    {
+        type: Flamme,
+        resource: 'Flamme',
+        hasPhysics: false,
+        display: 0,
+        castShadow: false,
+        isAnimated: true,
+        isInteractive: false
+    },
+    {
+        type: Torch,
+        resource: 'Torch',
+        hasPhysics: false,
+        display: 0,
+        castShadow: false,
+        isAnimated: true,
         isInteractive: false
     }
 ]

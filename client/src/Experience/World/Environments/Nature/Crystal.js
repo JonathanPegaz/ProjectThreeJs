@@ -2,6 +2,7 @@ import Model3D from "../../Model3D.js";
 import Experience from "../../../Experience.js";
 import QuestMarker from "../../../Interface/QuestMarker.js";
 import * as THREE from "three";
+import {Mesh, MeshBasicMaterial, MeshStandardMaterial, PlaneGeometry} from "three";
 
 export default class Crystal extends Model3D
 {
@@ -20,6 +21,34 @@ export default class Crystal extends Model3D
         this.scene.add(this.object)
 
         this.marker = new QuestMarker(this, -3)
+
+        this.setMinimapIcon()
+    }
+
+    setMinimapIcon() {
+        // plane for the diamond in the minimap
+        const plane = new PlaneGeometry(15, 15)
+        const material = new MeshBasicMaterial({
+            map: this.experience.resources.items.crystal_texture,
+            transparent: true,
+            depthWrite: false
+        })
+        const mesh = new Mesh(plane, material)
+        mesh.renderOrder = -1
+        mesh.position.set(-17, 26, 41)
+        mesh.rotation.x = - Math.PI / 2;
+        mesh.layers.set(2)
+        this.scene.add(mesh)
+    }
+
+    setMaterial(child) {
+        child.material = new MeshStandardMaterial({
+            ...child.material,
+            type: 'MeshStandardMaterial',
+            emissive: 0xffffff,
+            emissiveIntensity: 5,
+            emissiveMap: child.material.map,
+        })
     }
 
     interact(origin, mesh) {

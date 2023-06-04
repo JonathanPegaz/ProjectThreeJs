@@ -18,7 +18,6 @@ export default class Landscape {
 
     setModel() {
         this.model = this.resource.scene
-        this.model.scale.set(1, 1, 1)
         this.model.traverse((child) => {
             child.frustumCulled = false
             if(child instanceof Mesh) {
@@ -33,6 +32,8 @@ export default class Landscape {
                 child.receiveShadow = true
                 child.castShadow = false
             }
+            child.matrixAutoUpdate = false
+            child.matrixWorldNeedsUpdate = false
         })
 
         this.object.add(this.model)

@@ -118,7 +118,7 @@ export default class Environment
         this.environmentMap.texture.encoding = sRGBEncoding
 
         this.scene.background = this.environmentMap.texture
-        this.scene.environment = this.environmentMap.texture
+        //this.scene.environment = this.environmentMap.texture
 
         this.environmentMap.updateMaterials = () =>
         {
@@ -165,7 +165,7 @@ export default class Environment
 
         this.environmentMap.texture = this.resources.items.skybox_night
         this.scene.background = this.environmentMap.texture
-        this.scene.environment = this.environmentMap.texture
+        //this.scene.environment = this.environmentMap.texture
         this.experience.scene.fog.color.setHex(0x001624)
         this.experience.world.fireflies.firefliesMaterial.uniforms.uColor.value.setHex(0xe3cf3e)
 
@@ -190,7 +190,7 @@ export default class Environment
 
         this.environmentMap.texture = this.resources.items.skybox
         this.scene.background = this.environmentMap.texture
-        this.scene.environment = this.environmentMap.texture
+        //this.scene.environment = this.environmentMap.texture
         this.experience.scene.fog.color.setHex(0xffffff)
         this.experience.world.fireflies.firefliesMaterial.uniforms.uColor.value.setHex(0xffffff)
 

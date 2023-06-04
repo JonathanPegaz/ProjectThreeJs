@@ -26,8 +26,8 @@ export default class Renderer
         this.instance.physicallyCorrectLights = true
         this.instance.gammaFactor = 2.2
         //this.instance.outputColorSpace = sRGBEncoding
-        this.instance.toneMapping = NoToneMapping
-        this.instance.toneMappingExposure = 1.75
+        this.instance.toneMapping = CineonToneMapping
+        this.instance.toneMappingExposure = 1.3
         this.instance.shadowMap.enabled = true
         this.instance.shadowMap.type = PCFSoftShadowMap
         this.instance.setClearColor('#211d20')
@@ -80,8 +80,19 @@ export default class Renderer
 
     update()
     {
+        this.instance.setViewport(0, 0, this.sizes.width, this.sizes.height)
         this.instance.render(this.scene, this.camera.instance)
         this.labelRenderer.render(this.scene, this.camera.instance)
+
+        if (this.experience.minimap) {
+            this.instance.clearDepth()
+            this.instance.setScissorTest(true)
+
+            this.instance.setScissor(this.sizes.width - this.sizes.width / 4, this.sizes.height - this.sizes.height / 4, this.sizes.width / 4, this.sizes.height / 4)
+            this.instance.setViewport(this.sizes.width - this.sizes.width / 4, this.sizes.height - this.sizes.height / 4, this.sizes.width / 4, this.sizes.height / 4)
+            this.instance.render(this.scene, this.experience.minimap.instance)
+            this.instance.setScissorTest(false)
+        }
     }
 
     destroy() {

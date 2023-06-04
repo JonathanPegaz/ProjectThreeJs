@@ -15,8 +15,8 @@ export default class PortailShader extends Model3D
 
     setModel() {
         this.debugObject = {
-            portalColorStart: '#cbc8c8',
-            portalColorEnd: '#6a6a71'
+            portalColorStart: '#ffffff',
+            portalColorEnd: '#21b4d6'
         }
         this.isShader = true
          // create rounded plane and a texture
