@@ -7,45 +7,57 @@ export default class Mainscreen extends EventEmitter{
         this.experience = new Experience()
         this.debug = this.experience.debug
         this.pseudo = null
+        this.loadingScreen = document.querySelector('#loadingScreen')
         this.steps = {
             landing: () => {
-                const landing = document.querySelector('.loadingScreen-landing')
-                landing.classList.add('loadingScreen--active')
-                landing.querySelector('.loadingScreen-landing__button-login').addEventListener('click', () => {
-                    landing.classList.remove('loadingScreen--active')
+                const element = document.querySelector('.loadingScreen-landing')
+                element.classList.add('loadingScreen--active')
+                element.querySelector('.loadingScreen-landing__button-login').addEventListener('click', () => {
+                    element.classList.remove('loadingScreen--active')
                     //this.steps.login()
                     this.steps.starting()
                 })
-                landing.querySelector('.loadingScreen-register__button-register').addEventListener('click', () => {
-                    landing.classList.remove('loadingScreen--active')
+                element.querySelector('.loadingScreen-register__button-register').addEventListener('click', () => {
+                    element.classList.remove('loadingScreen--active')
                     this.steps.registration()
                 })
             },
             login: () => {
-                const landing = document.querySelector('.loadingScreen-login')
-                landing.classList.add('loadingScreen--active')
+                const element = document.querySelector('.loadingScreen-login')
+                element.classList.add('loadingScreen--active')
+                this.experience.alert.type.SYSTEM('Vous êtes maintenant connecté.', 4000, 'check_icon')
             },
             registration: () => {
-                const landing = document.querySelector('.loadingScreen-registration')
-                landing.classList.add('loadingScreen--active')
-                landing.querySelector('.loadingScreen-registration-return').addEventListener('click', () => {
-                    landing.classList.remove('loadingScreen--active')
+                const element = document.querySelector('.loadingScreen-registration')
+                element.classList.add('loadingScreen--active')
+                element.querySelector('.loadingScreen-registration-return').addEventListener('click', () => {
+                    element.classList.remove('loadingScreen--active')
                     this.steps.landing()
                 })
-                landing.querySelector('.loadingScreen-registration__form').addEventListener('submit', (event) => {
+                element.querySelector('.loadingScreen-registration__form').addEventListener('submit', (event) => {
                     event.preventDefault()
-                    landing.classList.remove('loadingScreen--active')
+                    element.classList.remove('loadingScreen--active')
                     this.steps.starting()
+                    this.experience.alert.addQueue(this.experience.alert.type.SYSTEM(
+                      'félicitations ! votre compte a bien été créé.',
+                      4000,
+                      'check_icon'
+                    ))
                 })
             },
             starting: () => {
-                const landing = document.querySelector('.loadingScreen-starting')
-                landing.classList.add('loadingScreen--active')
-                landing.querySelector('.loadingScreen-starting__form').addEventListener('submit', (event) => {
+                const element = document.querySelector('.loadingScreen-starting')
+                element.classList.add('loadingScreen--active')
+                element.querySelector('.loadingScreen-starting__form').addEventListener('submit', (event) => {
                     event.preventDefault()
-                    landing.classList.remove('loadingScreen--active')
-                    this.pseudo = landing.querySelector('#register-form-pseudo').value
+                    element.classList.remove('loadingScreen--active')
+                    this.pseudo = element.querySelector('#register-form-pseudo').value
                     this.trigger('pseudo-entered')
+                    let elements = document.querySelectorAll('.loading-hidden');
+                    for (let i = 0; i < elements.length; i++) {
+                        elements[i].classList.remove('loading-hidden');
+                    }
+                    this.experience.alert.type.SYSTEM('Bienvenue initié !', 4000, 'tchat_icon')
                     this.destroy()
                 })
             }
@@ -63,5 +75,10 @@ export default class Mainscreen extends EventEmitter{
 
     destroy() {
         this.steps = null
+        this.pseudo = null
+        if (this.loadingScreen !== null) {
+            this.loadingScreen.remove()
+            this.loadingScreen = null
+        }
     }
 }

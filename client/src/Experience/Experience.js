@@ -18,6 +18,7 @@ import Mainscreen from "./Mainscreen.js";
 import Hud from "./World/Player/Hud/Hud.js";
 import Controls from "./Utils/Controls.js";
 import NpcController from "./World/Npc/NpcController.js";
+import HTMLAnnouncement from "./HTMLInterface/HTMLAnnouncement.js";
 
 let instance = null
 
@@ -50,6 +51,7 @@ export default class Experience
         this.scene = new Scene()
         this.resources = new Resources(sources)
         this.physics = new Physics()
+        this.alert = new HTMLAnnouncement()
         this.mainscreen = new Mainscreen()
         this.camera = new Camera()
         this.renderer = new Renderer()
@@ -156,6 +158,7 @@ export default class Experience
         if (this.physics)
             this.physics.destroy()
         this.mainscreen.destroy()
+        this.alert.destroy()
         if(this.hud)
             this.hud.destroy()
         this.camera.destroy()
@@ -213,6 +216,7 @@ export default class Experience
         this.resources = null
         this.physics = null
         this.mainscreen = null
+        this.alert = null
         this.hud = null
         this.localPlayer = null
         this.npc = null

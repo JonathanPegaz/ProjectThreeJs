@@ -24,40 +24,81 @@
   src="./video/lac.mp4"
   style="display: none"
 ></video>
-<div class="ui">
-    <div class="controls">
-        <div class="group">
-            <div class="element">
-                <div class="keys is-arrows">
-                    <div class="key">Q/◀</div>
-                    <div class="key">S/▼</div>
-                    <div class="key">D/▶</div>
-                    <div class="key">Z/▲</div>
+<div id="hud">
+    <div class="col-l loading-hidden">
+        <div id="chat" class="chat-hidden">
+            <div>
+                <div id="chat-toggle-btn">
+                    <img src="icons/tchat_icon.svg" alt="chat toggle button">
                 </div>
-                move
-            </div>
-            <div class="element">
-                <div class="keys">
-                    <div class="key">F</div>
+                <div class="chat-messages-container">
+                    <ul class="chat-messages"></ul>
                 </div>
-                Action / Parler
+                <div class="chat-input-container">
+                    <label for="chat-input"></label>
+                    <input type="text" class="input" id="chat-input" placeholder="Écrivez quelque chose...">
+                    <button id="chat-send-btn">
+                        <img src="icons/send_icon.svg" alt="Send">
+                    </button>
+                </div>
             </div>
         </div>
     </div>
-</div>
-<div id="hud">
-    <div class="col-l"></div>
     <div class="col-m">
         <div class="announcement">
             <div class="announcement-content announcement-area"></div>
-            <div class="announcement-content announcement-alert"></div>
+            <div class="announcement-content announcement-system"></div>
             <div class="announcement-content announcement-kill"></div>
             <div class="announcement-content announcement-quest"></div>
         </div>
     </div>
-    <div class="col-r">
+    <div class="col-r loading-hidden">
         <div id="quest"></div>
         <div id="loot"></div>
+        <div id="tips">
+            <div class="tips-controls">
+                <div class="tips-controls__move">
+                    <div class="tips-controls-input tips-controls__move-col-l">
+                        <div>
+                            <span>Q/</span>
+                            <div>
+                                <img src="icons/arrow_icon.svg" alt="direction left">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tips-controls-input tips-controls__move-col-m">
+                        <div>
+                            <span>Z/</span>
+                            <div>
+                                <img src="icons/arrow_icon.svg" alt="direction forward">
+                            </div>
+                        </div>
+                        <div>
+                            <span>S/</span>
+                            <div>
+                                <img src="icons/arrow_icon.svg" alt="direction backward">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tips-controls-input tips-controls__move-col-r">
+                        <div>
+                            <span>D/</span>
+                            <div>
+                                <img src="icons/arrow_icon.svg" alt="direction right">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tips-controls__interact">
+                    <div class="tips-controls-input">
+                        <div>
+                            <span>F</span>
+                        </div>
+                    </div>
+                    <span>Interagir</span>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 <div id="loadingScreen">
@@ -80,19 +121,19 @@
                 <h2>Inscription</h2>
                 <form class="loadingScreen-registration__form"  method="post">
                     <label for="register-form-sponsorship"></label>
-                    <input class="input-primary" type="text" name="sponsorship" id="register-form-sponsorship" placeholder="Code de parrainage" required>
+                    <input class="input input-primary" type="text" name="sponsorship" id="register-form-sponsorship" placeholder="Code de parrainage" required>
 
                     <label for="register-form-email"></label>
-                    <input class="input-primary" type="email" name="email" id="register-form-email" placeholder="Email" required>
+                    <input class="input input-primary" type="email" name="email" id="register-form-email" placeholder="Email" required>
 
                     <label for="register-form-tel"></label>
-                    <input class="input-primary" type="tel" name="tel" id="register-form-tel" placeholder="Téléphone" required>
+                    <input class="input input-primary" type="tel" name="tel" id="register-form-tel" placeholder="Téléphone" required>
 
                     <label for="register-form-password"></label>
-                    <input class="input-primary" type="password" name="password" id="register-form-password" placeholder="Mot de passe" required>
+                    <input class="input input-primary" type="password" name="password" id="register-form-password" placeholder="Mot de passe" required>
 
                     <label for="register-form-password_confirmation"></label>
-                    <input class="input-primary" type="password" name="password" id="register-form-password_confirmation" placeholder="Confirmer le mot de passe" required>
+                    <input class="input input-primary" type="password" name="password" id="register-form-password_confirmation" placeholder="Confirmer le mot de passe" required>
 
                     <div class="register-form-rules-container">
                         <input type="checkbox" id="register-form-rules" name="rules">
@@ -107,7 +148,7 @@
             <div>
                 <form class="loadingScreen-starting__form" method="post">
                     <label for="register-form-pseudo"></label>
-                    <input class="input-primary" type="text" name="pseudo" id="register-form-pseudo" placeholder="Pseudo" required>
+                    <input class="input input-primary" type="text" name="pseudo" id="register-form-pseudo" placeholder="Pseudo" required>
                     <button class="loadingScreen-starting__button-start btn-primary btn">
                         <img src="icons/tchat_arrow_icon.svg" alt="arrow">
                         <span>Commencer</span>

@@ -4,98 +4,15 @@ import Experience from "../../../Experience.js";
 export default class Chat {
     constructor() {
         this.experience = new Experience()
-
         this.initChat();
     }
 
     initChat() {
-
-        this.chatContainer = document.createElement("div");
-        this.chatContainer.id = "chatContainer";
-        this.chatContainer.style.width = "350px";
-        this.chatContainer.style.height = "250px";
-        this.chatContainer.style.display = "flex";
-        this.chatContainer.style.flexDirection = "column";
-        this.chatContainer.style.bottom = "0px";
-        this.chatContainer.style.left = "5px";
-        this.chatContainer.style.position = "absolute";
-        document.body.appendChild(this.chatContainer);
-
-        this.toggleButton = document.createElement("button");
-        this.toggleButton.id = "toggleButton";
-        this.toggleButton.style.width = "50px";
-        this.toggleButton.style.height = "50px";
-        this.toggleButton.style.backgroundColor = "rgba(0, 0, 0, 0.5)";
-        this.toggleButton.style.border = "none";
-        this.toggleButton.style.outline = "none";
-        this.toggleButton.style.color = "white";
-        this.toggleButton.style.fontFamily = "Arial";
-        this.toggleButton.style.fontSize = "20px";
-        this.toggleButton.style.boxSizing = "border-box";
-        this.toggleButton.style.borderRadius = "50%";
-        this.toggleButton.style.backgroundImage = "url('chat.avif')";
-        this.toggleButton.style.backgroundSize = "cover";
-        this.chatContainer.appendChild(this.toggleButton);
-
-        this.chat = document.createElement("div");
-        this.chat.id = "chat";
-        this.chat.style.opacity = "0";
-        this.chat.style.width = "100%";
-        this.chat.style.height = "100%";
-        this.chat.style.backgroundColor = "rgba(0, 0, 0, 0.5)";
-        this.chat.style.display = "flex";
-        this.chat.style.flexDirection = "column";
-        this.chat.style.color = "white";
-        this.chat.style.fontFamily = "Arial";
-        this.chat.style.fontSize = "12px";
-        this.chat.style.boxSizing = "border-box";
-        this.chatContainer.appendChild(this.chat);
-
-        this.chatMessages = document.createElement("ul");
-        this.chatMessages.id = "chatMessages";
-        this.chatMessages.style.overflow = "auto";
-        this.chatMessages.style.height = "100%";
-        this.chatMessages.style.padding = "10px";
-        this.chat.appendChild(this.chatMessages);
-
-        this.inputContainer = document.createElement("div");
-        this.inputContainer.id = "inputContainer";
-        this.inputContainer.style.display = "flex";
-        this.inputContainer.style.flexDirection = "row";
-        this.inputContainer.style.alignItems = "center";
-        this.chat.appendChild(this.inputContainer);
-
-        this.chatInput = document.createElement("input");
-        this.chatInput.id = "chatInput";
-        this.chatInput.style.height = "40px";
-        this.chatInput.style.width = "100%";
-        this.chatInput.style.backgroundColor = "rgba(0, 0, 0, 0.5)";
-        this.chatInput.style.border = "none";
-        this.chatInput.style.outline = "none";
-        this.chatInput.style.color = "white";
-        this.chatInput.style.fontFamily = "Arial";
-        this.chatInput.style.fontSize = "12px";
-        this.chatInput.style.padding = "10px";
-
-        this.chatInput.style.boxSizing = "border-box";
-        this.chatInput.placeholder = "Type your message here...";
-        this.inputContainer.appendChild(this.chatInput);
-
-        this.chatButton = document.createElement("button");
-        this.chatButton.id = "chatButton";
-        this.chatButton.style.width = "120px";
-        this.chatButton.style.height = "40px";
-        this.chatButton.style.backgroundColor = "black";
-        this.chatButton.style.border = "none";
-        this.chatButton.style.outline = "none";
-        this.chatButton.style.color = "white";
-        this.chatButton.style.fontFamily = "Arial";
-        this.chatButton.style.fontSize = "12px";
-        this.chatButton.style.padding = "10px";
-        this.chatButton.style.boxSizing = "border-box";
-        this.chatButton.alignSelf = "center";
-        this.chatButton.innerHTML = "Send";
-        this.inputContainer.appendChild(this.chatButton);
+        this.chat = document.querySelector("#chat");
+        this.chatButton = document.querySelector("#chat-send-btn");
+        this.chatInput = document.querySelector("#chat-input");
+        this.chatMessages = document.querySelector(".chat-messages");
+        this.toggleButton = document.querySelector("#chat-toggle-btn");
 
         this.chatButton.addEventListener("click", () => {
             this.sendMessage();
@@ -104,10 +21,12 @@ export default class Chat {
 
 
         this.toggleButton.addEventListener("click", () => {
-            if (this.chat.classList.contains("fade-in")) {
-                this.fadeOut();
+            this.chat.classList.toggle("chat-hidden");
+            const icon = this.toggleButton.querySelector("img");
+            if (this.chat.classList.contains("chat-hidden")) {
+                icon.src = "icons/tchat_icon.svg";
             } else {
-                this.fadeIn();
+                icon.src = "icons/close_icon.svg";
             }
         })
 
@@ -148,7 +67,8 @@ export default class Chat {
 
     addMessage(data) {
         let message = document.createElement('li');
-        message.textContent = data.id + ': ' + data.message;
+        //TODO : change color of the message if it's from the local player
+        message.textContent = '<span class="chat-messages-id">' + data.id + ' : </span><span>' + data.message + '</span>';
         this.chatMessages.appendChild(message);
     }
 
@@ -168,19 +88,15 @@ export default class Chat {
     }
 
     destroy() {
-        this.chatContainer.remove();
-
         this.toggleButton.remove();
         this.chat.remove();
         this.chatMessages.remove();
-        this.inputContainer.remove();
         this.chatInput.remove();
         this.chatButton.remove();
 
         this.toggleButton = null;
         this.chat = null;
         this.chatMessages = null;
-        this.inputContainer = null;
         this.chatInput = null;
         this.chatButton = null;
 

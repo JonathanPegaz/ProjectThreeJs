@@ -36,8 +36,8 @@ export default class AnnouncementZone extends InteractiveObject {
     const isBusy = super.interact(origin)
     if (isBusy) return
 
-    this.wait(() => this.experience.world.htmlAnnouncement).then(() => {
-      this.experience.world.htmlAnnouncement.addQueue(this.experience.world.htmlAnnouncement.type.AREA, this.name, 3000)
+    this.wait(() => this.experience.alert).then(() => {
+      this.experience.alert.addQueue(this.experience.alert.type.AREA, this.name, 3000)
     })
   }
 

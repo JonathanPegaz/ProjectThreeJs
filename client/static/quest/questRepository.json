@@ -1,7 +1,7 @@
 {
   "1": {
     "title": "La fête du village",
-    "description": "Le chef du village vous demande de lui ramener cette liste de courses : ",
+    "description": "Le chef du village vous demande de lui ramener cette liste de courses",
     "tasks": {
       "1": {
         "order": 1,

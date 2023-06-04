@@ -17,7 +17,7 @@ export default class QuestMarker {
     iconContainer.classList.add('quest-marker-icon-container');
 
     let icon = document.createElement('img');
-    icon.src = 'icons/hamsa-solid.svg';
+    icon.src = 'icons/logo_blue.svg';
     icon.classList.add('quest-marker-icon-image');
     iconContainer.appendChild(icon);
 
