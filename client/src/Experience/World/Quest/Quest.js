@@ -1,7 +1,6 @@
 import EventEmitter from "../../Utils/EventEmitter.js"
 import Collect from "./Task/Collect.js"
 import { v4 as uuidv4 } from 'uuid'
-import Escort from "./Task/Escort.js"
 import Talk from "./Task/Talk.js";
 
 
@@ -19,10 +18,7 @@ export default class Quest extends EventEmitter{
     this.description = null
     this.taskEnum = {
       COLLECT: (param) => new Collect(param),
-      ESCORT: (param) => new Escort(param),
       TALK: (param) => new Talk(param),
-      // ESCORT: (param) => new Escort(param),
-      // DELIVERY: (param) => new Delivery(param),
     }
 
     this.init(quest)
@@ -77,6 +73,7 @@ export default class Quest extends EventEmitter{
   completeTask(task) {
     task.off("completed")
     task.off("update")
+    this.activeTasks[task.id].target.marker.unmark()
     this.completedTasks[task.id] = task
     delete this.activeTasks[task.id]
     this.update()
