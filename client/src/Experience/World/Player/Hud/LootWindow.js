@@ -31,7 +31,7 @@ export default class LootWindow extends EventEmitter{
     return new Promise((resolve) => {
       const li = document.createElement('li');
       li.classList.add('loot-item');
-      if (loot === 'diamond' || loot === 'mushroom' || loot === 'carrot' || loot === 'apple') {
+      if (loot === 'crystal' || loot === 'mushroom' || loot === 'carrot' || loot === 'apple') {
         li.innerHTML = `<img src="icons/items/${loot}.png" alt="${loot}"><span class="loot-item-nb"> +1</span>`
       } else {
         li.innerHTML = `<span>Unknown +1</span>`

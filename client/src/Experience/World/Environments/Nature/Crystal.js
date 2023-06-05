@@ -26,7 +26,7 @@ export default class Crystal extends Model3D
     }
 
     setMinimapIcon() {
-        // plane for the diamond in the minimap
+        // plane for the crystal in the minimap
         const plane = new PlaneGeometry(15, 15)
         const material = new MeshBasicMaterial({
             map: this.experience.resources.items.crystal_texture,

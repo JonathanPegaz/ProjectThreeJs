@@ -17,10 +17,10 @@
         "order": 2,
         "type": "COLLECT",
         "name": "Carottes",
-        "description": "collecter 3 carottes",
+        "description": "collecter 5000 carottes",
         "requirements": {
           "item": "carrot",
-          "quantity": "3"
+          "quantity": "5000"
         }
       },
       "3": {

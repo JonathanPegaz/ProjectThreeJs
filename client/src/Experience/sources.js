@@ -417,7 +417,7 @@ export default [
     {
         name: 'crystal_texture',
         type: 'texture',
-        path: 'icons/items/diamond.png'
+        path: 'icons/items/crystal.png'
     },
     {
         name:'Vent1',
