@@ -2,7 +2,7 @@ import Model3D from "../../Model3D.js";
 import Experience from "../../../Experience.js";
 import QuestMarker from "../../../Interface/QuestMarker.js";
 import * as THREE from "three";
-import {Mesh, MeshBasicMaterial, MeshStandardMaterial, PlaneGeometry} from "three";
+import {FrontSide, Mesh, MeshBasicMaterial, MeshStandardMaterial, MeshToonMaterial, PlaneGeometry} from "three";
 
 export default class Crystal extends Model3D
 {
@@ -23,6 +23,7 @@ export default class Crystal extends Model3D
         this.marker = new QuestMarker(this, -3)
 
         this.setMinimapIcon()
+        this.isBloom = true
     }
 
     setMinimapIcon() {
@@ -39,16 +40,6 @@ export default class Crystal extends Model3D
         mesh.rotation.x = - Math.PI / 2;
         mesh.layers.set(2)
         this.scene.add(mesh)
-    }
-
-    setMaterial(child) {
-        child.material = new MeshStandardMaterial({
-            ...child.material,
-            type: 'MeshStandardMaterial',
-            emissive: 0xffffff,
-            emissiveIntensity: 5,
-            emissiveMap: child.material.map,
-        })
     }
 
     interact(origin, mesh) {

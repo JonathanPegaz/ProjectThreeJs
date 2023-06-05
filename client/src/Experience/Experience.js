@@ -54,7 +54,7 @@ export default class Experience
         this.mainscreen = new Mainscreen()
         this.camera = new Camera()
         this.renderer = new Renderer()
-        //this.postProcessing = new PostProcessing()
+        this.postProcessing = new PostProcessing()
 
         if (this.debug.active) {
             this.debugFolder = this.debug.ui.addFolder('Experience')
@@ -80,10 +80,11 @@ export default class Experience
             this.npc = new NpcController()
             this.network = new Network()
             this.localPlayer = new LocalPlayer()
-            this.minimap = new Minimap()
+            //this.minimap = new Minimap()
             if(this.world.Cascade)
                 this.world.Cascade.sound.play()
             this.resources.homeVideoDiv.remove()
+            this.postProcessing.setupEffect()
         })
 
         // Resize event
@@ -105,7 +106,7 @@ export default class Experience
         this.renderer.resize()
         if(this.minimap)
             this.minimap.resize()
-        //this.postProcessing.resize()
+        this.postProcessing.resize()
     }
 
     update()
@@ -136,7 +137,7 @@ export default class Experience
 
         this.renderer.update()
         //console.timeEnd()
-        //this.postProcessing.update()
+        this.postProcessing.update()
         this.monitoring.endMonitoring()
     }
 
@@ -166,7 +167,7 @@ export default class Experience
         if(this.minimap)
             this.minimap.destroy()
         this.renderer.destroy()
-        //this.postProcessing.destroy()
+        this.postProcessing.destroy()
         this.monitoring.destroy()
         if(this.debug.active)
             this.debug.destroy()
