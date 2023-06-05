@@ -15,7 +15,7 @@ export default class CollectZoneController {
 
   init() {
     this.list = [
-      new CollectZone(new THREE.Vector3(-57, 9.5, 13), "Ferme", 19, 4.5, 2000, "carrot"),
+      new CollectZone(new THREE.Vector3(-57,17, 13), "Ferme", 3.5, 4.5, 2000, "carrot", 1),
     ];
 
     this.list.forEach((element) => {

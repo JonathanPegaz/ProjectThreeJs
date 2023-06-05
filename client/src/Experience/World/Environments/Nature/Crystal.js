@@ -20,8 +20,6 @@ export default class Crystal extends Model3D
         this.object.position.set(-18, 26, 41)
         this.scene.add(this.object)
 
-        this.marker = new QuestMarker(this, -3)
-
         this.setMinimapIcon()
     }
 
@@ -52,15 +50,14 @@ export default class Crystal extends Model3D
     }
 
     interact(origin, mesh) {
-        mesh.interacting = true
-        mesh.marker.mark()
+        super.interact(origin, mesh, null, false)
         if (this.input.keys.down.action) {
             this.pressAction++
             mesh.marker.press(this.pressAction, 200)
             if (this.pressAction > 200) {
                 this.pressAction = 0
                 mesh.marker.stopPress()
-                this.trigger('collect', ['crystal'])
+                this.trigger('collect', [['crystal', 1]])
             }
         } else {
             this.pressAction = 0
@@ -69,10 +66,8 @@ export default class Crystal extends Model3D
     }
 
     stopInteract(mesh) {
-        super.stopInteract()
+        super.stopInteract(mesh)
         this.pressAction = 0
-        mesh.interacting = false
-        mesh.marker.unmark()
     }
 
     destroy() {
@@ -80,8 +75,5 @@ export default class Crystal extends Model3D
         this.pressAction = null
         this.type = null
         this.itemToCollect = null
-        if (this.marker)
-            this.marker.destroy()
-        this.marker = null
     }
 }

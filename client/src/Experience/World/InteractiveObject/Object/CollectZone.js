@@ -3,20 +3,21 @@ import InteractiveObject from "../InteractiveObject.js";
 import QuestMarker from "../../../Interface/QuestMarker.js";
 
 export default class CollectZone extends InteractiveObject {
-  constructor(position, name, size, radius = 1, collectTime = 1000, itemToCollect = null) {
+  constructor(position, name, size, radius = 1, collectTime = 1000, itemToCollect = null, nbItemToCollect = 1) {
     super();
 
     this.radius = null
     this.size = null
     this.itemToCollect = null
+    this.nbItemToCollect = null
     this.collectTime = null
     this.isCollecting = false
     this.type = "collectable"
 
-    this.init(position, name, size, radius, collectTime, itemToCollect)
+    this.init(position, name, size, radius, collectTime, itemToCollect, nbItemToCollect)
   }
 
-  init(position, name, size, radius, collectTime, itemToCollect) {
+  init(position, name, size, radius, collectTime, itemToCollect, nbItemToCollect) {
     this.name = name
     this.radius = radius
     this.size = size
@@ -26,11 +27,12 @@ export default class CollectZone extends InteractiveObject {
     this.scene.add(this.object)
 
     this.itemToCollect = itemToCollect
+    this.nbItemToCollect = nbItemToCollect
     this.collectTime = collectTime
     this.setHitbox()
     this.add()
 
-    this.marker = new QuestMarker(this, -3)
+    this.marker = new QuestMarker(this, 0)
   }
 
   setHitbox() {
@@ -51,7 +53,7 @@ export default class CollectZone extends InteractiveObject {
   }
 
   interact(origin) {
-    return super.interact(origin, this.radius+1);
+    return super.interact(origin, null, this.radius+1);
   }
 
   collect() {
@@ -63,7 +65,7 @@ export default class CollectZone extends InteractiveObject {
     return new Promise(() => {
       const check = () => {
         if (this.isCollecting) {
-          this.trigger(`collect`, [this.itemToCollect]);
+          this.trigger('collect', [[this.itemToCollect, this.nbItemToCollect]]);
           setTimeout(check, this.collectTime);
         }
       };
@@ -77,6 +79,7 @@ export default class CollectZone extends InteractiveObject {
     this.collectTime = null
     this.isCollecting = null
     this.itemToCollect = null
+    this.nbItemToCollect = null
     this.marker = null
     super.destroy();
   }

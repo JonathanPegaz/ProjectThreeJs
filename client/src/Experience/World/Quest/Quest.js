@@ -59,7 +59,11 @@ export default class Quest extends EventEmitter{
 
     Object.values(this.taskOrders[this.currentOrder]).forEach((task) => {
       this.activeTasks[task.id] = task
-      this.activeTasks[task.id].target.marker.mark()
+
+      if (this.activeTasks[task.id].target) {
+        this.activeTasks[task.id].target.marker.mark()
+      }
+
       task.on("completed", () => {
         this.completeTask(task)
       })
@@ -73,7 +77,9 @@ export default class Quest extends EventEmitter{
   completeTask(task) {
     task.off("completed")
     task.off("update")
-    this.activeTasks[task.id].target.marker.unmark()
+    if (this.activeTasks[task.id].target) {
+      this.activeTasks[task.id].target.marker.unmark()
+    }
     this.completedTasks[task.id] = task
     delete this.activeTasks[task.id]
     this.update()

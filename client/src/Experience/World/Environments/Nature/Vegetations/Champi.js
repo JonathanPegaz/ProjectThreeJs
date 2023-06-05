@@ -32,7 +32,7 @@ export default class Champi extends Model3D
             if (this.pressAction > 200) {
                 this.pressAction = 0
                 mesh.marker.stopPress()
-                this.trigger('collect', ['mushroom'])
+                this.trigger('collect', [['mushroom', 1]])
             }
         } else {
             this.pressAction = 0

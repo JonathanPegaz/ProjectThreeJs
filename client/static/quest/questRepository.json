@@ -10,7 +10,7 @@
         "description": "collecter 2 cristaux",
         "requirements": {
           "item": "crystal",
-          "quantity": "2"
+          "quantity": "1"
         }
       },
       "2": {
