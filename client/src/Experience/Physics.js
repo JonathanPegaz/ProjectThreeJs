@@ -6,7 +6,51 @@ import { threeToCannon, ShapeType } from 'three-to-cannon';
 
 export default class Physics
 {
-    constructor()
+
+    constructor() {
+        this.experience = new Experience()
+        this.time = this.experience.time
+
+        this.worker = new Worker('./Physics-worker.js')
+        this.worker.postMessage({ command: 'init' })
+
+        this.objectsToUpdate = []
+
+        this.worker.onmessage = (event) => {
+            const { command, payload } = event.data;
+                switch (command) {
+                    case 'update':
+                        this.updatePosition(payload)
+                        break;
+                    default:
+                        console.error('Commande inconnue :', command);
+                }
+        }
+    }
+
+    createBoxShape(mesh) {
+        this.worker.postMessage({ command: 'createBoxShape', payload: mesh })
+    }
+
+    createTrimeshShape(mesh) {
+        const data = JSON.stringify(mesh)
+        this.worker.postMessage({ command: 'createTrimeshShape', payload: data })
+    }
+
+    update() {
+        this.worker.postMessage({ command: 'update', payload: this.time.delta })
+    }
+
+    updatePosition(payload) {
+        const { position, quaternion, id } = payload
+        console.log(payload)
+        const object = this.objectsToUpdate.find((object) => object.id === id)
+        object.position.copy(position)
+        object.quaternion.copy(quaternion)
+    }
+
+
+    /*constructor()
     {
         this.experience = new Experience()
         this.scene = this.experience.scene
@@ -100,5 +144,5 @@ export default class Physics
         this.debug = null
 
         this.objectsToUpdate = []
-    }
+    }*/
 }
