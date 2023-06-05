@@ -93,6 +93,10 @@ export default class World
             //this.meshsDisplayUpdate()
             this.experience.renderer.instance.shadowMap.needsUpdate = true
         }
+
+        if (this[asset].isBloom) {
+            this.experience.postProcessing.setSelectObjectsForBloom(this[asset].meshs)
+        }
     }
 
     update()

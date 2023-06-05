@@ -20,6 +20,7 @@ export default class Model3D extends InteractiveObject{
         this.materials = []
         this.isAnimated = data.isAnimated
         this.setModel()
+        this.isBloom = true
     }
 
     setModel() {
@@ -37,6 +38,7 @@ export default class Model3D extends InteractiveObject{
                 interactive = this.setInteraction(child)
                 child.castShadow = this.castShadow
                 this.meshs.push(child)
+                child.renderOrder = -1
             }
             child.matrixAutoUpdate = false
             child.matrixWorldAutoUpdate = false

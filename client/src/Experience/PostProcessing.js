@@ -1,8 +1,6 @@
 import * as THREE from 'three'
 import Experience from './Experience.js'
-import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer.js'
 import { ShaderPass } from 'three/examples/jsm/postprocessing/ShaderPass.js'
-import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
 import { GlitchPass } from 'three/addons/postprocessing/GlitchPass.js';
 import { RGBShiftShader } from 'three/examples/jsm/shaders/RGBShiftShader.js'
 import {DisplacementShader, TintShader} from "./Shaders/PostProcessingShaders.js";
@@ -10,6 +8,15 @@ import {DotScreenPass} from "three/addons/postprocessing/DotScreenPass.js";
 import {GammaCorrectionShader} from "three/addons/shaders/GammaCorrectionShader.js";
 import {SMAAPass} from "three/addons/postprocessing/SMAAPass.js";
 import {UnrealBloomPass} from "three/addons/postprocessing/UnrealBloomPass.js";
+import {
+    EffectPass,
+    SelectiveBloomEffect,
+    Selection,
+    BloomEffect,
+    SMAAEffect,
+    EffectComposer,
+    RenderPass
+} from "postprocessing";
 
 export default class PostProcessing
 {
@@ -23,6 +30,8 @@ export default class PostProcessing
         this.debug = this.experience.debug
         this.resources = this.experience.resources
 
+        this.selectedObjectsForBloom = new Selection()
+
         // Debug
         if(this.debug.active)
         {
@@ -31,14 +40,6 @@ export default class PostProcessing
         }
 
         this.setInstance()
-
-        this.resources.on('ready', () => {
-            // Wait a little
-            window.setTimeout(() =>
-            {
-                this.setupEffect()
-            }, 1000)
-        })
     }
 
     setInstance()
@@ -53,7 +54,6 @@ export default class PostProcessing
 
         this.instance = new EffectComposer(this.renderer.instance, renderTarget)
         this.instance.setSize(this.sizes.width, this.sizes.height)
-        this.instance.setPixelRatio(Math.min(this.sizes.pixelRatio, 2))
     }
 
     setupEffect() {
@@ -61,7 +61,32 @@ export default class PostProcessing
         const renderPass = new RenderPass(this.scene, this.camera.instance)
         this.instance.addPass(renderPass)
 
-        // Dot screen pass
+        // Selective bloom pass
+        const selectiveBloomEffect = new SelectiveBloomEffect(this.scene, this.camera.instance, {
+            intensity: 1.5,
+            mipmapBlur: true,
+            luminanceThreshold: 0.1,
+            luminanceSmoothing: 0.75,
+            radius: 0.5,
+        })
+        selectiveBloomEffect.selection = this.selectedObjectsForBloom
+        console.log(this.selectedObjectsForBloom)
+
+        const effectPass = new EffectPass(this.camera.instance, selectiveBloomEffect)
+        effectPass.renderToScreen = true
+        this.instance.addPass(effectPass)
+
+
+
+        // Unreal bloom pass
+        /*const unrealBloomPass = new UnrealBloomPass()
+        unrealBloomPass.enabled = true
+        this.instance.addPass(unrealBloomPass)
+        unrealBloomPass.strength = 0.3
+        unrealBloomPass.radius = 1
+        unrealBloomPass.threshold = 0.6*/
+
+       /* // Dot screen pass
         const dotScreenPass = new DotScreenPass()
         dotScreenPass.enabled = false
         this.instance.addPass(dotScreenPass)
@@ -151,13 +176,19 @@ export default class PostProcessing
             this.debugFolderDisplacement = this.debugFolder.addFolder('Displacement')
             this.debugFolderDisplacement.add(displacementPass, 'enabled').name('enabled')
             this.debugFolderDisplacement.add(displacementPass.material.uniforms.uTime, 'value').min(0).max(1).step(0.001).name('time')
-        }
+        }*/
+    }
+
+    setSelectObjectsForBloom(meshs) {
+        meshs.forEach(mesh => {
+            this.selectedObjectsForBloom.add(mesh)
+        })
     }
 
     resize()
     {
         this.instance.setSize(this.sizes.width, this.sizes.height)
-        this.instance.setPixelRatio(Math.min(this.sizes.pixelRatio, 2))
+/*        this.instance.setPixelRatio(Math.min(this.sizes.pixelRatio, 2))*/
     }
 
     update()
