@@ -119,6 +119,7 @@ export default class HTMLAnnouncement {
     this.duration = null;
     this.waitingQueue = [];
     this.waitingQueueActive = null;
+    this.type = null;
     clearTimeout(this.queueTimeout);
   }
 }

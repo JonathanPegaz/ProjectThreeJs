@@ -290,5 +290,11 @@ export default class Npc extends EventEmitter{
         this.name = null
         this.dialog = null
         this.hitbox = null
+
+        this.marker.destroy()
+        this.marker = null
+
+        this.interactMarker.destroy()
+        this.interactMarker = null
     }
 }

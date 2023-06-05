@@ -89,6 +89,9 @@ export default class QuestWindow extends EventEmitter{
   destroy() {
     this.quest = null
     this.experience.world.quest.off("update")
+    this.toggleButton.removeEventListener("click" , () => {})
+    this.toggleButton = null
+    this.questWindow = null
   }
 
   wait(callback) {
