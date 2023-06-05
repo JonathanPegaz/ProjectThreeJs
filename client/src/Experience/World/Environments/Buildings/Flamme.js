@@ -30,12 +30,12 @@ export default class Flamme extends Model3D
 
 
 
-        child.material = new MeshStandardMaterial({
+        child.material = new MeshToonMaterial({
             ...child.material,
-            type: 'MeshStandardMaterial',
+            type: 'MeshToonMaterial',
             color: 0xff3300,
-            emissive: 0xff3300,
-            emissiveIntensity: 5,
+            emissiveColor: 0xff0000 ,
+            emissiveIntensity: 20,
             emissiveMap: child.material.map,
         })
 

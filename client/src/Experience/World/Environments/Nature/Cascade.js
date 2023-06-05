@@ -1,5 +1,13 @@
 import Model3D from "../../Model3D.js";
-import {FrontSide, LinearFilter, MeshBasicMaterial, MeshToonMaterial, PositionalAudio, VideoTexture} from "three";
+import {
+    DoubleSide,
+    FrontSide,
+    LinearFilter,
+    MeshBasicMaterial,
+    MeshToonMaterial,
+    PositionalAudio,
+    VideoTexture
+} from "three";
 import {PositionalAudioHelper} from "three/addons/helpers/PositionalAudioHelper.js";
 
 export default class Cascade extends Model3D
@@ -11,7 +19,7 @@ export default class Cascade extends Model3D
 
     setMaterial(child) {
         let video = document.getElementById('video')
-        video.play()
+
         this.videoTexture = new VideoTexture(video)
 
         this.videoTexture.minFilter = LinearFilter
@@ -19,9 +27,11 @@ export default class Cascade extends Model3D
 
         child.material = new MeshToonMaterial({
             map: this.videoTexture,
-            side: FrontSide,
+            side: DoubleSide,
             toneMapped: false,
         })
+
+        video.play()
 
         // create the PositionalAudio object (passing in the listener)
         this.sound = new PositionalAudio( this.experience.camera.audioListener );

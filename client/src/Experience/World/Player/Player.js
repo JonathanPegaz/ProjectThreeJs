@@ -40,11 +40,15 @@ export default class Player {
             if(child instanceof Mesh)
             {
                 child.castShadow = false
+                child.receiveShadow = true
                 child.material = new MeshToonMaterial({
                     ...child.material,
                     side: FrontSide,
                     type: 'MeshToonMaterial',
                 })
+                if(child.name == "body_1") {
+                    child.material.color.setHex(0x0e1111)
+                }
             }
         })
 
@@ -58,7 +62,7 @@ export default class Player {
         const shadow = new Mesh( shadowgeo, shadowmat );
         shadow.renderOrder = -1;
         shadow.rotation.x = - Math.PI / 2;
-        shadow.position.y = -0.35;
+        shadow.position.y = -0.38;
         this.object.add( shadow );
 
        /*// Fake shadow
@@ -79,11 +83,13 @@ export default class Player {
     setAnimation()
     {
         this.animations = {}
-        this.resource.animations.push(this.resources.items.player_idle.animations[0])
-        this.resource.animations.push(this.resources.items.player_walking.animations[0])
-        this.resource.animations.push(this.resources.items.player_picking.animations[0])
-        this.resource.animations.push(this.resources.items.player_crouching.animations[0])
+        this.resource.animations.push(this.resources.items.player_idle_nocape.animations[0])
+        this.resource.animations.push(this.resources.items.player_walking_nocape.animations[0])
+        this.resource.animations.push(this.resources.items.player_picking_nocape.animations[0])
+        //this.resource.animations.push(this.resources.items.player_crouching.animations[0])
         this.mixer = new AnimationMixer(this.model)
+
+        console.log(this.resource)
 
         // action
         this.animations.idle = {
@@ -106,10 +112,10 @@ export default class Player {
             action: this.mixer.clipAction(this.resource.animations[3])
         }
 
-        this.animations.crouch = {
+        /*this.animations.crouch = {
             clip: this.resource.animations[4],
             action: this.mixer.clipAction(this.resource.animations[4])
-        }
+        }*/
     }
 
     destroy() {

@@ -47,6 +47,7 @@ import FruitRamasse from "./Nature/FruitRamasse.js";
 import PortailIntroShader from "./Buildings/PortailIntroShader.js";
 import Flamme from "./Buildings/Flamme.js";
 import Torch from "./Buildings/Torch.js";
+import Vent1 from "./Nature/Vent1.js";
 
 export const assets = [
     // display : 0 = small, 1 = medium, 2 = big
@@ -483,6 +484,15 @@ export const assets = [
     {
         type: Torch,
         resource: 'Torch',
+        hasPhysics: false,
+        display: 0,
+        castShadow: false,
+        isAnimated: true,
+        isInteractive: false
+    },
+    {
+        type: Vent1,
+        resource: 'Vent1',
         hasPhysics: false,
         display: 0,
         castShadow: false,
