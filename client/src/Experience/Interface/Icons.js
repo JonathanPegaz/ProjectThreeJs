@@ -16,14 +16,14 @@ export default class Icons {
 
     setHTML() {
         this.iconImage = document.createElement('img');
-        this.iconImage.src = 'icons/'+ this.icons +'.png';
+        this.iconImage.src = 'icons/'+ this.icons +'.svg';
         this.iconImage.classList.add('icon-image');
         this.iconImage.style.transform = `scale(0.5)`
     }
 
     setCSS2DObject() {
         this.iconLabel = new CSS2DObject(this.iconImage);
-        this.iconLabel.position.set(0, 1.5, 0);
+        this.iconLabel.position.set(0, 1.2, 0);
         this.target.object.add(this.iconLabel);
     }
 
@@ -33,7 +33,7 @@ export default class Icons {
     }
 
     change(source) {
-        this.iconImage.src = 'icons/'+ source +'.png';
+        this.iconImage.src = 'icons/'+ source +'.svg';
     }
 
     visible(isVisible) {

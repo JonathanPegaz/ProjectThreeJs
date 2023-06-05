@@ -7,6 +7,19 @@ export default class QuestWindow extends EventEmitter{
     this.experience = new Experience()
 
     this.quest = null
+    this.questWindow = document.getElementById("quest")
+    this.toggleButton = document.getElementById("quest-toggle-btn")
+
+    this.toggleButton.addEventListener("click", () => {
+      this.questWindow.classList.toggle("quest-hidden");
+      const icon = this.toggleButton.querySelector("img");
+      if (this.questWindow.classList.contains("quest-hidden")) {
+        icon.src = "icons/quest_icon.svg";
+      } else {
+        icon.src = "icons/close_icon.svg";
+      }
+    })
+
 
     this.init()
   }
@@ -25,17 +38,18 @@ export default class QuestWindow extends EventEmitter{
   }
 
   updateUI() {
-    const questWindow = document.getElementById("quest")
-    questWindow.classList.remove("quest-active")
-    questWindow.innerHTML = ""
+    this.questWindow.classList.remove("quest-active")
+    const quesContainer = this.questWindow.querySelector(".quest-container")
+    quesContainer.innerHTML = ""
+
     if (Object.keys(this.quest.activeQuests).length === 0) return
 
-    questWindow.classList.add("quest-active")
+    this.questWindow.classList.add("quest-active")
     let questList = ""
     Object.entries(this.quest.activeQuests).forEach(([id, quest]) => {
       questList += this.setUIQuest(quest)
     });
-    questWindow.innerHTML = questList
+    quesContainer.innerHTML += questList
   }
 
   setUIQuest(quest) {
@@ -63,7 +77,7 @@ export default class QuestWindow extends EventEmitter{
                 <span class="quest-task-name">${task.name}</span>
                 <span class="quest-task-goal">${task.goal.progress} / ${task.goal.objective}</span>
                 <div class="quest-task-mark">
-                  <img src="icons/ui-quest-mark-check.svg" alt="hexagon">
+                  <img src="icons/ui-quest-mark-check-blue.svg" alt="hexagon">
                 </div>
               </li>`
             }).join('')}
@@ -75,6 +89,9 @@ export default class QuestWindow extends EventEmitter{
   destroy() {
     this.quest = null
     this.experience.world.quest.off("update")
+    this.toggleButton.removeEventListener("click" , () => {})
+    this.toggleButton = null
+    this.questWindow = null
   }
 
   wait(callback) {

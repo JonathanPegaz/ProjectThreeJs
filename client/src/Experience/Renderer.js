@@ -88,8 +88,8 @@ export default class Renderer
             this.instance.clearDepth()
             this.instance.setScissorTest(true)
 
-            this.instance.setScissor(this.sizes.width - this.sizes.width / 4, this.sizes.height - this.sizes.height / 4, this.sizes.width / 4, this.sizes.height / 4)
-            this.instance.setViewport(this.sizes.width - this.sizes.width / 4, this.sizes.height - this.sizes.height / 4, this.sizes.width / 4, this.sizes.height / 4)
+            this.instance.setScissor(this.sizes.width - this.sizes.width + 16, this.sizes.height - this.sizes.height / 4 - 16, this.sizes.width / 4, this.sizes.height / 4)
+            this.instance.setViewport(this.sizes.width - this.sizes.width + 16, this.sizes.height - this.sizes.height / 4 - 16, this.sizes.width / 4, this.sizes.height / 4)
             this.instance.render(this.scene, this.experience.minimap.instance)
             this.instance.setScissorTest(false)
         }

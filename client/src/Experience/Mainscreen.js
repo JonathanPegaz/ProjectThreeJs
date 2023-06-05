@@ -1,72 +1,84 @@
 import EventEmitter from "./Utils/EventEmitter.js";
+import Experience from "./Experience.js";
 
 export default class Mainscreen extends EventEmitter{
     constructor() {
         super()
+        this.experience = new Experience()
+        this.debug = this.experience.debug
         this.pseudo = null
+        this.loadingScreen = document.querySelector('#loadingScreen')
+        this.steps = {
+            landing: () => {
+                const element = document.querySelector('.loadingScreen-landing')
+                element.classList.add('loadingScreen--active')
+                element.querySelector('.loadingScreen-landing__button-login').addEventListener('click', () => {
+                    element.classList.remove('loadingScreen--active')
+                    //this.steps.login()
+                    this.steps.starting()
+                })
+                element.querySelector('.loadingScreen-register__button-register').addEventListener('click', () => {
+                    element.classList.remove('loadingScreen--active')
+                    this.steps.registration()
+                })
+            },
+            login: () => {
+                const element = document.querySelector('.loadingScreen-login')
+                element.classList.add('loadingScreen--active')
+                this.experience.alert.type.SYSTEM('Vous êtes maintenant connecté.', 4000, 'check_icon')
+            },
+            registration: () => {
+                const element = document.querySelector('.loadingScreen-registration')
+                element.classList.add('loadingScreen--active')
+                element.querySelector('.loadingScreen-registration-return').addEventListener('click', () => {
+                    element.classList.remove('loadingScreen--active')
+                    this.steps.landing()
+                })
+                element.querySelector('.loadingScreen-registration__form').addEventListener('submit', (event) => {
+                    event.preventDefault()
+                    element.classList.remove('loadingScreen--active')
+                    this.steps.starting()
+                    this.experience.alert.addQueue(this.experience.alert.type.SYSTEM,
+                      'félicitations ! votre compte a bien été créé.',
+                      4000,
+                      'check_icon'
+                    )
+                })
+            },
+            starting: () => {
+                const element = document.querySelector('.loadingScreen-starting')
+                element.classList.add('loadingScreen--active')
+                element.querySelector('.loadingScreen-starting__form').addEventListener('submit', (event) => {
+                    event.preventDefault()
+                    element.classList.remove('loadingScreen--active')
+                    this.pseudo = element.querySelector('#register-form-pseudo').value
+                    this.trigger('pseudo-entered')
+                    let elements = document.querySelectorAll('.loading-hidden');
+                    for (let i = 0; i < elements.length; i++) {
+                        elements[i].classList.remove('loading-hidden');
+                    }
+                    this.experience.alert.type.SYSTEM('Bienvenue initié !', 4000, 'tchat_icon')
+                    this.destroy()
+                })
+            }
+        }
     }
 
     showInput()
     {
-        // Ajouter l'input pour rentrer le pseudo
-        const inputContainer = document.createElement('div')
-        inputContainer.style.position = 'absolute'
-        inputContainer.style.top = '50%'
-        inputContainer.style.left = '50%'
-        inputContainer.style.transform = 'translate(-50%, -50%)'
-        inputContainer.style.display = 'flex'
-        inputContainer.style.flexDirection = 'column'
-        inputContainer.style.alignItems = 'center'
-
-        const inputLabel = document.createElement('label')
-        inputLabel.innerText = 'Entrez votre pseudo :'
-        inputLabel.style.marginBottom = '10px'
-        inputLabel.style.fontFamily = 'Arial, sans-serif'
-        inputLabel.style.fontSize = '24px'
-        inputLabel.style.color = 'white'
-
-        const inputElement = document.createElement('input')
-        inputElement.type = 'text'
-        inputElement.style.width = '200px'
-        inputElement.style.padding = '10px'
-        inputElement.style.borderRadius = '5px'
-        inputElement.style.border = 'none'
-        inputElement.style.background = '#555555'
-        inputElement.style.color = 'white'
-        inputElement.style.fontFamily = 'Arial, sans-serif'
-        inputElement.style.fontSize = '18px'
-        inputElement.style.textAlign = 'center'
-
-        const submitButton = document.createElement('button')
-        submitButton.type = 'submit'
-        submitButton.innerText = 'Valider'
-        submitButton.style.padding = '10px'
-        submitButton.style.marginTop = '20px'
-        submitButton.style.borderRadius = '5px'
-        submitButton.style.border = 'none'
-        submitButton.style.background = '#555555'
-        submitButton.style.color = 'white'
-        submitButton.style.fontFamily = 'Arial, sans-serif'
-        submitButton.style.fontSize = '18px'
-        submitButton.style.cursor = 'pointer'
-
-        this.form = document.createElement('form')
-
-        inputContainer.appendChild(inputLabel)
-        inputContainer.appendChild(inputElement)
-        inputContainer.appendChild(submitButton)
-        this.form.appendChild(inputContainer)
-        document.body.appendChild(this.form)
-
-        this.form.addEventListener('submit', (event) => {
-            event.preventDefault();
-            this.pseudo = inputElement.value;
-            this.trigger('pseudo-entered')
-            this.destroy()
-        });
+        if (this.debug.active) {
+            this.steps.starting()
+        } else {
+            this.steps.landing()
+        }
     }
 
     destroy() {
-        this.form.remove()
+        this.steps = null
+        this.pseudo = null
+        if (this.loadingScreen !== null) {
+            this.loadingScreen.remove()
+            this.loadingScreen = null
+        }
     }
 }

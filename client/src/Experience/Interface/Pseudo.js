@@ -30,7 +30,7 @@ export default class Pseudo {
 
     setPlayerPseudo() {
         this.pseudoLabel = new CSS2DObject(this.nameContainer);
-        this.pseudoLabel.position.set(0, 1, 0);
+        this.pseudoLabel.position.set(0, .8, 0);
         this.target.object.add(this.pseudoLabel);
 
     }

@@ -19,9 +19,8 @@ export default class HTMLAnnouncement {
     this.duration = 2000;
     this.type = {
       AREA: (message, duration) => this.area(message, duration),
-      ALERT: (message, duration) => this.alert(message, duration),
-      KILL: (message, duration) => this.kill(message, duration),
-      QUEST: (message, duration) => this.quest(message, duration),
+      SYSTEM: (message, duration, icon) => this.system(message, duration, icon),
+      QUEST: (message, duration, icon) => this.quest(message, duration, icon),
     };
   }
 
@@ -29,39 +28,50 @@ export default class HTMLAnnouncement {
     return new Promise((resolve) => {
       const areaInterface = this.interface.querySelector('.announcement-area')
       areaInterface.innerHTML = '<h1 class="announcement-content-h1">' + message + '</h1>';
-      areaInterface.classList.add('announcement-active');
+      areaInterface.classList.toggle('announcement-active');
       setTimeout(() => {
-        this.interface.classList.remove('announcement-active');
-        this.interface.querySelector('.announcement-area').innerHTML = '';
+        areaInterface.classList.toggle('announcement-active');
+        areaInterface.innerHTML = '';
         resolve(true);
       }, duration);
     });
   }
 
-  alert(message, duration) {
+  system(message, duration, icon = null) {
     return new Promise((resolve) => {
+      const areaInterface = this.interface.querySelector('.announcement-system')
+
+      const img = icon ? `<img src="icons/${icon}.svg" alt="icon">` : ''
+      areaInterface.innerHTML = `
+        <div class="announcement-alert__content">
+            ${img}
+            <p class="announcement-alert__message">${message}</p>
+        </div>
+      `;
+
+      areaInterface.classList.toggle('announcement-active');
       setTimeout(() => {
+        areaInterface.classList.toggle('announcement-active');
+        areaInterface.innerHTML = '';
         resolve(true);
       }, duration);
     });
   }
 
-  kill(message, duration) {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        resolve(true);
-      }, duration);
-    });
-  }
-
-  quest(message, duration) {
+  quest(message, duration, icon = null) {
     return new Promise((resolve) => {
       const areaInterface = this.interface.querySelector('.announcement-quest')
-      areaInterface.innerHTML = '<h1 class="announcement-content-h1">' + message + '</h1>';
+      const img = icon ? `<img src="icons/${icon}.svg" alt="icon">` : ''
+      areaInterface.innerHTML = `
+        <div class="announcement-alert__content">
+            ${img}
+            <p class="announcement-alert__message">${message}</p>
+        </div>
+      `;
       areaInterface.classList.add('announcement-active');
       setTimeout(() => {
-        this.interface.classList.remove('announcement-active');
-        this.interface.querySelector('.announcement-quest').innerHTML = '';
+        areaInterface.classList.remove('announcement-active');
+        areaInterface.innerHTML = '';
         resolve(true);
       }, duration);
     });
@@ -109,6 +119,7 @@ export default class HTMLAnnouncement {
     this.duration = null;
     this.waitingQueue = [];
     this.waitingQueueActive = null;
+    this.type = null;
     clearTimeout(this.queueTimeout);
   }
 }

@@ -162,8 +162,6 @@ export default class World
         this.triggerZone = null
         this.quest.destroy()
         this.quest = null
-        this.htmlAnnouncement.destroy()
-        this.htmlAnnouncement = null
         this.collectZone.destroy()
         this.collectZone = null
         this.respawn.destroy()

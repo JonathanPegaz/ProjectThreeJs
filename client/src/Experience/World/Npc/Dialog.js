@@ -23,31 +23,24 @@ export default class Dialog {
     }
 
     setHTML() {
+
+        const htmlString = `
+          <div class="dialog-content">
+              <div class="dialog-chat-icon">
+                <img src="icons/tchat_icon.svg" alt="tchat">  
+              </div>
+              <div class="message-container">
+                <p id="dialog-text" class="dialog-text"></p>
+              </div>
+              <div class="action-container">
+                <img src="icons/tchat_arrow_icon.svg" alt="next">
+              </div>
+          </div>
+        `
         this.dialogContainer = document.createElement('div');
         this.dialogContainer.id = 'dialog-container';
         this.dialogContainer.classList.add('dialog-container');
-
-
-        this.dialogText = document.createElement('p');
-        this.dialogText.id = 'dialog-text';
-        this.dialogText.classList.add('dialog-text');
-
-        this.dialogContainer.appendChild(this.dialogText);
-
-        this.actionContainer = document.createElement('div');
-        this.actionContainer.classList.add('action-container');
-
-
-        this.actionImage = document.createElement('img');
-        this.actionImage.src = 'icons/f-key-50.png';
-        this.actionImage.classList.add('action-image');
-        this.actionContainer.appendChild(this.actionImage);
-
-        this.actionIcon = document.createElement('i');
-        this.actionIcon.classList.add('fas', 'fa-comments',  'action-icon');
-        this.actionContainer.appendChild(this.actionIcon);
-
-        this.dialogContainer.appendChild(this.actionContainer);
+        this.dialogContainer.innerHTML = htmlString;
     }
 
     setCSS2DObject() {
@@ -57,8 +50,9 @@ export default class Dialog {
     }
 
     addDialog() {
-        this.dialogText.innerHTML = ''
-        this.dialogText.innerHTML = this.getLine()
+        const dialogText = this.dialogContainer.querySelector('#dialog-text')
+        dialogText.innerHTML = ''
+        dialogText.innerHTML = this.getLine()
     }
 
     getLine() {
