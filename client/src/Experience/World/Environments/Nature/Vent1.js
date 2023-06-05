@@ -12,7 +12,6 @@ export default class Vent1 extends Model3D
         super.setModel();
 
         this.model.children[0].geometry.boundingSphere.center.set(-100, 15, -18)
-        console.log(this.model)
     }
 
     setMaterial(child) {
