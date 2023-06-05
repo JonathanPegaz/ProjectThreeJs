@@ -2,7 +2,7 @@ import Model3D from "../../Model3D.js";
 import Experience from "../../../Experience.js";
 import QuestMarker from "../../../Interface/QuestMarker.js";
 import * as THREE from "three";
-import {Mesh, MeshBasicMaterial, MeshStandardMaterial, PlaneGeometry} from "three";
+import {Mesh, MeshBasicMaterial, MeshStandardMaterial, MeshToonMaterial, PlaneGeometry} from "three";
 
 export default class Crystal extends Model3D
 {
@@ -42,11 +42,11 @@ export default class Crystal extends Model3D
     }
 
     setMaterial(child) {
-        child.material = new MeshStandardMaterial({
+        child.material = new MeshToonMaterial({
             ...child.material,
-            type: 'MeshStandardMaterial',
-            emissive: 0xffffff,
-            emissiveIntensity: 5,
+            type: 'MeshToonMaterial',
+            emissiveColor: 0xffffff,
+            emissiveIntensity: 20,
             emissiveMap: child.material.map,
         })
     }

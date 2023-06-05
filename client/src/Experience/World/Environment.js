@@ -32,8 +32,8 @@ export default class Environment
     setSunLight()
     {
         //this.sunLight = new THREE.DirectionalLight('#001624', 4)
-        this.sunLight = new DirectionalLight('#ffffff', 4)
-        this.sunLight.position.set(0, 90, 30)
+        this.sunLight = new DirectionalLight('#ffee50', 4)
+        this.sunLight.position.set(0, 50, 30)
         this.sunLight.castShadow = true
         this.sunLight.shadow.camera.far = 300
         this.sunLight.shadow.mapSize.set(16384, 16384)
@@ -161,7 +161,7 @@ export default class Environment
         this.addOverlay()
 
         this.sunLight.color.setHex(0x001624)
-        this.hemiLight.color.setHex(0x000000)
+        this.hemiLight.color.setHex(0x3b3b3b)
 
         this.environmentMap.texture = this.resources.items.skybox_night
         this.scene.background = this.environmentMap.texture

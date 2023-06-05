@@ -1,6 +1,6 @@
 export default [
     {
-        name: 'skybox',
+        name: 'skyboxOLD',
         type: 'cubeTexture',
         path: [
             'textures/environmentMap/Skybox/FS017/FS017_Day_Cubemap_front.png',
@@ -9,6 +9,18 @@ export default [
             'textures/environmentMap/Skybox/FS017/FS017_Day_Cubemap_down.png',
             'textures/environmentMap/Skybox/FS017/FS017_Day_Cubemap_right.png',
             'textures/environmentMap/Skybox/FS017/FS017_Day_Cubemap_left.png'
+        ]
+    },
+    {
+        name: 'skybox',
+        type: 'cubeTexture',
+        path: [
+            'textures/environmentMap/Skybox/px.png',
+            'textures/environmentMap/Skybox/nx.png',
+            'textures/environmentMap/Skybox/py.png',
+            'textures/environmentMap/Skybox/ny.png',
+            'textures/environmentMap/Skybox/pz.png',
+            'textures/environmentMap/Skybox/nz.png'
         ]
     },
     {
@@ -106,7 +118,7 @@ export default [
     {
         name: 'player',
         type: 'gltfModel',
-        path: 'models/perso.gltf'
+        path: 'models/Test-all-anims-no-cape.glb'
     },
     {
         name: 'water',
@@ -401,5 +413,10 @@ export default [
         name: 'crystal_texture',
         type: 'texture',
         path: 'icons/items/diamond.png'
+    },
+    {
+        name:'Vent1',
+        type:'gltfModel',
+        path:'models/vent1.glb'
     }
 ]
