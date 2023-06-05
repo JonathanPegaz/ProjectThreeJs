@@ -25,33 +25,33 @@ export default class Model3D extends InteractiveObject{
     setModel() {
         const file = this.experience.resources.items[this.resource]
 
-                // set model
-                this.model = file.scene
-                let interactive = false
-                this.model.traverse((child) =>
-                {
-                    if(child instanceof Mesh)
-                    {
-                        this.setMaterial(child)
-                        this.setPhysicsMeshs(child)
-                        interactive = this.setInteraction(child)
-                        child.castShadow = this.castShadow
-                        this.meshs.push(child)
-                    }
-                    child.matrixAutoUpdate = false
-                    child.matrixWorldAutoUpdate = false
-                })
-                if (interactive) {
-                    this.add()
-                }
-
-                // set animations
-                this.animations = file.animations
-                if (this.animations.length > 0) {
-                    this.setAnimation()
-                    this.isAnimated = true
-                }
+        // set model
+        this.model = file.scene
+        let interactive = false
+        this.model.traverse((child) =>
+        {
+            if(child instanceof Mesh)
+            {
+                this.setMaterial(child)
+                this.setPhysicsMeshs(child)
+                interactive = this.setInteraction(child)
+                child.castShadow = this.castShadow
+                this.meshs.push(child)
             }
+            child.matrixAutoUpdate = false
+            child.matrixWorldAutoUpdate = false
+        })
+        if (interactive) {
+            this.add()
+        }
+
+        // set animations
+        this.animations = file.animations
+        if (this.animations.length > 0) {
+            this.setAnimation()
+            this.isAnimated = true
+        }
+    }
 
     setMaterial(child) {
         // check if child material name already exist in materials

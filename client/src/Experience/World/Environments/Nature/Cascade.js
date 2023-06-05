@@ -24,15 +24,13 @@ export default class Cascade extends Model3D
         })
 
         // create the PositionalAudio object (passing in the listener)
-        const sound = new PositionalAudio( this.experience.camera.audioListener );
-        sound.position.set(child.geometry.boundingSphere.center.x, child.geometry.boundingSphere.center.y, child.geometry.boundingSphere.center.z)
-        sound.setBuffer( this.experience.resources.items.Waterfall_audio );
-        sound.setRefDistance(0.1)
-        sound.setLoop(true)
-        sound.setVolume(1)
-        sound.play()
-
-        this.model.add( sound );
+        this.sound = new PositionalAudio( this.experience.camera.audioListener );
+        this.sound.position.set(child.geometry.boundingSphere.center.x, child.geometry.boundingSphere.center.y, child.geometry.boundingSphere.center.z)
+        this.sound.setBuffer( this.experience.resources.items.Waterfall_audio );
+        this.sound.setRefDistance(0.3)
+        this.sound.setLoop(true)
+        this.sound.setVolume(1)
+        this.model.add( this.sound );
     }
 
     destroy() {
@@ -42,6 +40,7 @@ export default class Cascade extends Model3D
             if (child.type === 'PositionalAudio') {
                 child.stop()
                 child.remove()
+                child = null
             }
         })
         super.destroy();

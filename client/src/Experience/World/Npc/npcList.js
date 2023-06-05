@@ -48,6 +48,10 @@ export default [
             'Bonjour, je suis Yann',
             'Je suis un autre PNJ',
         ],
+        travelPoints: [
+            {x: -72, z: -17},
+            {x: -80, z: -17},
+        ],
         quest: null,
         animations_type: 'pnj'
     }

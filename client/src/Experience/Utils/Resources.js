@@ -26,10 +26,6 @@ export default class Resources extends EventEmitter
 
     setLoaders()
     {
-        // Overlay
-        // const overlayGeometry = new PlaneGeometry(2, 2, 1, 1)
-        // const overlay = new Mesh(overlayGeometry, overlayMaterial)
-        // this.scene.add(overlay)
 
         // add Html home video full screen
         this.homeVideoDiv = document.createElement('div')
@@ -180,11 +176,6 @@ export default class Resources extends EventEmitter
         {
             this.trigger('ready')
         }
-    }
-
-    removeOverlay() {
-        // Animate overlay
-        gsap.to(overlayMaterial.uniforms.uAlpha, { duration: 3, value: 0, delay: 1 })
     }
 
     destroy() {
