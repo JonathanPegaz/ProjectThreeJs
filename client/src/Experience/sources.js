@@ -15,12 +15,12 @@ export default [
         name: 'skybox_night',
         type: 'cubeTexture',
         path: [
-            'textures/environmentMap/Skybox/FS017/FS017_Night_Cubemap_front.png',
-            'textures/environmentMap/Skybox/FS017/FS017_Night_Cubemap_back.png',
-            'textures/environmentMap/Skybox/FS017/FS017_Night_Cubemap_up.png',
-            'textures/environmentMap/Skybox/FS017/FS017_Night_Cubemap_down.png',
-            'textures/environmentMap/Skybox/FS017/FS017_Night_Cubemap_right.png',
-            'textures/environmentMap/Skybox/FS017/FS017_Night_Cubemap_left.png'
+            'textures/environmentMap/Skybox/FS003/FS003_Night_Cubemap_front.png',
+            'textures/environmentMap/Skybox/FS003/FS003_Night_Cubemap_back.png',
+            'textures/environmentMap/Skybox/FS003/FS003_Night_Cubemap_up.png',
+            'textures/environmentMap/Skybox/FS003/FS003_Night_Cubemap_down.png',
+            'textures/environmentMap/Skybox/FS003/FS003_Night_Cubemap_right.png',
+            'textures/environmentMap/Skybox/FS003/FS003_Night_Cubemap_left.png'
         ]
     },
     {
@@ -116,7 +116,7 @@ export default [
     {
         name: 'islandHigh',
         type: 'gltfModel',
-        path: 'models/Ile.glb'
+        path: 'models/island.glb'
     },
     // {
     //     name: 'flowers',
@@ -373,8 +373,33 @@ export default [
         path: 'models/fruit_ramasse.glb'
     },
     {
+        name: 'Flamme',
+        type: 'gltfModel',
+        path: 'models/flamme.glb'
+    },
+    {
+        name: 'Torch',
+        type: 'gltfModel',
+        path: 'models/torch.glb'
+    },
+    {
         name: 'Waterfall_audio',
         type: 'audio',
         path: 'audio/waterfall.mp3'
+    },
+    {
+        name: 'roundshadow',
+        type: 'texture',
+        path: 'textures/roundshadow.png'
+    },
+    {
+        name: 'carotte_texture',
+        type: 'texture',
+        path: 'icons/items/carrot.png'
+    },
+    {
+        name: 'crystal_texture',
+        type: 'texture',
+        path: 'icons/items/diamond.png'
     }
 ]

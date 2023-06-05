@@ -5,7 +5,7 @@ export const overlayMaterial = new ShaderMaterial({
     transparent: true,
     uniforms:
         {
-            uAlpha: { value: 1 }
+            uAlpha: { value: 0 }
         },
     vertexShader: `
         void main()

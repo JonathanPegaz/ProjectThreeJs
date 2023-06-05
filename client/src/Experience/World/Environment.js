@@ -1,5 +1,7 @@
-import * as THREE from 'three'
 import Experience from '../Experience.js'
+import {DirectionalLight, HemisphereLight, Mesh, MeshStandardMaterial, PlaneGeometry, sRGBEncoding} from "three";
+import {overlayMaterial} from "../Shaders/OverlayShaders.js";
+import {gsap} from "gsap";
 
 export default class Environment
 {
@@ -21,12 +23,16 @@ export default class Environment
 
         this.setSunLight()
         this.setEnvironmentMap()
+        // black overlay
+        this.overlayGeometry = new PlaneGeometry(2, 2, 1, 1)
+        this.overlay = new Mesh(this.overlayGeometry, overlayMaterial)
+        this.scene.add(this.overlay)
     }
 
     setSunLight()
     {
         //this.sunLight = new THREE.DirectionalLight('#001624', 4)
-        this.sunLight = new THREE.DirectionalLight('#ffffff', 4)
+        this.sunLight = new DirectionalLight('#ffffff', 4)
         this.sunLight.position.set(0, 90, 30)
         this.sunLight.castShadow = true
         this.sunLight.shadow.camera.far = 300
@@ -40,7 +46,7 @@ export default class Environment
         this.scene.add(this.sunLight)
 
         // add hemisphere light green and blue
-        this.hemiLight = new THREE.HemisphereLight( 0xffffff, 0x444444 );
+        this.hemiLight = new HemisphereLight( 0xffffff, 0x444444 );
         this.hemiLight.position.set( 0, 20, 0 );
         this.scene.add( this.hemiLight );
 
@@ -109,16 +115,16 @@ export default class Environment
         this.environmentMap = {}
         this.environmentMap.intensity = 0.4
         this.environmentMap.texture = this.resources.items.skybox
-        this.environmentMap.texture.encoding = THREE.sRGBEncoding
+        this.environmentMap.texture.encoding = sRGBEncoding
 
         this.scene.background = this.environmentMap.texture
-        this.scene.environment = this.environmentMap.texture
+        //this.scene.environment = this.environmentMap.texture
 
         this.environmentMap.updateMaterials = () =>
         {
             this.scene.traverse((child) =>
             {
-                if(child instanceof THREE.Mesh && child.material instanceof THREE.MeshStandardMaterial)
+                if(child instanceof Mesh && child.material instanceof MeshStandardMaterial)
                 {
                     child.material.envMap = this.environmentMap.texture
                     child.material.envMapIntensity = this.environmentMap.intensity
@@ -152,36 +158,67 @@ export default class Environment
     }
 
     setNight() {
+        this.addOverlay()
+
         this.sunLight.color.setHex(0x001624)
         this.hemiLight.color.setHex(0x000000)
 
         this.environmentMap.texture = this.resources.items.skybox_night
         this.scene.background = this.environmentMap.texture
-        this.scene.environment = this.environmentMap.texture
+        //this.scene.environment = this.environmentMap.texture
         this.experience.scene.fog.color.setHex(0x001624)
         this.experience.world.fireflies.firefliesMaterial.uniforms.uColor.value.setHex(0xe3cf3e)
 
         this.flameLights.forEach(flameLight => {
             flameLight.visible = true
         })
+
+        window.setTimeout(() => {
+            this.removeOverlay()
+        }, 500)
     }
 
     setDay() {
+        this.addOverlay()
+
+        const overlayGeometry = new PlaneGeometry(2, 2, 1, 1)
+        const overlay = new Mesh(overlayGeometry, overlayMaterial)
+        this.scene.add(overlay)
+
         this.sunLight.color.setHex(0xffffff)
         this.hemiLight.color.setHex(0xffffff)
 
         this.environmentMap.texture = this.resources.items.skybox
         this.scene.background = this.environmentMap.texture
-        this.scene.environment = this.environmentMap.texture
+        //this.scene.environment = this.environmentMap.texture
         this.experience.scene.fog.color.setHex(0xffffff)
         this.experience.world.fireflies.firefliesMaterial.uniforms.uColor.value.setHex(0xffffff)
 
         this.flameLights.forEach(flameLight => {
             flameLight.visible = false
         })
+
+        window.setTimeout(() => {
+            this.removeOverlay()
+        }, 500)
+    }
+
+    addOverlay() {
+        // Animate overlay
+        overlayMaterial.uniforms.uAlpha.value = 1
+    }
+
+    removeOverlay() {
+        // Animate overlay
+        gsap.to(overlayMaterial.uniforms.uAlpha, { duration: 3, value: 0, delay: 1 })
     }
 
     destroy() {
+        this.overlay.geometry.dispose()
+        this.overlay.material.dispose()
+        this.scene.remove(this.overlay)
+        this.overlay = null
+
         this.sunLight.dispose()
         this.scene.remove(this.sunLight)
         this.sunLight = null

@@ -18,6 +18,7 @@ import Mainscreen from "./Mainscreen.js";
 import Hud from "./World/Player/Hud/Hud.js";
 import Controls from "./Utils/Controls.js";
 import NpcController from "./World/Npc/NpcController.js";
+import Minimap from "./Interface/Minimap.js";
 
 let instance = null
 
@@ -79,9 +80,10 @@ export default class Experience
             this.npc = new NpcController()
             this.network = new Network()
             this.localPlayer = new LocalPlayer()
-            this.world.meshsDisplayUpdate()
+            this.minimap = new Minimap()
+            if(this.world.Cascade)
+                this.world.Cascade.sound.play()
             this.resources.homeVideoDiv.remove()
-            this.resources.removeOverlay()
         })
 
         // Resize event
@@ -101,6 +103,8 @@ export default class Experience
     {
         this.camera.resize()
         this.renderer.resize()
+        if(this.minimap)
+            this.minimap.resize()
         //this.postProcessing.resize()
     }
 
@@ -159,6 +163,8 @@ export default class Experience
         if(this.hud)
             this.hud.destroy()
         this.camera.destroy()
+        if(this.minimap)
+            this.minimap.destroy()
         this.renderer.destroy()
         //this.postProcessing.destroy()
         this.monitoring.destroy()
