@@ -28,11 +28,11 @@ export default class QuestManager extends EventEmitter{
     quest.on("update", () => {
       this.trigger("update")
     })
-    this.experience.alert.addQueue(this.experience.alert.type.QUEST(
+    this.experience.alert.addQueue(this.experience.alert.type.QUEST,
       "Quête : " + quest.title,
       4000,
       'logo_blue'
-    ))
+    )
     this.trigger("update")
   }
 
@@ -49,11 +49,11 @@ export default class QuestManager extends EventEmitter{
     quest.off("update")
     this.completedQuests[quest.id] = quest
     delete this.activeQuests[quest.id]
-    this.experience.alert.addQueue(this.experience.alert.type.QUEST(
+    this.experience.alert.addQueue(this.experience.alert.type.QUEST,
       "Quête terminée : " +quest.title,
       4000,
       'check_icon'
-    )).then(() => {
+    ).then(() => {
       if (quest.nextQuest !== undefined && quest.nextQuest !== null) {
         this.add(quest.nextQuest)
       }

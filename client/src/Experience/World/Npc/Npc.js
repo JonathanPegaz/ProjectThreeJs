@@ -129,7 +129,7 @@ export default class Npc extends EventEmitter{
             return;
         }
         this.dialog = new Dialog(dialog, this)
-        this.icon.change('commentaires-64')
+        this.icon.change('full_tchat_icon')
         this.experience.controls.on('actionDown', () => {
             if (!this.canInteract)
                 return;
@@ -154,7 +154,7 @@ export default class Npc extends EventEmitter{
                     this.experience.world.quest.add(this.quest.id)
                     this.endDialog = this.quest.endDialog
                     this.experience.world.quest.on('completed', () => {
-                        this.icon.change('commentaires-64')
+                        this.icon.change('full_tchat_icon')
                         this.experience.world.quest.off('completed')
                         this.dialog.dialog = this.endDialog
                     })
@@ -172,7 +172,7 @@ export default class Npc extends EventEmitter{
             return;
 
         this.quest = quest
-        this.icon.change('exclamation-mark-100')
+        this.icon.change('full_quest_icon')
     }
 
     interact(value) {

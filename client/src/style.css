@@ -100,6 +100,10 @@ p {
     line-height: 1.5rem;
 }
 
+button:focus {
+    outline: none;
+}
+
 .loading-hidden {
     display: none !important;
 }
@@ -127,6 +131,25 @@ p {
     font-family: Athena, Roboto, sans-serif;
     font-size: 1.7rem;
     font-weight: 400;
+}
+
+.btn-toggle {
+    background-color: #FFFFFF;
+    border: 2px solid #21B4D6;
+    width: 2.5rem;
+    height: 2.5rem;
+    position: absolute;
+    top: 1rem;
+    border-radius: .5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.btn-toggle >img {
+    width: 50%;
+    height: 50%;
 }
 
 .btn-primary {
@@ -162,10 +185,14 @@ p {
     color: #21B4D6;
     border-radius: .5rem;
     font-size: 1.2rem;
-    font-family: Athena, Roboto, sans-serif;
+    font-family: Fakt, Roboto, sans-serif;
     width: 100%;
     box-sizing: border-box;
     text-transform: none;
+}
+
+.input::placeholder{
+    font-family: Athena, Roboto, sans-serif;
 }
 
 .input-primary {
@@ -358,26 +385,8 @@ input[type="checkbox"]:checked::before {
     position: relative;
 }
 
-#chat>div>div {
-    width: 100%;
-}
-
-#chat #chat-toggle-btn {
-    background-color: #FFFFFF;
-    border: 2px solid #21B4D6;
-    width: 2rem;
-    height: 2rem;
-    position: absolute;
-    right: -3rem;
-    top: 1rem;
-    border-radius: .5rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-#chat #chat-toggle-btn > img {
-    width: 50%;
+#chat-toggle-btn {
+    right: -3.5rem;
 }
 
 #chat .chat-messages-container {
@@ -440,15 +449,31 @@ input[type="checkbox"]:checked::before {
 }
 #quest {
     width: 100%;
+    position: relative;
+    z-index: 100;
+    transition: .2s;
+    display: none;
+}
+#quest.quest-hidden {
+    transform: translateX(calc(100% + 1rem));
+}
+#quest-toggle-btn {
+    left: -3.5rem;
+    top: 0;
+}
+#quest.quest-active {
+    display: flex;
+}
+
+#quest .quest-container>div {
+    background-color: #FFFFFF;
+    border: 3px solid #21B4D6;
     text-align: end;
-    color: #f1f1f1;
+    color: #21B4D6;
     font-weight: 200;
     box-sizing: border-box;
-    padding: 1rem;
     border-radius: 1rem;
-}
-.quest-active {
-    background: linear-gradient(to left, rgb(0, 0, 0), rgba(33, 180, 214, 0));
+    padding: 1rem;
 }
 
 #quest h3 {
@@ -456,7 +481,7 @@ input[type="checkbox"]:checked::before {
     font-weight: 600;
 }
 #quest hr {
-    background: linear-gradient(to left, rgb(255, 255, 255), rgba(0, 0, 0, 0));
+    background: linear-gradient(to left, rgb(33, 180, 214), rgba(0, 0, 0, 0));
     height: 1px;
     border: none;
     width: 100%;
@@ -485,17 +510,18 @@ input[type="checkbox"]:checked::before {
     list-style-position: inside;
     position: relative;
     border-color: #21B4D6;
-    padding-right: 20px;
-    margin-bottom: 10px;
+    margin-bottom: 1rem;
 }
 
 .quest-task-completed {
     list-style-position: inside;
     position: relative;
     border-color: rgba(255, 255, 255, 0.53);
-    color: rgba(255, 255, 255, 0.53);
-    padding-right: 20px;
-    margin-bottom: 10px;
+    color: rgba(33, 180, 214, 0.54);
+}
+
+.quest-task-completed:not(:last-of-type) {
+    margin-bottom: 1rem;
 }
 
 .quest-task-goal {
@@ -523,11 +549,11 @@ input[type="checkbox"]:checked::before {
 }
 
 .quest-marker-container {
-    width: 1.5rem;
-    height: 1.5rem;
+    width: 2.7rem;
+    height: 2.7rem;
     border-radius: 50%;
     background-color: #FFFFFF;
-    border: 2px solid #21B4D6;
+    border: 3px solid #21B4D6;
     position: absolute;
     top: 0;
     left: 0;
@@ -539,6 +565,9 @@ input[type="checkbox"]:checked::before {
 .quest-marker-icon-container {
     width: 65%;
     height: 65%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .interact-marker-container {
@@ -582,7 +611,7 @@ input[type="checkbox"]:checked::before {
 #loot {
     width: 100%;
     text-align: end;
-    color: #f1f1f1;
+    color: #21B4D6;
     font-weight: 200;
     padding: 10px 10px 10px 0;
     max-height: 30%;
@@ -602,39 +631,41 @@ input[type="checkbox"]:checked::before {
     align-items: flex-end;
 }
 
-/*.loot-item {*/
-/*    list-style: none;*/
-/*    width: 5rem;*/
-/*    height: 3rem;*/
-/*    background: linear-gradient(to left, rgb(0 0 0 / 43%), rgba(0, 0, 0, 0));*/
-/*    display: flex;*/
-/*    align-items: center;*/
-/*    justify-content: flex-end;*/
-/*    padding: 1rem;*/
-/*    margin-bottom: .5rem;*/
-/*    opacity: 0;*/
-/*    transform: translateX(100%);*/
-/*    transition: opacity 0.5s ease, transform 0.5s ease;*/
-/*}*/
-
 .loot-item {
     list-style: none;
-    width: 5rem;
-    height: 3rem;
-    background: linear-gradient(to left, rgb(0, 0, 0), rgba(0, 0, 0, 0));
+    height: 2rem;
+    width: 2rem;
+    background-color: #FFFFFF;
     display: flex;
     align-items: center;
-    justify-content: flex-end;
-    padding: 1rem;
+    justify-content: center;
+    padding: .5rem;
     margin-bottom: .5rem;
     opacity: 0;
     transform: translateX(100%);
     transition: opacity 0.5s ease, transform 0.5s ease;
     border-radius: 1rem;
+    border: 3px solid #21B4D6;
 }
 
 .loot-item img {
-    width: 3rem;
+    width: 2rem;
+}
+
+.loot-item-nb {
+    position: absolute;
+    background-color: #FFFFFF;
+    top: -.5rem;
+    left: -.5rem;
+    height: 1rem;
+    border-radius: 2rem;
+    font-size: .8rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Athena, Roboto, sans-serif;
+    padding: .2rem .3rem;
+    border: 2px solid #21B4D6;
 }
 
 .loot-item.active {
@@ -732,35 +763,50 @@ input[type="checkbox"]:checked::before {
 
 .dialog-container {
     position: fixed;
-    max-width: 90%;
-    background-color: rgba(0, 0, 0, 0.7);
-    color: #fff;
-    padding: 20px;
-    font-family: Arial, sans-serif;
-    font-size: 16px;
-    line-height: 1.5;
-    border-radius: 10px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+    max-width: 100%;
+    background-color: #FFFFFF;
+    border: .2rem solid #21B4D6;
+    border-radius: 1rem;
     align-items: center;
-    text-align: center;
+    text-align: left;
+    color: #21B4D6;
+
 }
 
-.dialog-container::after {
-    content: "";
+.dialog-container p {
+    font-family: Athena, Roboto, sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+    max-width: 20rem;
+}
+
+.dialog-content {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    padding: 1rem 2rem;
+    box-sizing: border-box;
+}
+
+.dialog-chat-icon {
     position: absolute;
-    bottom: -19px; /* Ajustez la valeur selon vos besoins */
-    border-width: 10px;
-    transform: rotate(180deg);
-    border-style: solid;
-    border-color: transparent transparent rgba(0, 0, 0, 0.7) transparent;
+    width: 2rem;
+    height: 2rem;
+    top: -1rem;
+    left: 0;
+}
+
+.message-container {
+    width: 95%;
 }
 
 .action-container {
     display: flex;
+    justify-content: center;
     align-items: center;
-    margin-top: 10px; /* Ajustez la valeur selon vos besoins */
+    width: .5rem;
+    margin-left: .5rem;
 }
 
 .action-image {
@@ -778,8 +824,8 @@ input[type="checkbox"]:checked::before {
     position: relative;
     display: inline-block;
     padding: 4px 8px;
-    background-color: rgba(0, 0, 0, 0.7);
     color: #fff;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
     font-family: Arial, sans-serif;
     font-size: 16px;
     border-radius: 4px;
@@ -787,11 +833,12 @@ input[type="checkbox"]:checked::before {
 
 .npc-name-text {
     white-space: nowrap;
+    font-family: Athena, Roboto, sans-serif;
 }
 
 .icon-image {
-    width: 40px; /* Ajustez la valeur selon la taille de votre image */
-    height: 40px; /* Ajustez la valeur selon la taille de votre image */
+    width: 3rem; /* Ajustez la valeur selon la taille de votre image */
+    height: 3rem; /* Ajustez la valeur selon la taille de votre image */
 }
 
 #loadingScreen {

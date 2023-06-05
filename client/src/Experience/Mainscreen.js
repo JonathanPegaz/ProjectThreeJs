@@ -38,11 +38,11 @@ export default class Mainscreen extends EventEmitter{
                     event.preventDefault()
                     element.classList.remove('loadingScreen--active')
                     this.steps.starting()
-                    this.experience.alert.addQueue(this.experience.alert.type.SYSTEM(
+                    this.experience.alert.addQueue(this.experience.alert.type.SYSTEM,
                       'félicitations ! votre compte a bien été créé.',
                       4000,
                       'check_icon'
-                    ))
+                    )
                 })
             },
             starting: () => {
