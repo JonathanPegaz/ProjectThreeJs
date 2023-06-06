@@ -19,7 +19,7 @@ export default class AnnouncementZoneController {
       new AnnouncementZone(new THREE.Vector3(-85.5, 17, 25.5), "Ruine Remnoru", 6.5),
       new AnnouncementZone(new THREE.Vector3(80.5, 17, -12), "Ruine Remnora", 10),
       new AnnouncementZone(new THREE.Vector3(20, 17, -39), "Ruine Remnoro", 6),
-      new AnnouncementZone(new THREE.Vector3(27, 14, -39), "Forêt de jade", 16.5, true),
+      new AnnouncementZone(new THREE.Vector3(27, 14, -39), "Jade_forest", 16.5, true),
       new AnnouncementZone(new THREE.Vector3(55.5, 20, 47), "Église singulière", 23),
       new AnnouncementZone(new THREE.Vector3(-20, 16.5, 42), "Mine de Mithralite", 19.5),
       new AnnouncementZone(new THREE.Vector3(11, 14, -10), "Arbre sacré", 8.5),
