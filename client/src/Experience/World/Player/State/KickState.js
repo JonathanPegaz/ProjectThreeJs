@@ -30,6 +30,7 @@ export default class KickState extends State {
         } else {
             curAction.play();
         }
+        this.experience.localPlayer.canKick = false
     }
 
     Exit() {
@@ -37,7 +38,11 @@ export default class KickState extends State {
 
     Update(timeElapsed, input) {
         if (input.keys.down.action) {
-            return;
+            if (this.experience.localPlayer.canKick) {
+                return;
+            }
+
+            this._parent.SetState('pick');
         }
 
         this._parent.SetState('idle');

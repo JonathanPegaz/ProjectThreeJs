@@ -23,6 +23,7 @@ export default class ArbreSacre extends Model3D
     }
 
     interact(origin, mesh) {
+        this.experience.localPlayer.canKick = true
         super.interact(origin, mesh, null, false)
         if (this.experience.controls.keys.down.action) {
             this.pressAction++

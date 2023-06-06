@@ -32,10 +32,13 @@ export default class IdleState extends State {
             this._parent.SetState('walk');
         }
         else if (input.keys.down.action) {
-            if(this.experience) {
-                // logic kick / pick
+            if(this.experience.localPlayer.canKick) {
+                this._parent.SetState('kick');
             }
-            this._parent.SetState('kick');
+            else {
+                this._parent.SetState('pick');
+            }
+
         }
         /*else if (input.keys.down.jump) {
             this._parent.SetState('dance');
