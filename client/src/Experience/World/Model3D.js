@@ -90,6 +90,9 @@ export default class Model3D extends InteractiveObject{
 
         if (typeof this.setHitbox === "function") {
             this.customHitbox = this.setHitbox(child)
+            if (!this.customHitbox) {
+                return true
+            }
         } else {
             const geometry = new SphereGeometry(0.5, 16, 16)
             const material = new MeshBasicMaterial({ color: 0xff00ff, wireframe: true, visible: this.debug.active ?? false })

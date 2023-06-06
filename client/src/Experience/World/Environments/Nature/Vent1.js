@@ -6,7 +6,6 @@ export default class Vent1 extends Model3D
     constructor(model)
     {
         super(model)
-        console.log(this.experience.resources.items[this.resource])
     }
 
     setMaterial(child) {

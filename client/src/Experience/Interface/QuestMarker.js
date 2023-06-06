@@ -2,7 +2,7 @@ import {CSS2DObject} from "three/addons/renderers/CSS2DRenderer.js";
 import Experience from "../Experience.js";
 
 export default class QuestMarker {
-  constructor(target, offset = 1.5) {
+  constructor(target, offset = 0) {
     this.experience = new Experience()
     this.target = target
     this.offset = offset

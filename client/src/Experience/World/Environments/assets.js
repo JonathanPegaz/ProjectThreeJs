@@ -343,7 +343,7 @@ export const assets = [
         display: 0,
         castShadow: true,
         isAnimated: true,
-        isInteractive: false
+        isInteractive: true
     },
     {
         type: Ilot,

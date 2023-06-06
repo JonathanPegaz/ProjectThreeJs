@@ -34,8 +34,8 @@ export default class CollectZone extends InteractiveObject {
       this.radius,
       this.radius,
       this.size,
-      32,
-      32,
+      16,
+      16,
       false,
       0,
       2 * Math.PI

@@ -10,7 +10,6 @@ export default class Crystal extends Model3D
         super(model)
         this.experience = new Experience()
         this.scene = this.experience.scene
-        this.input = this.experience.controls
         this.pressAction = 0
         this.type = 'collectable'
         this.itemToCollect = 'crystal'
@@ -50,7 +49,7 @@ export default class Crystal extends Model3D
 
     interact(origin, mesh) {
         super.interact(origin, mesh, null, false)
-        if (this.input.keys.down.action) {
+        if (this.experience.controls.keys.down.action) {
             this.pressAction++
             mesh.marker.press(this.pressAction, 200)
             if (this.pressAction > 200) {
@@ -70,7 +69,6 @@ export default class Crystal extends Model3D
     }
 
     destroy() {
-        this.input = null
         this.pressAction = null
         this.type = null
         this.itemToCollect = null

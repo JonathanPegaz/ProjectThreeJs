@@ -582,6 +582,7 @@ input[type="checkbox"]:checked::before {
     justify-content: center;
     align-items: center;
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    z-index: 30 !important;
 }
 .quest-marker-icon-container {
     width: 65%;
@@ -601,7 +602,7 @@ input[type="checkbox"]:checked::before {
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 10 !important;
+    z-index: 50 !important;
 }
 
 .progress-ring {
