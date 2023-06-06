@@ -16,15 +16,25 @@
       "2": {
         "order": 2,
         "type": "COLLECT",
-        "name": "Fruit sacré",
-        "description": "collecter 1 fruit sacré",
+        "name": "Carottes",
+        "description": "collecter 5000 carottes",
         "requirements": {
-          "item": "fruit",
-          "quantity": "1"
+          "item": "carrot",
+          "quantity": "5000"
         }
       },
       "3": {
         "order": 3,
+        "type": "COLLECT",
+        "name": "Champignons",
+        "description": "collecter 10 Champignons",
+        "requirements": {
+          "item": "mushroom",
+          "quantity": "10"
+        }
+      },
+      "4": {
+        "order": 4,
         "type": "TALK",
         "name": "Parler au chef du village",
         "description": "Parler au chef du village",

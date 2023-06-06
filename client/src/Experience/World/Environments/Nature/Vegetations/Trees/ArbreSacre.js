@@ -31,7 +31,7 @@ export default class ArbreSacre extends Model3D
                 this.pressAction = 0
                 mesh.marker.stopPress()
                 this.experience.world.Fruit_ramasse.playAnimation().then(() => {
-                    console.log(this.experience.world.Fruit_ramasse.setHitbox());
+                    this.experience.world.Fruit_ramasse.setStaticHitbox()
                 })
             }
         } else {
