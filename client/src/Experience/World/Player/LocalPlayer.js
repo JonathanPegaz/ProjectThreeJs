@@ -45,6 +45,7 @@ export default class LocalPlayer extends Player {
             mass: 1,
             allowSleep: false,
             position: new CANNON.Vec3(-96.1349, 15.562, -16.916),
+            //position: new CANNON.Vec3(48, 14, -40), //FOREST
             //position: new CANNON.Vec3(57, 15, -56), //PARTY
             //position: new CANNON.Vec3(-27, 20, 47), //CRYSTAL
             //position: new CANNON.Vec3(13, 14, -10), //TREE

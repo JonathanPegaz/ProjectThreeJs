@@ -18,16 +18,20 @@ export default class HTMLAnnouncement {
     this.interface = document.querySelector('.announcement');
     this.duration = 2000;
     this.type = {
-      AREA: (message, duration) => this.area(message, duration),
-      SYSTEM: (message, duration, icon) => this.system(message, duration, icon),
-      QUEST: (message, duration, icon) => this.quest(message, duration, icon),
+      AREA: (message, duration, param) => this.area(message, duration, param),
+      SYSTEM: (message, duration, param) => this.system(message, duration, param),
+      QUEST: (message, duration, param) => this.quest(message, duration, param),
     };
   }
 
-  area(message, duration) {
+  area(message, duration, gif) {
     return new Promise((resolve) => {
       const areaInterface = this.interface.querySelector('.announcement-area')
-      areaInterface.innerHTML = '<h1 class="announcement-content-h1">' + message + '</h1>';
+      if (gif) {
+        areaInterface.innerHTML = `<img class="announcement-content-gif" src="video/area/${message}.gif" alt="area title">`
+      } else {
+        areaInterface.innerHTML = '<h1 class="announcement-content-h1">' + message + '</h1>';
+      }
       areaInterface.classList.toggle('announcement-active');
       setTimeout(() => {
         areaInterface.classList.toggle('announcement-active');
@@ -37,7 +41,7 @@ export default class HTMLAnnouncement {
     });
   }
 
-  system(message, duration, icon = null) {
+  system(message, duration, icon) {
     return new Promise((resolve) => {
       const areaInterface = this.interface.querySelector('.announcement-system')
 
@@ -77,11 +81,12 @@ export default class HTMLAnnouncement {
     });
   }
 
-  async addQueue(type = this.type.AREA, message, duration = this.duration) {
+  async addQueue(type = this.type.AREA, message, duration = this.duration, param = false) {
     this.waitingQueue.push({
       type: type,
       message: message,
       duration: duration,
+      param: param,
     });
     if (!this.waitingQueueActive) {
       this.processQueue();
@@ -97,9 +102,9 @@ export default class HTMLAnnouncement {
     this.waitingQueueActive = true;
 
     const item = this.waitingQueue[0];
-    const { type, message, duration } = item;
+    const { type, message, duration, param } = item;
 
-    await type(message, duration);
+    await type(message, duration, param);
 
     this.waitingQueue.shift();
 
