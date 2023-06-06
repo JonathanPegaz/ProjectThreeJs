@@ -1,7 +1,7 @@
 import Experience from "../../Experience.js";
 import {clone} from "three/examples/jsm/utils/SkeletonUtils.js";
 import {
-    AnimationMixer,
+    AnimationMixer, AxesHelper,
     CircleGeometry, DoubleSide,
     FrontSide,
     Mesh,

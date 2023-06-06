@@ -1,17 +1,5 @@
 export default [
     {
-        name: 'skyboxOLD',
-        type: 'cubeTexture',
-        path: [
-            'textures/environmentMap/Skybox/FS017/FS017_Day_Cubemap_front.png',
-            'textures/environmentMap/Skybox/FS017/FS017_Day_Cubemap_back.png',
-            'textures/environmentMap/Skybox/FS017/FS017_Day_Cubemap_up.png',
-            'textures/environmentMap/Skybox/FS017/FS017_Day_Cubemap_down.png',
-            'textures/environmentMap/Skybox/FS017/FS017_Day_Cubemap_right.png',
-            'textures/environmentMap/Skybox/FS017/FS017_Day_Cubemap_left.png'
-        ]
-    },
-    {
         name: 'skybox',
         type: 'cubeTexture',
         path: [
@@ -39,11 +27,6 @@ export default [
         name: 'interfaceNormalMap',
         type: 'texture',
         path: 'textures/interfaceNormalMap.png'
-    },
-    {
-        name: 'foxModel',
-        type: 'gltfModel',
-        path: 'models/Fox/glTF/Fox.gltf'
     },
     {
         name: 'chief_idle',

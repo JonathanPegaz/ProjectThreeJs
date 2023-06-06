@@ -197,9 +197,7 @@ export default class Environment
         this.isNight = false
         this.addOverlay()
 
-        const overlayGeometry = new PlaneGeometry(2, 2, 1, 1)
-        const overlay = new Mesh(overlayGeometry, overlayMaterial)
-        this.scene.add(overlay)
+        this.experience.npc.moveNpcToDayPosition()
 
         this.sunLight.color.setHex(0xffffff)
         this.hemiLight.color.setHex(0xffffff)

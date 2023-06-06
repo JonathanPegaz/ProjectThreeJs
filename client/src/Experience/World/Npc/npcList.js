@@ -3,12 +3,12 @@ import Npc from "./Npc.js";
 export default [
     {
         id: 1,
-        name: 'Eric Chef du village',
+        name: 'Chef du village',
         type: Npc,
         model: 'chief_idle',
         position: {
             x: -83,
-            y: 16,
+            y: 15.58,
             z: -17
         },
         rotation: {
@@ -17,14 +17,14 @@ export default [
             z: 0
         },
         nightPosition: {
-            x: 55.138,
-            y: 16,
-            z: -72.60
+            x: 49.61,
+            y: 14.25,
+            z: -71.85
         },
         nightRotation: {
-            x: 59.06,
-            y: 16,
-            z: -57.10
+            x: 0,
+            y: Math.PI * 0.5,
+            z: 0
         },
         scale: 1,
         positionOffset: 0,
@@ -33,6 +33,10 @@ export default [
             'Je suis là pour vous donner une quête',
             'Ramenez moi 2 diamants et 3 carottes pour la fête du village',
         ],
+        nightDialog: [
+            'Le portail est réouvert grace à vous',
+            'Une grande aventure vous attend',
+        ],
         travelPoints: null,
         quest: {
             id: 1,
@@ -40,16 +44,17 @@ export default [
                 'Merci d\'avoir fait ma quête',
             ]
         },
-        animations_type: 'chief'
+        animations_type: 'chief',
+        isDancing: false,
     },
     {
         id: 2,
-        name: 'Yann Bras droit du chef',
+        name: 'Bras droit du chef',
         type: Npc,
         model: 'pnj_idle',
         position: {
             x: -80,
-            y: 16,
+            y: 15.58,
             z: -17
         },
         rotation: {
@@ -58,27 +63,30 @@ export default [
             z: 0
         },
         nightPosition: {
-            x: 55.138,
-            y: 16,
-            z: -72.60
+            x: 50.17,
+            y: 14.01,
+            z: -62.63
         },
         nightRotation: {
             x: 0,
-            y: 0,
+            y: Math.PI * 0.7,
             z: 0
         },
         scale: 1,
         positionOffset: 0,
         dialog: [
-            'Bonjour, je suis Yann',
-            'Je suis un autre PNJ',
+            'Bienvenue !',
+            'Je suis le bras droit du chef',
+            'Je vous conseille d\'aller le rencontrer dans le village',
+            'Il à besoin de votre aide',
         ],
-        travelPoints: [
-            {x: -72, z: -17},
-            {x: -80, z: -17},
+        nightDialog: [
+            'Profitez bien de la fête !',
         ],
+        travelPoints: null,
         quest: null,
-        animations_type: 'pnj'
+        animations_type: 'pnj',
+        isDancing: true,
     },
     {
         id: 3,
@@ -87,7 +95,7 @@ export default [
         model: 'pnj_idle',
         position: {
             x: -44.3,
-            y: 16,
+            y: 16.17,
             z: -13.93
         },
         rotation: {
@@ -96,13 +104,13 @@ export default [
             z: 0
         },
         nightPosition: {
-            x: 55.138,
-            y: 16,
-            z: -72.60
+            x: 52.57,
+            y: 14.25,
+            z: -66.85
         },
         nightRotation: {
             x: 0,
-            y: 0,
+            y: Math.PI * 0.25,
             z: 0
         },
         scale: 1,
@@ -110,9 +118,13 @@ export default [
         dialog: [
             'Les élèves sont bien calmes aujourd\'hui',
         ],
+        nightDialog: [
+            'Je suis le roi de la danse !',
+        ],
         travelPoints: null,
         quest: null,
-        animations_type: 'pnj'
+        animations_type: 'pnj',
+        isDancing: true,
     },
     {
         id: 4,
@@ -121,7 +133,7 @@ export default [
         model: 'pnj_idle',
         position: {
             x: -47.92,
-            y: 16,
+            y: 16.37,
             z: -14.07
         },
         rotation: {
@@ -130,9 +142,9 @@ export default [
             z: 0
         },
         nightPosition: {
-            x: 55.138,
-            y: 16,
-            z: -72.60
+            x: 54.72,
+            y: 14.25,
+            z: -68.06
         },
         nightRotation: {
             x: 0,
@@ -144,9 +156,13 @@ export default [
         dialog: [
             'C\'est bientôt la fête du village',
         ],
+        nightDialog: [
+            'Tu veux danser avec moi ?',
+        ],
         travelPoints: null,
         quest: null,
-        animations_type: 'pnj'
+        animations_type: 'pnj',
+        isDancing: true,
     },
     {
         id: 5,
@@ -155,7 +171,7 @@ export default [
         model: 'pnj_idle',
         position: {
             x: -48.50,
-            y: 16.1,
+            y: 16.37,
             z: -12.78
         },
         rotation: {
@@ -164,13 +180,13 @@ export default [
             z: 0
         },
         nightPosition: {
-            x: 55.138,
-            y: 16,
-            z: -72.60
+            x: 56.25,
+            y: 13.85,
+            z: -64.70
         },
         nightRotation: {
             x: 0,
-            y: 0,
+            y: Math.PI * 1.6,
             z: 0
         },
         scale: 0.5,
@@ -178,9 +194,13 @@ export default [
         dialog: [
             'Les cours sont ennuyeux',
         ],
+        nightDialog: [
+            'Trop cool la fête !',
+        ],
         travelPoints: null,
         quest: null,
-        animations_type: 'pnj'
+        animations_type: 'pnj',
+        isDancing: true,
     },
     {
         id: 6,
@@ -189,7 +209,7 @@ export default [
         model: 'pnj_idle',
         position: {
             x: -48.732,
-            y: 16.29,
+            y: 16.37,
             z: -15.23
         },
         rotation: {
@@ -198,13 +218,13 @@ export default [
             z: 0
         },
         nightPosition: {
-            x: 55.138,
-            y: 14,
-            z: -62.60
+            x: 53.78,
+            y: 13.85,
+            z: -63.77
         },
         nightRotation: {
             x: 0,
-            y: 0,
+            y: Math.PI * 0.5,
             z: 0
         },
         scale: 0.5,
@@ -212,9 +232,13 @@ export default [
         dialog: [
             'Vivement la récréation',
         ],
+        nightDialog: [
+            'Jamais je ne dormirai !',
+        ],
         travelPoints: null,
         quest: null,
-        animations_type: 'pnj'
+        animations_type: 'pnj',
+        isDancing: true,
     },
     /*{
         id: 7,
@@ -253,7 +277,7 @@ export default [
         model: 'pnj_idle',
         position: {
             x: -14.44,
-            y: 17,
+            y: 16.17,
             z: 29.170
         },
         rotation: {
@@ -262,13 +286,13 @@ export default [
             z: 0
         },
         nightPosition: {
-            x: 60.489,
-            y: 14,
-            z: -66
+            x: 60.295,
+            y: 13.88,
+            z: -65.93
         },
         nightRotation: {
             x: 0,
-            y: 0,
+            y: Math.PI * 1.5,
             z: 0
         },
         scale: 1,
@@ -276,9 +300,13 @@ export default [
         dialog: [
             'C\'est une belle journée pour miner',
         ],
+        nightDialog: [
+            'Les minerais sont plus beaux la nuit',
+        ],
         travelPoints: null,
         quest: null,
-        animations_type: 'pnj'
+        animations_type: 'pnj',
+        isDancing: true,
     },
     {
         id: 10,
@@ -287,7 +315,7 @@ export default [
         model: 'pnj_idle',
         position: {
             x: 11.22,
-            y: 16,
+            y: 13.86,
             z: -2.29
         },
         rotation: {
@@ -296,13 +324,13 @@ export default [
             z: 0
         },
         nightPosition: {
-            x: 61.93,
-            y: 14,
-            z: -62.5
+            x: 56.21,
+            y: 13.99,
+            z: -66.75
         },
         nightRotation: {
             x: 0,
-            y: 0,
+            y: Math.PI * 1.8,
             z: 0
         },
         scale: 1,
@@ -310,9 +338,13 @@ export default [
         dialog: [
             'Mon coin préféré, que c\'est beau',
         ],
+        nightDialog: [
+            'Cette fête est magnifique',
+        ],
         travelPoints: null,
         quest: null,
-        animations_type: 'pnj'
+        animations_type: 'pnj',
+        isDancing: true,
     },
     {
         id: 11,
@@ -321,7 +353,7 @@ export default [
         model: 'priest_idle',
         position: {
             x: 52.788,
-            y: 29,
+            y: 26.2,
             z: 61.299
         },
         rotation: {
@@ -330,13 +362,13 @@ export default [
             z: 0
         },
         nightPosition: {
-            x: 55.138,
-            y: 16,
-            z: -72.60
+            x: 55.34,
+            y: 14.40,
+            z: -72.16
         },
         nightRotation: {
             x: 0,
-            y: 0,
+            y: Math.PI * 1.75,
             z: 0
         },
         scale: 1,
@@ -344,8 +376,88 @@ export default [
         dialog: [
             'Que la lumière vous protège',
         ],
+        nightDialog: [
+            'Le pouvoir de la lumière est avec vous, le portail est ouvert',
+        ],
         travelPoints: null,
         quest: null,
-        animations_type: 'priest'
+        animations_type: 'priest',
+        isDancing: false,
+    },
+    {
+        id: 12,
+        name: 'Fermier',
+        type: Npc,
+        model: 'pnj_idle',
+        position: {
+            x: -51.172,
+            y: 16.66,
+            z: 16.476
+        },
+        rotation: {
+            x: 0,
+            y: 0,
+            z: 0
+        },
+        nightPosition: {
+            x: 51.191,
+            y: 13.97,
+            z: -59.36
+        },
+        nightRotation: {
+            x: 0,
+            y: Math.PI * 0.7,
+            z: 0
+        },
+        scale: 1,
+        positionOffset: 0,
+        dialog: [
+            'Les récoltes sont bonnes cette année',
+        ],
+        nightDialog: [
+            'Manger autant que vous voulez, c\'est la fête !',
+        ],
+        travelPoints: null,
+        quest: null,
+        animations_type: 'pnj',
+        isDancing: true,
+    },
+    {
+        id: 13,
+        name: 'Cueilleur',
+        type: Npc,
+        model: 'pnj_idle',
+        position: {
+            x: 29.602,
+            y: 14.2,
+            z: -34.93
+        },
+        rotation: {
+            x: 0,
+            y: 0,
+            z: 0
+        },
+        nightPosition: {
+            x: 62.174,
+            y: 13.82,
+            z: -62.812
+        },
+        nightRotation: {
+            x: 0,
+            y: Math.PI * 1.5,
+            z: 0
+        },
+        scale: 1,
+        positionOffset: 0,
+        dialog: [
+            'Ou sont les champignons ?', 'J\'adore les champignons',
+        ],
+        nightDialog: [
+            'Les vers luisants sont magnifiques',
+        ],
+        travelPoints: null,
+        quest: null,
+        animations_type: 'pnj',
+        isDancing: true,
     },
 ]
