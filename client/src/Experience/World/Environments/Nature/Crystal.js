@@ -1,8 +1,7 @@
 import Model3D from "../../Model3D.js";
 import Experience from "../../../Experience.js";
-import QuestMarker from "../../../Interface/QuestMarker.js";
 import * as THREE from "three";
-import {Mesh, MeshBasicMaterial, MeshStandardMaterial, MeshToonMaterial, PlaneGeometry} from "three";
+import {Mesh, MeshBasicMaterial, MeshToonMaterial, PlaneGeometry} from "three";
 
 export default class Crystal extends Model3D
 {
