@@ -1,5 +1,13 @@
 import Experience from '../Experience.js'
-import {DirectionalLight, HemisphereLight, Mesh, MeshStandardMaterial, PlaneGeometry, sRGBEncoding} from "three";
+import {
+    DirectionalLight,
+    HemisphereLight,
+    Mesh,
+    MeshStandardMaterial,
+    PlaneGeometry,
+    sRGBEncoding,
+    Vector3
+} from "three";
 import {overlayMaterial} from "../Shaders/OverlayShaders.js";
 import {gsap} from "gsap";
 
@@ -19,6 +27,8 @@ export default class Environment
             this.debugFolder.close()
         }
 
+        this.isNight = false
+
         this.flameLights = []
 
         this.setSunLight()
@@ -32,7 +42,8 @@ export default class Environment
     setSunLight()
     {
         //this.sunLight = new THREE.DirectionalLight('#001624', 4)
-        this.sunLight = new DirectionalLight('#ffee50', 4)
+        //this.sunLight = new DirectionalLight('#ffee50', 4)
+        this.sunLight = new DirectionalLight('#ffffff', 4)
         this.sunLight.position.set(0, 50, 30)
         this.sunLight.castShadow = true
         this.sunLight.shadow.camera.far = 300
@@ -158,6 +169,7 @@ export default class Environment
     }
 
     setNight() {
+        this.isNight = true
         this.addOverlay()
 
         this.sunLight.color.setHex(0x001624)
@@ -168,9 +180,14 @@ export default class Environment
         //this.scene.environment = this.environmentMap.texture
         this.experience.scene.fog.color.setHex(0x001624)
         this.experience.world.fireflies.firefliesMaterial.uniforms.uColor.value.setHex(0xe3cf3e)
+        this.experience.world.firefliesSecond.firefliesMaterial.uniforms.uColor.value.setHex(0x0021f3)
 
         this.flameLights.forEach(flameLight => {
-            flameLight.visible = true
+            this.flameLights.forEach(flameLight => {
+                if(flameLight.position.distanceTo(this.experience.localPlayer.object.position) < 15) {
+                    flameLight.visible = true
+                }
+            })
         })
 
         window.setTimeout(() => {
@@ -179,13 +196,14 @@ export default class Environment
     }
 
     setDay() {
+        this.isNight = false
         this.addOverlay()
 
         const overlayGeometry = new PlaneGeometry(2, 2, 1, 1)
         const overlay = new Mesh(overlayGeometry, overlayMaterial)
         this.scene.add(overlay)
 
-        this.sunLight.color.setHex(0xffffff)
+        this.sunLight.color.setHex(0xf7bf45)
         this.hemiLight.color.setHex(0xffffff)
 
         this.environmentMap.texture = this.resources.items.skybox
@@ -193,6 +211,7 @@ export default class Environment
         //this.scene.environment = this.environmentMap.texture
         this.experience.scene.fog.color.setHex(0xffffff)
         this.experience.world.fireflies.firefliesMaterial.uniforms.uColor.value.setHex(0xffffff)
+        this.experience.world.firefliesSecond.firefliesMaterial.uniforms.uColor.value.setHex(0xF9D016)
 
         this.flameLights.forEach(flameLight => {
             flameLight.visible = false
@@ -211,6 +230,19 @@ export default class Environment
     removeOverlay() {
         // Animate overlay
         gsap.to(overlayMaterial.uniforms.uAlpha, { duration: 3, value: 0, delay: 1 })
+    }
+
+    update() {
+        // update flame light visibility based on local player position
+        if (!this.isNight) return
+        this.flameLights.forEach(flameLight => {
+            let dot = this.experience.camera.instance.getWorldDirection(new Vector3()).dot(flameLight.position.clone().sub(this.experience.camera.instance.position).normalize())
+            if (flameLight.position.distanceTo(this.experience.localPlayer.object.position) > 25  || dot <= 0) {
+                flameLight.visible = false
+            } else {
+                flameLight.visible = true
+            }
+        })
     }
 
     destroy() {

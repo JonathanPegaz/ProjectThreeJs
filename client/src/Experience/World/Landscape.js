@@ -35,7 +35,6 @@ export default class Landscape {
             child.matrixAutoUpdate = false
             child.matrixWorldNeedsUpdate = false
         })
-
         this.object.add(this.model)
         this.scene.add(this.object)
     }

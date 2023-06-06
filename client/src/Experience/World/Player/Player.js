@@ -55,14 +55,14 @@ export default class Player {
         this.object.add(this.model)
 
         // Fake shadow
-        const shadowgeo = new PlaneGeometry( 0.75, 0.75 );
+        const shadowgeo = new PlaneGeometry( 0.65, 0.65 );
         const shadowmat = new MeshBasicMaterial( {
             map: this.resources.items.roundshadow, transparent: true, depthWrite: false
         } );
         const shadow = new Mesh( shadowgeo, shadowmat );
         shadow.renderOrder = -1;
         shadow.rotation.x = - Math.PI / 2;
-        shadow.position.y = -0.38;
+        shadow.position.y = -0.35;
         this.object.add( shadow );
 
        /*// Fake shadow
@@ -85,6 +85,7 @@ export default class Player {
         this.animations = {}
         this.resource.animations.push(this.resources.items.player_idle_nocape.animations[0])
         this.resource.animations.push(this.resources.items.player_walking_nocape.animations[0])
+        this.resource.animations.push(this.resources.items.player_running_nocape.animations[0])
         this.resource.animations.push(this.resources.items.player_picking_nocape.animations[0])
         //this.resource.animations.push(this.resources.items.player_crouching.animations[0])
         this.mixer = new AnimationMixer(this.model)
@@ -101,13 +102,13 @@ export default class Player {
         }
 
         this.animations.run = {
-            clip: this.resource.animations[2],
-            action: this.mixer.clipAction(this.resource.animations[2])
+            clip: this.resource.animations[3],
+            action: this.mixer.clipAction(this.resource.animations[3])
         }
 
         this.animations.pick = {
-            clip: this.resource.animations[3],
-            action: this.mixer.clipAction(this.resource.animations[3])
+            clip: this.resource.animations[4],
+            action: this.mixer.clipAction(this.resource.animations[4])
         }
 
         /*this.animations.crouch = {

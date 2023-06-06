@@ -188,15 +188,15 @@ export const assets = [
         isAnimated: true,
         isInteractive: false
     },
-    /*{
+    {
         type: PortailIntroShader,
-        resource: 'Portail_shader',
+        resource: 'Portail_intro_shader',
         hasPhysics: true,
         display: 1,
         castShadow: true,
         isAnimated: true,
         isInteractive: false
-    },*/
+    },
     {
         type: Props,
         resource: 'Props',
@@ -342,7 +342,7 @@ export const assets = [
         hasPhysics: false,
         display: 0,
         castShadow: true,
-        isAnimated: false,
+        isAnimated: true,
         isInteractive: false
     },
     {

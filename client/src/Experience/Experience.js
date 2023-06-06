@@ -82,11 +82,11 @@ export default class Experience
             this.npc = new NpcController()
             this.network = new Network()
             this.localPlayer = new LocalPlayer()
-            this.minimap = new Minimap()
+            //this.minimap = new Minimap()
             if(this.world.Cascade)
                 this.world.Cascade.sound.play()
-            this.world.Vent1.model.position.set(this.localPlayer.object.position.x, this.localPlayer.object.position.y, this.localPlayer.object.position.z)
-            this.localPlayer.object.add(this.world.Vent1.model)
+            /*this.world.Vent1.model.position.set(this.localPlayer.object.position.x, this.localPlayer.object.position.y, this.localPlayer.object.position.z)
+            this.localPlayer.object.add(this.world.Vent1.model)*/
             this.resources.homeVideoDiv.remove()
         })
 
@@ -115,6 +115,8 @@ export default class Experience
     update()
     {
         this.monitoring.beginMonitoring()
+
+        //console.time()
 
         this.camera.update()
 
