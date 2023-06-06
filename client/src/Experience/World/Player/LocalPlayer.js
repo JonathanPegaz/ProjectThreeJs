@@ -10,6 +10,8 @@ export default class LocalPlayer extends Player {
         this.id = null
 
         this.pseudo = new Pseudo(this, this.experience.mainscreen.pseudo)
+
+        this.canKick = false
         this.setController()
         this.setThirdPersonCamera()
         this.setPhysics()

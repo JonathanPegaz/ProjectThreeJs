@@ -43,12 +43,6 @@ export default class Ruine1 extends Model3D
             if (!this.dialog.isStarted) {
                 this.isPlayerInteracting = true
                 this.dialog.start()
-                if (this.anim) {
-                    this.anim.pause()
-                    this.setBodyRotation(
-                      this.experience.localPlayer.object.position.x - this.object.position.x,
-                      this.experience.localPlayer.object.position.z - this.object.position.z)
-                }
 
                 return;
             }
@@ -61,13 +55,6 @@ export default class Ruine1 extends Model3D
                 this.dialog.isStarted = false
 
                 this.trigger('collect', [['carrot', 4990]])
-
-                if (this.anim) {
-                    this.anim.resume()
-                    this.setBodyRotation(
-                      this.travelPoints[this.travelIndex].x - this.body.position.x,
-                      this.travelPoints[this.travelIndex].z - this.body.position.z)
-                }
 
                 return;
             }

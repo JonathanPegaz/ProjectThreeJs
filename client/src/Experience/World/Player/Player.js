@@ -1,7 +1,7 @@
 import Experience from "../../Experience.js";
 import {clone} from "three/examples/jsm/utils/SkeletonUtils.js";
 import {
-    AnimationMixer,
+    AnimationMixer, AxesHelper,
     CircleGeometry, DoubleSide,
     FrontSide,
     Mesh,
@@ -72,18 +72,6 @@ export default class Player {
         shadow.position.y = -0.35;
         this.object.add( shadow );
 
-       /*// Fake shadow
-        //Circle geometry
-        const circleGeometry = new CircleGeometry( 0.25, 32 );
-        // Gray color
-        const circleMaterial = new MeshBasicMaterial( {
-            color: 0x00000, opacity: 0.5, transparent: true, depthWrite: false });
-        const circle = new Mesh( circleGeometry, circleMaterial );
-        circle.renderOrder = -1;
-        circle.rotation.x = - Math.PI / 2;
-        circle.position.y = -0.35;
-        this.object.add( circle );*/
-
         this.scene.add(this.object);
     }
 
@@ -99,8 +87,6 @@ export default class Player {
 
         //this.resource.animations.push(this.resources.items.player_crouching.animations[0])
         this.mixer = new AnimationMixer(this.model)
-
-        console.log(this.resource)
 
         // action
         this.animations.idle = {

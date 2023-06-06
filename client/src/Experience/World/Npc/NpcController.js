@@ -29,6 +29,12 @@ export default class NpcController {
         })
     }
 
+    moveNpcToDayPosition() {
+        this.npcs.forEach(npc => {
+            this.list[npc.id].moveToDayPosition()
+        })
+    }
+
     get(id) {
         return this.list[id]
     }

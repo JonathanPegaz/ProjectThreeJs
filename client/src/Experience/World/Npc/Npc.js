@@ -33,7 +33,7 @@ export default class Npc extends EventEmitter{
         this.object = new Object3D()
         this.object.position.set(data.position.x, data.position.y, data.position.z)
         this.object.scale.set(data.scale, data.scale, data.scale)
-
+        this.object.quaternion.setFromAxisAngle(new CANNON.Vec3(0, 1, 0), data.rotation.y)
         this.canInteract = false
         this.isPlayerInteracting = false
 
@@ -44,7 +44,7 @@ export default class Npc extends EventEmitter{
         this.setModel(data.positionOffset)
 
         this.setAnimation()
-        this.setPhysics(data.rotation.y)
+        this.setPhysics()
         this.setHitbox()
         this.name = new Pseudo(this, data.name, false)
         this.setDialog(data.dialog)
@@ -110,12 +110,17 @@ export default class Npc extends EventEmitter{
             action: this.mixer.clipAction(this.resources.items[`${this.animations_type}_walking`].animations[0])
         }
 
+        this.animations.dance = {
+            clip: this.resources.items[`pnj_dancing`].animations[0],
+            action: this.mixer.clipAction(this.resources.items[`pnj_dancing`].animations[0])
+        }
+
         // start idle animation at random time
         this.animations.idle.action.time = Math.random() * this.animations.idle.action.getClip().duration
         this.animations.idle.action.play()
     }
 
-    setPhysics(rotation) {
+    setPhysics() {
 
         const shape = new CANNON.Sphere(0.6); // dimensions de la boîte
         this.body = new CANNON.Body({
@@ -123,18 +128,15 @@ export default class Npc extends EventEmitter{
             mass: 100,
             allowSleep: true,
             position: new CANNON.Vec3(this.object.position.x, this.object.position.y, this.object.position.z),
-            // position: new CANNON.Vec3(53, 14, -68),
             fixedRotation: true,
         })
 
-        this.body.quaternion.setFromAxisAngle(new CANNON.Vec3(0, 1, 0), rotation)
-
         this.physics.world.addBody(this.body)
 
-        this.physics.objectsToUpdate.push({
+        /*this.physics.objectsToUpdate.push({
             mesh: this.object,
             body: this.body
-        })
+        })*/
     }
 
     setHitbox() {
@@ -163,10 +165,12 @@ export default class Npc extends EventEmitter{
                 if (this.anim) {
                     this.anim.pause()
                 }
-                this.setBodyRotation(
+                /*this.setObjectRotation(
                     this.experience.localPlayer.object.position.x - this.object.position.x,
-                    this.experience.localPlayer.object.position.z - this.object.position.z)
+                    this.experience.localPlayer.object.position.z - this.object.position.z)*/
 
+                // rotation y for look the player when he talk
+                //this.object.quaternion.setFromAxisAngle(new CANNON.Vec3(0, -1, 0), this.experience.localPlayer.object.rotation.y)
                 return;
             }
 
@@ -242,14 +246,56 @@ export default class Npc extends EventEmitter{
         this.body.quaternion.setFromEuler(0, rotation, 0, 'XYZ')
     }
 
+    setObjectRotation(x, z) {
+        const rotation = Math.atan2(
+            x, z
+        )
+        this.object.quaternion.setFromEuler(0, rotation, 0, 'XYZ')
+    }
+
     moveToNightPosition() {
         if (this.anim)
             this.anim.kill()
+        this.object.position.set(
+            this.data.nightPosition.x,
+            this.data.nightPosition.y,
+            this.data.nightPosition.z
+        )
         this.body.position.set(
             this.data.nightPosition.x,
             this.data.nightPosition.y,
             this.data.nightPosition.z
-        )}
+        )
+        this.object.quaternion.setFromAxisAngle(new CANNON.Vec3(0, 1, 0), this.data.nightRotation.y)
+
+        if(this.data.isDancing) {
+            this.animations.dance.action.time = Math.random() * this.animations.dance.action.getClip().duration
+            this.animations.dance.action.play()
+        }
+        this.dialog.dialog = this.data.nightDialog
+    }
+
+    moveToDayPosition() {
+        if (this.anim)
+            this.anim.kill()
+        this.object.position.set(
+            this.data.position.x,
+            this.data.position.y,
+            this.data.position.z
+        )
+        this.body.position.set(
+            this.data.position.x,
+            this.data.position.y,
+            this.data.position.z
+        )
+        this.object.quaternion.setFromAxisAngle(new CANNON.Vec3(0, 1, 0), this.data.rotation.y)
+
+        if(this.data.isDancing) {
+            this.animations.idle.action.time = Math.random() * this.animations.idle.action.getClip().duration
+            this.animations.idle.action.play()
+        }
+        this.dialog.dialog = this.data.dialog
+    }
 
     interact(value) {
         this.canInteract = value
