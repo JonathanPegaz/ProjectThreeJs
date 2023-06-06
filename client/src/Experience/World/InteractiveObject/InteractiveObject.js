@@ -2,6 +2,7 @@ import Experience from "../../Experience.js";
 import * as THREE from "three";
 import EventEmitter from "../../Utils/EventEmitter.js";
 import { v4 as uuidv4 } from 'uuid';
+import QuestMarker from "../../Interface/QuestMarker.js";
 
 export default class InteractiveObject extends EventEmitter{
   constructor(isInteractive = true) {
@@ -17,7 +18,7 @@ export default class InteractiveObject extends EventEmitter{
     this.name = null
     this.position = null
     this.object = null
-    this.marker = null
+    this.marker = new QuestMarker(this, -3)
   }
 
   add() {
@@ -27,7 +28,7 @@ export default class InteractiveObject extends EventEmitter{
   delete() {
     this.experience.world.interactiveObject.delete(this.id)
   }
-  interact(origin, limit = null, zone = true) {
+  interact(origin, mesh = null, limit = null, zone = true) {
     if (this.isInteracting) return true
     this.isInteracting = true
 
@@ -37,12 +38,17 @@ export default class InteractiveObject extends EventEmitter{
       this.stay(origin, limit).then(() => {
         this.leave()
       })
+    } else {
+      mesh.marker.mark()
     }
     return false
   }
 
-  stopInteract() {
+  stopInteract(mesh = null) {
     this.isInteracting = false
+    if (mesh !== null) {
+      mesh.marker.unmark()
+    }
   }
 
   stay(origin, limit) {

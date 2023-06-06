@@ -24,7 +24,9 @@ export default class Collect extends Task {
 
     for (const [key, value] of Object.entries(this.world.interactiveObject.list)) {
       if (value.type === 'collectable' && value.itemToCollect === this.requirements.item) {
-        this.target = value
+        if (!value.questMarkerDisabled) {
+          this.target = value
+        }
         value.on('collect', (item) => {
           this.catch(item)
         })
@@ -32,21 +34,26 @@ export default class Collect extends Task {
     }
   }
 
-  catch(item) {
+  catch(data) {
     if (!this.active) return
 
-    if (item === this.requirements.item && this.requirements.quantity > 0) {
-      this.requirements.quantity--
-      this.goal.progress++
+    const loot = data[0]
+    const nb = data[1]
+
+    if (loot === this.requirements.item && this.requirements.quantity > 0) {
+      this.requirements.quantity  = this.requirements.quantity - nb
+      this.goal.progress = this.goal.progress + nb
       this.trigger("update")
-      if (this.requirements.quantity === 0) {
+      if (this.requirements.quantity <= 0) {
         this.isComplete()
       }
     }
   }
 
   isComplete() {
-    this.target.marker.unmark(this.target.id)
+    if (this.target) {
+      this.target.marker.unmark()
+    }
     super.isComplete();
   }
 

@@ -15,16 +15,17 @@ export default class CollectZoneController {
 
   init() {
     this.list = [
-      //new CollectZone(new THREE.Vector3(-20, 11.5, 42), "Mine", 25, 17.5, 4000, "diamond"),
-      new CollectZone(new THREE.Vector3(-57, 9.5, 13), "Ferme", 19, 4.5, 2000, "carrot"),
+      new CollectZone(new THREE.Vector3(-57,17, 13), "Ferme", 3.5, 4.5, 30, "carrot", 1),
     ];
 
     this.list.forEach((element) => {
       element.on(element.name, (event) => {
-        if (event === "INTERACT" || event === "LEAVE") {
-          element.collect()
+        if (event === "INTERACT") {
+          element.startCollect()
         }
-        //TODO: add a progress bar based on STAY event
+        if (event === "LEAVE") {
+          element.stopCollect()
+        }
       })
     })
 

@@ -85,18 +85,30 @@ export default class Model3D extends InteractiveObject{
 
     setInteraction(child) {
         if (!this.isInteractive) return
-        const geometry = new SphereGeometry(0.5, 16, 16)
-        const material = new MeshBasicMaterial({ color: 0xff00ff, wireframe: true, visible: this.debug.active ?? false })
-        const hitbox = new Mesh(geometry, material)
-        hitbox.position.set(child.geometry.boundingSphere.center.x, child.geometry.boundingSphere.center.y, child.geometry.boundingSphere.center.z)
-        child.hitbox = hitbox
+
+        this.customHitbox = null
+
+        if (typeof this.setHitbox === "function") {
+            this.customHitbox = this.setHitbox(child)
+        } else {
+            const geometry = new SphereGeometry(0.5, 16, 16)
+            const material = new MeshBasicMaterial({ color: 0xff00ff, wireframe: true, visible: this.debug.active ?? false })
+            this.customHitbox = new Mesh(geometry, material)
+            this.customHitbox.position.set(child.geometry.boundingSphere.center.x, child.geometry.boundingSphere.center.y, child.geometry.boundingSphere.center.z)
+        }
+
+        child.hitbox = this.customHitbox
         this.scene.add(child.hitbox)
         this.name = child.name
         child.object = new Object3D()
-        child.object.position.set(hitbox.position.x, hitbox.position.y, hitbox.position.z)
+        child.object.position.set(child.hitbox.position.x, child.hitbox.position.y, child.hitbox.position.z)
         this.scene.add(child.object)
         child.interacting = false
         child.marker = new InteractMarker(child)
+
+        if (typeof this.setDialog === "function") {
+            this.setDialog()
+        }
 
         return true
     }
@@ -137,5 +149,6 @@ export default class Model3D extends InteractiveObject{
         this.isInteractive = null
         this.experience = null
         this.name = null
+        this.customHitbox.geometry.dispose()
     }
 }

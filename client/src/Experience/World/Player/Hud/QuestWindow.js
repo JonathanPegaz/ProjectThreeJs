@@ -56,7 +56,7 @@ export default class QuestWindow extends EventEmitter{
     return `
       <div id="${quest.id}">
         <div class="quest-info">
-          <h3 class="quest-title">${quest.title}</h3>
+          <h3 class="quest-title"><img src="icons/logo_blue.svg" alt="quest icon"><span>${quest.title}</span></h3>
           <p class="quest-title">${quest.description}</p>
         </div>
         <hr>

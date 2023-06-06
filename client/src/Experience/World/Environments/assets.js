@@ -225,7 +225,7 @@ export const assets = [
         display: 2,
         castShadow: true,
         isAnimated: false,
-        isInteractive: false
+        isInteractive: true
     },
     {
         type: ArbreRose,
@@ -280,7 +280,7 @@ export const assets = [
         display: 0,
         castShadow: true,
         isAnimated: false,
-        isInteractive: false
+        isInteractive: true
     },
     {
         type: Crystal,
@@ -416,7 +416,7 @@ export const assets = [
         display: 1,
         castShadow: true,
         isAnimated: false,
-        isInteractive: false
+        isInteractive: true
     },
     {
         type: Ruine2,
