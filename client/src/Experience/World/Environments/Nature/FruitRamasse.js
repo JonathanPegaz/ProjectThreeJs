@@ -37,6 +37,23 @@ export default class FruitRamasse extends Model3D {
             this.pressAction = 0
             mesh.marker.stopPress()
         }
+
+    }
+
+    setAnimation() {
+        this.mixer = new AnimationMixer(this.model)
+        // disable animation loop
+        this.mixer.clipAction(this.animations[0]).setLoop(LoopRepeat, 0)
+    }
+
+    async playAnimation() {
+        return new Promise((resolve) => {
+            this.mixer.clipAction(this.animations[0]).clampWhenFinished = true;
+            this.mixer.clipAction(this.animations[0]).play()
+            this.mixer.addEventListener('finished', function (e) {
+                resolve();
+            });
+        });
     }
 
     destroy() {
