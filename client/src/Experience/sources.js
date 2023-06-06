@@ -441,5 +441,20 @@ export default [
         name:'Vent1',
         type:'gltfModel',
         path:'models/vent1.glb'
+    },
+    {
+        name: 'IntroMusic',
+        type: 'audio',
+        path: 'audio/OverworldLOOP.wav'
+    },
+    {
+        name: 'DayMusic',
+        type: 'audio',
+        path: 'audio/TownLOOP.wav'
+    },
+    {
+        name: 'Footstep',
+        type: 'audio',
+        path: 'audio/FootstepGrass04.wav'
     }
 ]

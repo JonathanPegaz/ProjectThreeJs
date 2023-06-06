@@ -20,6 +20,7 @@ import Controls from "./Utils/Controls.js";
 import NpcController from "./World/Npc/NpcController.js";
 import HTMLAnnouncement from "./HTMLInterface/HTMLAnnouncement.js";
 import Minimap from "./Interface/Minimap.js";
+import AudioController from "./AudioController.js";
 
 let instance = null
 
@@ -76,8 +77,12 @@ export default class Experience
         // Wait for resources
         this.resources.on('ready', () =>
         {
-            this.mainscreen.showInput()
             this.controls = new Controls()
+            this.audioController = new AudioController()
+            this.audioController.setAudioItems()
+            this.audioController.playBackgroundMusic('IntroMusic')
+            this.mainscreen.showInput()
+
             this.world = new World()
             this.world.init()
         })
@@ -98,6 +103,8 @@ export default class Experience
             /*this.world.Vent1.model.position.set(this.localPlayer.object.position.x, this.localPlayer.object.position.y, this.localPlayer.object.position.z)
             this.localPlayer.object.add(this.world.Vent1.model)*/
             this.resources.homeVideoDiv.remove()
+            this.audioController.setEffects()
+            this.audioController.playBackgroundMusic('DayMusic')
         })
 
         // Resize event
@@ -129,6 +136,9 @@ export default class Experience
         //console.time()
 
         this.camera.update()
+
+        if (this.audioController)
+            this.audioController.update()
 
         //console.time()
         if(this.physics)
@@ -167,6 +177,8 @@ export default class Experience
             this.controls.destroy()
         this.resources.destroy()
         this.world.destroy()
+        if(this.audioController)
+            this.audioController.destroy()
         if (this.localPlayer)
             this.localPlayer.destroy()
         if (this.npc)
