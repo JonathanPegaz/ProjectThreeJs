@@ -39,8 +39,8 @@ export default class Model3D extends InteractiveObject{
                 child.receiveShadow = true
                 this.meshs.push(child)
             }
-            child.matrixAutoUpdate = false
-            child.matrixWorldAutoUpdate = false
+            child.matrixAutoUpdate = true
+            child.matrixWorldAutoUpdate = true
         })
         if (interactive) {
             this.add()

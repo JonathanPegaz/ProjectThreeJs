@@ -111,6 +111,11 @@ export default [
         path: 'models/character/PNJ/pnj_walking.glb'
     },
     {
+        name: 'pnj_dancing',
+        type: 'gltfModel',
+        path: 'models/character/PNJ/pnj_dancing.glb'
+    },
+    {
         name: 'idle',
         type: 'gltfModel',
         path: 'models/character/Joueur/player_idle.glb'

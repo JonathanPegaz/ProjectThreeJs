@@ -484,7 +484,7 @@ export const assets = [
     {
         type: Torch,
         resource: 'Torch',
-        hasPhysics: false,
+        hasPhysics: true,
         display: 0,
         castShadow: false,
         isAnimated: true,

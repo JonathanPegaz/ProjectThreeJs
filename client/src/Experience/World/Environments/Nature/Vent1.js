@@ -6,20 +6,16 @@ export default class Vent1 extends Model3D
     constructor(model)
     {
         super(model)
+        console.log(this.experience.resources.items[this.resource])
     }
 
     setMaterial(child) {
         child.material = new MeshToonMaterial({
             ...child.material,
-            side: DoubleSide,
             type: 'MeshToonMaterial',
-            wireframe: true,
+            alphaTest: 0.5,
+            depthWrite: true,
+            transparent: false,
         })
-
-        const boxgeometry = new BoxGeometry( 1, 1, 1 );
-        const boxmaterial = new MeshBasicMaterial( {color: 0x00ff00} );
-        const cube = new Mesh( boxgeometry, boxmaterial );
-        this.model.add( cube );
-
     }
 }
