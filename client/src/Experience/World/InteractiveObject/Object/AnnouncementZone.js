@@ -4,16 +4,12 @@ import * as THREE from "three";
 
 
 export default class AnnouncementZone extends InteractiveObject {
-  constructor(position, name, radius = 1) {
+  constructor(position, name, radius = 1, unableGIF = false) {
     super()
     this.experience = new Experience()
-    this.radius = null
 
-    this.init(position, name, radius)
-  }
-
-  init(position, name, radius) {
     this.name = name
+    this.unableGIF = unableGIF
     this.radius = radius
     this.position = position
     this.object = new THREE.Object3D()
@@ -37,7 +33,7 @@ export default class AnnouncementZone extends InteractiveObject {
     if (isBusy) return
 
     this.wait(() => this.experience.alert).then(() => {
-      this.experience.alert.addQueue(this.experience.alert.type.AREA, this.name, 3000)
+      this.experience.alert.addQueue(this.experience.alert.type.AREA, this.name, 5000, this.unableGIF)
     })
   }
 
