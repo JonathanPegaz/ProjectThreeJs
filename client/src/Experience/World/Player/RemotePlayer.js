@@ -3,7 +3,7 @@ import Player from "./Player.js";
 
 export default class RemotePlayer extends Player {
     constructor(data) {
-        super()
+        super(data.isParrain)
 
         this.id = data.id;
         this.model = data.model;

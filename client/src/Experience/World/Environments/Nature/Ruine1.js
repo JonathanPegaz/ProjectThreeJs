@@ -79,5 +79,6 @@ export default class Ruine1 extends Model3D
         this.dialog = null
         this.mesh = null
         this.questMarkerDisabled = null
+        this.itemToCollect = null
     }
 }

@@ -76,6 +76,16 @@ export default [
         path: 'models/character/Joueur/player_walking.glb'
     },
     {
+        name: 'player_running',
+        type: 'gltfModel',
+        path: 'models/character/Joueur/player_walking.glb'
+    },
+    {
+        name: 'player_kicking',
+        type: 'gltfModel',
+        path: 'models/character/Joueur/player_picking.glb'
+    },
+    {
         name: 'player_idle_nocape',
         type: 'gltfModel',
         path: 'models/character/Joueur/player_idle_nocape.glb'
@@ -94,6 +104,11 @@ export default [
         name: 'player_running_nocape',
         type: 'gltfModel',
         path: 'models/character/Joueur/player_running_nocape.glb'
+    },
+    {
+        name: 'player_kicking_nocape',
+        type: 'gltfModel',
+        path: 'models/character/Joueur/player_kicking_nocape.glb'
     },
     {
         name: 'pnj_greeting',
@@ -116,6 +131,16 @@ export default [
         path: 'models/character/PNJ/pnj_dancing.glb'
     },
     {
+        name: 'priest_idle',
+        type: 'gltfModel',
+        path: 'models/character/Pretre/priest_idle.glb'
+    },
+    {
+        name: 'priest_walking',
+        type: 'gltfModel',
+        path: 'models/character/Pretre/priest_idle.glb'
+    },
+    {
         name: 'idle',
         type: 'gltfModel',
         path: 'models/character/Joueur/player_idle.glb'
@@ -124,6 +149,11 @@ export default [
         name: 'walking',
         type: 'gltfModel',
         path: 'models/character/Joueur/player_walking.glb'
+    },
+    {
+        name: 'parrain',
+        type: 'gltfModel',
+        path: 'models/perso.gltf'
     },
     {
         name: 'player',

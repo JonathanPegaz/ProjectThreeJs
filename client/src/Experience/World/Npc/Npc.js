@@ -22,6 +22,7 @@ import InteractMarker from "../../Interface/InteractMarker.js";
 export default class Npc extends EventEmitter{
     constructor(data) {
         super()
+        this.data = data
         this.experience = new Experience()
         this.physics = this.experience.physics
         this.resources = this.experience.resources
@@ -120,6 +121,7 @@ export default class Npc extends EventEmitter{
         this.body = new CANNON.Body({
             shape: shape,
             mass: 100,
+            allowSleep: true,
             position: new CANNON.Vec3(this.object.position.x, this.object.position.y, this.object.position.z),
             // position: new CANNON.Vec3(53, 14, -68),
             fixedRotation: true,
@@ -239,6 +241,15 @@ export default class Npc extends EventEmitter{
         )
         this.body.quaternion.setFromEuler(0, rotation, 0, 'XYZ')
     }
+
+    moveToNightPosition() {
+        if (this.anim)
+            this.anim.kill()
+        this.body.position.set(
+            this.data.nightPosition.x,
+            this.data.nightPosition.y,
+            this.data.nightPosition.z
+        )}
 
     interact(value) {
         this.canInteract = value

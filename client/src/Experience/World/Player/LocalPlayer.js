@@ -5,8 +5,8 @@ import Pseudo from "../../Interface/Pseudo.js";
 import Player from "./Player.js";
 
 export default class LocalPlayer extends Player {
-    constructor() {
-        super()
+    constructor(isParrain = false) {
+        super(isParrain)
         this.id = null
 
         this.pseudo = new Pseudo(this, this.experience.mainscreen.pseudo)
@@ -51,7 +51,7 @@ export default class LocalPlayer extends Player {
             //position: new CANNON.Vec3(13, 14, -10), //TREE
             //position: new CANNON.Vec3(32, 14, -32), //MUSHROOM
             //position: new CANNON.Vec3(57, 15, -56), //PORTAL
-            // position: new CANNON.Vec3(-85, 18, 22), //RUIN 1
+            //position: new CANNON.Vec3(-85, 18, 22), //RUIN 1
             fixedRotation: true,
         })
 
@@ -79,6 +79,7 @@ export default class LocalPlayer extends Player {
             rx: this.object.rotation.x,
             ry: this.object.rotation.y,
             rz: this.object.rotation.z,
+            isParrain: this.isParrain
         })
     }
 
@@ -113,7 +114,8 @@ export default class LocalPlayer extends Player {
                 rx: this.object.rotation.x,
                 ry: this.object.rotation.y,
                 rz: this.object.rotation.z,
-                action: this.controller.stateMachine._currentState.Name
+                action: this.controller.stateMachine._currentState.Name,
+                isParrain: this.isParrain
             })
     }
 

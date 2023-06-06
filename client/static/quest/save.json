@@ -1,0 +1,53 @@
+{
+  "1": {
+    "title": "La fête du village",
+    "description": "Le chef du village vous demande de lui ramener cette liste de courses",
+    "tasks": {
+      "1": {
+        "order": 1,
+        "type": "COLLECT",
+        "name": "Cristaux",
+        "description": "collecter 2 cristaux",
+        "requirements": {
+          "item": "crystal",
+          "quantity": "1"
+        }
+      },
+      "2": {
+        "order": 2,
+        "type": "COLLECT",
+        "name": "Carottes",
+        "description": "collecter 5000 carottes",
+        "requirements": {
+          "item": "carrot",
+          "quantity": "5000"
+        }
+      },
+      "3": {
+        "order": 3,
+        "type": "COLLECT",
+        "name": "Champignons",
+        "description": "collecter 10 Champignons",
+        "requirements": {
+          "item": "mushroom",
+          "quantity": "10"
+        }
+      },
+      "4": {
+        "order": 4,
+        "type": "TALK",
+        "name": "Parler au chef du village",
+        "description": "Parler au chef du village",
+        "requirements": {
+          "item": 1,
+          "quantity": "1"
+        }
+      }
+    },
+    "reward": {
+      "xp": "100",
+      "item": "diamant",
+      "quantity": "1"
+    }
+  }
+}

@@ -13,7 +13,7 @@ import {
 
 
 export default class Player {
-    constructor() {
+    constructor(isParrain) {
         this.experience = new Experience()
         this.scene = this.experience.scene
         this.resources = this.experience.resources
@@ -21,7 +21,14 @@ export default class Player {
         this.time = this.experience.time
         this.debug = this.experience.debug
         this.network = this.experience.network
-        this.resource = this.resources.items.player
+        this.isParrain = isParrain
+
+        if (this.isParrain) {
+            this.resource = this.resources.items.parrain
+        } else {
+            this.resource = this.resources.items.player
+        }
+
 
         this.object = new Object3D()
         this.object.position.set(0, 0, 0)
@@ -82,13 +89,18 @@ export default class Player {
 
     setAnimation()
     {
+        const temp = this.isParrain ? '' : '_nocape'
         this.animations = {}
-        this.resource.animations.push(this.resources.items.player_idle_nocape.animations[0])
-        this.resource.animations.push(this.resources.items.player_walking_nocape.animations[0])
-        this.resource.animations.push(this.resources.items.player_running_nocape.animations[0])
-        this.resource.animations.push(this.resources.items.player_picking_nocape.animations[0])
+        this.resource.animations.push(this.resources.items[`player_idle${temp}`].animations[0])
+        this.resource.animations.push(this.resources.items[`player_walking${temp}`].animations[0])
+        this.resource.animations.push(this.resources.items[`player_running${temp}`].animations[0])
+        this.resource.animations.push(this.resources.items[`player_picking${temp}`].animations[0])
+        this.resource.animations.push(this.resources.items[`player_kicking${temp}`].animations[0])
+
         //this.resource.animations.push(this.resources.items.player_crouching.animations[0])
         this.mixer = new AnimationMixer(this.model)
+
+        console.log(this.resource)
 
         // action
         this.animations.idle = {
@@ -109,6 +121,11 @@ export default class Player {
         this.animations.pick = {
             clip: this.resource.animations[4],
             action: this.mixer.clipAction(this.resource.animations[4])
+        }
+
+        this.animations.kick = {
+            clip: this.resource.animations[5],
+            action: this.mixer.clipAction(this.resource.animations[5])
         }
 
         /*this.animations.crouch = {

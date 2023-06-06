@@ -16,6 +16,16 @@ export default [
             y: 0,
             z: 0
         },
+        nightPosition: {
+            x: 55.138,
+            y: 16,
+            z: -72.60
+        },
+        nightRotation: {
+            x: 59.06,
+            y: 16,
+            z: -57.10
+        },
         scale: 1,
         positionOffset: 0,
         dialog: [
@@ -43,6 +53,16 @@ export default [
             z: -17
         },
         rotation: {
+            x: 0,
+            y: 0,
+            z: 0
+        },
+        nightPosition: {
+            x: 55.138,
+            y: 16,
+            z: -72.60
+        },
+        nightRotation: {
             x: 0,
             y: 0,
             z: 0
@@ -75,6 +95,16 @@ export default [
             y: Math.PI * 1.5,
             z: 0
         },
+        nightPosition: {
+            x: 55.138,
+            y: 16,
+            z: -72.60
+        },
+        nightRotation: {
+            x: 0,
+            y: 0,
+            z: 0
+        },
         scale: 1,
         positionOffset: 0,
         dialog: [
@@ -97,6 +127,16 @@ export default [
         rotation: {
             x: 0,
             y: Math.PI * 0.5,
+            z: 0
+        },
+        nightPosition: {
+            x: 55.138,
+            y: 16,
+            z: -72.60
+        },
+        nightRotation: {
+            x: 0,
+            y: 0,
             z: 0
         },
         scale: 0.5,
@@ -123,6 +163,16 @@ export default [
             y: Math.PI * 0.5,
             z: 0
         },
+        nightPosition: {
+            x: 55.138,
+            y: 16,
+            z: -72.60
+        },
+        nightRotation: {
+            x: 0,
+            y: 0,
+            z: 0
+        },
         scale: 0.5,
         positionOffset: -0.5,
         dialog: [
@@ -145,6 +195,16 @@ export default [
         rotation: {
             x: 0,
             y: Math.PI * 0.5,
+            z: 0
+        },
+        nightPosition: {
+            x: 55.138,
+            y: 14,
+            z: -62.60
+        },
+        nightRotation: {
+            x: 0,
+            y: 0,
             z: 0
         },
         scale: 0.5,
@@ -201,6 +261,16 @@ export default [
             y: Math.PI,
             z: 0
         },
+        nightPosition: {
+            x: 60.489,
+            y: 14,
+            z: -66
+        },
+        nightRotation: {
+            x: 0,
+            y: 0,
+            z: 0
+        },
         scale: 1,
         positionOffset: 0,
         dialog: [
@@ -225,13 +295,57 @@ export default [
             y: 0,
             z: 0
         },
+        nightPosition: {
+            x: 61.93,
+            y: 14,
+            z: -62.5
+        },
+        nightRotation: {
+            x: 0,
+            y: 0,
+            z: 0
+        },
         scale: 1,
         positionOffset: 0,
         dialog: [
-            'Mon coin préfére, que c\'est beau',
+            'Mon coin préféré, que c\'est beau',
         ],
         travelPoints: null,
         quest: null,
         animations_type: 'pnj'
+    },
+    {
+        id: 11,
+        name: 'Prêtre',
+        type: Npc,
+        model: 'priest_idle',
+        position: {
+            x: 52.788,
+            y: 29,
+            z: 61.299
+        },
+        rotation: {
+            x: 0,
+            y: 0,
+            z: 0
+        },
+        nightPosition: {
+            x: 55.138,
+            y: 16,
+            z: -72.60
+        },
+        nightRotation: {
+            x: 0,
+            y: 0,
+            z: 0
+        },
+        scale: 1,
+        positionOffset: 0,
+        dialog: [
+            'Que la lumière vous protège',
+        ],
+        travelPoints: null,
+        quest: null,
+        animations_type: 'priest'
     },
 ]

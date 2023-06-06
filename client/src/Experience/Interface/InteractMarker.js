@@ -63,7 +63,7 @@ export default class InteractMarker {
   }
 
   setProgress(percent) {
-    this.circle.style.strokeDashoffset = this.circumference - percent / 100 * this.circumference;
+    this.circle.style.strokeDashoffset = Math.round(this.circumference - (percent / (100 - (this.circumference - 100))) * this.circumference)
   }
 
   destroy() {
