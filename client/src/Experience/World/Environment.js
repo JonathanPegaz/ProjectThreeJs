@@ -179,7 +179,6 @@ export default class Environment
         this.experience.world.Portail_shader.portailpointLight.visible = true
         this.experience.world.Fruit_pose.model.visible = true
         this.experience.world.Cristaux_portail.model.visible = true
-        this.experience.localPlayer.setAnimation()
 
         this.sunLight.color.setHex(0x001624)
         this.hemiLight.color.setHex(0x3b3b3b)
