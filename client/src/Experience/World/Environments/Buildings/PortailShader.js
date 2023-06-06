@@ -2,7 +2,7 @@ import Model3D from "../../Model3D.js";
 import {
     CircleGeometry,
     Color,
-    DoubleSide, Mesh,
+    DoubleSide, Mesh, PointLight,
     ShaderMaterial
 } from "three";
 
@@ -21,7 +21,7 @@ export default class PortailShader extends Model3D
         this.isShader = true
          // create rounded plane and a texture
 
-        const geometry = new CircleGeometry( 1.35, 32 )
+        const geometry = new CircleGeometry( 1.31, 32 )
         const portalShader = new ShaderMaterial({
             side: DoubleSide,
             uniforms:
@@ -158,6 +158,10 @@ void main()
         this.model.scale.set(1, 1, 1)
         this.model.castShadow = true
         this.setPhysicsMeshs(this.model)
+
+        const pointLight = new PointLight(0x21b4d6, 8, 5)
+        pointLight.position.set(52.52305, 14.867, -71.9713)
+        this.experience.scene.add(pointLight)
 
         if(this.experience.debug.active)
         {

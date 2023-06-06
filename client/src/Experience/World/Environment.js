@@ -183,11 +183,7 @@ export default class Environment
         this.experience.world.firefliesSecond.firefliesMaterial.uniforms.uColor.value.setHex(0x0021f3)
 
         this.flameLights.forEach(flameLight => {
-            this.flameLights.forEach(flameLight => {
-                if(flameLight.position.distanceTo(this.experience.localPlayer.object.position) < 15) {
-                    flameLight.visible = true
-                }
-            })
+            flameLight.visible = true
         })
 
         window.setTimeout(() => {
@@ -203,7 +199,7 @@ export default class Environment
         const overlay = new Mesh(overlayGeometry, overlayMaterial)
         this.scene.add(overlay)
 
-        this.sunLight.color.setHex(0xf7bf45)
+        this.sunLight.color.setHex(0xffffff)
         this.hemiLight.color.setHex(0xffffff)
 
         this.environmentMap.texture = this.resources.items.skybox
@@ -233,16 +229,7 @@ export default class Environment
     }
 
     update() {
-        // update flame light visibility based on local player position
-        if (!this.isNight) return
-        this.flameLights.forEach(flameLight => {
-            let dot = this.experience.camera.instance.getWorldDirection(new Vector3()).dot(flameLight.position.clone().sub(this.experience.camera.instance.position).normalize())
-            if (flameLight.position.distanceTo(this.experience.localPlayer.object.position) > 25  || dot <= 0) {
-                flameLight.visible = false
-            } else {
-                flameLight.visible = true
-            }
-        })
+
     }
 
     destroy() {

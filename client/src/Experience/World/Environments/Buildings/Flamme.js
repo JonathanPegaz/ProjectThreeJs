@@ -10,7 +10,7 @@ export default class Flamme extends Model3D
 
     setMaterial(child) {
         // add new point light flame color to child
-        const flamePointlight = new PointLight(0xe25822, 3, 10)
+        const flamePointlight = new PointLight(0xe25822, 1, 2)
         flamePointlight.castShadow = false
 
         flamePointlight.position.set(child.geometry.boundingSphere.center.x, child.geometry.boundingSphere.center.y+0.1, child.geometry.boundingSphere.center.z)

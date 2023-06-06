@@ -104,7 +104,6 @@ export default class World
         this.ocean.update()
         this.fireflies.update()
         this.firefliesSecond.update()
-        this.environment.update()
 
         /*if (this.experience.controls && (this.experience.controls.keys.down.forward || this.experience.controls.keys.down.backward || this.experience.controls.keys.down.strafeLeft || this.experience.controls.keys.down.strafeRight)) {
             this.meshsDisplayUpdate()
