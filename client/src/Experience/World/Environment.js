@@ -10,6 +10,7 @@ import {
 } from "three";
 import {overlayMaterial} from "../Shaders/OverlayShaders.js";
 import {gsap} from "gsap";
+import CristauxPortail from "./Environments/Nature/CristauxPortail.js";
 
 export default class Environment
 {
@@ -173,6 +174,10 @@ export default class Environment
         this.addOverlay()
 
         this.experience.npc.moveNpcToNightPosition()
+        this.experience.world.Portail_shader.model.visible = true
+        this.experience.world.Portail_shader.portailpointLight.visible = true
+        this.experience.world.Fruit_pose.model.visible = true
+        this.experience.world.Cristaux_portail.model.visible = true
 
         this.sunLight.color.setHex(0x001624)
         this.hemiLight.color.setHex(0x3b3b3b)
@@ -198,6 +203,11 @@ export default class Environment
         this.addOverlay()
 
         this.experience.npc.moveNpcToDayPosition()
+
+        this.experience.world.Portail_shader.model.visible = false
+        this.experience.world.Portail_shader.portailpointLight.visible = false
+        this.experience.world.Fruit_pose.model.visible = false
+        this.experience.world.Cristaux_portail.model.visible = false
 
         this.sunLight.color.setHex(0xffffff)
         this.hemiLight.color.setHex(0xffffff)

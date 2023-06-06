@@ -158,10 +158,12 @@ void main()
         this.model.scale.set(1, 1, 1)
         this.model.castShadow = true
         this.setPhysicsMeshs(this.model)
+        this.model.visible = false
 
-        const pointLight = new PointLight(0x21b4d6, 8, 5)
-        pointLight.position.set(52.52305, 14.867, -71.9713)
-        this.experience.scene.add(pointLight)
+        this.portailpointLight = new PointLight(0x21b4d6, 20, 10)
+        this.portailpointLight.position.set(52.52305, 14.867, -71.9713)
+        this.portailpointLight.visible = false
+        this.experience.scene.add(this.portailpointLight)
 
         if(this.experience.debug.active)
         {
