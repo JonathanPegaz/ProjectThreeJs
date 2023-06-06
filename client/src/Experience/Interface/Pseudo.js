@@ -21,8 +21,14 @@ export default class Pseudo {
 
         this.nameText = document.createElement('span');
         this.nameText.classList.add('npc-name-text');
-        if (this.isPlayer)
-            this.nameText.style.color = '#FFD700';
+        if (this.isPlayer) {
+            const playerRank = document.createElement('img');
+            playerRank.src = 'icons/rank/rank0.svg';
+            this.nameContainer.appendChild(playerRank);
+
+            this.nameContainer.classList.add('player-name-container');
+            this.nameText.style.color = '#21B4D6';
+        }
         this.nameText.textContent = this.text;
 
         this.nameContainer.appendChild(this.nameText);
