@@ -225,7 +225,7 @@ export const assets = [
         display: 2,
         castShadow: true,
         isAnimated: false,
-        isInteractive: false
+        isInteractive: true
     },
     {
         type: ArbreRose,
