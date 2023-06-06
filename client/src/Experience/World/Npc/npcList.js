@@ -7,9 +7,9 @@ export default [
         type: Npc,
         model: 'chief_idle',
         position: {
-            x: -83,
-            y: 15.58,
-            z: -17
+            x: -65.36,
+            y: 16.1,
+            z: -14.39
         },
         rotation: {
             x: 0,
@@ -53,13 +53,13 @@ export default [
         type: Npc,
         model: 'pnj_idle',
         position: {
-            x: -80,
-            y: 15.58,
-            z: -17
+            x: -87.39,
+            y: 15.54,
+            z: -16.92
         },
         rotation: {
             x: 0,
-            y: 0,
+            y: Math.PI * 1.5,
             z: 0
         },
         nightPosition: {
