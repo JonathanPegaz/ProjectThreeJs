@@ -88,8 +88,6 @@ export default class Player {
         //this.resource.animations.push(this.resources.items.player_crouching.animations[0])
         this.mixer = new AnimationMixer(this.model)
 
-        console.log(this.resource)
-
         // action
         this.animations.idle = {
             clip: this.resource.animations[1],
