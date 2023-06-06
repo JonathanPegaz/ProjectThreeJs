@@ -11,11 +11,12 @@ import Experience from "../Experience.js";
 import { assets } from './Environments/assets.js';
 import QuestManager from "./Quest/QuestManager.js";
 import TriggerZoneController from "./InteractiveObject/Controller/TriggerZoneController.js";
-import {BackSide, Fog, FogExp2, Mesh, MeshBasicMaterial, SphereGeometry, Vector3} from "three";
+import {BackSide, Color, Fog, FogExp2, Mesh, MeshBasicMaterial, SphereGeometry, Vector3} from "three";
 import AnnouncementZoneController from "./InteractiveObject/Controller/AnnouncementZoneController.js";
 import Fireflies from "./Fireflies.js";
 import LootWindow from "./Player/Hud/LootWindow.js";
 import {NodeToyMaterial} from "@nodetoy/three-nodetoy";
+import {color} from "three/nodes";
 
 export default class World
 {
@@ -38,7 +39,8 @@ export default class World
         this.ocean = new Ocean()
         this.environment = new Environment()
         this.landscape = new Landscape()
-        this.fireflies = new Fireflies()
+        this.fireflies = new Fireflies(new Color('#ffffff'))
+        this.firefliesSecond = new Fireflies(new Color('#F9D016'))
     }
 
     init() {
@@ -95,10 +97,13 @@ export default class World
         }
     }
 
+
+
     update()
     {
         this.ocean.update()
         this.fireflies.update()
+        this.firefliesSecond.update()
 
         /*if (this.experience.controls && (this.experience.controls.keys.down.forward || this.experience.controls.keys.down.backward || this.experience.controls.keys.down.strafeLeft || this.experience.controls.keys.down.strafeRight)) {
             this.meshsDisplayUpdate()
@@ -106,8 +111,9 @@ export default class World
 
         // update mixer animatedAsset
         for (let asset of this.animatedAsset) {
-            if (asset.mixer)
+            if (asset.mixer) {
                 asset.mixer.update(this.experience.time.delta / 1000)
+            }
             if(asset.videoTexture)
                 asset.videoTexture.needsUpdate = true
             if(asset.isShader) {
@@ -119,7 +125,7 @@ export default class World
 
     meshsDisplayUpdate() {
         // loop through all the small meshs and check if they are close enough to be displayed
-        /*for (let mesh of this.smallMeshsDistance) {
+        for (let mesh of this.smallMeshsDistance) {
             mesh.visible = this.experience.camera.instance.position.distanceTo(mesh.geometry.boundingSphere.center) < 50
         }
         // loop through all the medium meshs and check if they are close enough to be displayed
@@ -130,7 +136,7 @@ export default class World
         for (let mesh of this.bigMeshsDistance) {
             mesh.visible = this.experience.camera.instance.position.distanceTo(mesh.geometry.boundingSphere.center) < 70;
         }
-        loop through all the shadow meshs and check if they are close enough to be displayed
+        /*loop through all the shadow meshs and check if they are close enough to be displayed
         for (let mesh of this.shadowMeshs) {
             let distance = this.experience.camera.instance.position.distanceTo(mesh.geometry.boundingSphere.center) < 50;
             if (!distance) {
@@ -152,8 +158,11 @@ export default class World
         for (let asset of assets)
         {
             // remove Mesh from the scene
-            this.scene.remove(this[asset.resource].model)
-            this[asset.resource].destroy()
+            console.log(asset)
+            if(this[asset.resource].model) {
+                this.scene.remove(this[asset.resource].model)
+                this[asset.resource].destroy()
+            }
             this[asset.resource] = null
         }
 

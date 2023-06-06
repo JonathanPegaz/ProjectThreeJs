@@ -15,13 +15,13 @@ export default class PortailIntroShader extends Model3D
 
     setModel() {
         this.debugObject = {
-            portalColorStart: '#cbc8c8',
-            portalColorEnd: '#6a6a71'
+            portalColorStart: '#ffffff',
+            portalColorEnd: '#21b4d6'
         }
         this.isShader = true
         // create rounded plane and a texture
 
-        const geometry = new CircleGeometry( 1.35, 32 )
+        const geometry = new CircleGeometry( 1.31, 32 )
         const portalShader = new ShaderMaterial({
             side: DoubleSide,
             uniforms:
@@ -153,8 +153,8 @@ void main()
         })
 
         this.model = new Mesh(geometry, portalShader)
-        this.model.position.set(-96.3208, 15.9828, -19.5588)
-        this.model.rotation.set(0, Math.PI*1.38, 0)
+        this.model.position.set(-96.3589, 16.2, -19.1417)
+        this.model.rotation.set(0, Math.PI*1.37, 0)
         this.model.scale.set(1, 1, 1)
         this.model.castShadow = true
         this.setPhysicsMeshs(this.model)

@@ -4,12 +4,15 @@ import {AdditiveBlending, BufferAttribute, BufferGeometry, Color, Points, Shader
 
 export default class Fireflies
 {
-    constructor()
+    constructor(color)
     {
         this.experience = new Experience()
         this.scene = this.experience.scene
         this.time = this.experience.time
         this.debug = this.experience.debug
+
+        this.color = color
+
         this.setModel()
     }
 
@@ -17,7 +20,7 @@ export default class Fireflies
     {
         // Fireflies
         this.firefliesGeometry = new BufferGeometry()
-        const firefliesCount = 6000
+        const firefliesCount = 3000
         const positionArray = new Float32Array(firefliesCount * 3)
         const scaleArray = new Float32Array(firefliesCount)
 
@@ -40,7 +43,7 @@ export default class Fireflies
                     uTime: { value: 0 },
                     uPixelRatio: { value: Math.min(window.devicePixelRatio, 2) },
                     uSize: { value: 100 },
-                    uColor: { value: new Color('#ffffff') },
+                    uColor: { value: this.color },
                 },
             vertexShader: `uniform float uTime;
                         uniform float uPixelRatio;

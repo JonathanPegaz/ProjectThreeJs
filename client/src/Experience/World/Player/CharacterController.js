@@ -32,7 +32,6 @@ class CharacterFSM extends FiniteStateMachine {
         this._AddState('walk', WalkState);
         this._AddState('run', RunState);
         this._AddState('pick', PickState);
-        this._AddState('crouch', CrouchState);
     }
 }
 

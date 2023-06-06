@@ -91,6 +91,11 @@ export default [
         path: 'models/character/Joueur/player_walking_nocape.glb'
     },
     {
+        name: 'player_running_nocape',
+        type: 'gltfModel',
+        path: 'models/character/Joueur/player_running_nocape.glb'
+    },
+    {
         name: 'pnj_greeting',
         type: 'gltfModel',
         path: 'models/character/PNJ/pnj_greeting.glb'
@@ -382,7 +387,7 @@ export default [
     {
         name: 'Fruit_ramasse',
         type: 'gltfModel',
-        path: 'models/fruit_ramasse.glb'
+        path: 'models/fruit_drop.glb'
     },
     {
         name: 'Flamme',

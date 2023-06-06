@@ -10,6 +10,5 @@ export default class PortailIntro extends Model3D
 
     setMaterial(child) {
         return super.setMaterial(child);
-        child.receiveShadow = true
     }
 }

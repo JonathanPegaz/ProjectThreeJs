@@ -1,5 +1,5 @@
 import Model3D from "../../Model3D.js";
-import {MeshToonMaterial, PointLight} from "three";
+import {AnimationMixer, LoopRepeat, MeshToonMaterial, PointLight} from "three";
 
 
 export default class Flag extends Model3D
@@ -14,5 +14,13 @@ export default class Flag extends Model3D
             ...child.material,
             type: 'MeshToonMaterial',
         })
+    }
+
+    setAnimation() {
+        this.mixer = new AnimationMixer(this.model)
+        for (let i = 0; i < this.animations.length; i++) {
+            this.mixer.clipAction(this.animations[i]).loop = LoopRepeat
+            this.mixer.clipAction(this.animations[i]).play()
+        }
     }
 }

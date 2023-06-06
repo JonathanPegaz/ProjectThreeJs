@@ -31,7 +31,7 @@ export default class Npc extends EventEmitter{
         this.id = data.id
         this.object = new Object3D()
         this.object.position.set(data.position.x, data.position.y, data.position.z)
-        this.object.rotation.set(data.rotation.x, data.rotation.y, data.rotation.z)
+        this.object.scale.set(data.scale, data.scale, data.scale)
 
         this.canInteract = false
         this.isPlayerInteracting = false
@@ -40,9 +40,10 @@ export default class Npc extends EventEmitter{
 
         this.icon = new Icons(this, '')
 
-        this.setModel()
+        this.setModel(data.positionOffset)
+
         this.setAnimation()
-        this.setPhysics()
+        this.setPhysics(data.rotation.y)
         this.setHitbox()
         this.name = new Pseudo(this, data.name, false)
         this.setDialog(data.dialog)
@@ -53,16 +54,17 @@ export default class Npc extends EventEmitter{
         this.interactMarker = new InteractMarker(this, 0.0)
     }
 
-    setModel() {
+    setModel(positionOffset) {
         this.model = clone(this.resources.items[`${this.animations_type}_idle`].scene)
         this.model.scale.set(0.175, 0.175, 0.175)
-        this.model.position.set(0, -0.6, 0)
+        this.model.position.set(0, -0.6 + positionOffset, 0)
 
         this.model.traverse((child) =>
         {
             if(child instanceof Mesh)
             {
                 child.castShadow = false
+                child.receiveShadow = true
                 child.material = new MeshToonMaterial({
                     ...child.material,
                     side: FrontSide,
@@ -79,7 +81,7 @@ export default class Npc extends EventEmitter{
         const shadow = new Mesh( shadowgeo, shadowmat );
         shadow.renderOrder = -1;
         shadow.rotation.x = - Math.PI / 2;
-        shadow.position.y = -0.55;
+        shadow.position.y = -0.55 + positionOffset;
         this.object.add( shadow );
 
         this.experience.scene.add(this.object)
@@ -112,7 +114,7 @@ export default class Npc extends EventEmitter{
         this.animations.idle.action.play()
     }
 
-    setPhysics() {
+    setPhysics(rotation) {
 
         const shape = new CANNON.Sphere(0.6); // dimensions de la boîte
         this.body = new CANNON.Body({
@@ -122,6 +124,8 @@ export default class Npc extends EventEmitter{
             // position: new CANNON.Vec3(53, 14, -68),
             fixedRotation: true,
         })
+
+        this.body.quaternion.setFromAxisAngle(new CANNON.Vec3(0, 1, 0), rotation)
 
         this.physics.world.addBody(this.body)
 
@@ -156,10 +160,10 @@ export default class Npc extends EventEmitter{
                 this.icon.visible(false)
                 if (this.anim) {
                     this.anim.pause()
-                    this.setBodyRotation(
-                        this.experience.localPlayer.object.position.x - this.object.position.x,
-                        this.experience.localPlayer.object.position.z - this.object.position.z)
                 }
+                this.setBodyRotation(
+                    this.experience.localPlayer.object.position.x - this.object.position.x,
+                    this.experience.localPlayer.object.position.z - this.object.position.z)
 
                 return;
             }

@@ -34,9 +34,6 @@ export default class IdleState extends State {
         else if (input.keys.down.action) {
             this._parent.SetState('pick');
         }
-        else if (input.keys.down.crouch) {
-            this._parent.SetState('crouch');
-        }
         /*else if (input.keys.down.jump) {
             this._parent.SetState('dance');
         }*/

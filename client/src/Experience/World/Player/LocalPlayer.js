@@ -44,7 +44,7 @@ export default class LocalPlayer extends Player {
             shape: shape,
             mass: 1,
             allowSleep: false,
-            position: new CANNON.Vec3(-99, 17, -19),
+            position: new CANNON.Vec3(-96.1349, 15.562, -16.916),
             // position: new CANNON.Vec3(57, 15, -56),
             fixedRotation: true,
         })

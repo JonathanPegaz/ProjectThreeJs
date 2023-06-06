@@ -2,7 +2,7 @@ import Model3D from "../../Model3D.js";
 import {
     DoubleSide,
     FrontSide,
-    LinearFilter,
+    LinearFilter, Mesh,
     MeshBasicMaterial,
     MeshToonMaterial,
     PositionalAudio,
@@ -15,6 +15,15 @@ export default class Cascade extends Model3D
     constructor(model)
     {
         super(model)
+
+        this.model.traverse((child) =>
+        {
+            if(child instanceof Mesh)
+            {
+                child.castShadow = false
+                child.receiveShadow = false
+            }
+        })
     }
 
     setMaterial(child) {

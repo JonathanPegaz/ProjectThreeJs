@@ -1,5 +1,5 @@
 import Model3D from "../../Model3D.js";
-import {DoubleSide, FrontSide, LinearFilter, MeshBasicMaterial, VideoTexture} from "three";
+import {DoubleSide, FrontSide, LinearFilter, MeshBasicMaterial, MeshToonMaterial, VideoTexture} from "three";
 import {NodeToyMaterial} from "@nodetoy/three-nodetoy";
 
 export default class Lac extends Model3D
@@ -19,13 +19,11 @@ export default class Lac extends Model3D
         this.videoTexture.minFilter = LinearFilter
         this.videoTexture.magFilter = LinearFilter
 
-        child.material = new MeshBasicMaterial({
+        child.material = new MeshToonMaterial({
             map: this.videoTexture,
             side: DoubleSide,
             toneMapped: false,
         })
-        child.receiveShadow = true;
-
         video.play()
     }
 }
