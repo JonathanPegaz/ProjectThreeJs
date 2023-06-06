@@ -5,8 +5,8 @@ import Pseudo from "../../Interface/Pseudo.js";
 import Player from "./Player.js";
 
 export default class LocalPlayer extends Player {
-    constructor() {
-        super()
+    constructor(isParrain = false) {
+        super(isParrain)
         this.id = null
 
         this.pseudo = new Pseudo(this, this.experience.mainscreen.pseudo)
@@ -44,13 +44,14 @@ export default class LocalPlayer extends Player {
             shape: shape,
             mass: 1,
             allowSleep: false,
-            position: new CANNON.Vec3(-96.1349, 15.562, -16.916),
+           // position: new CANNON.Vec3(-96.1349, 15.562, -16.916),
             //position: new CANNON.Vec3(57, 15, -56), //PARTY
             //position: new CANNON.Vec3(-27, 20, 47), //CRYSTAL
             //position: new CANNON.Vec3(13, 14, -10), //TREE
             // position: new CANNON.Vec3(32, 14, -32), //MUSHROOM
-            //position: new CANNON.Vec3(57, 15, -56), //PORTAL
+            position: new CANNON.Vec3(57, 15, -56), //PORTAL
             // position: new CANNON.Vec3(-85, 18, 22), //RUIN 1
+            // position: new CANNON.Vec3(52, 30, 61),
             fixedRotation: true,
         })
 
@@ -78,6 +79,7 @@ export default class LocalPlayer extends Player {
             rx: this.object.rotation.x,
             ry: this.object.rotation.y,
             rz: this.object.rotation.z,
+            isParrain: this.isParrain
         })
     }
 
@@ -112,7 +114,8 @@ export default class LocalPlayer extends Player {
                 rx: this.object.rotation.x,
                 ry: this.object.rotation.y,
                 rz: this.object.rotation.z,
-                action: this.controller.stateMachine._currentState.Name
+                action: this.controller.stateMachine._currentState.Name,
+                isParrain: this.isParrain
             })
     }
 

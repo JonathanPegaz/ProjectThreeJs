@@ -32,6 +32,8 @@ io.sockets.on('connection', function(socket){
 		socket.userData.ry = data.ry;
 		socket.userData.rz = data.rz;
 		socket.userData.action = "idle";
+		socket.userData.isParrain = data.isParrain;
+
 
 		socket.broadcast.emit('newPlayer', socket.userData);
 	});
@@ -77,7 +79,8 @@ setInterval(function(){
 				rx: socket.userData.rx,
 				ry: socket.userData.ry,
 				rz: socket.userData.rz,
-				action: socket.userData.action
+				action: socket.userData.action,
+				isParrain: socket.userData.isParrain
 			});
 		}
 	})

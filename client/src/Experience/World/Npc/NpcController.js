@@ -16,6 +16,19 @@ export default class NpcController {
         })
     }
 
+    deleteAllNpc () {
+        this.npcs.forEach(npc => {
+            this.list[npc.id].destroy()
+            this.delete(npc.id)
+        })
+    }
+
+    moveNpcToNightPosition() {
+        this.npcs.forEach(npc => {
+            this.list[npc.id].moveToNightPosition()
+        })
+    }
+
     get(id) {
         return this.list[id]
     }

@@ -172,6 +172,8 @@ export default class Environment
         this.isNight = true
         this.addOverlay()
 
+        this.experience.npc.moveNpcToNightPosition()
+
         this.sunLight.color.setHex(0x001624)
         this.hemiLight.color.setHex(0x3b3b3b)
 

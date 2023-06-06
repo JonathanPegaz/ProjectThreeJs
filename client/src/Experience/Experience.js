@@ -66,6 +66,11 @@ export default class Experience
                 window.location.reload()
             }
             this.debugFolder.add(this.debugObject, 'cleanMemory').name('Clean memory')
+
+            this.debugFolderplayer = this.debug.ui.addFolder('Player')
+            this.debugObjectplayer = {}
+            this.debugObjectplayer.isParrain = false
+            this.debugFolderplayer.add(this.debugObjectplayer, 'isParrain').name('isParrain')
         }
 
         // Wait for resources
@@ -81,7 +86,12 @@ export default class Experience
             this.hud = new Hud()
             this.npc = new NpcController()
             this.network = new Network()
-            this.localPlayer = new LocalPlayer()
+            if (this.debug.active) {
+                this.localPlayer = new LocalPlayer(this.debugObjectplayer.isParrain ? this.debugObjectplayer.isParrain : false)
+            } else {
+                this.localPlayer = new LocalPlayer()
+            }
+
             //this.minimap = new Minimap()
             if(this.world.Cascade)
                 this.world.Cascade.sound.play()

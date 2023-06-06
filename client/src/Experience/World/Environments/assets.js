@@ -80,7 +80,7 @@ export const assets = [
         isAnimated: false,
         isInteractive: false
     },
-    {
+    /*{
         type: Dalles,
         resource: 'Dalles',
         hasPhysics: false,
@@ -88,7 +88,7 @@ export const assets = [
         castShadow: false,
         isAnimated: false,
         isInteractive: false
-    },
+    },*/
     {
         type: Ferme,
         resource: 'Ferme',
