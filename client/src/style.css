@@ -379,7 +379,7 @@ input[type="checkbox"]:checked::before {
 }
 
 .announcement-content-gif {
-    width: 50%;
+    width: 70%;
 }
 
 #chat {
