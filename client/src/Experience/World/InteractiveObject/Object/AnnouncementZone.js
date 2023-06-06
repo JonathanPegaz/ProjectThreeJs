@@ -33,7 +33,7 @@ export default class AnnouncementZone extends InteractiveObject {
     if (isBusy) return
 
     this.wait(() => this.experience.alert).then(() => {
-      this.experience.alert.addQueue(this.experience.alert.type.AREA, this.name, 5000, this.unableGIF)
+      this.experience.alert.addQueue(this.experience.alert.type.AREA, this.name, 6000, this.unableGIF)
     })
   }
 
