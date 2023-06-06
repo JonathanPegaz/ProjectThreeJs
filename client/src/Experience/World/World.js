@@ -106,9 +106,9 @@ export default class World
         this.firefliesSecond.update()
         this.environment.update()
 
-        if (this.experience.controls && (this.experience.controls.keys.down.forward || this.experience.controls.keys.down.backward || this.experience.controls.keys.down.strafeLeft || this.experience.controls.keys.down.strafeRight)) {
+        /*if (this.experience.controls && (this.experience.controls.keys.down.forward || this.experience.controls.keys.down.backward || this.experience.controls.keys.down.strafeLeft || this.experience.controls.keys.down.strafeRight)) {
             this.meshsDisplayUpdate()
-        }
+        }*/
 
         // update mixer animatedAsset
         for (let asset of this.animatedAsset) {
