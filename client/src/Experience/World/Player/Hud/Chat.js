@@ -6,7 +6,6 @@ export default class Chat {
     constructor() {
         this.experience = new Experience()
         this.initChat();
-        this.setHTML()
     }
 
     initChat() {
@@ -56,39 +55,38 @@ export default class Chat {
 
     }
 
-    setHTML() {
-        const htmlString = `
-          <div class="dialog-content">
-              <div class="dialog-chat-icon">
-              </div>
-              <div class="message-container">
-                <p id="chat-text" class="dialog-text"></p>
-              </div>
-          </div>
-        `
-        this.dialogContainer = document.createElement('div');
-        this.dialogContainer.id = 'dialog-container';
-        this.dialogContainer.classList.add('dialog-container');
-        this.dialogContainer.innerHTML = htmlString;
-    }
-
     /*setCSS2DObject() {
         this.dialogLabel = new CSS2DObject(this.dialogContainer);
         this.dialogLabel.position.set(0, 1.5, 0);
     }*/
 
     createTemporaryChatMessage(data, target) {
-        this.dialogLabel = new CSS2DObject(this.dialogContainer);
-        this.dialogLabel.position.set(0, 1.5, 0);
-        const dialogText = this.dialogContainer.querySelector('#chat-text')
+        const htmlString = `
+          <div class="dialog-content">
+              <div class="dialog-chat-icon">
+              </div>
+              <div class="message-container">
+                <p id="chat-text${data.id}" class="dialog-text"></p>
+              </div>
+          </div>
+        `
+        const dialogContainer = document.createElement('div');
+        dialogContainer.id = 'dialog-container';
+        dialogContainer.classList.add('dialog-container');
+        dialogContainer.innerHTML = htmlString;
+
+
+        let dialogLabel = new CSS2DObject(dialogContainer);
+        dialogLabel.position.set(0, 1.5, 0);
+        const dialogText = dialogContainer.querySelector(`#chat-text${data.id}`)
         dialogText.innerHTML = data.message
-        target.object.add(this.dialogLabel);
+        target.object.add(dialogLabel);
 
         // remove the message after 5 seconds
         setTimeout(() => {
-            if (this.dialogLabel.parent)
-                this.dialogLabel.parent.remove(this.dialogLabel);
-            this.dialogLabel = null;
+            if (dialogLabel.parent)
+                dialogLabel.parent.remove(dialogLabel);
+            dialogLabel = null;
         }, 5000);
     }
 
