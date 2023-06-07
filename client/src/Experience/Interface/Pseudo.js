@@ -3,11 +3,12 @@ import { CSS2DObject} from "three/addons/renderers/CSS2DRenderer.js";
 import {Box3} from "three";
 
 export default class Pseudo {
-    constructor(target, pseudo, isPlayer = true) {
+    constructor(target, pseudo, isParrain = false, isPlayer = true) {
         this.experience = new Experience()
 
         this.target = target
         this.text = pseudo
+        this.isParrain = isParrain
         this.isPlayer = isPlayer
 
         this.setHTML()
@@ -23,7 +24,11 @@ export default class Pseudo {
         this.nameText.classList.add('npc-name-text');
         if (this.isPlayer) {
             const playerRank = document.createElement('img');
-            playerRank.src = 'icons/rank/rank0.svg';
+            if (this.isParrain) {
+                playerRank.src = 'icons/rank/rank3.svg';
+            } else {
+                playerRank.src = 'icons/rank/rank0.svg';
+            }
             this.nameContainer.appendChild(playerRank);
 
             this.nameContainer.classList.add('player-name-container');

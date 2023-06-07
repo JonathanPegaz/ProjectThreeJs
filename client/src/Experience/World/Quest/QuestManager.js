@@ -53,6 +53,7 @@ export default class QuestManager extends EventEmitter{
     quest.off("completed")
     quest.off("track")
     quest.off("update")
+    this.experience.audioController.QuestCompleted.play()
     if (quest.reward) {
       this.trigger('reward', [[quest.reward.item, quest.reward.quantity]])
     }

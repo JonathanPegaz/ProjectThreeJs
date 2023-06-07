@@ -468,11 +468,6 @@ export default [
         path: 'audio/cartoonVoice.mp3'
     },
     {
-        name: 'Footstep',
-        type: 'audio',
-        path: 'audio/FootstepGrass04.wav'
-    },
-    {
         name: 'AmbianceSeaLoop',
         type: 'audio',
         path: 'audio/AmbianceSeaLoopStereo.wav'
@@ -511,7 +506,23 @@ export default [
         name: 'DiggingGround',
         type: 'audio',
         path: 'audio/digging_ground.mp3'
+    },
+    {
+        name: 'QuestCompleted',
+        type: 'audio',
+        path: 'audio/quest_completed.wav'
+    },
+    {
+        name: 'RelaxingOnTheRoad',
+        type: 'audio',
+        path: 'audio/RelaxingOnTheRoad.wav'
+    },
+    {
+        name: 'HappyTheme',
+        type: 'audio',
+        path: 'audio/HappyTheme.wav'
     }
+
 /*    {
         name: 'Firework',
         type: 'gltfModel',

@@ -180,6 +180,7 @@ export default class Environment
             this.hemiLight.color.setHex(0x3b3b3b)
 
             this.experience.audioController.AmbianceNightLoop.play()
+            this.experience.audioController.playBackgroundMusic("RelaxingOnTheRoad")
 
             this.environmentMap.texture = this.resources.items.skybox_night
             this.scene.background = this.environmentMap.texture
@@ -207,6 +208,7 @@ export default class Environment
         this.hemiLight.color.setHex(0xffffff)
 
         this.experience.audioController.AmbianceNightLoop.pause()
+        this.experience.audioController.playBackgroundMusic("DayMusic")
 
         this.environmentMap.texture = this.resources.items.skybox
         this.scene.background = this.environmentMap.texture
@@ -228,6 +230,7 @@ export default class Environment
         window.setTimeout(() => {
             this.addOverlay()
             this.experience.npc.moveNpcToNightPosition()
+            this.experience.audioController.playBackgroundMusic("HappyTheme")
             this.experience.world.Portail_shader.model.visible = true
             this.experience.world.Portail_shader.portailpointLight.visible = true
             this.experience.world.Cristaux_portail.model.visible = true
@@ -242,6 +245,7 @@ export default class Environment
     resetParty() {
         this.addOverlay()
         this.experience.npc.moveNpcToDayPosition()
+        this.experience.audioController.playBackgroundMusic("DayMusic")
 
         this.experience.world.Portail_shader.model.visible = false
         this.experience.world.Portail_shader.portailpointLight.visible = false

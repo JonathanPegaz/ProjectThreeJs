@@ -23,6 +23,7 @@ export default class Player {
         this.network = this.experience.network
         this.isParrain = isParrain
         this.isInteractingObject = false
+        this.isInteractingCarrot = false
 
         if (this.isParrain) {
             this.resource = this.resources.items.parrain

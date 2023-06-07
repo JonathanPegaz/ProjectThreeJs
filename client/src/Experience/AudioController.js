@@ -37,6 +37,16 @@ export default class AudioController {
         this.AmbianceNightLoop.setBuffer(this.resources.AmbianceNightLoop)
         this.AmbianceNightLoop.setLoop(true)
         this.AmbianceNightLoop.setVolume(0.1)
+
+        this.RelaxingOnTheRoad = new Audio(this.camera.audioListener)
+        this.RelaxingOnTheRoad.setBuffer(this.resources.RelaxingOnTheRoad)
+        this.RelaxingOnTheRoad.setLoop(true)
+        this.RelaxingOnTheRoad.setVolume(0.1)
+
+        this.HappyTheme = new Audio(this.camera.audioListener)
+        this.HappyTheme.setBuffer(this.resources.HappyTheme)
+        this.HappyTheme.setLoop(true)
+        this.HappyTheme.setVolume(0.1)
     }
 
     setEffects() {
@@ -75,6 +85,10 @@ export default class AudioController {
         this.FallingObject.setLoop(false)
         this.FallingObject.setVolume(0.5)
 
+        this.QuestCompleted = new Audio(this.camera.audioListener)
+        this.QuestCompleted.setBuffer(this.resources.QuestCompleted)
+        this.QuestCompleted.setLoop(false)
+        this.QuestCompleted.setVolume(1)
 
        /* this.controls.on('forwardDown', () => {
             this.Footstep.play()
