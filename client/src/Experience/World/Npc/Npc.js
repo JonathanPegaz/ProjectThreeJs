@@ -47,7 +47,7 @@ export default class Npc extends EventEmitter{
         this.setAnimation()
         this.setPhysics()
         this.setHitbox()
-        this.name = new Pseudo(this, data.name, false)
+        this.name = new Pseudo(this, data.name, false, false)
         this.setDialog(data.dialog)
         //this.setQuest(data.quest)
         this.travelIndex = 0

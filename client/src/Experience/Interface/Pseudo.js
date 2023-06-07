@@ -3,13 +3,12 @@ import { CSS2DObject} from "three/addons/renderers/CSS2DRenderer.js";
 import {Box3} from "three";
 
 export default class Pseudo {
-    constructor(isParrain, target, pseudo, isPlayer = true) {
+    constructor(target, pseudo, isParrain = false, isPlayer = true) {
         this.experience = new Experience()
-
-        this.isParrain = isParrain
 
         this.target = target
         this.text = pseudo
+        this.isParrain = isParrain
         this.isPlayer = isPlayer
 
         this.setHTML()

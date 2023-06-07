@@ -9,7 +9,7 @@ export default class LocalPlayer extends Player {
         super(isParrain)
         this.id = null
 
-        this.pseudo = new Pseudo(isParrain, this, this.experience.mainscreen.pseudo)
+        this.pseudo = new Pseudo(this, this.experience.mainscreen.pseudo, isParrain)
 
         this.canKick = false
         this.setController()

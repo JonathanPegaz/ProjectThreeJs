@@ -10,7 +10,7 @@ export default class RemotePlayer extends Player {
         this.colour = data.colour;
         this.remotePlayer = true
 
-        this.pseudo = new Pseudo(data.isParrain, this, data.pseudo)
+        this.pseudo = new Pseudo(this, data.pseudo, data.isParrain)
         this.action = 'idle'
     }
 
