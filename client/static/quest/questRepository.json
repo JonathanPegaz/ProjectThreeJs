@@ -26,10 +26,6 @@
         }
       }
     },
-    "reward": {
-      "item": "kooma",
-      "quantity": "100"
-    },
     "next": {
       "quest": 2
     }

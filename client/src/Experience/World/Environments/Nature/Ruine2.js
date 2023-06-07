@@ -32,9 +32,10 @@ export default class Ruine2 extends Model3D
 
     setDialog() {
         const data = [
-            'Il faut faire un texte sur le parrain',
-            'blablabla',
-            "Là faut dire qu'/en récompense il y a 4990 carottes",
+            "Le Kooma est à la fois la monnaie du monde et la représentation de votre influence sur celui-ci.",
+            "Afin d'en obtenir, complétez des défis, des quêtes et explorez le monde.",
+            "Attention, le Kooma à une durée de vie, seul votre investissement vous permettra d'en gagner et de les conserver.",
+            "Voici quelques champignons, cela pourrait vous servir."
         ]
 
         this.dialog = new Dialog(data, this.mesh)
