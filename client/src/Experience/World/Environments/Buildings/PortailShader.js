@@ -239,7 +239,7 @@ void main()
     }
 
     destroy() {
-        this.dialog.destroy()
+        if (this.dialog) this.dialog.destroy()
         this.dialog = null
         this.model = null
     }
