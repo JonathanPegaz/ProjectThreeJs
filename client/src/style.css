@@ -527,6 +527,7 @@ input[type="checkbox"]:checked::before {
 
 .quest-task {
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
     justify-content: flex-end;
     gap: .5rem;
@@ -537,8 +538,6 @@ input[type="checkbox"]:checked::before {
     position: relative;
     border-color: #21B4D6;
     margin-bottom: 1rem;
-    display: flex;
-    flex-wrap: wrap;
 }
 
 .quest-task-completed {
@@ -555,6 +554,10 @@ input[type="checkbox"]:checked::before {
 .quest-task-goal-container {
     display: flex;
     flex-wrap: nowrap;
+}
+
+.quest-task span {
+    font-size: 1.1rem;
 }
 
 .quest-task-mark {
