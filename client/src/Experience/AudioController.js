@@ -26,12 +26,12 @@ export default class AudioController {
         this.SeaLoop = new Audio(this.camera.audioListener)
         this.SeaLoop.setBuffer(this.resources.AmbianceSeaLoop)
         this.SeaLoop.setLoop(true)
-        this.SeaLoop.setVolume(0.08)
+        this.SeaLoop.setVolume(0.05)
 
         this.WindForestLoop = new Audio(this.camera.audioListener)
         this.WindForestLoop.setBuffer(this.resources.AmbianceWindForestLoop)
         this.WindForestLoop.setLoop(true)
-        this.WindForestLoop.setVolume(0.1)
+        this.WindForestLoop.setVolume(0.05)
 
         this.AmbianceNightLoop = new Audio(this.camera.audioListener)
         this.AmbianceNightLoop.setBuffer(this.resources.AmbianceNightLoop)
@@ -88,7 +88,7 @@ export default class AudioController {
         this.QuestCompleted = new Audio(this.camera.audioListener)
         this.QuestCompleted.setBuffer(this.resources.QuestCompleted)
         this.QuestCompleted.setLoop(false)
-        this.QuestCompleted.setVolume(1)
+        this.QuestCompleted.setVolume(0.5)
 
        /* this.controls.on('forwardDown', () => {
             this.Footstep.play()
