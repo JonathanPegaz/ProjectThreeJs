@@ -56,14 +56,17 @@ export default class CollectZone extends InteractiveObject {
       if (!this.canCollect) return
       this.interactMarker.press(pressState, this.collectTime)
       pressState++
+      this.experience.audioController.DiggingGround.play()
       if (pressState > this.collectTime) {
         this.trigger('collect', [[this.itemToCollect, this.nbItemToCollect]]);
         this.interactMarker.stopPress()
+        this.experience.audioController.playSound('Notification')
         pressState = 0
       }
     })
     this.experience.controls.on('actionUp',  () => {
       if (!this.canCollect) return
+      this.experience.audioController.DiggingGround.pause()
       this.interactMarker.stopPress()
       pressState = 0
     })

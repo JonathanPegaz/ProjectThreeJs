@@ -51,15 +51,19 @@ export default class Crystal extends Model3D
         super.interact(origin, mesh, null, false)
         if (this.experience.controls.keys.down.action) {
             this.pressAction++
+            this.experience.audioController.DiggingGround.play()
             mesh.marker.press(this.pressAction, 200)
             if (this.pressAction > 200) {
                 this.pressAction = 0
                 mesh.marker.stopPress()
+                this.experience.audioController.DiggingGround.pause()
                 this.trigger('collect', [['crystal', 1]])
+                this.experience.audioController.playSound('Notification')
             }
         } else {
             this.pressAction = 0
             mesh.marker.stopPress()
+            this.experience.audioController.DiggingGround.pause()
         }
     }
 

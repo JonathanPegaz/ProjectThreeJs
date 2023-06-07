@@ -46,9 +46,9 @@ export default class Cascade extends Model3D
         this.sound = new PositionalAudio( this.experience.camera.audioListener );
         this.sound.position.set(child.geometry.boundingSphere.center.x, child.geometry.boundingSphere.center.y, child.geometry.boundingSphere.center.z)
         this.sound.setBuffer( this.experience.resources.items.Waterfall_audio );
-        this.sound.setRefDistance(0.3)
+        this.sound.setRefDistance(0.4)
         this.sound.setLoop(true)
-        this.sound.setVolume(1)
+        this.sound.setVolume(2)
         this.model.add( this.sound );
     }
 

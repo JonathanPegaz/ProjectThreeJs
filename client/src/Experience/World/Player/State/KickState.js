@@ -39,6 +39,12 @@ export default class KickState extends State {
     Update(timeElapsed, input) {
         if (input.keys.down.action) {
             if (this.experience.localPlayer.canKick) {
+                /*if (this.experience.audioController.Kick.isPlaying) {
+                    return;
+                }*/
+                window.setTimeout(() => {
+                    this.experience.audioController.Kick.play()
+                }, 500)
                 return;
             }
 

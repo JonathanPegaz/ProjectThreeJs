@@ -98,13 +98,15 @@ export default class Experience
             }
 
             //this.minimap = new Minimap()
-            if(this.world.Cascade)
-                this.world.Cascade.sound.play()
             /*this.world.Vent1.model.position.set(this.localPlayer.object.position.x, this.localPlayer.object.position.y, this.localPlayer.object.position.z)
             this.localPlayer.object.add(this.world.Vent1.model)*/
             this.resources.homeVideoDiv.remove()
             this.audioController.setEffects()
             this.audioController.playBackgroundMusic('DayMusic')
+            this.audioController.SeaLoop.play()
+            this.audioController.WindForestLoop.play()
+            if(this.world.Cascade)
+                this.world.Cascade.sound.play()
         })
 
         // Resize event

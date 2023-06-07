@@ -171,47 +171,42 @@ export default class Environment
     }
 
     setNight() {
-        this.isNight = true
-        this.addOverlay()
-
-        this.experience.npc.moveNpcToNightPosition()
-        this.experience.world.Portail_shader.model.visible = true
-        this.experience.world.Portail_shader.portailpointLight.visible = true
-        this.experience.world.Fruit_pose.model.visible = true
-        this.experience.world.Cristaux_portail.model.visible = true
-
-        this.sunLight.color.setHex(0x001624)
-        this.hemiLight.color.setHex(0x3b3b3b)
-
-        this.environmentMap.texture = this.resources.items.skybox_night
-        this.scene.background = this.environmentMap.texture
-        //this.scene.environment = this.environmentMap.texture
-        this.experience.scene.fog.color.setHex(0x001624)
-        this.experience.world.fireflies.firefliesMaterial.uniforms.uColor.value.setHex(0xe3cf3e)
-        this.experience.world.firefliesSecond.firefliesMaterial.uniforms.uColor.value.setHex(0x0021f3)
-
-        this.flameLights.forEach(flameLight => {
-            flameLight.visible = true
-        })
-
         window.setTimeout(() => {
-            this.removeOverlay()
-        }, 500)
+
+            this.isNight = true
+            this.addOverlay()
+
+            this.sunLight.color.setHex(0x001624)
+            this.hemiLight.color.setHex(0x3b3b3b)
+
+            this.experience.audioController.AmbianceNightLoop.play()
+
+            this.environmentMap.texture = this.resources.items.skybox_night
+            this.scene.background = this.environmentMap.texture
+            //this.scene.environment = this.environmentMap.texture
+            this.experience.scene.fog.color.setHex(0x001624)
+            this.experience.world.fireflies.firefliesMaterial.uniforms.uColor.value.setHex(0xe3cf3e)
+            this.experience.world.firefliesSecond.firefliesMaterial.uniforms.uColor.value.setHex(0x0021f3)
+
+            this.flameLights.forEach(flameLight => {
+                flameLight.visible = true
+            })
+
+            window.setTimeout(() => {
+                this.removeOverlay()
+            }, 500)
+
+        }, this.debug.active ? 100 : 3000)
     }
 
     setDay() {
         this.isNight = false
         this.addOverlay()
 
-        this.experience.npc.moveNpcToDayPosition()
-
-        this.experience.world.Portail_shader.model.visible = false
-        this.experience.world.Portail_shader.portailpointLight.visible = false
-        this.experience.world.Fruit_pose.model.visible = false
-        this.experience.world.Cristaux_portail.model.visible = false
-
         this.sunLight.color.setHex(0xffffff)
         this.hemiLight.color.setHex(0xffffff)
+
+        this.experience.audioController.AmbianceNightLoop.pause()
 
         this.environmentMap.texture = this.resources.items.skybox
         this.scene.background = this.environmentMap.texture
@@ -223,6 +218,35 @@ export default class Environment
         this.flameLights.forEach(flameLight => {
             flameLight.visible = false
         })
+
+        window.setTimeout(() => {
+            this.removeOverlay()
+        }, 500)
+    }
+
+    setParty() {
+        window.setTimeout(() => {
+            this.addOverlay()
+            this.experience.npc.moveNpcToNightPosition()
+            this.experience.world.Portail_shader.model.visible = true
+            this.experience.world.Portail_shader.portailpointLight.visible = true
+            this.experience.world.Cristaux_portail.model.visible = true
+
+            window.setTimeout(() => {
+                this.removeOverlay()
+            }, 500)
+
+        }, this.debug.active ? 100 : 3000)
+    }
+
+    resetParty() {
+        this.addOverlay()
+        this.experience.npc.moveNpcToDayPosition()
+
+        this.experience.world.Portail_shader.model.visible = false
+        this.experience.world.Portail_shader.portailpointLight.visible = false
+        this.experience.world.Fruit_pose.model.visible = false
+        this.experience.world.Cristaux_portail.model.visible = false
 
         window.setTimeout(() => {
             this.removeOverlay()

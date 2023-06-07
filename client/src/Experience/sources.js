@@ -69,6 +69,11 @@ export default [
         path: 'models/character/Joueur/player_picking.glb'
     },
     {
+        name: 'player_dancing',
+        type: 'gltfModel',
+        path: 'models/character/Joueur/player_idle.glb'
+    },
+    {
         name: 'player_idle_nocape',
         type: 'gltfModel',
         path: 'models/character/Joueur/player_idle_nocape.glb'
@@ -92,6 +97,11 @@ export default [
         name: 'player_kicking_nocape',
         type: 'gltfModel',
         path: 'models/character/Joueur/player_kicking_nocape.glb'
+    },
+    {
+        name: 'player_dancing_nocape',
+        type: 'gltfModel',
+        path: 'models/character/Joueur/player_dancing_nocape.glb'
     },
     {
         name: 'pnj_greeting',
@@ -453,8 +463,58 @@ export default [
         path: 'audio/TownLOOP.wav'
     },
     {
+        name: 'CartoonVoice',
+        type: 'audio',
+        path: 'audio/cartoonVoice.mp3'
+    },
+    {
         name: 'Footstep',
         type: 'audio',
         path: 'audio/FootstepGrass04.wav'
+    },
+    {
+        name: 'AmbianceSeaLoop',
+        type: 'audio',
+        path: 'audio/AmbianceSeaLoopStereo.wav'
+    },
+    {
+        name: 'AmbianceWindForestLoop',
+        type: 'audio',
+        path: 'audio/AmbianceWindForestLoop.wav'
+    },
+    {
+        name: 'AmbianceNightLoop',
+        type: 'audio',
+        path: 'audio/AmbianceNightLoop.wav'
+    },
+    {
+        name: 'Kick',
+        type: 'audio',
+        path: 'audio/kick.mp3'
+    },
+    {
+        name: 'PickObject',
+        type: 'audio',
+        path: 'audio/pick_object.mp3'
+    },
+    {
+        name: 'FallingObject',
+        type: 'audio',
+        path: 'audio/falling_object.mp3'
+    },
+    {
+        name: 'Notification',
+        type: 'audio',
+        path: 'audio/notification.mp3'
+    },
+    {
+        name: 'DiggingGround',
+        type: 'audio',
+        path: 'audio/digging_ground.mp3'
     }
+/*    {
+        name: 'Firework',
+        type: 'gltfModel',
+        path: 'models/Firework.glb'
+    }*/
 ]

@@ -42,15 +42,19 @@ export default class FruitRamasse extends Model3D {
         super.interact(origin, mesh, null, false)
         if (this.experience.controls.keys.down.action) {
             this.pressAction++
+            this.experience.audioController.DiggingGround.play()
             mesh.marker.press(this.pressAction, this.timeToInteract)
             if (this.pressAction > this.timeToInteract) {
                 this.pressAction = 0
                 mesh.marker.stopPress()
                 this.trigger('collect', [[this.itemToCollect, 1]])
+                this.experience.audioController.playSound('Notification')
+                this.experience.audioController.DiggingGround.pause()
             }
         } else {
             this.pressAction = 0
             mesh.marker.stopPress()
+            this.experience.audioController.DiggingGround.pause()
         }
     }
 
