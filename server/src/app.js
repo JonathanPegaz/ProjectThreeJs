@@ -52,7 +52,7 @@ io.sockets.on('connection', function(socket){
 	socket.on('chat message', function(data){
 		console.log(`chat message:${data.id} ${data.message}`);
 		//io.to(data.id).emit('chat message', { id: socket.id, message: data.message });
-		io.emit('chat message', { id: data.id, message: data.message });
+		io.emit('chat message', { id: data.id, pseudo: data.pseudo, message: data.message });
 	})
 });
 

@@ -23,7 +23,6 @@ export default class Dialog {
     }
 
     setHTML() {
-
         const htmlString = `
           <div class="dialog-content">
               <div class="dialog-chat-icon">

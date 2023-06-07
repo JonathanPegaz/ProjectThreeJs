@@ -35,7 +35,7 @@ export default class IdleState extends State {
             if(this.experience.localPlayer.canKick) {
                 this._parent.SetState('kick');
             }
-            else if(this.experience.localPlayer.isInteractingObject) {
+            else if(this.experience.localPlayer.isInteractingObject || this.experience.localPlayer.isInteractingCarrot) {
                 this._parent.SetState('pick');
             }
             else {

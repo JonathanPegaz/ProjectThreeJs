@@ -74,11 +74,13 @@ export default class CollectZone extends InteractiveObject {
 
   startCollect() {
     this.interactMarker.mark()
+    this.experience.localPlayer.isInteractingCarrot = true
     this.canCollect = true
   }
 
   stopCollect() {
     this.interactMarker.unmark()
+    this.experience.localPlayer.isInteractingCarrot = false
     this.canCollect = false
   }
 

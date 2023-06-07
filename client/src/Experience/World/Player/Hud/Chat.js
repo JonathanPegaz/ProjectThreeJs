@@ -1,10 +1,12 @@
 import Experience from "../../../Experience.js";
+import {CSS2DObject} from "three/addons/renderers/CSS2DRenderer.js";
 
 
 export default class Chat {
     constructor() {
         this.experience = new Experience()
         this.initChat();
+        this.setHTML()
     }
 
     initChat() {
@@ -17,8 +19,6 @@ export default class Chat {
         this.chatButton.addEventListener("click", () => {
             this.sendMessage();
         })
-
-
 
         this.toggleButton.addEventListener("click", () => {
             this.chat.classList.toggle("chat-hidden");
@@ -56,11 +56,56 @@ export default class Chat {
 
     }
 
+    setHTML() {
+        const htmlString = `
+          <div class="dialog-content">
+              <div class="dialog-chat-icon">
+              </div>
+              <div class="message-container">
+                <p id="chat-text" class="dialog-text"></p>
+              </div>
+          </div>
+        `
+        this.dialogContainer = document.createElement('div');
+        this.dialogContainer.id = 'dialog-container';
+        this.dialogContainer.classList.add('dialog-container');
+        this.dialogContainer.innerHTML = htmlString;
+    }
+
+    /*setCSS2DObject() {
+        this.dialogLabel = new CSS2DObject(this.dialogContainer);
+        this.dialogLabel.position.set(0, 1.5, 0);
+    }*/
+
+    createTemporaryChatMessage(data, target) {
+        this.dialogLabel = new CSS2DObject(this.dialogContainer);
+        this.dialogLabel.position.set(0, 1.5, 0);
+        const dialogText = this.dialogContainer.querySelector('#chat-text')
+        dialogText.innerHTML = data.message
+        target.object.add(this.dialogLabel);
+
+        // remove the message after 5 seconds
+        setTimeout(() => {
+            if (this.dialogLabel.parent)
+                this.dialogLabel.parent.remove(this.dialogLabel);
+            this.dialogLabel = null;
+        }, 5000);
+    }
+
     sendMessage() {
         if (this.chatInput.value.length > 0) {
             this.experience.network.socket.emit("chat message", {
-                id: this.experience.localPlayer.pseudo.text ,message: this.chatInput.value
+                id: this.experience.localPlayer.id,
+                pseudo: this.experience.localPlayer.pseudo.text,
+                message: this.chatInput.value
             });
+
+            this.createTemporaryChatMessage({
+                id: this.experience.localPlayer.id,
+                pseudo: this.experience.localPlayer.pseudo.text,
+                message: this.chatInput.value
+            }, this.experience.localPlayer)
+
             this.chatInput.value = "";
         }
     }
@@ -68,8 +113,12 @@ export default class Chat {
     addMessage(data) {
         let message = document.createElement('li');
         //TODO : change color of the message if it's from the local player
-        message.textContent = '<span class="chat-messages-id">' + data.id + ' : </span><span>' + data.message + '</span>';
+        message.innerHTML = '<span class="chat-messages-id">' + data.pseudo + ' : </span><span>' + data.message + '</span>';
         this.chatMessages.appendChild(message);
+        const player = this.experience.network.getRemotePlayerById(data.id)
+        if (player) {
+            this.createTemporaryChatMessage(data, player)
+        }
     }
 
     fadeIn() {
@@ -85,6 +134,11 @@ export default class Chat {
 
     update() {
         this.chatMessages.scrollTop = this.chat.scrollHeight;
+        if(this.chatInput == document.activeElement) {
+            this.experience.controls.pause = true;
+        } else {
+            this.experience.controls.pause = false;
+        }
     }
 
     destroy() {
