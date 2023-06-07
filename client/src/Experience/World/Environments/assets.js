@@ -1,6 +1,5 @@
 import Barriere from "./Buildings/Barriere.js";
 import Batiments from "./Buildings/Batiments.js";
-import Dalles from "./Buildings/Dalles.js";
 import Panneaux from "./Buildings/Panneaux.js";
 import Ponts from "./Buildings/Ponts.js";
 import Props from "./Buildings/Props.js";
@@ -22,18 +21,14 @@ import Stele1 from "./Nature/Stele1.js";
 import Stele2 from "./Nature/Stele2.js";
 import Stele3 from "./Nature/Stele3.js";
 import Ferme from "./Buildings/Ferme.js";
-import TreeAnimated from "./Nature/Vegetations/Trees/TreeAnimated.js";
 import Champi from "./Nature/Vegetations/Champi.js";
 import Ecume1 from "./Nature/Ecume1.js";
 import Cascade from "./Nature/Cascade.js";
 import Ecume2 from "./Nature/Ecume2.js";
 import Flag from "./Buildings/Flag.js";
-import Pancarte from "./Buildings/Pancarte.js";
 import Place from "./Buildings/Place.js";
 import PortailPlace from "./Buildings/PortailPlace.js";
 import PortailShader from "./Buildings/PortailShader.js";
-import Miasme from "./Nature/Miasme.js";
-import Modele from "./Nature/Modele.js";
 import Ecume3 from "./Nature/Ecume3.js";
 import Carotte from "./Nature/Vegetations/Carrote.js";
 import CristauxPortail from "./Nature/CristauxPortail.js";
@@ -48,7 +43,6 @@ import PortailIntroShader from "./Buildings/PortailIntroShader.js";
 import Flamme from "./Buildings/Flamme.js";
 import Torch from "./Buildings/Torch.js";
 import Vent1 from "./Nature/Vent1.js";
-import Firework from "./Buildings/Firework.js";
 
 export const assets = [
     // display : 0 = small, 1 = medium, 2 = big
@@ -81,15 +75,6 @@ export const assets = [
         isAnimated: false,
         isInteractive: false
     },
-    /*{
-        type: Dalles,
-        resource: 'Dalles',
-        hasPhysics: false,
-        display: 0,
-        castShadow: false,
-        isAnimated: false,
-        isInteractive: false
-    },*/
     {
         type: Ferme,
         resource: 'Ferme',
@@ -108,15 +93,6 @@ export const assets = [
         isAnimated: true,
         isInteractive: false
     },
-    /*{
-        type: Pancarte,
-        resource: 'Pancarte',
-        hasPhysics: true,
-        display: 1,
-        castShadow: true,
-        isAnimated: false,
-        isInteractive: false
-    },*/
     {
         type: Panneaux,
         resource: 'Panneaux',
@@ -364,25 +340,6 @@ export const assets = [
         isAnimated: true,
         isInteractive: false
     },
-    /*{
-        type: Miasme,
-        resource: 'Miasme',
-        hasPhysics: true,
-        display: 2,
-        castShadow: false,
-        isAnimated: false,
-        isInteractive: false
-    },*/
-    // {
-    //     type: Modele,
-    //     resource: 'modele',
-    //     hasPhysics: false,
-    //     display: 0,
-    //     castShadow: false,
-    //     source: 'models/modele.glb',
-    //     isAnimated: false,
-    //     isInteractive: false
-    // },
     {
         type: Cascade,
         resource: 'Cascade',
@@ -499,14 +456,5 @@ export const assets = [
         castShadow: false,
         isAnimated: true,
         isInteractive: false
-    },
-    /*{
-        type: Firework,
-        resource: 'Firework',
-        hasPhysics: false,
-        display: 0,
-        castShadow: false,
-        isAnimated: true,
-        isInteractive: false
-    }*/
+    }
 ]

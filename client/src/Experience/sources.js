@@ -203,11 +203,6 @@ export default [
         path: 'models/Batiments.glb'
     },
     {
-        name: 'Dalles',
-        type: 'gltfModel',
-        path: 'models/Dalles.glb'
-    },
-    {
         name: 'Ferme',
         type: 'gltfModel',
         path: 'models/Ferme.glb'
@@ -217,11 +212,6 @@ export default [
         type: 'gltfModel',
         path: 'models/flag.glb'
     },
-    /*{
-        name: 'Pancarte',
-        type: 'gltfModel',
-        path: 'models/pancarte.glb'
-    },*/
     {
         name: 'Panneaux',
         type: 'gltfModel',
@@ -322,11 +312,6 @@ export default [
         type: 'gltfModel',
         path: 'models/Lac.glb'
     },
-    /*{
-        name: 'Miasme',
-        type: 'gltfModel',
-        path: 'models/miasme.glb'
-    },*/
     {
         name: 'Cascade',
         type: 'gltfModel',
@@ -522,10 +507,4 @@ export default [
         type: 'audio',
         path: 'audio/HappyTheme.wav'
     }
-
-/*    {
-        name: 'Firework',
-        type: 'gltfModel',
-        path: 'models/Firework.glb'
-    }*/
 ]
