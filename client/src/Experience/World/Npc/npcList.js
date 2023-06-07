@@ -42,7 +42,7 @@ export default [
                 "Pouvez-vous m'aider à rassembler les quelques courses qu'il nous manque ?",
             ],
             2: [
-              "Merci pour votre aider !!!",
+              "Merci pour votre aide !!!",
               "Vous êtes terriblement efficace.",
                 "Voici votre récompense, un peu de Kooma, cette poudre issue du raffinage de cristaux de Mithralite est assez rare, prenez en soin.",
               "Je m'occupe du reste, rendez-vous ce soir à 20h."
@@ -94,7 +94,7 @@ export default [
             'Bienvenue !',
             'Je suis le bras droit du chef',
             'Je vous conseille d\'aller le rencontrer dans le village',
-            'Il à besoin de votre aide',
+            'Il a besoin de votre aide',
         ],
         nightDialog: [
             'Profitez bien de la fête !',

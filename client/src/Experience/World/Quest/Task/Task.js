@@ -20,6 +20,7 @@ export default class Task extends EventEmitter{
     this.extra = null
     const transition = document.getElementById('transition')
     const transitionH1 = document.getElementById('transition-h1')
+    const transitionInput = document.getElementById('transition-input')
     this.extraFunction = {
       moveNPC: (id, x, y, z, transitionActive = false) => {
         if (!transitionActive) {
@@ -47,6 +48,19 @@ export default class Task extends EventEmitter{
         window.setTimeout(() => {
           transition.classList.remove("transition-active")
         }, 3000)
+      },
+      endGame: () => {
+        transitionInput.style.display = "flex"
+        transitionH1.innerHTML = "Merci d'avoir joué, La suite arrive bientôt !"
+        transition.classList.add("transition-active")
+        transition.style.pointerEvents = "initial"
+        document.getElementById('btn-freeNav').addEventListener('click', () => {
+          transition.classList.remove("transition-active")
+          transition.style.pointerEvents = "none"
+          transitionH1.innerHTML = ""
+          transitionInput.style.display = "none"
+          document.getElementById('btn-freeNav').removeEventListener('click', () => {})
+        })
       }
     }
   }

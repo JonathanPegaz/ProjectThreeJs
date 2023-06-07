@@ -314,6 +314,7 @@ input[type="checkbox"]:checked::before {
     transition: opacity .2s ease-in-out;
     pointer-events: none;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
 }
@@ -322,8 +323,14 @@ input[type="checkbox"]:checked::before {
     opacity: 1;
 }
 
+#transition-input {
+    display: none;
+    gap: 3rem;
+}
+
 #transition-h1 {
     font-size: 3rem;
+    margin-bottom: 4rem;
 }
 
 #hud {
@@ -551,8 +558,7 @@ input[type="checkbox"]:checked::before {
 
 .quest-task {
     display: flex;
-    flex-wrap: wrap;
-    align-items: center;
+    align-items: flex-start;
     justify-content: flex-end;
     gap: .5rem;
 }
@@ -578,6 +584,10 @@ input[type="checkbox"]:checked::before {
 .quest-task-goal-container {
     display: flex;
     flex-wrap: nowrap;
+}
+
+.quest-task-goal {
+    white-space: nowrap;
 }
 
 .quest-task span {
@@ -957,8 +967,8 @@ input[type="checkbox"]:checked::before {
 }
 
 .loadingScreen-landing>img {
-    width: 100%;
-    max-width: 20rem;
+    width: 30rem;
+    max-width: calc(100vw / 2);
 }
 
 .loadingScreen-landing .btn {
