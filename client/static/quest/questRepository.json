@@ -26,10 +26,6 @@
         }
       }
     },
-    "reward": {
-      "item": "kooma",
-      "quantity": "100"
-    },
     "next": {
       "quest": 2
     }
@@ -50,7 +46,7 @@
         "extra": {
           "1": {
             "functionName": "moveNPC",
-            "params": ["1", 54, 14, -53]
+            "params": [1, 54, 14, -53]
           }
         }
       },
@@ -149,7 +145,7 @@
         "extra": {
           "1": {
             "functionName": "moveNPC",
-            "params": ["1", 54, 14, -52]
+            "params": [11, 55, 14, -53, true]
           }
         }
       },
@@ -157,8 +153,8 @@
         "order": 4,
         "type": "TALK",
         "dialogId": 4,
-        "name": "Parler au chef du village",
-        "description": "Parler au chef du village",
+        "name": "Retournez voir le chef",
+        "description": "Retournez voir le chef",
         "requirements": {
           "item": 1,
           "quantity": "1"
@@ -178,6 +174,16 @@
             "functionName": "setParty",
             "params": []
           }
+        }
+      },
+      "6": {
+        "order": 6,
+        "type": "INQUIRE",
+        "name": "Inspecter le portail",
+        "description": "Inspecter le portail",
+        "requirements": {
+          "item": 4,
+          "quantity": "1"
         }
       }
     },

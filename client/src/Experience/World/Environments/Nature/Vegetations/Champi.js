@@ -29,8 +29,8 @@ export default class Champi extends Model3D
         if (this.input.keys.down.action) {
             this.pressAction++
             this.experience.audioController.DiggingGround.play()
-            mesh.marker.press(this.pressAction, 200)
-            if (this.pressAction > 200) {
+            mesh.marker.press(this.pressAction, 100)
+            if (this.pressAction > 100) {
                 this.pressAction = 0
                 mesh.marker.stopPress()
                 this.experience.audioController.DiggingGround.pause()

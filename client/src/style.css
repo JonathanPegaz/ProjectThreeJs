@@ -302,6 +302,30 @@ input[type="checkbox"]:checked::before {
     }
 }
 
+#transition {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: black;
+    z-index: 999;
+    opacity: 0;
+    transition: opacity .2s ease-in-out;
+    pointer-events: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#transition.transition-active {
+    opacity: 1;
+}
+
+#transition-h1 {
+    font-size: 3rem;
+}
+
 #hud {
     height: calc(100vh - 2rem);
     width: calc(100vw - 2rem);

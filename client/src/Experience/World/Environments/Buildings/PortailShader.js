@@ -183,17 +183,20 @@ void main()
             })
         }
 
-        this.relativeId = 1
+        this.inquireId = 4
         this.name = "PortalShader"
         this.model.object = new THREE.Object3D()
         this.model.object.position.set(52.52305, 14.867, -71.9713)
         this.experience.scene.add(this.model.object)
         this.model.marker = new InteractMarker(this.model, 0)
+        this.marker = new QuestMarker(this.model, 0)
         this.meshs.push(this.model)
         this.setHitbox()
         this.add()
 
         this.setDialog()
+
+        this.experience.world.inquireZone.push(this)
     }
 
     setHitbox() {
@@ -205,6 +208,7 @@ void main()
     }
 
     interact(origin, mesh) {
+        if (!this.marker.target.visible) return
         super.interact(origin, mesh, null, false)
     }
 
@@ -231,7 +235,7 @@ void main()
                 this.dialog.isFinished = false
                 this.dialog.isStarted = false
 
-                this.trigger(`talk`, [this.relativeId])
+                this.trigger('inquire', [this.inquireId])
 
                 return;
             }
@@ -242,6 +246,7 @@ void main()
         if (this.dialog) this.dialog.destroy()
         this.dialog = null
         this.model = null
+        this.inquireId = null
     }
 
 }

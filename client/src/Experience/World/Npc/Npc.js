@@ -49,7 +49,7 @@ export default class Npc extends EventEmitter{
         this.setHitbox()
         this.name = new Pseudo(this, data.name, false)
         this.setDialog(data.dialog)
-        this.setQuest(data.quest)
+        //this.setQuest(data.quest)
         this.travelIndex = 0
         this.setTravelPoint(data.travelPoints)
         this.marker = new QuestMarker(this, 0.0)

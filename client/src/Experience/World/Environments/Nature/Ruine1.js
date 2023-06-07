@@ -15,7 +15,7 @@ export default class Ruine1 extends Model3D
         this.itemToCollect = 'carrot'
         this.questMarkerDisabled = true
 
-        this.id = 1
+        this.inquireId = 1
         this.experience.world.inquireZone.push(this)
     }
 
@@ -34,16 +34,15 @@ export default class Ruine1 extends Model3D
 
     setDialog() {
         const data = [
-            'Il faut faire un texte sur le parrain',
-            'blablabla',
-            "Là faut dire qu'/en récompense il y a 4990 carottes",
+            "Un parrain sera toujours à votre disposition pour vous aider dans votre aventure.",
+            "Vous pourrez à votre tour parrainer des initiés en fonction de votre quantité de Kooma.",
+            "Soyez bienveillant, cette relation vous permettra sûrement de développer un lien fort avec votre parrain ou vos filleuls.",
+            "Pour vous aider, voici une petite récompense."
         ]
 
         this.dialog = new Dialog(data, this.mesh)
         this.experience.controls.on('actionDown', () => {
             if (!this.isInteracting) return
-
-            this.trigger(`talk`, [this.id])
 
             if (!this.dialog.isStarted) {
                 this.isPlayerInteracting = true
@@ -59,7 +58,8 @@ export default class Ruine1 extends Model3D
                 this.dialog.isFinished = false
                 this.dialog.isStarted = false
 
-                this.trigger('collect', [['carrot', 4990]])
+                this.trigger('collect', [['carrot', 4995]])
+                this.trigger('inquire', [this.inquireId])
 
                 return;
             }
@@ -72,6 +72,6 @@ export default class Ruine1 extends Model3D
         this.mesh = null
         this.questMarkerDisabled = null
         this.itemToCollect = null
-        this.id = null
+        this.inquireId = null
     }
 }

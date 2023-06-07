@@ -32,6 +32,7 @@ export default class Talk extends Task{
     }
 
     catch(item) {
+        if (!this.active) return
         if (item === this.requirements.item) {
             this.requirements.quantity--
             this.goal.progress++

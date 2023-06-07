@@ -44,6 +44,7 @@ export default [
             2: [
               "Merci pour votre aider !!!",
               "Vous êtes terriblement efficace.",
+                "Voici votre récompense, un peu de Kooma, cette poudre issue du raffinage de cristaux de Mithralite est assez rare, prenez en soin.",
               "Je m'occupe du reste, rendez-vous ce soir à 20h."
             ],
             3: [
@@ -59,12 +60,6 @@ export default [
             ]
         },
         travelPoints: null,
-        quest: {
-            //id: 1,
-            endDialog: [
-                'Merci beaucoup !!!',
-            ]
-        },
         animations_type: 'chief',
         isDancing: false,
     },
@@ -412,7 +407,7 @@ export default [
             1: [
               "Ouuuh, je crois que j'ai mangé un mauvais champignon, ça taaannnggueee...",
               "...",
-              "...",
+              "... ...",
               "OH !! Vous êtes là.",
               "Comment !?!? C'est déjà l'heure de la fête ?",
               "Merci de m'avoir prévenu, pressons-nous !!!"

@@ -22,7 +22,7 @@ export default class Inquire extends Task{
         }
 
         for (const [key, value] of Object.entries(this.experience.world.inquireZone)) {
-            if (value.id === this.requirements.item) {
+            if (value.inquireId === this.requirements.item) {
                 this.target = value
                 value.on("inquire", () => {
                     this.catch()
@@ -32,6 +32,7 @@ export default class Inquire extends Task{
     }
 
     catch() {
+        if (!this.active) return
         this.requirements.quantity--
         this.goal.progress++
         this.trigger("update")
