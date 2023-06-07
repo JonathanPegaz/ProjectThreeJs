@@ -468,11 +468,6 @@ export default [
         path: 'audio/cartoonVoice.mp3'
     },
     {
-        name: 'Footstep',
-        type: 'audio',
-        path: 'audio/FootstepGrass04.wav'
-    },
-    {
         name: 'AmbianceSeaLoop',
         type: 'audio',
         path: 'audio/AmbianceSeaLoopStereo.wav'
