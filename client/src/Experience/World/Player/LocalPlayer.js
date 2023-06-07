@@ -52,7 +52,8 @@ export default class LocalPlayer extends Player {
             //position: new CANNON.Vec3(-27, 20, 47), //CRYSTAL
             //position: new CANNON.Vec3(13, 14, -10), //TREE
             //position: new CANNON.Vec3(32, 14, -32), //MUSHROOM
-            // position: new CANNON.Vec3(57, 15, -56), //PORTAL
+            //position: new CANNON.Vec3(57, 15, -56), //PORTAL
+            //position: new CANNON.Vec3(61, 26, 58), //CHURCH
             //position: new CANNON.Vec3(-85, 18, 22), //RUIN 1
             //position: new CANNON.Vec3(23, 15, -39), //RUIN 2
             //position: new CANNON.Vec3(78, 14, -11), //RUIN 3

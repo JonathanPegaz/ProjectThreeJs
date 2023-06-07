@@ -5,12 +5,13 @@ import * as THREE from "three";
 export default class FruitPose extends Model3D {
     constructor(model) {
         super(model)
-        this.model.visible = false
+        this.model.visible = true
         this.timeToInteract = 100
         this.object = new THREE.Object3D()
-        this.object.position.set(0, 0, 0)
+        this.object.position.set(53.124345779418945, 13.871932029724121+3, -70.10857009887695)
         this.scene.add(this.object)
 
+        this.id = 1
         this.experience.world.deliveryZone.push(this)
     }
 

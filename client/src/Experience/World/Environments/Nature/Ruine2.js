@@ -13,7 +13,7 @@ export default class Ruine2 extends Model3D
         this.itemToCollect = 'mushroom'
         this.questMarkerDisabled = true
 
-        this.id = 2
+        this.inquireId = 2
         this.experience.world.inquireZone.push(this)
     }
 
@@ -42,8 +42,6 @@ export default class Ruine2 extends Model3D
         this.experience.controls.on('actionDown', () => {
             if (!this.isInteracting) return
 
-            this.trigger(`talk`, [this.id])
-
             if (!this.dialog.isStarted) {
                 this.isPlayerInteracting = true
                 this.dialog.start()
@@ -64,7 +62,8 @@ export default class Ruine2 extends Model3D
                 this.dialog.isFinished = false
                 this.dialog.isStarted = false
 
-                this.trigger('collect', [['mushroom', 4990]])
+                this.trigger('collect', [['mushroom', 4995]])
+                this.trigger('inquire', [this.inquireId])
 
                 if (this.anim) {
                     this.anim.resume()
@@ -84,6 +83,6 @@ export default class Ruine2 extends Model3D
         this.mesh = null
         this.questMarkerDisabled = null
         this.itemToCollect = null
-        this.id = null
+        this.inquireId = null
     }
 }

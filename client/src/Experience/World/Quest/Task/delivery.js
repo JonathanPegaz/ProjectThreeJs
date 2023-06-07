@@ -32,6 +32,7 @@ export default class Delivery extends Task{
     }
 
     catch() {
+        if (!this.active) return
         this.requirements.quantity--
         this.goal.progress++
         this.trigger("update")
