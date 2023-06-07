@@ -11,7 +11,7 @@ export default class Ruine3 extends Model3D
         super(model)
 
         this.mesh = null
-        this.id = 3
+        this.inquireId = 3
         this.experience.world.inquireZone.push(this)
 
         this.object = new THREE.Object3D()
@@ -44,8 +44,6 @@ export default class Ruine3 extends Model3D
         this.experience.controls.on('actionDown', () => {
             if (!this.isInteracting) return
 
-            this.trigger(`talk`, [this.id])
-
             if (!this.dialog.isStarted) {
                 this.isPlayerInteracting = true
                 this.dialog.start()
@@ -66,7 +64,7 @@ export default class Ruine3 extends Model3D
                 this.dialog.isFinished = false
                 this.dialog.isStarted = false
 
-                this.trigger('inquire')
+                this.trigger('inquire', [this.inquireId])
 
                 if (this.anim) {
                     this.anim.resume()
@@ -86,6 +84,6 @@ export default class Ruine3 extends Model3D
         this.mesh = null
         this.questMarkerDisabled = null
         this.itemToCollect = null
-        this.id = null
+        this.inquireId = null
     }
 }

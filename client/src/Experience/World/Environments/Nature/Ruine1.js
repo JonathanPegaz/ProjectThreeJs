@@ -15,7 +15,7 @@ export default class Ruine1 extends Model3D
         this.itemToCollect = 'carrot'
         this.questMarkerDisabled = true
 
-        this.id = 1
+        this.inquireId = 1
         this.experience.world.inquireZone.push(this)
     }
 
@@ -44,8 +44,6 @@ export default class Ruine1 extends Model3D
         this.experience.controls.on('actionDown', () => {
             if (!this.isInteracting) return
 
-            this.trigger(`talk`, [this.id])
-
             if (!this.dialog.isStarted) {
                 this.isPlayerInteracting = true
                 this.dialog.start()
@@ -60,7 +58,8 @@ export default class Ruine1 extends Model3D
                 this.dialog.isFinished = false
                 this.dialog.isStarted = false
 
-                this.trigger('collect', [['carrot', 4990]])
+                this.trigger('collect', [['carrot', 4995]])
+                this.trigger('inquire', [this.inquireId])
 
                 return;
             }
@@ -73,6 +72,6 @@ export default class Ruine1 extends Model3D
         this.mesh = null
         this.questMarkerDisabled = null
         this.itemToCollect = null
-        this.id = null
+        this.inquireId = null
     }
 }

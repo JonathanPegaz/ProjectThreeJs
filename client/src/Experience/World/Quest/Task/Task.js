@@ -18,16 +18,35 @@ export default class Task extends EventEmitter{
     this.order = null
     this.active = null
     this.extra = null
-
+    const transition = document.getElementById('transition')
+    const transitionH1 = document.getElementById('transition-h1')
     this.extraFunction = {
-      moveNPC: (id, x, y, z) => {
-        this.experience.npc.list[id].moveToPosition(new Vector3(x, y, z))
+      moveNPC: (id, x, y, z, transitionActive = false) => {
+        if (!transitionActive) {
+          this.experience.npc.list[id].moveToPosition(new Vector3(x, y, z))
+          return
+        }
+        transition.classList.add("transition-active")
+        window.setTimeout(() => {
+          this.experience.npc.list[id].moveToPosition(new Vector3(x, y, z))
+          transition.classList.remove("transition-active")
+        }, 1000)
       },
       setNight: () => {
+        transitionH1.innerHTML = "Quelques heures plus tard..."
+        transition.classList.add("transition-active")
         this.experience.world.environment.setNight()
+        window.setTimeout(() => {
+          transition.classList.remove("transition-active")
+          transitionH1.innerHTML = ""
+        }, 3000)
       },
       setParty: () => {
+        transition.classList.add("transition-active")
         this.experience.world.environment.setParty()
+        window.setTimeout(() => {
+          transition.classList.remove("transition-active")
+        }, 3000)
       }
     }
   }
