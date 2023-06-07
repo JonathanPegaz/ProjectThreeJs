@@ -53,10 +53,21 @@ export default class Resources extends EventEmitter
         this.homeVideoDiv.appendChild(this.homeVideo)
         document.body.appendChild(this.homeVideoDiv)
 
+        // add loading gif
+        this.loadingGifDiv = document.createElement('img')
+        this.loadingGifDiv.src = './video/logo_loading.gif'
+        this.loadingGifDiv.style.cssText = `
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        `
+        document.body.appendChild(this.loadingGifDiv)
+
         const loadingPercentageElement = document.createElement('div');
         loadingPercentageElement.style.cssText = `
             position: absolute;
-            top: 70%;
+            top: 90%;
             left: 50%;
             transform: translate(-50%, -50%);
             font-family: sans-serif;
@@ -82,6 +93,9 @@ export default class Resources extends EventEmitter
                         '    transition: transform 1.5s ease-in-out;  ' +
                         '}'
                     document.getElementsByTagName('head')[0].appendChild(style)
+
+                    // remove loading gif
+                    document.body.removeChild(this.loadingGifDiv)
 
                     // Update loadingBarElement
                     //loadingCircleElement.classList.add('ended')
