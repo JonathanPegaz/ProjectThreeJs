@@ -35,9 +35,9 @@ export default class Ruine3 extends Model3D
 
     setDialog() {
         const data = [
-            'blablabla',
-            'blublublublu',
-            "blobloblobloblo",
+            "Ce monde est vivant, ses habitants évoluent, ils ont des habitudes, une culture et une personnalité propre.",
+            "Vos actions ont des conséquences sur votre environnement, apprenez donc à le connaître et à vivre avec ses habitants, vous pourriez peut-être faire de belles rencontres.",
+            "Le prêtre a souvent l'habitude de se cacher derrière son église, peut être pourriez-vous aller là-bas.",
         ]
 
         this.dialog = new Dialog(data, this.mesh)

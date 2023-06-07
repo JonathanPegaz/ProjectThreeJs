@@ -34,9 +34,10 @@ export default class Ruine1 extends Model3D
 
     setDialog() {
         const data = [
-            'Il faut faire un texte sur le parrain',
-            'blablabla',
-            "Là faut dire qu'/en récompense il y a 4990 carottes",
+            "Un parrain sera toujours à votre disposition pour vous aider dans votre aventure.",
+            "Vous pourrez à votre tour parrainer des initiés en fonction de votre quantité de Kooma.",
+            "Soyez bienveillant, cette relation vous permettra sûrement de développer un lien fort avec votre parrain ou vos filleuls.",
+            "Pour vous aider, voici une petite récompense."
         ]
 
         this.dialog = new Dialog(data, this.mesh)
