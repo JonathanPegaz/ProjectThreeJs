@@ -152,6 +152,7 @@ export default class Model3D extends InteractiveObject{
         this.isInteractive = null
         this.experience = null
         this.name = null
-        this.customHitbox.geometry.dispose()
+        if(this.customHitbox)
+            this.customHitbox.geometry.dispose()
     }
 }

@@ -62,7 +62,7 @@ export default class Ruine1 extends Model3D
     }
 
     destroy() {
-        this.dialog.destroy()
+        if (this.dialog) this.dialog.destroy()
         this.dialog = null
         this.mesh = null
         this.questMarkerDisabled = null
