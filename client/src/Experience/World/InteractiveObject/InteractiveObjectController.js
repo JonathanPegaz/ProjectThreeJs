@@ -33,10 +33,12 @@ export default class InteractiveObjectController extends EventEmitter{
             const intersects = raycaster.intersectObject(mesh.hitbox);
             if (intersects.length > 0) {
               mesh.interacting = true
+              this.experience.localPlayer.isInteractingObject = true
               value.interact(raycaster, mesh);
             } else if (mesh.interacting) {
               value.stopInteract(mesh);
               mesh.interacting = false
+              this.experience.localPlayer.isInteractingObject = false
             }
           }
         })

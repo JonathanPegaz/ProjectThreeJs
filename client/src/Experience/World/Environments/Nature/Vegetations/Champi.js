@@ -28,15 +28,19 @@ export default class Champi extends Model3D
         mesh.marker.mark()
         if (this.input.keys.down.action) {
             this.pressAction++
+            this.experience.audioController.DiggingGround.play()
             mesh.marker.press(this.pressAction, 200)
             if (this.pressAction > 200) {
                 this.pressAction = 0
                 mesh.marker.stopPress()
+                this.experience.audioController.DiggingGround.pause()
                 this.trigger('collect', [['mushroom', 1]])
+                this.experience.audioController.playSound('Notification')
             }
         } else {
             this.pressAction = 0
             mesh.marker.stopPress()
+            this.experience.audioController.DiggingGround.pause()
         }
     }
 

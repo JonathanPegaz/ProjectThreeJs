@@ -31,6 +31,7 @@ export default class ArbreSacre extends Model3D
             if (this.pressAction > this.timeToInteract) {
                 this.pressAction = 0
                 mesh.marker.stopPress()
+                this.experience.audioController.playSound('FallingObject')
                 this.experience.world.Fruit_ramasse.playAnimation().then(() => {
                     this.experience.world.Fruit_ramasse.setStaticHitbox()
                 })

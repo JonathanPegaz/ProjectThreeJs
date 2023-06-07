@@ -1,8 +1,10 @@
 import npcList from "./npcList.js";
+import Experience from "../../Experience.js";
 
 
 export default class NpcController {
     constructor() {
+        this.experience = new Experience()
         this.npcs = npcList
 
         this.list = {}

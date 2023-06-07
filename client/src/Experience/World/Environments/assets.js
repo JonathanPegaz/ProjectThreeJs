@@ -48,6 +48,7 @@ import PortailIntroShader from "./Buildings/PortailIntroShader.js";
 import Flamme from "./Buildings/Flamme.js";
 import Torch from "./Buildings/Torch.js";
 import Vent1 from "./Nature/Vent1.js";
+import Firework from "./Buildings/Firework.js";
 
 export const assets = [
     // display : 0 = small, 1 = medium, 2 = big
@@ -498,5 +499,14 @@ export const assets = [
         castShadow: false,
         isAnimated: true,
         isInteractive: false
-    }
+    },
+    /*{
+        type: Firework,
+        resource: 'Firework',
+        hasPhysics: false,
+        display: 0,
+        castShadow: false,
+        isAnimated: true,
+        isInteractive: false
+    }*/
 ]

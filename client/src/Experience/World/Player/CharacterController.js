@@ -10,6 +10,7 @@ import Npc from "../Npc/Npc.js";
 import PickState from "./State/PickState.js";
 import CrouchState from "./State/CrouchState.js";
 import KickState from "./State/KickState.js";
+import DanceState from "./State/DanceState.js";
 
 class BasicCharacterControllerProxy {
     constructor(animations) {
@@ -34,6 +35,7 @@ class CharacterFSM extends FiniteStateMachine {
         this._AddState('run', RunState);
         this._AddState('pick', PickState);
         this._AddState('kick', KickState);
+        this._AddState('dance', DanceState);
     }
 }
 

@@ -22,6 +22,7 @@ export default class Player {
         this.debug = this.experience.debug
         this.network = this.experience.network
         this.isParrain = isParrain
+        this.isInteractingObject = false
 
         if (this.isParrain) {
             this.resource = this.resources.items.parrain
@@ -84,6 +85,7 @@ export default class Player {
         this.resource.animations.push(this.resources.items[`player_running${temp}`].animations[0])
         this.resource.animations.push(this.resources.items[`player_picking${temp}`].animations[0])
         this.resource.animations.push(this.resources.items[`player_kicking${temp}`].animations[0])
+        this.resource.animations.push(this.resources.items[`player_dancing${temp}`].animations[0])
 
         //this.resource.animations.push(this.resources.items.player_crouching.animations[0])
         this.mixer = new AnimationMixer(this.model)
@@ -112,6 +114,11 @@ export default class Player {
         this.animations.kick = {
             clip: this.resource.animations[5],
             action: this.mixer.clipAction(this.resource.animations[5])
+        }
+
+        this.animations.dance = {
+            clip: this.resource.animations[6],
+            action: this.mixer.clipAction(this.resource.animations[6])
         }
 
         /*this.animations.crouch = {

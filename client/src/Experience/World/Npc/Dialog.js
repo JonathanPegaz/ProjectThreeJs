@@ -56,6 +56,7 @@ export default class Dialog {
     }
 
     getLine() {
+        this.experience.audioController.CartoonVoice.play()
         return this.dialog[this.currentLine]
     }
 

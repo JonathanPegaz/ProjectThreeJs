@@ -58,6 +58,7 @@ export default class InteractiveObject extends EventEmitter{
         const origin2D = new THREE.Vector2(origin.ray.origin.x, origin.ray.origin.z)
         const distance = origin2D.distanceTo(new THREE.Vector2(this.position.x, this.position.z))
         if (distance < limit) {
+          this.experience.localPlayer.isInteractingObject = true
           this.trigger(this.name, ["STAY"])
           setTimeout(check, 500);
         } else {
@@ -69,6 +70,7 @@ export default class InteractiveObject extends EventEmitter{
   }
 
   leave() {
+    this.experience.localPlayer.isInteractingObject = true
     this.isInteracting = false
     this.trigger(this.name, ["LEAVE"])
   }
