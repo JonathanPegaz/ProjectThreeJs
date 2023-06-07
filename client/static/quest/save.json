@@ -145,7 +145,7 @@
         "extra": {
           "1": {
             "functionName": "moveNPC",
-            "params": [11, 55, 14, -53]
+            "params": [11, 55, 14, -53, true]
           }
         }
       },
@@ -184,6 +184,12 @@
         "requirements": {
           "item": 4,
           "quantity": "1"
+        },
+        "extra": {
+          "1": {
+            "functionName": "endGame",
+            "params": []
+          }
         }
       }
     },

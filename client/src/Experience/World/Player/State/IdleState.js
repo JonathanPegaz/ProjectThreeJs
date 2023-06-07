@@ -38,7 +38,7 @@ export default class IdleState extends State {
             else if(this.experience.localPlayer.isInteractingObject || this.experience.localPlayer.isInteractingCarrot) {
                 this._parent.SetState('pick');
             }
-            else {
+            else if(!this.experience.localPlayer.isInteractingNpc) {
                 this._parent.SetState('dance');
             }
 

@@ -184,6 +184,12 @@
         "requirements": {
           "item": 4,
           "quantity": "1"
+        },
+        "extra": {
+          "1": {
+            "functionName": "endGame",
+            "params": []
+          }
         }
       }
     },
