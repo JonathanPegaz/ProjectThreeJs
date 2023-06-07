@@ -24,6 +24,7 @@ export default class Player {
         this.isParrain = isParrain
         this.isInteractingObject = false
         this.isInteractingCarrot = false
+        this.isInteractingNpc = false
 
         if (this.isParrain) {
             this.resource = this.resources.items.parrain

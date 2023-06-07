@@ -50,10 +50,15 @@ export default class NpcController {
     }
 
     catch(raycaster) {
+        let hasTrue = false
         for (const [key, value] of Object.entries(this.list)) {
             const intersects = raycaster.intersectObject(value.hitbox);
             value.canInteract = raycaster.intersectObject(value.hitbox).length > 0 || raycaster.intersectObject(value.object).length > 0
+            if (value.canInteract) {
+                hasTrue = true
+            }
         }
+        this.experience.localPlayer.isInteractingNpc = hasTrue
     }
 
     update() {
