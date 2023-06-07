@@ -1,25 +1,25 @@
 {
   "1": {
-    "title": "La fête du village",
-    "description": "Le chef du village vous demande de lui ramener cette liste de courses",
+    "title": "L'initiation",
+    "description": "La fête du village approche, il faut vous préparer pour l'initiation.",
     "tasks": {
       "1": {
         "order": 1,
-        "type": "COLLECT",
-        "name": "Cristaux",
-        "description": "collecter 2 cristaux",
+        "type": "INQUIRE",
+        "name": "Trouver un indice",
+        "description": "Trouver un indice",
         "requirements": {
-          "item": "crystal",
+          "item": 3,
           "quantity": "1"
         }
       },
       "2": {
         "order": 2,
-        "type": "COLLECT",
-        "name": "Fruit sacré",
-        "description": "collecter 1 fruit sacré",
+        "type": "TALK",
+        "name": "Retrouver le prêtre",
+        "description": "Retrouver le prêtre",
         "requirements": {
-          "item": "fruit",
+          "item": 11,
           "quantity": "1"
         }
       },

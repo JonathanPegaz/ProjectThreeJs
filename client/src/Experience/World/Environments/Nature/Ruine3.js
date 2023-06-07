@@ -1,6 +1,8 @@
 import Model3D from "../../Model3D.js";
 import {Mesh, MeshBasicMaterial, SphereGeometry} from "three";
 import Dialog from "../../Npc/Dialog.js";
+import QuestMarker from "../../../Interface/QuestMarker.js";
+import * as THREE from "three";
 
 export default class Ruine3 extends Model3D
 {
@@ -9,6 +11,13 @@ export default class Ruine3 extends Model3D
         super(model)
 
         this.mesh = null
+        this.id = 3
+        this.experience.world.inquireZone.push(this)
+
+        this.object = new THREE.Object3D()
+        this.object.position.set(81, 15, -11)
+        this.scene.add(this.object)
+        this.marker = new QuestMarker(this, 0)
     }
 
     setHitbox(element) {
@@ -57,6 +66,8 @@ export default class Ruine3 extends Model3D
                 this.dialog.isFinished = false
                 this.dialog.isStarted = false
 
+                this.trigger('inquire')
+
                 if (this.anim) {
                     this.anim.resume()
                     this.setBodyRotation(
@@ -75,5 +86,6 @@ export default class Ruine3 extends Model3D
         this.mesh = null
         this.questMarkerDisabled = null
         this.itemToCollect = null
+        this.id = null
     }
 }

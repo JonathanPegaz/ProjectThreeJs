@@ -12,6 +12,9 @@ export default class Ruine2 extends Model3D
         this.type = 'collectable'
         this.itemToCollect = 'mushroom'
         this.questMarkerDisabled = true
+
+        this.id = 2
+        this.experience.world.inquireZone.push(this)
     }
 
     setHitbox(element) {
@@ -80,5 +83,6 @@ export default class Ruine2 extends Model3D
         this.mesh = null
         this.questMarkerDisabled = null
         this.itemToCollect = null
+        this.id = null
     }
 }

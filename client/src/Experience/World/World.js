@@ -31,6 +31,7 @@ export default class World
         this.bigMeshsDistance = []
         this.shadowMeshs = []
         this.animatedAsset = []
+        this.inquireZone = []
 
         this.scene.fog = new Fog(0xDFE9F3, 0, 65)
 
@@ -201,5 +202,6 @@ export default class World
         this.mediumMeshsDistance = null
         this.bigMeshsDistance = null
         this.shadowMeshs = null
+        this.inquireZone = null
     }
 }

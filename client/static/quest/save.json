@@ -48,6 +48,50 @@
       "xp": "100",
       "item": "diamant",
       "quantity": "1"
+    },
+    "next": {
+      "quest": 2
+    }
+  },
+  "2": {
+    "title": "L'initiation",
+    "description": "La fête du village approche, il faut vous préparer pour l'initiation.",
+    "tasks": {
+      "1": {
+        "order": 1,
+        "type": "INQUIRE",
+        "name": "Trouver un indice",
+        "description": "Trouver un indice",
+        "requirements": {
+          "item": 3,
+          "quantity": "1"
+        }
+      },
+      "2": {
+        "order": 2,
+        "type": "TALK",
+        "name": "Retrouver le prêtre",
+        "description": "Retrouver le prêtre",
+        "requirements": {
+          "item": 11,
+          "quantity": "1"
+        }
+      },
+      "3": {
+        "order": 3,
+        "type": "TALK",
+        "name": "Parler au chef du village",
+        "description": "Parler au chef du village",
+        "requirements": {
+          "item": 1,
+          "quantity": "1"
+        }
+      }
+    },
+    "reward": {
+      "xp": "100",
+      "item": "diamant",
+      "quantity": "1"
     }
   }
 }
