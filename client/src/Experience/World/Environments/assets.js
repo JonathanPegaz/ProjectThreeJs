@@ -186,7 +186,7 @@ export const assets = [
         display: 1,
         castShadow: true,
         isAnimated: true,
-        isInteractive: false
+        isInteractive: true
     },
     {
         type: PortailIntroShader,
@@ -334,7 +334,7 @@ export const assets = [
         display: 0,
         castShadow: true,
         isAnimated: false,
-        isInteractive: false
+        isInteractive: true
     },
     {
         type: FruitRamasse,

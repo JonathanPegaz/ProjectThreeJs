@@ -1,16 +1,57 @@
 {
   "1": {
+    "title": "Premiers pas",
+    "description": "Vous venez d'arriver dans Singularité, commencez votre initiation.",
+    "tasks": {
+      "1": {
+        "order": 1,
+        "type": "TALK",
+        "dialogId": 1,
+        "name": "Rencontrer le bras droit du chef",
+        "description": "Rencontrer le bras droit du chef",
+        "requirements": {
+          "item": 2,
+          "quantity": "1"
+        }
+      },
+      "2": {
+        "order": 2,
+        "type": "TALK",
+        "dialogId": 1,
+        "name": "Parler au chef du village",
+        "description": "Parler au chef du village",
+        "requirements": {
+          "item": 1,
+          "quantity": "1"
+        }
+      }
+    },
+    "reward": {
+      "item": "kooma",
+      "quantity": "100"
+    },
+    "next": {
+      "quest": 2
+    }
+  },
+  "2": {
     "title": "La fête du village",
-    "description": "Le chef du village vous demande de lui ramener cette liste de courses",
+    "description": "Le chef du village vous demande de lui ramener cette liste de courses.",
     "tasks": {
       "1": {
         "order": 1,
         "type": "COLLECT",
         "name": "Cristaux",
-        "description": "collecter 2 cristaux",
+        "description": "collecter 7 cristaux",
         "requirements": {
           "item": "crystal",
-          "quantity": "1"
+          "quantity": "7"
+        },
+        "extra": {
+          "1": {
+            "functionName": "moveNPC",
+            "params": ["1", 54, 14, -53]
+          }
         }
       },
       "2": {
@@ -26,39 +67,67 @@
       "3": {
         "order": 3,
         "type": "COLLECT",
-        "name": "Champignons",
-        "description": "collecter 10 Champignons",
+        "name": "Fruit de Mithralite",
+        "description": "Trouver le fruit de mithralite",
         "requirements": {
-          "item": "mushroom",
-          "quantity": "10"
+          "item": "fruit",
+          "quantity": "1"
         }
       },
       "4": {
         "order": 4,
+        "type": "COLLECT",
+        "name": "Champignons",
+        "description": "collecter 5000 Champignons",
+        "requirements": {
+          "item": "mushroom",
+          "quantity": "5000"
+        }
+      },
+      "5": {
+        "order": 5,
         "type": "TALK",
-        "name": "Parler au chef du village",
-        "description": "Parler au chef du village",
+        "dialogId": 2,
+        "name": "Retournez voir le chef",
+        "description": "Retournez voir le chef",
         "requirements": {
           "item": 1,
           "quantity": "1"
+        },
+        "extra": {
+          "1": {
+            "functionName": "setNight",
+            "params": []
+          }
         }
       }
     },
     "reward": {
-      "xp": "100",
-      "item": "diamant",
-      "quantity": "1"
+      "item": "kooma",
+      "quantity": "100"
     },
     "next": {
-      "quest": 2
+      "quest": 3,
+      "timeout": 4000
     }
   },
-  "2": {
+  "3": {
     "title": "L'initiation",
     "description": "La fête du village approche, il faut vous préparer pour l'initiation.",
     "tasks": {
       "1": {
         "order": 1,
+        "type": "TALK",
+        "dialogId": 3,
+        "name": "Parler au chef",
+        "description": "Parler au chef",
+        "requirements": {
+          "item": 1,
+          "quantity": "1"
+        }
+      },
+      "2": {
+        "order": 2,
         "type": "INQUIRE",
         "name": "Trouver un indice",
         "description": "Trouver un indice",
@@ -67,31 +136,54 @@
           "quantity": "1"
         }
       },
-      "2": {
-        "order": 2,
-        "type": "TALK",
-        "name": "Retrouver le prêtre",
-        "description": "Retrouver le prêtre",
-        "requirements": {
-          "item": 11,
-          "quantity": "1"
-        }
-      },
       "3": {
         "order": 3,
         "type": "TALK",
+        "dialogId": 1,
+        "name": "Chercher vers l'église",
+        "description": "Chercher vers l'église",
+        "requirements": {
+          "item": 11,
+          "quantity": "1"
+        },
+        "extra": {
+          "1": {
+            "functionName": "moveNPC",
+            "params": ["1", 54, 14, -52]
+          }
+        }
+      },
+      "4": {
+        "order": 4,
+        "type": "TALK",
+        "dialogId": 4,
         "name": "Parler au chef du village",
         "description": "Parler au chef du village",
         "requirements": {
           "item": 1,
           "quantity": "1"
         }
+      },
+      "5": {
+        "order": 5,
+        "type": "DELIVERY",
+        "name": "Poser le fruit",
+        "description": "Poser le fruit",
+        "requirements": {
+          "item": 1,
+          "quantity": "1"
+        },
+        "extra": {
+          "1": {
+            "functionName": "setParty",
+            "params": []
+          }
+        }
       }
     },
     "reward": {
-      "xp": "100",
-      "item": "diamant",
-      "quantity": "1"
+      "item": "kooma",
+      "quantity": "1000"
     }
   }
 }

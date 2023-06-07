@@ -65,9 +65,11 @@ export default class QuestWindow extends EventEmitter{
             return `
               <li id="${task.id}" class="quest-task quest-task-active">
                 <span class="quest-task-name">${task.name}</span>
-                <span class="quest-task-goal">${task.goal.progress} / ${task.goal.objective}</span>
-                <div class="quest-task-mark">
-                  <img src="icons/ui-quest-mark-empty.svg" alt="hexagon">
+                <div class="quest-task-goal-container">
+                  <span class="quest-task-goal">${task.goal.progress} / ${task.goal.objective}</span>
+                  <div class="quest-task-mark">
+                    <img src="icons/ui-quest-mark-empty.svg" alt="hexagon">
+                  </div>
                 </div>
               </li>`
           }).join('')}

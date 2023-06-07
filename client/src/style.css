@@ -379,7 +379,7 @@ input[type="checkbox"]:checked::before {
 }
 
 .announcement-content-gif {
-    width: 100%;
+    width: 90%;
 }
 
 #chat {
@@ -529,6 +529,7 @@ input[type="checkbox"]:checked::before {
     display: flex;
     align-items: center;
     justify-content: flex-end;
+    gap: .5rem;
 }
 
 .quest-task-active {
@@ -536,6 +537,8 @@ input[type="checkbox"]:checked::before {
     position: relative;
     border-color: #21B4D6;
     margin-bottom: 1rem;
+    display: flex;
+    flex-wrap: wrap;
 }
 
 .quest-task-completed {
@@ -549,8 +552,9 @@ input[type="checkbox"]:checked::before {
     margin-bottom: 1rem;
 }
 
-.quest-task-goal {
-    margin-left: .5rem;
+.quest-task-goal-container {
+    display: flex;
+    flex-wrap: nowrap;
 }
 
 .quest-task-mark {

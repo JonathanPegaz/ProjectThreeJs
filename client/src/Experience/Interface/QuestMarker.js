@@ -6,6 +6,7 @@ export default class QuestMarker {
     this.experience = new Experience()
     this.target = target
     this.offset = offset
+    this.targeting = false
   }
 
   setHTML() {
@@ -31,11 +32,13 @@ export default class QuestMarker {
   }
 
   mark() {
+    this.targeting = true
     this.setHTML()
     this.setCSS2DObject()
   }
 
   unmark() {
+    this.targeting = false
     this.target.object.remove(this.markerObject)
     this.questMarkerContainer = null
   }
@@ -43,5 +46,6 @@ export default class QuestMarker {
   destroy() {
     this.target = null
     this.offset = null
+    this.targeting = null
   }
 }

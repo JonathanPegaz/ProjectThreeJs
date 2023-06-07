@@ -1,6 +1,6 @@
 import Task from "./Task.js";
 
-export default class Inquire extends Task{
+export default class Delivery extends Task{
     constructor(param) {
         super();
 
@@ -21,10 +21,10 @@ export default class Inquire extends Task{
             progress: 0,
         }
 
-        for (const [key, value] of Object.entries(this.experience.world.inquireZone)) {
+        for (const [key, value] of Object.entries(this.experience.world.deliveryZone)) {
             if (value.id === this.requirements.item) {
                 this.target = value
-                value.on("inquire", () => {
+                value.on("delivery", () => {
                     this.catch()
                 })
             }

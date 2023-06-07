@@ -1,6 +1,7 @@
 import EventEmitter from "../../../Utils/EventEmitter.js";
 import Experience from "../../../Experience.js";
 import { v4 as uuidv4 } from 'uuid';
+import {Vector3} from "three";
 
 
 export default class Task extends EventEmitter{
@@ -16,6 +17,19 @@ export default class Task extends EventEmitter{
     this.requirements = null
     this.order = null
     this.active = null
+    this.extra = null
+
+    this.extraFunction = {
+      moveNPC: (id, x, y, z) => {
+        this.experience.npc.list[id].moveToPosition(new Vector3(x, y, z))
+      },
+      setNight: () => {
+        this.experience.world.environment.setNight()
+      },
+      setParty: () => {
+        this.experience.world.environment.setParty()
+      }
+    }
   }
 
   init(param) {
@@ -26,6 +40,8 @@ export default class Task extends EventEmitter{
     this.type = this.constructor.name
     this.order = param.order !== undefined ? param.order : 0
     this.active = false
+    if (param.extra !== undefined)
+      this.extra = param.extra
   }
 
   catch() {
@@ -33,7 +49,18 @@ export default class Task extends EventEmitter{
   }
 
   isComplete() {
+    if (this.extra !== null)
+      this.callExtra()
+
     this.trigger("completed")
+  }
+
+  callExtra() {
+    Object.entries(this.extra).forEach(([key, value]) => {
+      const functionName = value.functionName;
+      const params = value.params;
+      this.extraFunction[functionName](...params);
+    });
   }
 
   setActive() {
@@ -48,5 +75,7 @@ export default class Task extends EventEmitter{
     this.requirements = null
     this.world = null
     this.order = null
+    this.extra = null
+    this.extraFunction = null
   }
 }

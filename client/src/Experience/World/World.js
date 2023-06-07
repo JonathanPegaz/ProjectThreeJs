@@ -32,6 +32,7 @@ export default class World
         this.shadowMeshs = []
         this.animatedAsset = []
         this.inquireZone = []
+        this.deliveryZone = []
 
         this.scene.fog = new Fog(0xDFE9F3, 0, 65)
 
@@ -159,7 +160,6 @@ export default class World
         for (let asset of assets)
         {
             // remove Mesh from the scene
-            console.log(asset)
             if(this[asset.resource].model) {
                 this.scene.remove(this[asset.resource].model)
                 this[asset.resource].destroy()
@@ -203,5 +203,6 @@ export default class World
         this.bigMeshsDistance = null
         this.shadowMeshs = null
         this.inquireZone = null
+        this.deliveryZone = null
     }
 }

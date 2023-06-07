@@ -18,6 +18,7 @@ import QuestMarker from "../../Interface/QuestMarker.js";
 import * as CANNON from "cannon-es";
 import {gsap} from "gsap";
 import InteractMarker from "../../Interface/InteractMarker.js";
+import Talk from "../Quest/Task/Talk.js";
 
 export default class Npc extends EventEmitter{
     constructor(data) {
@@ -155,10 +156,17 @@ export default class Npc extends EventEmitter{
         this.experience.controls.on('actionDown', () => {
             if (!this.canInteract)
                 return;
-
-            this.trigger(`talk`, [this.id])
             
             if (!this.dialog.isStarted) {
+                if (this.marker.targeting) {
+                    const currentQuest = this.experience.world.quest.getCurrentQuest()
+                    Object.values(currentQuest.activeTasks).forEach((task) => {
+                        if (task instanceof Talk && task.target instanceof Npc && task.target.id === this.id && task.dialogId !== undefined) {
+                            this.dialog.dialog = this.data.questDialog[task.dialogId]
+                        }
+                    })
+                }
+
                 this.isPlayerInteracting = true
                 this.dialog.start()
                 this.icon.visible(false)
@@ -177,12 +185,14 @@ export default class Npc extends EventEmitter{
             this.dialog.nextLine()
 
             if (this.dialog.isFinished) {
+                this.trigger(`talk`, [this.id])
                 this.isPlayerInteracting = false
                 this.dialog.isFinished = false
                 this.dialog.isStarted = false
 
                 if (this.quest) {
-                    this.experience.world.quest.add(this.quest.id)
+                    if (this.quest.id)
+                        this.experience.world.quest.add(this.quest.id)
                     this.endDialog = this.quest.endDialog
                     this.experience.world.quest.on('completed', () => {
                         this.icon.change('full_tchat_icon')
@@ -253,19 +263,25 @@ export default class Npc extends EventEmitter{
         this.object.quaternion.setFromEuler(0, rotation, 0, 'XYZ')
     }
 
+    moveToPosition(position) {
+        this.object.position.set(
+          position.x,
+          position.y,
+          position.z
+        )
+        this.body.position.set(
+          position.x,
+          position.y,
+          position.z
+        )
+    }
+
     moveToNightPosition() {
         if (this.anim)
             this.anim.kill()
-        this.object.position.set(
-            this.data.nightPosition.x,
-            this.data.nightPosition.y,
-            this.data.nightPosition.z
-        )
-        this.body.position.set(
-            this.data.nightPosition.x,
-            this.data.nightPosition.y,
-            this.data.nightPosition.z
-        )
+
+        this.moveToPosition(this.data.nightPosition)
+
         this.object.quaternion.setFromAxisAngle(new CANNON.Vec3(0, 1, 0), this.data.nightRotation.y)
 
         if(this.data.isDancing) {
@@ -278,16 +294,9 @@ export default class Npc extends EventEmitter{
     moveToDayPosition() {
         if (this.anim)
             this.anim.kill()
-        this.object.position.set(
-            this.data.position.x,
-            this.data.position.y,
-            this.data.position.z
-        )
-        this.body.position.set(
-            this.data.position.x,
-            this.data.position.y,
-            this.data.position.z
-        )
+
+        this.moveToPosition(this.data.position)
+
         this.object.quaternion.setFromAxisAngle(new CANNON.Vec3(0, 1, 0), this.data.rotation.y)
 
         if(this.data.isDancing) {

@@ -1,10 +1,15 @@
 import Model3D from "../../Model3D.js";
 import {
+    BoxGeometry,
     CircleGeometry,
     Color,
-    DoubleSide, Mesh, PointLight,
+    DoubleSide, Mesh, MeshBasicMaterial, PointLight,
     ShaderMaterial
 } from "three";
+import * as THREE from "three";
+import QuestMarker from "../../../Interface/QuestMarker.js";
+import InteractMarker from "../../../Interface/InteractMarker.js";
+import Dialog from "../../Npc/Dialog.js";
 
 export default class PortailShader extends Model3D
 {
@@ -178,6 +183,65 @@ void main()
             })
         }
 
+        this.relativeId = 1
+        this.name = "PortalShader"
+        this.model.object = new THREE.Object3D()
+        this.model.object.position.set(52.52305, 14.867, -71.9713)
+        this.experience.scene.add(this.model.object)
+        this.model.marker = new InteractMarker(this.model, 0)
+        this.meshs.push(this.model)
+        this.setHitbox()
+        this.add()
+
+        this.setDialog()
+    }
+
+    setHitbox() {
+        const geometry = new BoxGeometry(3, 3, .5)
+        const material = new MeshBasicMaterial({ color: 0xff0000, wireframe: true, visible: this.debug.active ?? false })
+        this.model.hitbox = new Mesh(geometry, material)
+        this.model.hitbox.position.set(0,0,0)
+        this.model.object.add(this.model.hitbox)
+    }
+
+    interact(origin, mesh) {
+        super.interact(origin, mesh, null, false)
+    }
+
+    setDialog() {
+        const data = [
+            'WHOOOOOSSSHHH'
+        ]
+
+        this.dialog = new Dialog(data, this.model)
+        this.experience.controls.on('actionDown', () => {
+            if (!this.isInteracting) return
+
+            if (!this.dialog.isStarted) {
+                this.isPlayerInteracting = true
+                this.dialog.start()
+
+                return;
+            }
+
+            this.dialog.nextLine()
+
+            if (this.dialog.isFinished) {
+                this.isPlayerInteracting = false
+                this.dialog.isFinished = false
+                this.dialog.isStarted = false
+
+                this.trigger(`talk`, [this.relativeId])
+
+                return;
+            }
+        })
+    }
+
+    destroy() {
+        this.dialog.destroy()
+        this.dialog = null
+        this.model = null
     }
 
 }

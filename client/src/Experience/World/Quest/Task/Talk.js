@@ -5,6 +5,7 @@ export default class Talk extends Task{
         super();
 
         this.goal = null
+        this.dialogId = param.dialogId
 
         this.init(param)
     }
@@ -48,5 +49,6 @@ export default class Talk extends Task{
     destroy() {
         super.destroy();
         this.goal = null
+        this.dialogId = null
     }
 }
