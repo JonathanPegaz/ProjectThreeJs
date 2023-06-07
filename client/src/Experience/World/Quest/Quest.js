@@ -2,6 +2,8 @@ import EventEmitter from "../../Utils/EventEmitter.js"
 import Collect from "./Task/Collect.js"
 import { v4 as uuidv4 } from 'uuid'
 import Talk from "./Task/Talk.js";
+import Inquire from "./Task/Inquire.js";
+import Delivery from "./Task/delivery.js";
 
 
 export default class Quest extends EventEmitter{
@@ -14,11 +16,16 @@ export default class Quest extends EventEmitter{
     this.currentOrder = 0
 
     this.id = null
+    this.relativeId = null
     this.title = null
     this.description = null
+    this.nextQuest = null
+    this.reward = null
     this.taskEnum = {
       COLLECT: (param) => new Collect(param),
       TALK: (param) => new Talk(param),
+      INQUIRE: (param) => new Inquire(param),
+      DELIVERY: (param) => new Delivery(param),
     }
 
     this.init(quest)
@@ -28,6 +35,13 @@ export default class Quest extends EventEmitter{
     this.id = uuidv4()
     this.title = quest.title
     this.description = quest.description
+    this.reward = quest.reward
+    if (quest.next !== undefined && Object.keys(quest.next).length) {
+      if (quest.next.quest !== undefined) {
+        this.nextQuest = quest.next
+      }
+    }
+
     this.activeTasks = {}
     this.completedTasks = {}
     Object.values(quest.tasks).forEach((param) => {
@@ -111,5 +125,8 @@ export default class Quest extends EventEmitter{
     this.title = null
     this.description = null
     this.taskEnum = null
+    this.nextQuest = null
+    this.relativeId = null
+    this.reward = null
   }
 }

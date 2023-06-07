@@ -1,6 +1,7 @@
 import Model3D from "../../Model3D.js";
 import {Mesh, MeshBasicMaterial, SphereGeometry} from "three";
 import Dialog from "../../Npc/Dialog.js";
+import Experience from "../../../Experience.js";
 
 export default class Ruine1 extends Model3D
 {
@@ -8,10 +9,14 @@ export default class Ruine1 extends Model3D
     {
         super(model)
 
+        this.experience = new Experience()
         this.mesh = null
         this.type = 'collectable'
         this.itemToCollect = 'carrot'
         this.questMarkerDisabled = true
+
+        this.id = 1
+        this.experience.world.inquireZone.push(this)
     }
 
     setHitbox(element) {
@@ -67,5 +72,6 @@ export default class Ruine1 extends Model3D
         this.mesh = null
         this.questMarkerDisabled = null
         this.itemToCollect = null
+        this.id = null
     }
 }

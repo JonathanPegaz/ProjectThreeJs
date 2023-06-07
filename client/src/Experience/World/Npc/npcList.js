@@ -29,19 +29,40 @@ export default [
         scale: 1,
         positionOffset: 0,
         dialog: [
-            'Bonjour, Je suis le chef du village',
-            'Je suis là pour vous donner une quête',
-            'Ramenez moi 2 diamants et 3 carottes pour la fête du village',
+            "Oooooh, il fait beau aujourd'hui !!!"
         ],
         nightDialog: [
             'Le portail est réouvert grace à vous',
             'Une grande aventure vous attend',
         ],
+        questDialog: {
+            1: [
+                "Bonjour, je suis le chef du village !",
+                "Avec le village, nous organisons une fête ce soir en l'honneur de votre initiation." ,
+                "Pouvez-vous m'aider à rassembler les quelques courses qu'il nous manque ?",
+            ],
+            2: [
+              "Merci pour votre aider !!!",
+              "Vous êtes terriblement efficace.",
+              "Je m'occupe du reste, rendez-vous ce soir à 20h."
+            ],
+            3: [
+              "Bonsoir !!!",
+              "Je suis dans de beaux draps...",
+              "La fête est sur le point de commencer mais le prêtre n'est toujours pas là...",
+              "J'ai encore besoin de votre aide, pouvez-vous le retrouver ?"
+            ],
+            4: [
+              "Merci, tout est enfin réuni.",
+              "Il est l'heure de commencer la fête !!!",
+              "Je vous laisse l'honneur de disposer le fruit sacré au pied du portail."
+            ]
+        },
         travelPoints: null,
         quest: {
-            id: 1,
+            //id: 1,
             endDialog: [
-                'Merci d\'avoir fait ma quête',
+                'Merci beaucoup !!!',
             ]
         },
         animations_type: 'chief',
@@ -83,6 +104,13 @@ export default [
         nightDialog: [
             'Profitez bien de la fête !',
         ],
+        questDialog: {
+            1: [
+                "Bienvenue !",
+                "Je suis le bras droit du chef." ,
+                "Je crois qu'il vous attend à l'entrée du village.",
+            ]
+        },
         travelPoints: null,
         quest: null,
         animations_type: 'pnj',
@@ -374,11 +402,22 @@ export default [
         scale: 1,
         positionOffset: 0,
         dialog: [
-            'Que la lumière vous protège',
+            "Que la lumière vous protège",
+            "... Hic ..."
         ],
         nightDialog: [
             'Le pouvoir de la lumière est avec vous, le portail est ouvert',
         ],
+        questDialog: {
+            1: [
+              "Ouuuh, je crois que j'ai mangé un mauvais champignon, ça taaannnggueee...",
+              "...",
+              "...",
+              "OH !! Vous êtes là.",
+              "Comment !?!? C'est déjà l'heure de la fête ?",
+              "Merci de m'avoir prévenu, pressons-nous !!!"
+            ]
+        },
         travelPoints: null,
         quest: null,
         animations_type: 'priest',

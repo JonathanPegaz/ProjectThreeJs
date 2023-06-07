@@ -24,6 +24,9 @@ export default class LootWindow extends EventEmitter{
           })
         }
       }
+      this.experience.world.quest.on('reward', (reward) => {
+        this.display(reward)
+      })
     })
   }
 
@@ -34,7 +37,7 @@ export default class LootWindow extends EventEmitter{
       const li = document.createElement('li');
 
       li.classList.add('loot-item');
-      if (loot === 'crystal' || loot === 'mushroom' || loot === 'carrot' || loot === 'fruit') {
+      if (loot === 'crystal' || loot === 'mushroom' || loot === 'carrot' || loot === 'fruit' || loot === 'kooma') {
         li.innerHTML = `<img src="icons/items/${loot}.png" alt="${loot}"><span class="loot-item-nb"> +${nb}</span>`
       } else {
         li.innerHTML = `<span>Unknown +1</span>`

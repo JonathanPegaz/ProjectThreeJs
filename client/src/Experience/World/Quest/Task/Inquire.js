@@ -1,11 +1,10 @@
 import Task from "./Task.js";
 
-export default class Talk extends Task{
+export default class Inquire extends Task{
     constructor(param) {
         super();
 
         this.goal = null
-        this.dialogId = param.dialogId
 
         this.init(param)
     }
@@ -21,24 +20,23 @@ export default class Talk extends Task{
             objective: this.requirements.quantity,
             progress: 0,
         }
-        for (const [key, value] of Object.entries(this.experience.npc.list)) {
+
+        for (const [key, value] of Object.entries(this.experience.world.inquireZone)) {
             if (value.id === this.requirements.item) {
                 this.target = value
-                value.on("talk", (item) => {
-                    this.catch(item)
+                value.on("inquire", () => {
+                    this.catch()
                 })
             }
         }
     }
 
-    catch(item) {
-        if (item === this.requirements.item) {
-            this.requirements.quantity--
-            this.goal.progress++
-            this.trigger("update")
-            if (this.requirements.quantity === 0) {
-                this.isComplete()
-            }
+    catch() {
+        this.requirements.quantity--
+        this.goal.progress++
+        this.trigger("update")
+        if (this.requirements.quantity === 0) {
+            this.isComplete()
         }
     }
 
@@ -49,6 +47,5 @@ export default class Talk extends Task{
     destroy() {
         super.destroy();
         this.goal = null
-        this.dialogId = null
     }
 }
