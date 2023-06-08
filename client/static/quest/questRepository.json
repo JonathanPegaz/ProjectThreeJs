@@ -54,10 +54,10 @@
         "order": 2,
         "type": "COLLECT",
         "name": "Carottes",
-        "description": "collecter 5000 carottes",
+        "description": "collecter 10 carottes",
         "requirements": {
           "item": "carrot",
-          "quantity": "5000"
+          "quantity": "10"
         }
       },
       "3": {
@@ -74,10 +74,10 @@
         "order": 4,
         "type": "COLLECT",
         "name": "Champignons",
-        "description": "collecter 5000 Champignons",
+        "description": "collecter 5 Champignons",
         "requirements": {
           "item": "mushroom",
-          "quantity": "5000"
+          "quantity": "5"
         }
       },
       "5": {
