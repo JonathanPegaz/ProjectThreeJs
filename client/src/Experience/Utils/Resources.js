@@ -62,6 +62,9 @@ export default class Resources extends EventEmitter
             left: 50%;
             transform: translate(-50%, -50%);
         `
+        // scale loading gif to 1/4 of the screen
+        this.loadingGifDiv.style.width = window.innerWidth / 3 + 'px'
+        this.loadingGifDiv.style.height = window.innerWidth / 3 + 'px'
         document.body.appendChild(this.loadingGifDiv)
 
         const loadingPercentageElement = document.createElement('div');
@@ -75,6 +78,7 @@ export default class Resources extends EventEmitter
             color: #ffffff;
         `;
         document.body.appendChild(loadingPercentageElement);
+
 
 
         const loadingManager = new LoadingManager(
