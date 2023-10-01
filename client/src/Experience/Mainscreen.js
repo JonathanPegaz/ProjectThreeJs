@@ -12,8 +12,11 @@ export default class Mainscreen extends EventEmitter{
             landing: () => {
                 const element = document.querySelector('.loadingScreen-landing')
                 element.classList.add('loadingScreen--active')
+                const elementCreators = document.querySelector('.creators')
+                elementCreators.classList.add('creators--active')
                 element.querySelector('.loadingScreen-landing__button-login').addEventListener('click', () => {
                     element.classList.remove('loadingScreen--active')
+                    elementCreators.classList.remove('creators--active')
                     //this.steps.login()
                     this.steps.starting()
                 })

@@ -939,6 +939,11 @@ input[type="checkbox"]:checked::before {
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
+}
+
+.loadingScreen-content{
+    margin-top: auto;
 }
 
 .loadingScreen-content>div {
@@ -973,6 +978,8 @@ input[type="checkbox"]:checked::before {
 
 .loadingScreen-landing .btn {
     width: 100%;
+    max-width: 150px;
+    justify-content: center;
 }
 
 .loadingScreen-registration, .loadingScreen-starting {
@@ -1039,6 +1046,65 @@ input[type="checkbox"]:checked::before {
     transform: rotate(180deg);
 }
 
+.language-selection {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.language-flag {
+    width: 30px;
+    height: 30px;
+    margin: 0 15px;
+    cursor: pointer;
+}
+.creators {
+    text-align: center;
+    font-size: 1.2rem;
+    font-weight: 400;
+    font-family: Fakt, Roboto, sans-serif;
+    color: #333; /* Change to the desired text color */
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    margin-top: auto;
+    opacity: 0;
+    width: min-content;
+}
+
+.creators--active {
+    animation: fade-in 0.5s ease-in-out forwards;
+    opacity: 1;
+}
+
+.creators p {
+    margin: 0;
+}
+
+.developers,
+.designers {
+    margin: 0 5px;
+}
+
+.creators a {
+    color: #333; /* Change to the desired text color */
+    text-decoration: none;
+}
+
+.creators a:hover {
+    color: #007bff; /* Change the color on hover */
+}
+
+/* Responsive layout for creators section */
+@media (max-width: 768px) {
+    .creators {
+        flex-wrap: wrap;
+    }
 
 
-
+    .developers a,
+    .designers a {
+        margin: 5px;
+    }
+}
