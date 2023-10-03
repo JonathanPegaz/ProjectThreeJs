@@ -1049,7 +1049,7 @@ input[type="checkbox"]:checked::before {
 .language-selection {
     display: flex;
     justify-content: center;
-    margin-top: 10px;
+    margin-top: 15px;
 }
 
 .language-flag {
@@ -1107,4 +1107,22 @@ input[type="checkbox"]:checked::before {
     .designers a {
         margin: 5px;
     }
+}
+
+.loadingScreen-starting__form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1rem;
+    width: 100%;
+}
+
+.disabled {
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+.language-disabled {
+    opacity: 0.5;
 }

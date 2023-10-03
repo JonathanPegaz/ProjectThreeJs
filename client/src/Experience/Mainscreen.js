@@ -24,6 +24,18 @@ export default class Mainscreen extends EventEmitter{
                     element.classList.remove('loadingScreen--active')
                     this.steps.registration()
                 })
+                const language_fr = document.querySelector('.fr')
+                const language_en = document.querySelector('.en')
+                language_fr.addEventListener('click', () => {
+                    language_fr.classList.remove('language-disabled')
+                    language_en.classList.add('language-disabled')
+                    this.experience.locale = 0
+                })
+                language_en.addEventListener('click', () => {
+                    language_en.classList.remove('language-disabled')
+                    language_fr.classList.add('language-disabled')
+                    this.experience.locale = 1
+                })
             },
             login: () => {
                 const element = document.querySelector('.loadingScreen-login')
