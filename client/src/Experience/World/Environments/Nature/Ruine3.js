@@ -35,10 +35,10 @@ export default class Ruine3 extends Model3D
 
     setDialog() {
         const data = [
-            "Ce monde est vivant, ses habitants évoluent, ils ont des habitudes, une culture et une personnalité propre.",
-            "Vos actions ont des conséquences sur votre environnement, apprenez donc à le connaître et à vivre avec ses habitants, vous pourriez peut-être faire de belles rencontres.",
-            "Le prêtre a souvent l'habitude de se cacher derrière son église, peut être pourriez-vous aller là-bas.",
-        ]
+            ["Ce monde est vivant, ses habitants évoluent, ils ont des habitudes, une culture et une personnalité propre.", "This world is alive, its inhabitants evolve, they have habits, a culture, and a personality of their own."],
+            ["Vos actions ont des conséquences sur votre environnement, apprenez donc à le connaître et à vivre avec ses habitants, vous pourriez peut-être faire de belles rencontres.", "Your actions have consequences on your environment, so learn to get to know it and live with its inhabitants, you might make some beautiful encounters."],
+            ["Le prêtre a souvent l'habitude de se cacher derrière son église, peut-être pourriez-vous aller là-bas.", "The priest often has the habit of hiding behind his church, maybe you could go there."],
+          ]          
 
         this.dialog = new Dialog(data, this.mesh)
         this.experience.controls.on('actionDown', () => {

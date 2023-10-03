@@ -1,3 +1,4 @@
+import Experience from "../../Experience.js";
 import EventEmitter from "../../Utils/EventEmitter.js"
 import Collect from "./Task/Collect.js"
 import { v4 as uuidv4 } from 'uuid'
@@ -9,6 +10,7 @@ import Delivery from "./Task/delivery.js";
 export default class Quest extends EventEmitter{
   constructor(quest) {
     super()
+    this.experience = new Experience()
 
     this.activeTasks = null
     this.completedTasks = null
@@ -33,8 +35,8 @@ export default class Quest extends EventEmitter{
 
   init(quest) {
     this.id = uuidv4()
-    this.title = quest.title
-    this.description = quest.description
+    this.title = quest.title[this.experience.locale]
+    this.description = quest.description[this.experience.locale]
     this.reward = quest.reward
     if (quest.next !== undefined && Object.keys(quest.next).length) {
       if (quest.next.quest !== undefined) {

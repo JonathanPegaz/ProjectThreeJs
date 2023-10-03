@@ -30,7 +30,7 @@ export default class QuestManager extends EventEmitter{
       this.trigger("update")
     })
     this.experience.alert.addQueue(this.experience.alert.type.QUEST,
-      "Nouvelle quête : " + quest.title,
+      ["Nouvelle quête : ", "New Quest : "][this.experience.locale] + quest.title,
       4000,
       'logo_blue'
     )
@@ -60,7 +60,7 @@ export default class QuestManager extends EventEmitter{
     this.completedQuests[quest.id] = quest
     delete this.activeQuests[quest.id]
     this.experience.alert.addQueue(this.experience.alert.type.QUEST,
-      "Quête terminée : " +quest.title,
+      ["Quête terminée : ", "Quest completed : "][this.experience.locale] +quest.title,
       4000,
       'check_icon'
     ).then(() => {

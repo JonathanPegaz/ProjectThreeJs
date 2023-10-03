@@ -73,7 +73,7 @@ export default class Mainscreen extends EventEmitter{
                         elements[i].classList.remove('loading-hidden');
                     }
                     this.experience.alert.addQueue(this.experience.alert.type.SYSTEM,
-                      "Bienvenue initié !",
+                      ["Bienvenue initié !", "Welcome initiate!"][this.experience.locale],
                       4000,
                       'tchat_icon'
                     )
