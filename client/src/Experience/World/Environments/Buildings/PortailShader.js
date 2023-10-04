@@ -214,7 +214,8 @@ void main()
 
     setDialog() {
         const data = [
-            'WHOOOOOSSSHHH'
+            ['WHOOOOOSSSHHH',
+             'WHOOOOOSSSHHH']
         ]
 
         this.dialog = new Dialog(data, this.model)

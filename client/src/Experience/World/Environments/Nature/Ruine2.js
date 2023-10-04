@@ -32,11 +32,11 @@ export default class Ruine2 extends Model3D
 
     setDialog() {
         const data = [
-            "Le Kooma est à la fois la monnaie du monde et la représentation de votre influence sur celui-ci.",
-            "Afin d'en obtenir, complétez des défis, des quêtes et explorez le monde.",
-            "Attention, le Kooma à une durée de vie, seul votre investissement vous permettra d'en gagner et de les conserver.",
-            "Voici quelques champignons, cela pourrait vous servir."
-        ]
+            ["Le Kooma est à la fois la monnaie du monde et la représentation de votre influence sur celui-ci.", "Kooma is both the currency of the world and a representation of your influence over it."],
+            ["Afin d'en obtenir, complétez des défis, des quêtes et explorez le monde.", "To obtain it, complete challenges, quests, and explore the world."],
+            ["Attention, le Kooma a une durée de vie, seul votre investissement vous permettra d'en gagner et de les conserver.", "Attention, Kooma has a lifespan, only your investment will allow you to earn and keep it."],
+            ["Voici quelques champignons, cela pourrait vous servir.", "Here are some mushrooms, they might come in handy."]
+          ]          
 
         this.dialog = new Dialog(data, this.mesh)
         this.experience.controls.on('actionDown', () => {

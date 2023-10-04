@@ -12,14 +12,29 @@ export default class Mainscreen extends EventEmitter{
             landing: () => {
                 const element = document.querySelector('.loadingScreen-landing')
                 element.classList.add('loadingScreen--active')
+                const elementCreators = document.querySelector('.creators')
+                elementCreators.classList.add('creators--active')
                 element.querySelector('.loadingScreen-landing__button-login').addEventListener('click', () => {
                     element.classList.remove('loadingScreen--active')
+                    elementCreators.classList.remove('creators--active')
                     //this.steps.login()
                     this.steps.starting()
                 })
                 element.querySelector('.loadingScreen-register__button-register').addEventListener('click', () => {
                     element.classList.remove('loadingScreen--active')
                     this.steps.registration()
+                })
+                const language_fr = document.querySelector('.fr')
+                const language_en = document.querySelector('.en')
+                language_fr.addEventListener('click', () => {
+                    language_fr.classList.remove('language-disabled')
+                    language_en.classList.add('language-disabled')
+                    this.experience.locale = 0
+                })
+                language_en.addEventListener('click', () => {
+                    language_en.classList.remove('language-disabled')
+                    language_fr.classList.add('language-disabled')
+                    this.experience.locale = 1
                 })
             },
             login: () => {
@@ -58,7 +73,7 @@ export default class Mainscreen extends EventEmitter{
                         elements[i].classList.remove('loading-hidden');
                     }
                     this.experience.alert.addQueue(this.experience.alert.type.SYSTEM,
-                      "Bienvenue initié !",
+                      ["Bienvenue initié !", "Welcome initiate!"][this.experience.locale],
                       4000,
                       'tchat_icon'
                     )

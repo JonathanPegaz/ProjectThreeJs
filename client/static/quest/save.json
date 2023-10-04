@@ -1,14 +1,14 @@
 {
   "1": {
-    "title": "Premiers pas",
-    "description": "Vous venez d'arriver dans Singularité, commencez votre initiation.",
+    "title": ["Premiers pas", "First steps"],
+    "description": ["Vous venez d'arriver dans Singularité, commencez votre initiation.", "You have just arrived in Singularity, begin your initiation."],
     "tasks": {
       "1": {
         "order": 1,
         "type": "TALK",
         "dialogId": 1,
-        "name": "Rencontrer le bras droit du chef",
-        "description": "Rencontrer le bras droit du chef",
+        "name": ["Rencontrer le bras droit du chef", "Meet the chief's right hand"],
+        "description": ["Rencontrer le bras droit du chef", "Meet the chief's right hand"],
         "requirements": {
           "item": 2,
           "quantity": "1"
@@ -18,8 +18,8 @@
         "order": 2,
         "type": "TALK",
         "dialogId": 1,
-        "name": "Parler au chef du village",
-        "description": "Parler au chef du village",
+        "name": ["Parler au chef du village", "Talk to the village chief"],
+        "description": ["Parler au chef du village", "Talk to the village chief"],
         "requirements": {
           "item": 1,
           "quantity": "1"
@@ -31,14 +31,14 @@
     }
   },
   "2": {
-    "title": "La fête du village",
-    "description": "Le chef du village vous demande de lui ramener cette liste de courses.",
+    "title": ["La fête du village", "Village Festival"],
+    "description": ["Le chef du village vous demande de lui ramener cette liste de courses.", "The village chief asks you to bring him this shopping list."],
     "tasks": {
       "1": {
         "order": 1,
         "type": "COLLECT",
-        "name": "Cristaux",
-        "description": "collecter 7 cristaux",
+        "name": ["Cristaux", "Crystals"],
+        "description": ["Collecter 7 cristaux", "Collect 7 crystals"],
         "requirements": {
           "item": "crystal",
           "quantity": "7"
@@ -53,8 +53,8 @@
       "2": {
         "order": 2,
         "type": "COLLECT",
-        "name": "Carottes",
-        "description": "collecter 10 carottes",
+        "name": ["Carottes", "Carrots"],
+        "description": ["Collecter 10 carottes", "Collect 10 carrots"],
         "requirements": {
           "item": "carrot",
           "quantity": "10"
@@ -63,8 +63,8 @@
       "3": {
         "order": 3,
         "type": "COLLECT",
-        "name": "Fruit de Mithralite",
-        "description": "Trouver le fruit de mithralite",
+        "name": ["Fruit de Mithralite", "Mithralite Fruit"],
+        "description": ["Trouver le fruit de mithralite", "Find the Mithralite fruit"],
         "requirements": {
           "item": "fruit",
           "quantity": "1"
@@ -73,8 +73,8 @@
       "4": {
         "order": 4,
         "type": "COLLECT",
-        "name": "Champignons",
-        "description": "collecter 5 Champignons",
+        "name": ["Champignons", "Mushrooms"],
+        "description": ["Collecter 5 Champignons", "Collect 5 Mushrooms"],
         "requirements": {
           "item": "mushroom",
           "quantity": "5"
@@ -84,8 +84,8 @@
         "order": 5,
         "type": "TALK",
         "dialogId": 2,
-        "name": "Retournez voir le chef",
-        "description": "Retournez voir le chef",
+        "name": ["Retournez voir le chef", "Return to the chief"],
+        "description": ["Retournez voir le chef", "Return to the chief"],
         "requirements": {
           "item": 1,
           "quantity": "1"
@@ -108,15 +108,15 @@
     }
   },
   "3": {
-    "title": "L'initiation",
-    "description": "La fête du village approche, il faut vous préparer pour l'initiation.",
+    "title": ["L'initiation", "The Initiation"],
+    "description": ["La fête du village approche, il faut vous préparer pour l'initiation.", "The village festival is approaching; you need to prepare for the initiation."],
     "tasks": {
       "1": {
         "order": 1,
         "type": "TALK",
         "dialogId": 3,
-        "name": "Parler au chef",
-        "description": "Parler au chef",
+        "name": ["Parler au chef", "Talk to the chief"],
+        "description": ["Parler au chef", "Talk to the chief"],
         "requirements": {
           "item": 1,
           "quantity": "1"
@@ -125,8 +125,8 @@
       "2": {
         "order": 2,
         "type": "INQUIRE",
-        "name": "Trouver un indice",
-        "description": "Trouver un indice",
+        "name": ["Trouver un indice", "Find a clue"],
+        "description": ["Trouver un indice", "Find a clue"],
         "requirements": {
           "item": 3,
           "quantity": "1"
@@ -136,8 +136,8 @@
         "order": 3,
         "type": "TALK",
         "dialogId": 1,
-        "name": "Chercher vers l'église",
-        "description": "Chercher vers l'église",
+        "name": ["Chercher vers l'église", "Search near the church"],
+        "description": ["Chercher vers l'église", "Search near the church"],
         "requirements": {
           "item": 11,
           "quantity": "1"
@@ -153,8 +153,8 @@
         "order": 4,
         "type": "TALK",
         "dialogId": 4,
-        "name": "Retournez voir le chef",
-        "description": "Retournez voir le chef",
+        "name": ["Retournez voir le chef", "Return to the chief"],
+        "description": ["Retournez voir le chef", "Return to the chief"],
         "requirements": {
           "item": 1,
           "quantity": "1"
@@ -163,8 +163,8 @@
       "5": {
         "order": 5,
         "type": "DELIVERY",
-        "name": "Poser le fruit",
-        "description": "Poser le fruit",
+        "name": ["Poser le fruit", "Place the fruit"],
+        "description": ["Poser le fruit", "Place the fruit"],
         "requirements": {
           "item": 1,
           "quantity": "1"
@@ -179,8 +179,8 @@
       "6": {
         "order": 6,
         "type": "INQUIRE",
-        "name": "Inspecter le portail",
-        "description": "Inspecter le portail",
+        "name": ["Inspecter le portail", "Inspect the portal"],
+        "description": ["Inspecter le portail", "Inspect the portal"],
         "requirements": {
           "item": 4,
           "quantity": "1"

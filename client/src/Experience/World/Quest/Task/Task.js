@@ -34,7 +34,7 @@ export default class Task extends EventEmitter{
         }, 1000)
       },
       setNight: () => {
-        transitionH1.innerHTML = "Quelques heures plus tard..."
+        transitionH1.innerHTML = ["Quelques heures plus tard...", "A few hours later..."][this.experience.locale]
         transition.classList.add("transition-active")
         this.experience.world.environment.setNight()
         window.setTimeout(() => {
@@ -51,7 +51,7 @@ export default class Task extends EventEmitter{
       },
       endGame: () => {
         transitionInput.style.display = "flex"
-        transitionH1.innerHTML = "Merci d'avoir joué, La suite arrive bientôt !"
+        transitionH1.innerHTML = ["Merci d'avoir joué, La suite arrive bientôt !", "Thanks for playing, the rest is coming soon!"][this.experience.locale]
         transition.classList.add("transition-active")
         transition.style.pointerEvents = "initial"
         document.getElementById('btn-freeNav').addEventListener('click', () => {

@@ -3,7 +3,7 @@ import Npc from "./Npc.js";
 export default [
     {
         id: 1,
-        name: 'Chef du village',
+        name: ['Chef du village', 'Village chief'],
         type: Npc,
         model: 'chief_idle',
         position: {
@@ -29,34 +29,39 @@ export default [
         scale: 1,
         positionOffset: 0,
         dialog: [
-            "Oooooh, il fait beau aujourd'hui !!!"
+            ["Oooooh, il fait beau aujourd'hui !!!", "Oh, it's a beautiful day today !!!"]
         ],
         nightDialog: [
-            'Le portail est réouvert grace à vous',
-            'Une grande aventure vous attend',
+            ["Le portail est réouvert grâce à vous", "The portal has been reopened thanks to you"],
+            ["Une grande aventure vous attend", "An exciting adventure awaits you"]
         ],
         questDialog: {
             1: [
-                "Bonjour, je suis le chef du village !",
-                "Avec le village, nous organisons une fête ce soir en l'honneur de votre initiation." ,
-                "Pouvez-vous m'aider à rassembler les quelques courses qu'il nous manque ?",
+                ["Bonjour, je suis le chef du village !", "Hello, I'm the village chief !"],
+                ["Avec le village, nous organisons une fête ce soir en l'honneur de votre initiation.",
+                    "With the village, we are organizing a party tonight in honor of your initiation."],
+                ["Pouvez-vous m'aider à rassembler les quelques courses qu'il nous manque ?",
+                    "Can you help me gather the few items we need for the party?"]
             ],
             2: [
-              "Merci pour votre aide !!!",
-              "Vous êtes terriblement efficace.",
-                "Voici votre récompense, un peu de Kooma, cette poudre issue du raffinage de cristaux de Mithralite est assez rare, prenez en soin.",
-              "Je m'occupe du reste, rendez-vous ce soir à 20h."
+                ["Merci pour votre aide !!!", "Thank you for your help !!!"],
+                ["Vous êtes terriblement efficace.", "You are terribly efficient."],
+                ["Voici votre récompense, un peu de Kooma, cette poudre issue du raffinage de cristaux de Mithralite est assez rare, prenez en soin.",
+                    "Here is your reward, a bit of Kooma, this powder refined from Mithralite crystals is quite rare, take care of it."],
+                ["Je m'occupe du reste, rendez-vous ce soir à 20h.", "I'll take care of the rest, see you tonight at 8 PM."]
             ],
             3: [
-              "Bonsoir !!!",
-              "Je suis dans de beaux draps...",
-              "La fête est sur le point de commencer mais le prêtre n'est toujours pas là...",
-              "J'ai encore besoin de votre aide, pouvez-vous le retrouver ?"
+                ["Bonsoir !!!", "Good evening !!!"],
+                ["Je suis dans de beaux draps...", "I'm in a bit of a bind..."],
+                ["La fête est sur le point de commencer mais le prêtre n'est toujours pas là...",
+                    "The party is about to start, but the priest is still not here..."],
+                ["J'ai encore besoin de votre aide, pouvez-vous le retrouver ?", "I still need your help, can you find him ?"]
             ],
             4: [
-              "Merci, tout est enfin réuni.",
-              "Il est l'heure de commencer la fête !!!",
-              "Je vous laisse l'honneur de disposer le fruit sacré au pied du portail."
+                ["Merci, tout est enfin réuni.", "Thank you, everything is finally ready."],
+                ["Il est l'heure de commencer la fête !!!", "It's time to start the party !!!"],
+                ["Je vous laisse l'honneur de disposer le fruit sacré au pied du portail.",
+                    "I leave you the honor of placing the sacred fruit at the base of the portal."]
             ]
         },
         travelPoints: null,
@@ -65,7 +70,7 @@ export default [
     },
     {
         id: 2,
-        name: 'Bras droit du chef',
+        name: ['Bras droit du chef', 'Chief\'s right-hand man'],
         type: Npc,
         model: 'pnj_idle',
         position: {
@@ -91,19 +96,19 @@ export default [
         scale: 1,
         positionOffset: 0,
         dialog: [
-            'Bienvenue !',
-            'Je suis le bras droit du chef',
-            'Je vous conseille d\'aller le rencontrer dans le village',
-            'Il a besoin de votre aide',
+            ['Bienvenue !', 'Welcome !'],
+            ['Je suis le bras droit du chef', 'I am the chief\'s right-hand man'],
+            ['Je vous conseille d\'aller le rencontrer dans le village', 'I advise you to go meet him in the village'],
+            ['Il a besoin de votre aide', 'He needs your help']
         ],
         nightDialog: [
-            'Profitez bien de la fête !',
+            ['Profitez bien de la fête !', 'Enjoy the party !']
         ],
         questDialog: {
             1: [
-                "Bienvenue !",
-                "Je suis le bras droit du chef." ,
-                "Je crois qu'il vous attend à l'entrée du village.",
+                ['Bienvenue !', 'Welcome !'],
+                ['Je suis le bras droit du chef.', 'I am the chief\'s right-hand man.'],
+                ['Je crois qu\'il vous attend à l\'entrée du village.', 'I believe he is waiting for you at the village entrance.']
             ]
         },
         travelPoints: null,
@@ -113,7 +118,7 @@ export default [
     },
     {
         id: 3,
-        name: 'Professeur',
+        name: ['Professeur', 'Teacher'],
         type: Npc,
         model: 'pnj_idle',
         position: {
@@ -139,10 +144,10 @@ export default [
         scale: 1,
         positionOffset: 0,
         dialog: [
-            'Les élèves sont bien calmes aujourd\'hui',
+            ["Les élèves sont bien calmes aujourd'hui", "The students are very calm today"]
         ],
         nightDialog: [
-            'Je suis le roi de la danse !',
+            ["Je suis le roi de la danse !", "I am the dance king!"]
         ],
         travelPoints: null,
         quest: null,
@@ -151,7 +156,7 @@ export default [
     },
     {
         id: 4,
-        name: 'Enfant',
+        name: ['Enfant', 'Child'],
         type: Npc,
         model: 'pnj_idle',
         position: {
@@ -177,10 +182,10 @@ export default [
         scale: 0.5,
         positionOffset: -0.5,
         dialog: [
-            'C\'est bientôt la fête du village',
+            ["C'est bientôt la fête du village", "The village festival is coming soon"]
         ],
         nightDialog: [
-            'Tu veux danser avec moi ?',
+            ["Tu veux danser avec moi ?", "Do you want to dance with me?"]
         ],
         travelPoints: null,
         quest: null,
@@ -189,7 +194,7 @@ export default [
     },
     {
         id: 5,
-        name: 'Enfant',
+        name: ['Enfant', 'Child'],
         type: Npc,
         model: 'pnj_idle',
         position: {
@@ -215,10 +220,10 @@ export default [
         scale: 0.5,
         positionOffset: -0.5,
         dialog: [
-            'Les cours sont ennuyeux',
+            ["Les cours sont ennuyeux", "Classes are boring"]
         ],
         nightDialog: [
-            'Trop cool la fête !',
+            ["Trop cool la fête !", "The party is so cool!"]
         ],
         travelPoints: null,
         quest: null,
@@ -227,7 +232,7 @@ export default [
     },
     {
         id: 6,
-        name: 'Enfant',
+        name: ['Enfant', 'Child'],
         type: Npc,
         model: 'pnj_idle',
         position: {
@@ -253,49 +258,19 @@ export default [
         scale: 0.5,
         positionOffset: -0.5,
         dialog: [
-            'Vivement la récréation',
+            ["Vivement la récréation", "Can't wait for recess"]
         ],
         nightDialog: [
-            'Jamais je ne dormirai !',
+            ["Jamais je ne dormirai !", "I'll never sleep!"]
         ],
         travelPoints: null,
         quest: null,
         animations_type: 'pnj',
         isDancing: true,
     },
-    /*{
-        id: 7,
-        name: 'Villagois',
-        type: Npc,
-        model: 'pnj_idle',
-        position: {
-            x: -82.95,
-            y: 16,
-            z: -11.22
-        },
-        rotation: {
-            x: 0,
-            y: 0,
-            z: 0
-        },
-        scale: 1,
-        positionOffset: 0,
-        dialog: [
-            'Quelle belle journée',
-        ],
-        travelPoints: [
-            {x: -81.705 , z: 14.02},
-            {x: -58.684, z: 21.014},
-            {x: -24.488, z: 13.741},
-            {x: -38.505, z: -7.903},
-            {x: -82.95, z: -11.22},
-        ],
-        quest: null,
-        animations_type: 'pnj'
-    },*/
     {
         id: 9,
-        name: 'Mineur',
+        name: ['Mineur', 'Miner'],
         type: Npc,
         model: 'pnj_idle',
         position: {
@@ -321,10 +296,10 @@ export default [
         scale: 1,
         positionOffset: 0,
         dialog: [
-            'C\'est une belle journée pour miner',
+            ["C'est une belle journée pour miner", "It's a beautiful day for mining"]
         ],
         nightDialog: [
-            'Les minerais sont plus beaux la nuit',
+            ["Les minerais sont plus beaux la nuit", "Ores are more beautiful at night"]
         ],
         travelPoints: null,
         quest: null,
@@ -333,7 +308,7 @@ export default [
     },
     {
         id: 10,
-        name: 'Villagois',
+        name: ['Villagois', 'Villager'],
         type: Npc,
         model: 'pnj_idle',
         position: {
@@ -359,10 +334,10 @@ export default [
         scale: 1,
         positionOffset: 0,
         dialog: [
-            'Mon coin préféré, que c\'est beau',
+            ["Mon coin préféré, que c'est beau", "My favorite spot, it's so beautiful"]
         ],
         nightDialog: [
-            'Cette fête est magnifique',
+            ["Cette fête est magnifique", "This party is magnificent"]
         ],
         travelPoints: null,
         quest: null,
@@ -371,7 +346,7 @@ export default [
     },
     {
         id: 11,
-        name: 'Prêtre',
+        name: ['Prêtre', 'Priest'],
         type: Npc,
         model: 'priest_idle',
         position: {
@@ -397,20 +372,26 @@ export default [
         scale: 1,
         positionOffset: 0,
         dialog: [
-            "Que la lumière vous protège",
-            "... Hic ..."
+            ["Que la lumière vous protège", "May the light protect you"],
+            ["... Hic ...", "... Hic ..."],
+            ["... ...", "... ..."],
+            ["OH !! Vous êtes là.", "OH !! You're here."],
+            ["Comment !?!? C'est déjà l'heure de la fête ?", "What !?!? Is it already party time?"],
+            ["Merci de m'avoir prévenu, pressons-nous !!!", "Thank you for letting me know, let's hurry !!!"]
         ],
         nightDialog: [
-            'Le pouvoir de la lumière est avec vous, le portail est ouvert',
+            ["Le pouvoir de la lumière est avec vous, le portail est ouvert",
+                "The power of light is with you, the portal is open"]
         ],
         questDialog: {
             1: [
-              "Ouuuh, je crois que j'ai mangé un mauvais champignon, ça taaannnggueee...",
-              "...",
-              "... ...",
-              "OH !! Vous êtes là.",
-              "Comment !?!? C'est déjà l'heure de la fête ?",
-              "Merci de m'avoir prévenu, pressons-nous !!!"
+                ["Ouuuh, je crois que j'ai mangé un mauvais champignon, ça taaannnggueee...",
+                    "Ouuuh, I think I ate a bad mushroom, it taaastes..."],
+                ["...", "..."],
+                ["... ...", "... ..."],
+                ["OH !! Vous êtes là.", "OH !! You're here."],
+                ["Comment !?!? C'est déjà l'heure de la fête ?", "What !?!? Is it already party time?"],
+                ["Merci de m'avoir prévenu, pressons-nous !!!", "Thank you for letting me know, let's hurry !!!"]
             ]
         },
         travelPoints: null,
@@ -420,7 +401,7 @@ export default [
     },
     {
         id: 12,
-        name: 'Fermier',
+        name: ['Fermier', 'Farmer'],
         type: Npc,
         model: 'pnj_idle',
         position: {
@@ -446,10 +427,10 @@ export default [
         scale: 1,
         positionOffset: 0,
         dialog: [
-            'Les récoltes sont bonnes cette année',
+            ["Les récoltes sont bonnes cette année", "The harvest is good this year"]
         ],
         nightDialog: [
-            'Manger autant que vous voulez, c\'est la fête !',
+            ["Manger autant que vous voulez, c'est la fête !", "Eat as much as you want, it's the party !"]
         ],
         travelPoints: null,
         quest: null,
@@ -458,7 +439,7 @@ export default [
     },
     {
         id: 13,
-        name: 'Cueilleur',
+        name: ['Cueilleur', 'Harvester'],
         type: Npc,
         model: 'pnj_idle',
         position: {
@@ -484,14 +465,15 @@ export default [
         scale: 1,
         positionOffset: 0,
         dialog: [
-            'Ou sont les champignons ?', 'J\'adore les champignons',
+            ["Où sont les champignons ?", "Where are the mushrooms ?"],
+            ["J'adore les champignons", "I love mushrooms"]
         ],
         nightDialog: [
-            'Les vers luisants sont magnifiques',
+            ["Les vers luisants sont magnifiques", "The fireflies are beautiful"]
         ],
         travelPoints: null,
         quest: null,
         animations_type: 'pnj',
         isDancing: true,
-    },
+    }
 ]

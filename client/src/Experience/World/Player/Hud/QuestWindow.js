@@ -65,7 +65,7 @@ export default class QuestWindow extends EventEmitter{
             return `
               <li id="${task.id}" class="quest-task quest-task-active">
                 <div>
-                  <span class="quest-task-name">${task.name}</span>
+                  <span class="quest-task-name">${task.name[this.experience.locale]}</span>
                 </div>
                 <div class="quest-task-goal-container">
                   <span class="quest-task-goal">${task.goal.progress} / ${task.goal.objective}</span>
@@ -79,7 +79,7 @@ export default class QuestWindow extends EventEmitter{
             return `
               <li id="${task.id}" class="quest-task quest-task-completed">
                   <div>
-                    <span class="quest-task-name">${task.name}</span>
+                    <span class="quest-task-name">${task.name[this.experience.locale]}</span>
                   </div>
                   <div class="quest-task-goal-container">
                     <span class="quest-task-goal">${task.goal.progress} / ${task.goal.objective}</span>

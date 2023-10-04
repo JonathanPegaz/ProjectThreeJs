@@ -34,11 +34,11 @@ export default class Ruine1 extends Model3D
 
     setDialog() {
         const data = [
-            "Un parrain sera toujours à votre disposition pour vous aider dans votre aventure.",
-            "Vous pourrez à votre tour parrainer des initiés en fonction de votre quantité de Kooma.",
-            "Soyez bienveillant, cette relation vous permettra sûrement de développer un lien fort avec votre parrain ou vos filleuls.",
-            "Pour vous aider, voici une petite récompense."
-        ]
+            ["Un parrain sera toujours à votre disposition pour vous aider dans votre aventure.", "A sponsor will always be available to help you in your adventure."],
+            ["Vous pourrez à votre tour parrainer des initiés en fonction de votre quantité de Kooma.", "You will be able to sponsor initiates in turn based on your amount of Kooma."],
+            ["Soyez bienveillant, cette relation vous permettra sûrement de développer un lien fort avec votre parrain ou vos filleuls.", "Be kind, this relationship will surely allow you to develop a strong bond with your sponsor or mentees."],
+            ["Pour vous aider, voici une petite récompense.", "To help you, here is a small reward."]
+          ]
 
         this.dialog = new Dialog(data, this.mesh)
         this.experience.controls.on('actionDown', () => {

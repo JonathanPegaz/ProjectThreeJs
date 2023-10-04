@@ -94,7 +94,7 @@ export default class Model3D extends InteractiveObject{
                 return true
             }
         } else {
-            const geometry = new SphereGeometry(0.5, 16, 16)
+            const geometry = child.name === 'Champi' ? new SphereGeometry(0.5, 22, 22) : new SphereGeometry(0.5, 16, 16)
             const material = new MeshBasicMaterial({ color: 0xff00ff, wireframe: true, visible: this.debug.active ?? false })
             this.customHitbox = new Mesh(geometry, material)
             this.customHitbox.position.set(child.geometry.boundingSphere.center.x, child.geometry.boundingSphere.center.y, child.geometry.boundingSphere.center.z)

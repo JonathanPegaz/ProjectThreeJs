@@ -46,6 +46,7 @@ export default class Experience
         this.canvas = _canvas
 
         // Setup
+        this.locale = 0
         this.debug = new Debug()
         this.monitoring = new Monitoring()
         this.sizes = new Sizes()
@@ -242,6 +243,7 @@ export default class Experience
                 child.material.dispose()
             }
         })
+        this.locale = 0
 
         // null
         this.scene = null
